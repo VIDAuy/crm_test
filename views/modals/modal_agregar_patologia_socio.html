@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="modalAgregarPatologiaSocio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar patología a socio:</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <label>Patología:</label>
+                <br>
+                <select class="form-select form-select-lg mb-4" id="select_patologia_socio" aria-label="Patología" style="width: 100%;">
+                </select>
+                <br>
+
+                <div class="form-floating mt-4 mb-3">
+                    <textarea class="form-control" placeholder="Observación" id="txt_observacion_patologia_socio" style="height: 100px"></textarea>
+                    <label for="txt_observacion_patologia_socio">Observación:</label>
+                  </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="agregar_patologia_socio(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

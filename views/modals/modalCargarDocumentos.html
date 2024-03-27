@@ -1,0 +1,63 @@
+<!-- Modal -->
+<div class="modal fade" id="modalCargarDocumentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Cargar documento:</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-4">
+                        <form id="form_cargar_documento" name="form_cargar_documento">
+                            <div class="container mb-3">
+                                <div class="form-floating">
+                                    <select class="form-select select_tipo_documento" id="select_tipo_documento"
+                                        aria-label="Tipo de documento">
+                                    </select>
+                                    <label for="select_tipo_documento">Tipo de documento:</label>
+                                </div>
+                            </div>
+                            <div class="container mb-3">
+                                <label for="file_cargar_documento"><u>Seleccione el documento a cargar:</u></label>
+                                <br>
+                                <input type="file" class="form-control" id="file_cargar_documento">
+                            </div>
+                            <div class="container mb-5">
+                                <div class="form-floating">
+                                    <select class="form-select select_area_a_avisar" id="select_area_a_avisar"
+                                        aria-label="Avisar a">
+                                    </select>
+                                    <label for="select_area_a_avisar">Avisar a:</label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary" onclick="cargar_documento()"
+                                    id="btn_cargar_documento">Cargar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-8">
+                        <div class="alert alert-info" role="alert">
+                            <div class="d-flex justify-content-center">
+                                <u>Previsualización de documento seleccionado:</u>
+                            </div>
+                            <div id="previsualizar_documento_seleccionado" style="display: none;">
+                                <div class="d-flex justify-content-center">
+                                    <img src="" width="50%" height="auto" id="imagenmuestra">
+                                    <iframe src="" style="width:100%; height:auto;" id="pdfmuestra"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<!-- Modal -->
+<div class="modal fade" id="modalGestionarLlamadasPendientes" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 1041;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Lista de llamadas pendientes para hoy</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered table-striped table-hover" width="100%">
+                        <thead class="table-dark">
+                            <tr>
+                                <th style="width: 30%">Nombre:</th>
+                                <th style="width: 10%">Cédula</th>
+                                <th style="width: 20%">Teléfono:</th>
+                                <th style="width: 30%">Observación:</th>
+                                <th style="width: 10%">Gestionar:</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodymGLlP">
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="./assets/js/sistemaBajas/gestionarBajas.js?v=2.0.2"></script>

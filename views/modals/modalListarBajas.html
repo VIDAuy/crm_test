@@ -1,0 +1,53 @@
+<!-- Modal -->
+<div class="modal fade" id="modalListarBajas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header bg-info">
+				<h1 class="modal-title fs-5" id="staticBackdropLabel">Lista de bajas pendientes</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+
+
+				<div class="d-flex justify-content-center mb-4">
+					<div class="form-floating mb-3">
+						<select class="form-select" id="where" aria-label="Floating label select example"
+							onchange="corroborarBajasWhere();">
+							<option value="2">Todos los resultados</option>
+							<option value="Pendiente">Pendientes</option>
+							<option value="En gestión">En gestión</option>
+						</select>
+						<label for="where">Filtrar bajas:</label>
+					</div>
+				</div>
+
+
+				<div class="table-responsive mb-3">
+					<table id="tablaMLB" class="table table-sm table-bordered table-striped table-hover" width="100%">
+						<thead class="table-dark">
+							<tr>
+								<th scope="col" class="text-center">Nombre</th>
+								<th scope="col" class="text-center">Cédula</th>
+								<th scope="col" class="text-center">Teléfono</th>
+								<th scope="col" class="text-center">Fecha solicitud</th>
+								<th scope="col" class="text-center">Motivo</th>
+								<th scope="col" class="text-center">En gestión</th>
+								<th scope="col">Observaciones</th>
+								<th scope="col" class="text-center">Filial solicitud</th>
+								<th scope="col" class="text-center">Actualizar registro</th>
+							</tr>
+						</thead>
+						<tbody id="tbodyMLB">
+						</tbody>
+					</table>
+				</div>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>

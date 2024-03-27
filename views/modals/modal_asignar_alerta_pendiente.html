@@ -1,0 +1,53 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_asignarAlertaPendiente" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Asignar Alerta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" id="id_registro_asignar_alerta_a_usuario">
+                <input type="hidden" id="id_sub_usuario_asignar_alerta_a_usuario">
+                <input type="hidden" id="tipo_operacion_asignar_alerta_a_usuario">
+
+                <ul class="list-group mb-5">
+                    <li class="list-group-item list-group-item-info"><strong>Datos del registro:</strong></li>
+                    <li class="list-group-item border-info">
+                        <strong>Cédula:</strong>
+                        <span id="cedula_registro_asignar_alerta_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Sector:</strong>
+                        <span id="sector_registro_asignar_alerta_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Nombre Cliente:</strong>
+                        <span id="nombre_cliente_registro_asignar_alerta_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Teléfono:</strong>
+                        <span id="telefono_registro_asignar_alerta_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Usuario Asignado:</strong>
+                        <span id="usuario_asignado_registro_asignar_alerta_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Usuario Asignador:</strong>
+                        <span id="usuario_asignador_registro_asignar_alerta_a_usuario"></span>
+                    </li>
+                </ul>
+
+                <select class="form-select" id="select_asignar_alerta_pendiente"></select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="abrir_asignar_alerta(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

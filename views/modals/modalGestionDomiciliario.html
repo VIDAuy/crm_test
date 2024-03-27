@@ -1,0 +1,98 @@
+<!-- Modal -->
+<div class="modal fade" id="modalGestionDomiciliario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                    <span id="tituloGD"></span>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="container-fluid">
+                    <h3>Datos del socio:</h3>
+                    <input type="hidden" id="idGD">
+                    <div class="row">
+                        <div class="col-5">
+                            <label for="nombreGD">Nombre:</label>
+                            <input type="text" id="nombreGD" class="form-control" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label for="cedulaGD">Cédula:</label>
+                            <input type="text" id="cedulaGD" class="form-control" disabled>
+                        </div>
+                        <div class="col-3">
+                            <label for="telefonoGD">Teléfono:</label>
+                            <input type="text" id="telefonoGD" class="form-control" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label for="nroTalonGD">Nro de talón:</label>
+                            <input type="text" id="nroTalonGD" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>Cuotas anteriores:</h3>
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="cuota6GD" id="mes6GD"></label>
+                            <input type="text" id="cuota6GD" class="form-control" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label for="cuota5GD" id="mes5GD"></label>
+                            <input type="text" id="cuota5GD" class="form-control" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label for="cuota4GD" id="mes4GD"></label>
+                            <input type="text" id="cuota4GD" class="form-control" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label for="cuota3GD" id="mes3GD"></label>
+                            <input type="text" id="cuota3GD" class="form-control" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label for="cuota2GD" id="mes2GD"></label>
+                            <input type="text" id="cuota2GD" class="form-control" disabled>
+                        </div>
+                        <div class="col-2">
+                            <label for="cuota1GD" id="mes1GD"></label>
+                            <input type="text" id="cuota1GD" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>Gestión:</h3>
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="estadoGD">Estado:</label>
+                            <select name="" id="estadoGD" class="form-select">
+                                <option value="disabled" selected disabled>Obligatorio</option>
+                                <option value="1">Inubicable</option>
+                                <option value="2">Fallecido</option>
+                                <option value="3">Auditoria</option>
+                                <option value="4">Promesa Pago</option>
+                                <option value="5">Fecha Contacto</option>
+                                <option value="6">Baja Pendiente</option>
+                                <option value="7">Baja</option>
+                                <option value="8">Pago</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <label for="fechaOpcionalGD" id="fechaOpcionalGDLabel">Campo innecesario:</label>
+                            <input type="text" id="fechaOpcionalGD" class="form-control">
+                        </div>
+                        <div class="col-8">
+                            <label for="observacionGD">Observación:</label>
+                            <textarea name="" id="observacionGD" class="form-control" rows="1"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="guardarGD">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

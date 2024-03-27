@@ -1,0 +1,23 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_sesionExpirada" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Sesión Expirada</h1>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control mb-4" id="txt_cedula_sesion_expirada"
+                        placeholder="Ejemplo: 53249775">
+                    <label for="txt_cedula_sesion_expirada">Ingrese su cédula:</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="extender_sesion()">Extender Sesión</button>
+            </div>
+        </div>
+    </div>
+</div>

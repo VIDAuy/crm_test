@@ -1,0 +1,43 @@
+.card_titulo_crmessage {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.card_titulo_crmessage:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: #1201ff;
+  transition: left 0.8s;
+}
+
+.card_titulo_crmessage:hover:after {
+  left: 0;
+}
+
+.card_titulo_crmessage:hover {
+  color: #1201ff;
+  transition: left 0.8s;
+  font-size: 23px;
+}
+
+.card_texto_estado_crmessage {
+  font-size: 18px;
+  color: blue;
+  text-decoration: underline;
+  display: flex;
+}
+
+.card_texto_crmessage:hover {
+  transition: 0.5s;
+  font-size: 14.5px;
+}
+
+.card_texto_secundario_crmessage {
+  opacity: 0.8;
+}

@@ -1,0 +1,31 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_registrarComentarioAuditoria" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Registrar comentario:</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_id_registrar_comentario_auditoria"
+                        placeholder="ID" disabled>
+                    <label for="txt_id_registrar_comentario_auditoria">ID:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" placeholder="Escriba un comentario"
+                        id="txt_mensaje_registrar_comentario_auditoria" style="height: 100px"></textarea>
+                    <label for="txt_mensaje_registrar_comentario_auditoria">Escriba un comentario
+                        ...</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-success" onclick="registrar_comentario_auditoria_socio(false)">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>

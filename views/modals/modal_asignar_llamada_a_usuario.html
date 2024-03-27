@@ -1,0 +1,69 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_asignarLlamadaAUsuario" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Asignar llamada</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" id="id_registro_asignar_llamada_a_usuario">
+                <input type="hidden" id="id_area_asignar_llamada_a_usuario">
+                <input type="hidden" id="tipo_operacion_asignar_llamada_a_usuario">
+
+                <ul class="list-group mb-5">
+                    <li class="list-group-item list-group-item-info"><strong>Datos del registro:</strong></li>
+                    <li class="list-group-item border-info">
+                        <strong>Cédula:</strong>
+                        <span id="cedula_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Nombre:</strong>
+                        <span id="nombre_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Teléfono:</strong>
+                        <span id="telefono_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Socio:</strong>
+                        <span id="socio_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Baja:</strong>
+                        <span id="baja_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Fecha y Hora:</strong>
+                        <span id="fechayhora_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Comentario:</strong>
+                        <span id="comentario_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Fecha de registro:</strong>
+                        <span id="fechaderegistro_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Usuario asignado:</strong>
+                        <span id="asignado_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                    <li class="list-group-item border-info">
+                        <strong>Usuario asignador:</strong>
+                        <span id="asignador_registro_asignar_llamada_a_usuario"></span>
+                    </li>
+                </ul>
+
+                <select class="form-select" id="select_asignar_llamada_a_usuario"></select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="abrir_asignar_llamada(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_cargar_registro_volver_a_llamar" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Cargar registro volver a llamar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" id="id_volver_a_llamar">
+                <input type="hidden" id="area_volver_a_llamar">
+                <input type="hidden" id="cedula_volver_a_llamar">
+                <input type="hidden" id="nombre_volver_a_llamar">
+                <input type="hidden" id="telefono_volver_a_llamar">
+                <input type="hidden" id="es_socio_volver_a_llamar">
+                <input type="hidden" id="fecha_hora_volver_a_llamar">
+                <input type="hidden" id="mensaje_volver_a_llamar">
+                <input type="hidden" id="fecha_registro_volver_a_llamar">
+
+
+                <div class="row mb-3">
+                    <div class="col-lg-12">
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" placeholder="Observación" id="observacion_volver_a_llamar"
+                                style="height: 100px"></textarea>
+                            <label for="observacion_volver_a_llamar">Observación:</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-floating mb-3">
+                            <select class="form-select agregarFiliales" id="avisar_a_volver_a_llamar" aria-label="Avisar a">
+                            </select>
+                            <label for="avisar_a_volver_a_llamar">Avisar a:</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="cargar_imagen_volver_a_llamar">Cargar Imagen:</label>
+                        <input type="file" name="cargar_imagen_volver_a_llamar[]" id="cargar_imagen_volver_a_llamar"
+                            class="form-control mb-3" accept=".jpg, .jpeg, .png, .pdf" multiple>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary"
+                    onclick="cargar_registro_volver_a_llamar(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

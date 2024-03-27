@@ -1,0 +1,24 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_AgregarEtiquetaSocio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" style="overflow-y: scroll;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Etiqueta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_etiqueta_socio" placeholder="Etiqueta">
+                    <label for="txt_etiqueta_socio">Etiqueta:</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="agregar_etiqueta_socio(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
