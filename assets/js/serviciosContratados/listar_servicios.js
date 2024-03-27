@@ -12,7 +12,7 @@ function listar_servicios_del_socio() {
     },
     success: function (r) {
       if (r.error) {
-        alert("La cédula ingresada no pertenece a un socio actual de Vida.\nSe mostrarán los servicios contratados previos a la baja.");
+        warning("La cédula ingresada no pertenece a un socio actual de Vida.\nSe mostrarán los servicios contratados previos a la baja.");
         $.each(r, function (index, el) {
           if (el.nroServicio != null) {
             nuevoServicio =
@@ -73,7 +73,7 @@ function listar_servicios_del_socio() {
       $("#modalServiciosContratados").modal("show");
     },
     error: function () {
-      alert("Ha ocurrido un error inesperado, por favor comuníquese con el administrador.");
+      error("Ha ocurrido un error inesperado, por favor comuníquese con el administrador.");
     },
   });
 

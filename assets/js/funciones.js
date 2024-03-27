@@ -297,10 +297,10 @@ function ocultar_todo_contenido() {
   $('.contenido').css({ display: 'none' });
   $('#historiaComunicacionDeCedulaDiv').css('display', 'none');
   $('#historiaComunicacionDeCedulaDiv_funcionarios').css('display', 'none');
-  $('#b1').text('Coordinación');
-  $('#b1').attr('disabled', false);
-  $('#b2').text('Cobranza');
-  $('#b2').attr('disabled', false);
+  $('#btnDatosCoordinacion').text('Coordinación');
+  $('#btnDatosCoordinacion').attr('disabled', false);
+  $('#btnDatosCobranza').text('Cobranza');
+  $('#btnDatosCobranza').attr('disabled', false);
 
   //noEsSocioRegistro
   $('#cedulasNSR').val('');

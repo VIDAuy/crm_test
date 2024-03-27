@@ -1,7 +1,4 @@
 <?php
-$siEsSocio = "";
-$agenda_volver_a_llamar = "";
-
 if ($_SESSION['nivel'] == 1) {
 
     $siEsSocio = "
@@ -17,6 +14,8 @@ if ($_SESSION['nivel'] == 1) {
 			</div>
 		</div>
     </div>";
+
+    $agenda_volver_a_llamar = "";
 } else {
 
     $siEsSocio = "
@@ -41,9 +40,9 @@ if ($_SESSION['nivel'] == 1) {
             <div class='col-4 justify-content-center'>
                 <label class='col-form-label d-block text-center'>Más datos:</label>
                 <div class='d-flex'>
-                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='b1' onclick='datosCoordina()'>Coordinación</button>
-                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='b2' onclick='datosCobranza()'>Cobranza</button>
-                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='b3' onclick='datosProductos()'>Productos</button>
+                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='btnDatosCoordinacion' onclick='datos_coordinacion()'>Coordinación</button>
+                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='btnDatosCobranza' onclick='datos_cobranza()'>Cobranza</button>
+                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='btnDatosProductos' onclick='datos_productos()'>Productos</button>
                 </div>
             </div>
         </div>
@@ -65,9 +64,7 @@ if ($_SESSION['nivel'] == 1) {
 
     $agenda_volver_a_llamar = "
     <div class='d-flex justify-content-center'>
-        <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)'>
-            Agregar a agenda 📞
-        </button>
+    <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)'>Agregar a agenda 📞</button>
     </div>";
 }
 

@@ -38,12 +38,12 @@ function buscarSocio() {
                 $("#contenido_funcionario").css("display", "none");
                 $("#historiaComunicacionDeCedulaDiv").css("display", "none");
                 $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
-                $("#b1").text("Coordinación");
-                $("#b1").attr("disabled", false);
-                $("#b2").text("Cobranza");
-                $("#b2").attr("disabled", false);
-                $('#b3').text('Productos');
-                $("#b3").attr("disabled", false);
+                $("#btnDatosCoordinacion").text("Coordinación");
+                $("#btnDatosCoordinacion").attr("disabled", false);
+                $("#btnDatosCobranza").text("Cobranza");
+                $("#btnDatosCobranza").attr("disabled", false);
+                $('#btnDatosProductos').text('Productos');
+                $("#btnDatosProductos").attr("disabled", false);
 
                 //noEsSocioRegistro
                 $("#cedulasNSR").val("");
@@ -139,10 +139,10 @@ function buscarFuncionario(cedula, tipo) {
             $("#contenido_funcionario").css("display", "none");
             $("#acciones_socios_nivel_3").css("display", "none");
             $("#historiaComunicacionDeCedulaDiv").css("display", "none");
-            $("#b1").val("Coordinación");
-            $("#b1").attr("disabled", false);
-            $("#b2").val("Cobranza");
-            $("#b2").attr("disabled", false);
+            $("#btnDatosCoordinacion").val("Coordinación");
+            $("#btnDatosCoordinacion").attr("disabled", false);
+            $("#btnDatosCobranza").val("Cobranza");
+            $("#btnDatosCobranza").attr("disabled", false);
 
             //siEsSocio
             $("#cedulas").val("");
