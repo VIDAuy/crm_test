@@ -1,100 +1,86 @@
 function historiaComunicacionDeCedula() {
-    $("#example1").DataTable().destroy();
-    $.ajax({
-        url: `${url_app}historiaComunicacionDeCedula.php`,
-        type: "GET",
-        dataType: "JSON",
-        data: { CI: $("#ci").val() },
-        beforeSend: function () {
-            $("#historiaComunicacionDeCedula tr").remove();
-        },
-    }).done(function (datos) {
-        if (!datos.noRegistros) {
-            $.each(datos, function (index, el) {
-                let nuevaLinea = "<tr>";
-                nuevaLinea += "<td>" + el.id + "</td>";
-                nuevaLinea += "<td>" + el.fecha + "</td>";
-                nuevaLinea += "<td>" + el.sector + "</td>";
-                nuevaLinea += "<td>" + el.usuario + "</td>";
-                nuevaLinea += "<td>" + el.socio + "</td>";
-                nuevaLinea += "<td>" + el.baja + "</td>";
-                nuevaLinea += "<td>" + el.observacion + "</td>";
-                nuevaLinea += "<td>" + el.avisar_a + "</td>";
-                nuevaLinea += '<td class="text-center">' + el.imagen + '</td>';
-                nuevaLinea += '<td class="text-center">' + el.mas_info + '</td>';
-                nuevaLinea += "</tr>";
-                $(nuevaLinea).appendTo("#historiaComunicacionDeCedula");
-            });
-            $("#example1").DataTable({
-                pageLength: 5,
-                searching: true,
-                paging: true,
-                lengthChange: false,
-                info: true,
-                order: [[0, "desc"]],
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-                },
-            });
-            stateSave: true;
-            $('[type="search"]').addClass("form-control-static");
-            $('[type="search"]').css({ borderRadius: "5px" });
-        }
+    let cedula = $("#ci").val();
+
+    $("#tabla_historia_comunicacion_de_cedula").DataTable({
+        ajax: `${url_ajax}historiaComunicacionDeCedula.php?cedula=${cedula}`,
+        columns: [
+            { data: "id" },
+            { data: "fecha" },
+            { data: "sector" },
+            { data: "usuario" },
+            { data: "socio" },
+            { data: "baja" },
+            { data: "observacion" },
+            { data: "avisar_a" },
+            { data: "imagen" },
+            { data: "mas_info" },
+        ],
+        bDestroy: true,
+        order: [[0, "desc"]],
+        language: { url: url_lenguage },
+        pageLength: 5,
     });
 }
 
-function modalHistoriaComunicacionDeCedula(CIParam) {
-    $("#modalHistoriaComunicacionDeCedula").modal("show");
+function modal_ver_imagen_registro(ruta, id) {
+    document.getElementById('mostrar_imagenes_relamos').innerHTML = '';
+
     $.ajax({
-        url: url_app + "historiaComunicacionDeCedula.php",
-        dataType: "JSON",
+        type: 'GET',
+        url: `${url_ajax}imagenes_de_registros.php`,
         data: {
-            ID: CIParam,
+            id: id,
         },
-        beforeSend: function () {
-            $("#MHCDCtitulo").text(null);
-            $("#MHCDCcedula").val(null);
-            $("#MHCDCnombre").val(null);
-            $("#MHCDCtelefono").val(null);
-            $("#MHCDCfecha_registro").val(null);
-            $("#MHCDCsector").val(null);
-            $("#MHCDCobservaciones").text(null);
-            $("#MHCDCsocio").val(null);
-            $("#MHCDCbaja").val(null);
+        dataType: 'JSON',
+        success: function (response) {
+            if (response.error === false) {
+                let imagenes = response.datos;
+
+                imagenes.map((val) => {
+                    let separar_nombre_archivo = val.split('.');
+                    let extencion_archivo = separar_nombre_archivo[1];
+
+                    if (extencion_archivo != 'pdf') {
+                        document.getElementById(
+                            'mostrar_imagenes_relamos'
+                        ).innerHTML += `<img src="${ruta}/${val}" style="width: 100%; height: auto"> <br> <br>`;
+                    } else {
+                        document.getElementById(
+                            'mostrar_imagenes_relamos'
+                        ).innerHTML += `<iframe src="${ruta}/${val}" width=100% height=600></iframe>`;
+                    }
+                });
+            } else {
+                error(response.mensaje);
+            }
         },
-    })
-        .done(function (datos) {
-            $("#MHCDCtitulo").text(datos.id);
-            $("#MHCDCcedula").val(datos.cedula);
-            $("#MHCDCnombre").val(datos.nombre);
-            $("#MHCDCtelefono").val(datos.telefono);
-            $("#MHCDCfecha_registro").val(datos.fecha_registro);
-            $("#MHCDCsector").val(datos.sector);
-            $("#MHCDCobservaciones").text(datos.observaciones);
-            if (datos.socio == "No") {
-                $("#MHCDCsocio").css({ color: "red" });
-            } else {
-                $("#MHCDCsocio").css({ color: "black" });
-            }
-            $("#MHCDCsocio").val(datos.socio);
-            if (datos.baja == "Sí") {
-                $("#MHCDCbaja").css({ color: "red" });
-            } else {
-                $("#MHCDCbaja").css({ color: "black" });
-            }
-            $("#MHCDCbaja").val(datos.baja);
-            $("#modalHistoriaComunicacionDeCedula").modal("show");
-        })
-        .fail(function () {
-            error('Ha ocurrido un error al cargar "modalHistoriaComunicacionDeCedula", por favor cominíqueselo al administrador');
-        });
+    });
+
+    $('#modalVerImagenesRegistro').modal('show');
+}
+
+function abrir_modal_ver_mas_registro(id, cedula, nombre, telefono, fecha_registro, sector, observacion, socio, baja) {
+    $("#MHCDCtitulo").text(`#${id}`);
+    $("#MHCDCcedula").val(cedula);
+    $("#MHCDCnombre").val(nombre);
+    $("#MHCDCtelefono").val(telefono);
+    $("#MHCDCfecha_registro").val(fecha_registro);
+    $("#MHCDCsector").val(sector);
+    $("#MHCDCobservaciones").val(observacion);
+    socio == 0 ? $("#MHCDCsocio").css("color", "#DC3545") : $("#MHCDCsocio").css("color", "black");
+    baja == 1 ? $("#MHCDCbaja").css("color", "#DC3545") : $("#MHCDCbaja").css("color", "black");
+    $("#MHCDCsocio").val(socio == 1 ? 'Si' : "No");
+    $("#MHCDCbaja").val(baja == 1 ? "Si" : "No");
+
+
+    $("#modalHistoriaComunicacionDeCedula").modal("show");
 }
 
 function historiaComunicacionDeCedula_funcionarios() {
     let cedula = $("#ci").val();
 
     $("#tabla_historia_comunicacion_de_cedula_funcionario").DataTable({
-        ajax: `${url_app}historiaComunicacionDeCedula_funcionarios.php?cedula=${cedula}`,
+        ajax: `${url_ajax}historiaComunicacionDeCedula_funcionarios.php?cedula=${cedula}`,
         columns: [
             { data: "id" },
             { data: "fecha" },
@@ -103,6 +89,6 @@ function historiaComunicacionDeCedula_funcionarios() {
         ],
         bDestroy: true,
         order: [[0, "desc"]],
-        language: { url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json" },
+        language: { url: url_lenguage },
     });
 }

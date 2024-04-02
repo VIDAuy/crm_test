@@ -38,7 +38,7 @@ function registrar_auditoria_socio(openModal = false) {
 
             $.ajax({
                 type: "POST",
-                url: `${url_app}auditorias_socio/registrar_auditoria.php`,
+                url: `${url_ajax}auditorias_socio/registrar_auditoria.php`,
                 data: {
                     cedula,
                     descripcion,
@@ -79,7 +79,7 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
 
             $.ajax({
                 type: "POST",
-                url: `${url_app}auditorias_socio/registrar_comentario.php`,
+                url: `${url_ajax}auditorias_socio/registrar_comentario.php`,
                 data: {
                     id,
                     comentario
@@ -107,7 +107,7 @@ function ver_comentarios_auditorias_socio(id, cedula) {
     $("#span_cedula_socio").text(cedula);
 
     $("#tabla_comentario_auditorias").DataTable({
-        ajax: `${url_app}auditorias_socio/tabla_comentarios_auditoria.php?id=${id}`,
+        ajax: `${url_ajax}auditorias_socio/tabla_comentarios_auditoria.php?id=${id}`,
         columns: [
             { data: "id" },
             { data: "comentario" },
@@ -115,9 +115,7 @@ function ver_comentarios_auditorias_socio(id, cedula) {
         ],
         order: [[0, "asc"]],
         bDestroy: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-        },
+        language: { url: url_lenguage },
     });
 
     $("#modal_verComentariosAuditoriaSocio").modal("show");
@@ -126,7 +124,7 @@ function ver_comentarios_auditorias_socio(id, cedula) {
 function tabla_registros_auditoria_socio(btnRegistrarComentario = false) {
 
     $("#tabla_auditorias_registradas").DataTable({
-        ajax: `${url_app}auditorias_socio/tabla_auditorias.php?btnRegistrarComentario=${btnRegistrarComentario}`,
+        ajax: `${url_ajax}auditorias_socio/tabla_auditorias.php?btnRegistrarComentario=${btnRegistrarComentario}`,
         columns: [
             { data: "id" },
             { data: "cedula" },
@@ -138,9 +136,7 @@ function tabla_registros_auditoria_socio(btnRegistrarComentario = false) {
         ],
         order: [[0, "asc"]],
         bDestroy: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-        },
+        language: { url: url_lenguage },
     });
 
     $("#modal_auditoriasSocioRegistradas").modal("show");
@@ -153,7 +149,7 @@ function verificar_auditoria_socio() {
     if (controlCedula(cedula) === true) {
         $.ajax({
             type: "GET",
-            url: `${url_app}auditorias_socio/comprobar_auditorias.php?cedula=${cedula}`,
+            url: `${url_ajax}auditorias_socio/comprobar_auditorias.php?cedula=${cedula}`,
             dataType: "JSON",
             success: function (response) {
                 if (response.error === false) {

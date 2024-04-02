@@ -19,7 +19,7 @@ function cargar_select_tipo_documento() {
     document.getElementById("select_tipo_documento").innerHTML = '<option value="" selected disabled>Seleccione el tipo de documento ...</option>';
 
     $.ajax({
-        url: url_app + "select_tipo_documento.php",
+        url: `${url_ajax}select_tipo_documento.php`,
         dataType: "JSON",
         success: function (r) {
             $.each(r.datos, function (i, v) {
@@ -39,7 +39,7 @@ function cargar_select_area_a_avisar() {
 
     /*
     $.ajax({
-        url: url_app + "agregarFiliales.php",
+        url: `${url_ajax}agregarFiliales.php`,
         dataType: "JSON",
         success: function (r) {
             $.each(r.datos, function (i, v) {
@@ -147,7 +147,7 @@ function cargar_documento() {
 
         $.ajax({
             type: "POST",
-            url: url_app + 'cargar_documentos.php',
+            url: `${url_ajax}cargar_documentos.php`,
             data: formData,
             dataType: "JSON",
             contentType: false,
@@ -174,7 +174,7 @@ function alertas_de_documentos_cargados() {
 
 function tabla_documentos_cargados() {
     $('#tabla_documentos_cargados').DataTable({
-        ajax: url_app + 'documentos_cargados.php',
+        ajax: `${url_ajax}documentos_cargados.php`,
         columns: [
             { data: 'nro_carga' },
             { data: 'tipo_documento' },
@@ -186,14 +186,14 @@ function tabla_documentos_cargados() {
         "order": [[0, 'asc']],
         "lengthChange": false,
         "ordering": false,
-        language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+        language: { url: url_lenguage },
     });
 }
 
 
 function tabla_alertas_respondidas() {
     $('#tabla_alertas_respondidas').DataTable({
-        ajax: url_app + 'alertas_respondidas.php',
+        ajax: `${url_ajax}alertas_respondidas.php`,
         columns: [
             { data: 'fila' },
         ],
@@ -201,7 +201,7 @@ function tabla_alertas_respondidas() {
         "ordering": false,
         "lengthChange": false,
         "searching": false,
-        language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+        language: { url: url_lenguage },
     });
 }
 
@@ -217,7 +217,7 @@ function mostrar_documento(ruta) {
 function alertar_funcionario_estado_documento() {
     $.ajax({
         type: "GET",
-        url: url_app + 'contar_cambios_estados_documentos.php',
+        url: `${url_ajax}contar_cambios_estados_documentos.php`,
         dataType: "JSON",
         success: function (response) {
             if (response.error === false) {
@@ -240,7 +240,7 @@ $(document).on('click', '.check_leido', function () {
     if ($(this).is(':checked')) {
         $.ajax({
             type: "POST",
-            url: url_app + 'marcar_alerta_leida.php',
+            url: `${url_ajax}marcar_alerta_leida.php`,
             data: {
                 "nro_cargo": nro_cargo
             },
@@ -265,11 +265,11 @@ async function notificacion_escritorio() {
 
         let opciones = {
             body: " Presiona aqui para ver los documentos",
-            icon: url_app + "assets/img/alerta_crm.png",
+            icon: url_ajax + "assets/img/alerta_crm.png",
         };
         let notificacion = new Notification("CRM Funcionarios - Tienes Alertas pendientes", opciones);
         notificacion.onclick = function () {
-            window.location.replace(url_app + "index.php");
+            window.location.replace(url_ajax + "index.php");
 
         }
     });

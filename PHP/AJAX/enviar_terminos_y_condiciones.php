@@ -1,5 +1,5 @@
 <?php
-include './configuraciones.php';
+include_once '../configuraciones.php';
 $id_sub_usuario = $_SESSION['id_sub_usuario'];
 $sector = $_REQUEST['sector'];
 $cedula = $_REQUEST['cedula'];

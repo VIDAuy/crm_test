@@ -45,7 +45,7 @@ function identificar_persona() {
 
         $.ajax({
             type: "GET",
-            url: `${url_app}comprobar_persona_en_sesion.php`,
+            url: `${url_ajax}comprobar_persona_en_sesion.php`,
             data: {
                 sector: sector,
                 cedula: cedula

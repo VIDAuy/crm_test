@@ -1,5 +1,5 @@
 <?php
-include '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 
 if (!isset($_REQUEST['area'])) {

@@ -10,7 +10,7 @@ function datos_cobranza() {
 
 		$.ajax({
 			type: "GET",
-			url: `${url_app}masDatos/datosCobranza.php?opcion=1`,
+			url: `${url_ajax}masDatos/datosCobranza.php?opcion=1`,
 			data: {
 				cedula: cedula
 			},
@@ -35,7 +35,7 @@ function datos_cobranza() {
 
 function tabla_cobranzas(cedula) {
 	$("#tabla_registros_cobranza").DataTable({
-		ajax: `${url_app}masDatos/datosCobranza.php?cedula=${cedula}&opcion=2`,
+		ajax: `${url_ajax}masDatos/datosCobranza.php?cedula=${cedula}&opcion=2`,
 		columns: [
 			{ data: "mes" },
 			{ data: "anho" },
@@ -44,8 +44,6 @@ function tabla_cobranzas(cedula) {
 		],
 		order: [[1, "desc"], [0, "desc"]],
 		bDestroy: true,
-		language: {
-			url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-		},
+		language: { url: url_lenguage },
 	});
 }

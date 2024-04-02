@@ -1,5 +1,5 @@
 <?php
-include './configuraciones.php';
+include_once '../configuraciones.php';
 
 
 $listar_usuarios = obtener_usuarios();

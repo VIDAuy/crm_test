@@ -12,7 +12,7 @@ function alertas_de_vida_te_lleva() {
     if (sector == "Calidad") {
         $.ajax({
             type: "GET",
-            url: `${url_app}contar_pendientes_vida_te_lleva.php`,
+            url: `${url_ajax}contar_pendientes_vida_te_lleva.php`,
             dataType: "JSON",
             success: function (response) {
                 if (response.error === false) {

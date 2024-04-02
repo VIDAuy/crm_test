@@ -21,7 +21,7 @@ function consulta_licencias() {
 
     $.ajax({
         type: "GET",
-        url: url_app + "licencia_acompanante.php",
+        url: `${url_ajax}licencia_acompanante.php`,
         data: {
             cod_trabajador: cod_trabajador,
             opcion: "consulta",
@@ -32,11 +32,7 @@ function consulta_licencias() {
                 let groupColumn = 0;
 
                 $("#tabla_licencia_personal").DataTable({
-                    ajax:
-                        url_app +
-                        "licencia_acompanante.php?cod_trabajador=" +
-                        cod_trabajador +
-                        "&opcion=tabla",
+                    ajax: `${url_ajax}licencia_acompanante.php?cod_trabajador=${cod_trabajador}&opcion=tabla`,
                     columnDefs: [{ visible: false, targets: groupColumn }],
                     columns: [
                         { data: "anio" },
@@ -73,9 +69,7 @@ function consulta_licencias() {
                                 }
                             });
                     },
-                    language: {
-                        url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-                    },
+                    language: { url: url_lenguage },
                     footerCallback: function (row, data, start, end, display) {
                         total_tomados = this.api()
                             .column(4)
@@ -111,7 +105,7 @@ function consulta_licencias() {
 function buscarHorasAcompanante(cedula, fecha_desde, fecha_hasta) {
     $.ajax({
         type: "GET",
-        url: url_app + "calcular_total_horas_funcionario.php",
+        url: `${url_ajax}calcular_total_horas_funcionario.php`,
         data: {
             cedula: cedula,
             fecha_desde: fecha_desde,
@@ -121,14 +115,7 @@ function buscarHorasAcompanante(cedula, fecha_desde, fecha_hasta) {
         success: function (response) {
             if (response.error === false) {
                 $("#tabla_horas_acompanantes").DataTable({
-                    ajax:
-                        url_app +
-                        "horas_acompanantes.php?cedula=" +
-                        cedula +
-                        "&fecha_desde=" +
-                        fecha_desde +
-                        "&fecha_hasta=" +
-                        fecha_hasta,
+                    ajax: `${url_ajax}horas_acompanantes.php?cedula=${cedula}&fecha_desde=${fecha_desde}&fecha_hasta=${fecha_hasta}`,
                     columns: [
                         { data: "fecha_filtro" },
                         { data: "id_info" },
@@ -148,9 +135,7 @@ function buscarHorasAcompanante(cedula, fecha_desde, fecha_hasta) {
                     ],
                     order: [[0, "asc"]],
                     bDestroy: true,
-                    language: {
-                        url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-                    },
+                    language: { url: url_lenguage },
                 });
 
                 $("#modalHorasAcompanantes").modal("show");
@@ -164,14 +149,7 @@ function buscarHorasAcompanante(cedula, fecha_desde, fecha_hasta) {
 
 function buscarFaltasAcompanante(cedula, fecha_desde, fecha_hasta) {
     $("#tabla_faltas_acompanantes").DataTable({
-        ajax:
-            url_app +
-            "faltas_acompanantes.php?cedula=" +
-            cedula +
-            "&fecha_desde=" +
-            fecha_desde +
-            "&fecha_hasta=" +
-            fecha_hasta,
+        ajax: `${url_ajax}faltas_acompanantes.php?cedula=${cedula}&fecha_desde=${fecha_desde}&fecha_hasta=${fecha_hasta}`,
         columns: [
             { data: "trabajador" },
             { data: "tipo_falta" },
@@ -182,7 +160,7 @@ function buscarFaltasAcompanante(cedula, fecha_desde, fecha_hasta) {
         ],
         bDestroy: true,
         order: [[0, "asc"]],
-        language: { url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json" },
+        language: { url: url_lenguage },
     });
 
     $("#modalFaltasAcompanantes").modal("show");

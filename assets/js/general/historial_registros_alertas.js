@@ -3,7 +3,7 @@ function ver_registros_volver_a_llamar() {
     $("#modal_historialRegistrosVolverALlamar").modal("show");
 
     $('#tabla_historial_volver_a_llamar').DataTable({
-        ajax: `${url_app}tabla_historial_volver_a_llamar.php?`,
+        ajax: `${url_ajax}tabla_historial_volver_a_llamar.php?`,
         columns: [
             { data: 'id' },
             { data: 'cedula' },
@@ -20,7 +20,7 @@ function ver_registros_volver_a_llamar() {
         ],
         "order": [[0, 'desc']],
         "bDestroy": true,
-        language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+        language: { url: url_lenguage },
     });
 }
 
@@ -29,7 +29,7 @@ function ver_registros_alertas() {
     $("#modal_historialRegistrosDeAlertas").modal("show");
 
     $('#tabla_historial_alertas').DataTable({
-        ajax: `${url_app}tabla_historial_alertas.php`,
+        ajax: `${url_ajax}tabla_historial_alertas.php`,
         columns: [
             { data: 'id' },
             { data: 'cedula' },
@@ -42,6 +42,6 @@ function ver_registros_alertas() {
         ],
         "order": [[0, 'desc']],
         "bDestroy": true,
-        language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+        language: { url: url_lenguage },
     });
 }

@@ -1,5 +1,5 @@
 <?php
-include '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 $id_auditoria_socio = $_REQUEST['id'];
 $comentario = $_REQUEST['comentario'];

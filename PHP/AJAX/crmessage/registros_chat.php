@@ -1,6 +1,5 @@
 <?php
-
-include '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 $id = $_REQUEST['id'];
 $estado_consulta = "";

@@ -1,8 +1,9 @@
 <?php
 include_once "../conexiones/conexion2.php";
+
 error_reporting(E_ALL);
-if (empty($_REQUEST["hasta"]))
-  die(json_encode(["data" => []]));
+
+if (empty($_REQUEST["hasta"])) die(json_encode(["data" => []]));
 
 $desde = date("Y/m/d", strtotime($_REQUEST["desde"]));
 $hasta = date("Y-m-d", strtotime($_REQUEST["hasta"]));
@@ -10,12 +11,12 @@ $d = new DateTime($_REQUEST["desde"]);
 $h =  new DateTime($_REQUEST["hasta"]);
 $diferencia = $d->diff($h);
 
-if ($diferencia->m >= 3)
-  die(json_encode(["data" => []]));
+if ($diferencia->m >= 3) die(json_encode(["data" => []]));
 
 $consulta = "SELECT * FROM bajas WHERE (CAST(fecha_ingreso_baja AS date) >= '{$desde}' AND CAST(fecha_ingreso_baja AS date) <= '{$hasta}');";
 $tabla  = [];
 $bajas = mysqli_query($conexion, $consulta);
+
 if (mysqli_num_rows($bajas) > 0) {
   while ($baja = mysqli_fetch_assoc($bajas)) {
     $id_relacion = $baja["idrelacion"];
@@ -41,11 +42,17 @@ if (mysqli_num_rows($bajas) > 0) {
     ];
   }
 }
+
+
 die(json_encode(["data" => $tabla], JSON_UNESCAPED_UNICODE));
+
+
+
 function utf8Convertir($campo)
 {
   return mb_convert_encoding($campo, 'UTF-8', 'UTF-8');
 }
+
 function recortarCampo($campo, $largo = 120)
 {
   $largoCampo = is_null($campo) ? 0 : mb_strlen($campo);
@@ -59,6 +66,7 @@ function recortarCampo($campo, $largo = 120)
   }
   return $campo;
 }
+
 function obtener_area($id_relacion)
 {
   global $conexion;

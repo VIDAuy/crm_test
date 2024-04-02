@@ -1,5 +1,5 @@
 <?php
-include '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 $area = $_REQUEST['area'];
 $area = obtener_area($area);

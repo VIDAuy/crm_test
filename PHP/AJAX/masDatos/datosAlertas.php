@@ -1,5 +1,5 @@
 <?php
-include '../configuraciones.php';
+include_once '../../configuraciones.php';
 $conexion = connection(DB);
 
 $sector = $_SESSION['id'];

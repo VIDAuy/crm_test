@@ -27,7 +27,7 @@ function buscarSocio() {
     } else {
 
         $.ajax({
-            url: `${url_app}cargar_datos_socios.php`,
+            url: `${url_ajax}cargar_datos_socios.php`,
             type: "GET",
             dataType: "JSON",
             data: { CI: cedula },
@@ -126,7 +126,7 @@ function buscarSocio() {
 
 function buscarFuncionario(cedula, tipo) {
     $.ajax({
-        url: `${url_app}cargar_datos_funcionarios.php`,
+        url: `${url_ajax}cargar_datos_funcionarios.php`,
         type: "GET",
         dataType: "JSON",
         data: {

@@ -11,7 +11,7 @@ function tabla_llamadas_pendientes() {
     let id_sector = localStorage.getItem("id_sector");
 
     $('#tabla_llamadas_pendientes').DataTable({
-        ajax: `${url_app}volver_a_llamar/tabla_llamadas_pendientes.php?opcion=1&cedula=${cedula}&area=${id_sector}`,
+        ajax: `${url_ajax}volver_a_llamar/tabla_llamadas_pendientes.php?opcion=1&cedula=${cedula}&area=${id_sector}`,
         columns: [
             { data: 'id' },
             { data: 'cedula' },
@@ -35,7 +35,7 @@ function tabla_llamadas_pendientes() {
             }],
         "order": [[0, 'asc']],
         "bDestroy": true,
-        language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+        language: { url: url_lenguage },
     });
 }
 
@@ -45,7 +45,7 @@ function badge_cantidad_pendientes_volver_a_llamar() {
 
     $.ajax({
         type: "GET",
-        url: `${url_app}volver_a_llamar/tabla_llamadas_pendientes.php?opcion=2`,
+        url: `${url_ajax}volver_a_llamar/tabla_llamadas_pendientes.php?opcion=2`,
         dataType: "JSON",
         success: function (response) {
             let cantidad = response.cantidad;
@@ -87,7 +87,7 @@ function agendar_volver_a_llamar(openModal = false) {
         } else {
             $.ajax({
                 type: "POST",
-                url: `${url_app}volver_a_llamar/agendar_volver_a_llamar.php`,
+                url: `${url_ajax}volver_a_llamar/agendar_volver_a_llamar.php`,
                 data: {
                     area: area,
                     cedula: cedula,
@@ -132,7 +132,7 @@ function abrir_agenda_volver_a_llamar(openModal = false) {
     let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 
     $("#tabla_agenda_volver_a_llamar").DataTable({
-        ajax: `${url_app}volver_a_llamar/listado_agenda_volver_a_llamar.php?area=${area}&id_sub_usuario=${id_sub_usuario}`,
+        ajax: `${url_ajax}volver_a_llamar/listado_agenda_volver_a_llamar.php?area=${area}&id_sub_usuario=${id_sub_usuario}`,
         columns: [
             { data: "id" },
             { data: "cedula" },
@@ -154,9 +154,7 @@ function abrir_agenda_volver_a_llamar(openModal = false) {
         ],
         order: [[0, "asc"]],
         bDestroy: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-        },
+        language: { url: url_lenguage },
     });
 }
 
@@ -181,7 +179,7 @@ function cambiar_fecha_y_hora_volver_a_llamar(openModal = false, id) {
 
         $.ajax({
             type: "POST",
-            url: `${url_app}volver_a_llamar/cambiar_fecha_y_hora_volver_a_llamar.php`,
+            url: `${url_ajax}volver_a_llamar/cambiar_fecha_y_hora_volver_a_llamar.php`,
             data: {
                 "id": id_registro,
                 "fecha": fecha,
@@ -210,7 +208,7 @@ function cantidad_volver_a_llamar() {
 
         $.ajax({
             type: "GET",
-            url: `${url_app}volver_a_llamar/contar_pendientes_volver_a_llamar.php`,
+            url: `${url_ajax}volver_a_llamar/contar_pendientes_volver_a_llamar.php`,
             data: {
                 area: area,
                 id_sub_usuario: id_sub_usuario
@@ -283,7 +281,7 @@ function cargar_registro_volver_a_llamar(openModal = false, id, area, cedula, no
             $.ajax({
                 type: "POST",
                 data: form_data,
-                url: `${url_app}volver_a_llamar/cargar_registro_volver_a_llamar.php`,
+                url: `${url_ajax}volver_a_llamar/cargar_registro_volver_a_llamar.php`,
                 dataType: "JSON",
                 contentType: false,
                 processData: false,
@@ -374,7 +372,7 @@ function abrir_asignar_llamada(openModal = false, id, id_area, cedula, nombre, t
 
             $.ajax({
                 type: "POST",
-                url: `${url_app}volver_a_llamar/asignar_llamada_a_usuario.php`,
+                url: `${url_ajax}volver_a_llamar/asignar_llamada_a_usuario.php`,
                 data: {
                     "id_registro": id_registro,
                     "id_area": id_area,
@@ -420,7 +418,7 @@ function select_sub_usuarios(opcion, div, id_sub_usuario = null, nombre_sub_usua
 
         $.ajax({
             type: "GET",
-            url: `${url_app}volver_a_llamar/select_sub_usuarios.php?area=${id_area}`,
+            url: `${url_ajax}volver_a_llamar/select_sub_usuarios.php?area=${id_area}`,
             dataType: "JSON",
             success: function (response) {
                 let datos = response.datos;
@@ -435,7 +433,7 @@ function select_sub_usuarios(opcion, div, id_sub_usuario = null, nombre_sub_usua
 
         $.ajax({
             type: "GET",
-            url: `${url_app}volver_a_llamar/select_sub_usuarios.php?id_sub_usuario=${id_sub_usuario}`,
+            url: `${url_ajax}volver_a_llamar/select_sub_usuarios.php?id_sub_usuario=${id_sub_usuario}`,
             dataType: "JSON",
             success: function (response) {
                 let datos = response.datos;

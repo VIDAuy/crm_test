@@ -19,7 +19,7 @@ $cedula = $_REQUEST['cedulas'];
 $envioSector = $_REQUEST['ensec'];
 $socio = $_REQUEST['socio'];
 $sector = $_REQUEST['sector'];
-$id_sub_usuario = !isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
+$id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
 
 
 if ($area == "" || $nombre == "" || $observacion == "" || $cedula == "" || $socio == "" || $sector == "") {

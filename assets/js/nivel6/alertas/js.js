@@ -168,7 +168,7 @@ function tabla_documentos_cargados() {
         "order": [[0, 'asc']],
         "lengthChange": false,
         "ordering": false,
-        language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+        language: { url: url_lenguage },
     });
 }
 
@@ -183,7 +183,7 @@ function tabla_alertas_respondidas() {
         "ordering": false,
         "lengthChange": false,
         "searching": false,
-        language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json' },
+        language: { url: url_lenguage },
     });
 }
 

@@ -3,7 +3,7 @@ function listarMensualidades() {
   let cedula = $("#ci").val();
 
   $("#tabla_cobranza_abitab").DataTable({
-    ajax: `${url_app}listar_cobranza_abitab.php?cedula=${cedula}`,
+    ajax: `${url_ajax}listar_cobranza_abitab.php?cedula=${cedula}`,
     columns: [
       { data: "fecha_orden" },
       { data: "id" },
@@ -24,8 +24,6 @@ function listarMensualidades() {
     ],
     order: [[0, "ASC"]],
     bDestroy: true,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-    },
+    language: { url: url_lenguage },
   });
 }

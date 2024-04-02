@@ -1,5 +1,5 @@
 <?php
-include './configuraciones.php';
+include_once '../configuraciones.php';
 
 
 $id_registro = $_REQUEST['id_registro'];

@@ -114,7 +114,29 @@ function randomColor()
     return $str;
 }
 
-/** Eliminar acento de string **/
+/** Reemplazar acento en string **/
+function remplazarAcentos($texto)
+{
+    //  $texto_parseado = eliminarAcentos($texto);
+    $texto_parseado = $texto;
+
+    $remplazar_array = array(
+        "'" => '', '"' => ' ', '`' => ' ', '`' => '',
+        'Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A',
+        'Ç' => 'C', 'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I',  'Ò' => 'O', 'Ó' => 'O',
+        'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss',
+        'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c', 'è' => 'e', 'é' => 'e', 'ê' => 'e',
+        'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o',  'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o',
+        'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y', 'Ñ' => 'N', 'ñ' => 'n', '°' => ' ', 'Â' => ' ',
+        'â' => 'a', '™' => ' ', '€' => '', 'Âº' => '', '/' => '/'
+    );
+
+    $texto_parseado = strtr($texto_parseado, $remplazar_array);
+    $texto_parseado = preg_replace('([^A-Za-z0-9 ])', '', $texto_parseado);
+    return $texto_parseado;
+}
+
+/** Eliminar acento en string **/
 function eliminarAcentos($cadena)
 {
     $especial = @utf8_decode('ÁÀÂÄáàäâªÉÈÊËéèëêÍÌÏÎíìïîÓÒÖÔóòöôÚÙÛÜúùüûÑñÇç³€™º');
@@ -208,4 +230,12 @@ function reformar_fecha($fecha)
     $mes = strlen($mes) == 1 ? "0$mes" : $mes;
 
     return "$dia/$mes/$ano";
+}
+
+/** Términa el proceso y devuelve el error expecificado **/
+function devolver_error($mensaje)
+{
+    $response['error'] = true;
+    $response['mensaje'] = $mensaje;
+    die(json_encode($response));
 }

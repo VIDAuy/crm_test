@@ -32,7 +32,6 @@ function cargo(param, socioParam) {
         form_data.append("cedulas", cedulas);
         form_data.append("sector", sector);
         form_data.append("socio", socioParam);
-        form_data.append("id_sub_usuario", id_sub_usuario);
 
 
         if (param == 0) {
@@ -56,7 +55,7 @@ function cargo(param, socioParam) {
         $.ajax({
             type: "POST",
             data: form_data,
-            url: `${url_app}datos.php`,
+            url: `${url_ajax}datos.php`,
             dataType: "JSON",
             contentType: false,
             processData: false,
@@ -68,11 +67,25 @@ function cargo(param, socioParam) {
             },
             success: function (content) {
                 if (content.error === false) {
-                    $("#ci").val("");
+                    //$("#ci").val("");
+                    $("#nombreNSR").val("");
+                    $("#nombreNS").val("");
+                    $("#apellidoNS").val("");
+                    $("#telefonoNSR").val("");
+                    $("#telefonoNS").val("");
+                    $("#celularNS").val("");
+                    $("#observacionesNSR").val("");
+                    $("#observacionesNS").val("");
+                    $("#obser").val("");
+                    $("#avisarNSR").val("");
+                    $("#avisarNS").val("");
+                    $("#ensec").val("");
                     $("#cargar_imagen_registro_1").val("");
                     $("#cargar_imagen_registro_2").val("");
                     $("#cargar_imagen_registro_3").val("");
-                    ocultar_todo_contenido();
+                    $('#ensec').prop('selectedIndex', 0);
+                    //ocultar_todo_contenido();
+                    historiaComunicacionDeCedula();
                     correcto(content.message);
                 } else {
                     alerta("Error!", content.message, "error");
@@ -97,7 +110,7 @@ function cargo_registro_fucionario() {
     } else {
         $.ajax({
             type: "POST",
-            url: url_app + "datos_funcionarios.php",
+            url: url_ajax + "datos_funcionarios.php",
             data: {
                 cedula: cedula,
                 nombre: nombre,

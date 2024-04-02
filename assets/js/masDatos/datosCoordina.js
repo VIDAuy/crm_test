@@ -10,7 +10,7 @@ function datos_coordinacion() {
 
 		$.ajax({
 			type: "GET",
-			url: `${url_app}masDatos/datosCoordina.php`,
+			url: `${url_ajax}masDatos/datosCoordina.php`,
 			data: {
 				cedula: cedula,
 				opcion: 1
@@ -35,7 +35,7 @@ function datos_coordinacion() {
 
 function tabla_coordinacion(cedula) {
 	$("#tabla_servicios_coordinacion").DataTable({
-		ajax: `${url_app}masDatos/datosCoordina.php?cedula=${cedula}&opcion=2`,
+		ajax: `${url_ajax}masDatos/datosCoordina.php?cedula=${cedula}&opcion=2`,
 		columns: [
 			{ data: "id" },
 			{ data: "observacion" },
@@ -50,9 +50,7 @@ function tabla_coordinacion(cedula) {
 		],
 		order: [[0, "desc"]],
 		bDestroy: true,
-		language: {
-			url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-		},
+		language: { url: url_lenguage },
 	});
 
 	$("#modalDatosCoordina").modal("show");

@@ -1,6 +1,5 @@
 <?php
-
-include '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 $area_consulta = $_SESSION['id'];
 $area_consultada = $_REQUEST['area_consultada'];

@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.0.82';
+$version = '?v=1.0.83';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
@@ -38,6 +38,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/patologias_socio.js",
 				"general/etiqueta_socio.js",
 				"general/crmessage.js",
+				"general/equifax.js",
 			];
 
 			/** JS General **/
@@ -123,6 +124,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/patologias_socio.js",
 				"general/etiqueta_socio.js",
 				"general/crmessage.js",
+				"general/equifax.js",
 			];
 
 			/** JS General **/
@@ -209,6 +211,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/etiqueta_socio.js",
 				"general/auditorias_socios.js",
 				"general/crmessage.js",
+				"general/equifax.js",
 			];
 
 			/** Carga JS **/
@@ -296,6 +299,7 @@ if (isset($_SESSION['nivel'])) {
 				"funciones.js",
 				"general/sesion.js",
 				"general/crmessage.js",
+				"general/equifax.js",
 			];
 
 			/** Carga JS **/
@@ -347,6 +351,7 @@ if (isset($_SESSION['nivel'])) {
 				"funciones.js",
 				"general/sesion.js",
 				"general/crmessage.js",
+				"general/equifax.js",
 			];
 
 			/** Carga JS **/
@@ -403,6 +408,7 @@ if (isset($_SESSION['nivel'])) {
 				"nivel6/alertas/js.js",
 				"general/sesion.js",
 				"nivel6/crmessage.js",
+				"general/equifax.js",
 			];
 
 			/** Carga JS **/

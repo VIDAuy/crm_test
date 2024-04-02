@@ -1,5 +1,5 @@
 <?php
-include_once './configuraciones.php';
+include_once '../configuraciones.php';
 
 $sucursales_inspira = ['1372', '1373', '1374', '1375', '1376'];
 $mostrar_inspira = $_SESSION['id'] == 2 || $_SESSION['id'] == 34 ? true : false;

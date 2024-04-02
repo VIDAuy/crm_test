@@ -61,23 +61,25 @@ echo json_encode($response);
 
 function consulta_general($conexion, $cedula, $fecha_desde, $fecha_hasta)
 {
-    $consulta = mysqli_query($conexion, "SELECT 
-s.id AS 'id_servicio', 
-h.hora_inicio, 
-h.hora_fin, 
-h.horario_cortado,
-s.idinfo,
-s.fecha AS 'fecha_servicio'
-FROM servicios_new s 
-INNER JOIN pedido_acomp p ON p.id = s.idinfo 
-INNER JOIN horarios h ON h.id_servicio = s.id
-WHERE s.activo = 1 
-AND h.activo = 1
-AND h.sin_acompanante = 0 
-AND s.fecha BETWEEN '$fecha_desde' AND '$fecha_hasta'
-AND (horario_cortado = 0 OR (horario_cortado = 1 AND hora_fin = '23:59'))
-AND h.cedula_acompanante = '$cedula'
-ORDER BY s.id DESC");
+    $sql = "SELECT 
+            s.id AS 'id_servicio', 
+            h.hora_inicio, 
+            h.hora_fin, 
+            h.horario_cortado,
+            s.idinfo,
+            s.fecha AS 'fecha_servicio'
+           FROM servicios_new s 
+            INNER JOIN pedido_acomp p ON p.id = s.idinfo 
+            INNER JOIN horarios h ON h.id_servicio = s.id
+           WHERE 
+            s.activo = 1 AND 
+            h.activo = 1 AND 
+            h.sin_acompanante = 0 AND 
+            s.fecha BETWEEN '$fecha_desde' AND '$fecha_hasta' AND 
+            (horario_cortado = 0 OR (horario_cortado = 1 AND hora_fin = '23:59')) AND 
+            h.cedula_acompanante = '$cedula'
+           ORDER BY s.id DESC";
+    $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;
 }

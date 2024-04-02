@@ -1,5 +1,5 @@
 <?php
-include 'configuraciones.php';
+include_once '../configuraciones.php';
 
 
 $cantidad_pendientes = consulta();

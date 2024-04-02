@@ -1,12 +1,9 @@
 <?php
-include './configuraciones.php';
-
+include_once '../configuraciones.php';
 
 $opcion = $_REQUEST['opcion'];
-
-$sector         = isset($_SESSION['id_sector']) ? $_SESSION['id_sector'] : "";
+$sector         = isset($_SESSION['id']) ? $_SESSION['id'] : "";
 $id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
-
 
 
 /** Tabla **/

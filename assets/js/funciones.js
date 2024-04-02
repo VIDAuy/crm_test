@@ -1,6 +1,11 @@
 const produccion = false;
-const app = produccion ? 'crm' : 'crm_test';
-const url_app = 'http://192.168.1.250:82/' + app + '/PHP/AJAX/';
+const protocolo = "http";
+const server = "192.168.1.250:82";
+const app = produccion ? "crm" : "crm_test";
+const url_app = `${protocolo}://${server}/${app}`;
+const url_ajax = `${url_app}/PHP/AJAX/`;
+const url_lenguage = `${url_app}/assets/js/lenguage.json`;
+
 
 // AJAX
 function agregarFiliales() {
@@ -18,7 +23,7 @@ function agregarFiliales() {
   }
 
   $.ajax({
-    url: url_app + 'agregarFiliales.php',
+    url: `${url_ajax}agregarFiliales.php`,
     dataType: 'JSON',
     success: function (r) {
       $.each(r.datos, function (i, v) {
@@ -35,7 +40,7 @@ function select_usuarios(div) {
 
   $.ajax({
     type: "GET",
-    url: `${url_app}select_usuarios.php?`,
+    url: `${url_ajax}select_usuarios.php?`,
     dataType: "JSON",
     success: function (response) {
       let datos = response.datos;
@@ -67,7 +72,7 @@ function enviar_terminos_y_condiciones_socio(openModal = false) {
     } else {
       $.ajax({
         type: 'POST',
-        url: `${url_app}enviar_terminos_y_condiciones.php`,
+        url: `${url_ajax}enviar_terminos_y_condiciones.php`,
         data: {
           sector: sector,
           cedula: cedula,
@@ -219,43 +224,6 @@ function alerta_ancla(titulo, mensaje, icono) {
       location.reload();
     }
   });
-}
-
-function modal_ver_imagen_registro(ruta, id) {
-  document.getElementById('mostrar_imagenes_relamos').innerHTML = '';
-
-  $.ajax({
-    type: 'GET',
-    url: `${url_app}imagenes_de_registros.php`,
-    data: {
-      id: id,
-    },
-    dataType: 'JSON',
-    success: function (response) {
-      if (response.error === false) {
-        let imagenes = response.datos;
-
-        imagenes.map((val) => {
-          let separar_nombre_archivo = val.split('.');
-          let extencion_archivo = separar_nombre_archivo[1];
-
-          if (extencion_archivo != 'pdf') {
-            document.getElementById(
-              'mostrar_imagenes_relamos'
-            ).innerHTML += `<img src="${ruta}/${val}" style="width: 100%; height: auto"> <br> <br>`;
-          } else {
-            document.getElementById(
-              'mostrar_imagenes_relamos'
-            ).innerHTML += `<iframe src="${ruta}/${val}" width=100% height=600></iframe>`;
-          }
-        });
-      } else {
-        error(response.mensaje);
-      }
-    },
-  });
-
-  $('#modalVerImagenesRegistro').modal('show');
 }
 
 function mostrarLoader(opcion = 'M') {

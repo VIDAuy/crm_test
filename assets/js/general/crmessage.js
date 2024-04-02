@@ -27,16 +27,14 @@ function ver_crmessage() {
 
 function tabla_mis_consultas() {
     $("#tabla_mis_consultas_crmessage").DataTable({
-        ajax: `${url_app}crmessage/tabla_mis_consultas.php`,
+        ajax: `${url_ajax}crmessage/tabla_mis_consultas.php`,
         columns: [
             { data: "id" },
             { data: "consulta" },
         ],
         order: [[0, "asc"]],
         bDestroy: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-        },
+        language: { url: url_lenguage },
         columnDefs: [
             {
                 targets: [0],
@@ -51,16 +49,14 @@ function tabla_mis_consultas() {
 
 function tabla_consultas_asignadas() {
     $("#tabla_consultas_asignadas_crmessage").DataTable({
-        ajax: `${url_app}crmessage/tabla_consultas_asignadas.php`,
+        ajax: `${url_ajax}crmessage/tabla_consultas_asignadas.php`,
         columns: [
             { data: "id" },
             { data: "consulta" },
         ],
         order: [[0, "asc"]],
         bDestroy: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-        },
+        language: { url: url_lenguage },
         columnDefs: [
             {
                 targets: [0],
@@ -90,7 +86,7 @@ function mostrar_mensajes_chat(id = null, opcionResponder = false) {
     document.getElementById('div_mensajes').innerHTML = '';
     $.ajax({
         type: "GET",
-        url: `${url_app}crmessage/registros_chat.php?id=${id_chat}`,
+        url: `${url_ajax}crmessage/registros_chat.php?id=${id_chat}`,
         dataType: "JSON",
         success: function (response) {
             if (response.error === false) {
@@ -130,7 +126,7 @@ function nueva_consulta_crmessage() {
 
         $.ajax({
             type: "POST",
-            url: `${url_app}crmessage/nueva_consulta.php`,
+            url: `${url_ajax}crmessage/nueva_consulta.php`,
             data: {
                 consulta,
                 area_consultada,
@@ -166,7 +162,7 @@ function responder_consulta() {
     } else {
         $.ajax({
             type: "POST",
-            url: `${url_app}crmessage/responder_consulta.php`,
+            url: `${url_ajax}crmessage/responder_consulta.php`,
             data: {
                 id_consulta,
                 respuesta
@@ -190,7 +186,7 @@ function responder_consulta() {
 function cantidad_consultas_no_leidas() {
     $.ajax({
         type: "GET",
-        url: `${url_app}crmessage/cantidad_consultas_no_leidas.php`,
+        url: `${url_ajax}crmessage/cantidad_consultas_no_leidas.php`,
         dataType: "JSON",
         success: function (response) {
             if (response.error === false) {
@@ -213,7 +209,7 @@ function marcar_mensajes_como_leidos(id, tipoConsulta, marcarLeidos) {
     if (marcarLeidos == 1) { //Hay mensajes pendientes de ver
         $.ajax({
             type: "POST",
-            url: `${url_app}crmessage/marcar_mensaje_como_leido.php`,
+            url: `${url_ajax}crmessage/marcar_mensaje_como_leido.php`,
             data: {
                 id,
                 tipoConsulta

@@ -7,8 +7,9 @@ date_default_timezone_set('America/Montevideo');
 define("PATH_APP", __DIR__);
 
 const PRODUCCION = false; // para definir si es test o produccion la APP
-const URL_APP = PRODUCCION ? 'http://192.168.1.250:82/crm' : 'http://192.168.1.250:82/crm_test';
-const URL_DOCUMENTOS = PRODUCCION ? 'http://192.168.1.250:82/crm/assets/documentos/registros' : 'http://192.168.1.250:82/crm_test/assets/documentos/registros';
+const APP = PRODUCCION ? "crm" : "crm_test";
+const URL_APP = "http://192.168.1.250:82/" . APP;
+const URL_DOCUMENTOS = 'http://192.168.1.250:82/' . APP . '/assets/documentos/registros';
 
 error_reporting(PRODUCCION ? 0 : E_ALL);
 
@@ -126,6 +127,7 @@ const TABLA_AUDITORIAS_SOCIO             = "auditorias_socio";
 const TABLA_COMENTARIO_AUDITORIAS_SOCIO  = "comentario_auditorias_socio";
 const TABLA_CONSULTA_TRANSAREA           = "consulta_transarea";
 const TABLA_MENSAJES_CONSULTA_TRANSAREA  = "mensajes_consulta_transarea";
+const TABLA_IMAGENES_REGISTROS           = "imagenes_registro";
 
 
 //SERVER - COORDINACIÓN

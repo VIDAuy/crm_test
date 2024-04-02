@@ -10,7 +10,7 @@ function datos_productos() {
 
 		$.ajax({
 			type: "GET",
-			url: `${url_app}masDatos/datosProductos.php?opcion=1`,
+			url: `${url_ajax}masDatos/datosProductos.php?opcion=1`,
 			data: {
 				cedula: cedula
 			},
@@ -35,7 +35,7 @@ function datos_productos() {
 
 function tabla_productos(cedula) {
 	$("#tabla_productos_registrados").DataTable({
-		ajax: `${url_app}masDatos/datosProductos.php?cedula=${cedula}&opcion=2`,
+		ajax: `${url_ajax}masDatos/datosProductos.php?cedula=${cedula}&opcion=2`,
 		columns: [
 			{ data: "nroServicio" },
 			{ data: "servicio" },
@@ -44,8 +44,6 @@ function tabla_productos(cedula) {
 		],
 		order: [[0, "desc"]],
 		bDestroy: true,
-		language: {
-			url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-		},
+		language: { url: url_lenguage },
 	});
 }

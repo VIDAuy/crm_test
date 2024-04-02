@@ -34,9 +34,7 @@ function tabla_mis_consultas() {
         ],
         order: [[0, "asc"]],
         bDestroy: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-        },
+        language: { url: url_lenguage },
         columnDefs: [
             {
                 targets: [0],
@@ -58,9 +56,7 @@ function tabla_consultas_asignadas() {
         ],
         order: [[0, "asc"]],
         bDestroy: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-        },
+        language: { url: url_lenguage },
         columnDefs: [
             {
                 targets: [0],
