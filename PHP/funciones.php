@@ -239,3 +239,28 @@ function devolver_error($mensaje)
     $response['mensaje'] = $mensaje;
     die(json_encode($response));
 }
+
+/** Genera un hash con el largo requerido **/
+function generarHash($largo)
+{
+    $caracteres_permitidos = '0123456789abcdefghijklmnopqrstuvwxyz';
+    return substr(str_shuffle($caracteres_permitidos), 0, $largo);
+}
+
+//Suma un array de numeros
+function sumar_array($array_numeros)
+{
+    $total_suma = 0;
+    foreach ($array_numeros as $numero) {
+        $total_suma = $total_suma + $numero;
+    }
+    return $total_suma;
+}
+
+/** Busca y devuelve el primer número de celular encontrado en el string **/
+function buscarCelular($numeros)
+{
+    preg_match_all('/(09)[1-9]{1}\d{6}/x', $numeros, $respuesta);
+    $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
+    return $respuesta;
+}

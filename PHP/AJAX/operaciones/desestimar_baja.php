@@ -99,13 +99,6 @@ function obtener_datos_padron($cedula)
     return mysqli_fetch_assoc($consulta);
 }
 
-function buscarCelular($numeros)
-{
-    preg_match_all('/(09)[1-9]{1}\d{6}/x', $numeros, $respuesta);
-    $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
-    return $respuesta;
-}
-
 function dejar_registro_crm($cedula, $nombre, $telefono)
 {
     $conexion = connection(DB);

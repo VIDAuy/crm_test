@@ -211,7 +211,7 @@ function warning(mensaje, titulo = "") {
 }
 
 function correcto(mensaje) {
-  Swal.fire({ title: 'Exito!', html: mensaje, icon: 'success' });
+  Swal.fire({ title: 'Éxito!', html: mensaje, icon: 'success' });
 }
 
 function alerta_ancla(titulo, mensaje, icono) {
@@ -224,6 +224,35 @@ function alerta_ancla(titulo, mensaje, icono) {
       location.reload();
     }
   });
+}
+
+function cargando(opcion = "M", mensaje = null) {
+  if (opcion === "M") {
+    $loader = Swal.fire({
+      icon: "info",
+      title: "Cargando...",
+      html: mensaje,
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
+  } else {
+    Swal.hideLoading();
+    Swal.close();
+  }
+}
+
+function showLoading(title = "Cargando...") {
+  Swal.fire({
+    title,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => Swal.showLoading(),
+  });
+}
+
+function hideLoading() {
+  Swal.close();
 }
 
 function mostrarLoader(opcion = 'M') {
@@ -312,6 +341,17 @@ function fecha_hora_actual() {
   return `${fecha} ${hora}:${minutos}`;
 }
 
+function fecha_actual(obtener) {
+  let devolver = "";
+  let fecha = new Date();
+  if (obtener == "fecha") devolver = fecha.toJSON().slice(0, 10);
+  if (obtener == "anio") devolver = fecha.getFullYear();
+  if (obtener == "mes") devolver = fecha.getMonth() + 1;
+  if (obtener == "dia") devolver = fecha.getDay();
+
+  return `${devolver}`;
+}
+
 function controlCedula(cedula) {
   if (cedula == "") {
     error("Debe ingresar una cédula");
@@ -325,4 +365,10 @@ function controlCedula(cedula) {
 function esNumero(cadena) {
   const regex_numeros = /^[0-9]*$/;
   return regex_numeros.test(cadena);
+}
+
+//Cambiar clase y nombre de botón
+function cambiar_div(div, clase, nombre) {
+  document.getElementById(`${div}`).className = `${clase}`;
+  document.getElementById(`${div}`).innerHTML = `${nombre}`;
 }

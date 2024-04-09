@@ -128,6 +128,9 @@ const TABLA_COMENTARIO_AUDITORIAS_SOCIO  = "comentario_auditorias_socio";
 const TABLA_CONSULTA_TRANSAREA           = "consulta_transarea";
 const TABLA_MENSAJES_CONSULTA_TRANSAREA  = "mensajes_consulta_transarea";
 const TABLA_IMAGENES_REGISTROS           = "imagenes_registro";
+const TABLA_HISTORIAL_UPLOADERS          = "historial_uploaders";
+const TABLA_REGISTROS_EQUIFAX            = "registros_equifax";
+const TABLA_BAJAS_MOROSIDAD              = "bajas_morosidad";
 
 
 //SERVER - COORDINACIÓN

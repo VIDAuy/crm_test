@@ -213,13 +213,6 @@ function sendSMS($celular, $mensaje)
     return $client->sendSms($a, $b, $c, $d);
 }
 
-function buscarCelular($numeros)
-{
-    preg_match_all('/(09)[1-9]{1}\d{6}/x', $numeros, $respuesta);
-    $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
-    return $respuesta;
-}
-
 function registrar_envio($cedula, $nombre, $celular, $sector, $id_sub_usuario)
 {
     $conexion = connection(DB);
