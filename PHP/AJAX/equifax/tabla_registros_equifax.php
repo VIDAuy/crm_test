@@ -3,7 +3,8 @@ include_once '../../configuraciones.php';
 
 $tabla["data"] = [];
 
-$registros = obtener_registros_equifax();
+$registros = isset($_REQUEST['cedula']) ? obtener_registros_equifax($_REQUEST['cedula']) : obtener_registros_equifax(false);
+
 
 while ($row = mysqli_fetch_assoc($registros)) {
 
@@ -57,12 +58,13 @@ echo json_encode($tabla);
 
 
 
-function obtener_registros_equifax()
+function obtener_registros_equifax($cedula = false)
 {
     $conexion = connection(DB);
     $tabla = TABLA_REGISTROS_EQUIFAX;
 
-    $sql = "SELECT * FROM {$tabla} WHERE activo = 1";
+    $where = $cedula != false ? "AND cedula = '$cedula'" : "";
+    $sql = "SELECT * FROM {$tabla} WHERE activo = 1 $where";
 
     $consulta = mysqli_query($conexion, $sql);
 

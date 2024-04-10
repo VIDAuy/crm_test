@@ -7,6 +7,7 @@ $(document).ready(function () {
     badge_cantidad_alertas_pendientes();
     setInterval(badge_cantidad_alertas_pendientes, 15000);
     $(".administrar_pendientes").css("display", "none");
+    $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
     agregarFiliales();
 });
 
@@ -18,7 +19,7 @@ function cantidad_alertas() {
 
     let sector = $("#sector").val();
 
-    if (sector == "Calidad" || sector == "Bajas") {
+    if (["Calidad", "sector"].includes(sector)) {
 
         let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 

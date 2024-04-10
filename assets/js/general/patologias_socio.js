@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 function tabla_patologias_socio() {
 
-    $(".patologias_socio").css("display", "block");
+    if (!["Cobranzas"].includes(sector)) $(".patologias_socio").css("display", "block");
 
     let cedula = $("#ci").val();
     $("#tabla_patologias_socio").DataTable({

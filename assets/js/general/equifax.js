@@ -60,7 +60,7 @@ function uploader_equifax(openModal = false) {
 }
 
 
-function registros_equifax() {
+function registros_equifax(cedula = false) {
 
     let todos_los_meses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     let mes_actual = fecha_actual("mes");
@@ -73,15 +73,18 @@ function registros_equifax() {
         div.html(`<span class="text-danger">(${html})</span>`);
     });
 
-    tabla_registros_equifax();
+    tabla_registros_equifax(cedula);
 
     $("#modal_registrosEquifax").modal("show");
 }
 
 
-function tabla_registros_equifax() {
+function tabla_registros_equifax(cedula) {
+
+    cedula = cedula != false ? `?cedula=${cedula}` : "";
+
     $("#tabla_registros_equifax").DataTable({
-        ajax: `${url_ajax}equifax/tabla_registros_equifax.php`,
+        ajax: `${url_ajax}equifax/tabla_registros_equifax.php${cedula}`,
         columns: [
             { data: "id" },
             { data: "cedula" },
@@ -105,4 +108,25 @@ function tabla_registros_equifax() {
         bDestroy: true,
         language: { url: url_lenguage },
     });
+}
+
+
+function verificar_socio_equifax() {
+    let cedula = $("#ci").val();
+    $("#div_socio_equifax").html("");
+
+    if (controlCedula(cedula) === true) {
+        $.ajax({
+            type: "GET",
+            url: `${url_ajax}equifax/verificar_socio_en_clering.php?cedula=${cedula}`,
+            dataType: "JSON",
+            success: function (response) {
+                if (response.error === false) {
+                    $("#div_socio_equifax").html(`<button class='btn btn-info' onclick='registros_equifax(${cedula})'>Socio en Clering </button>`);
+                } else if (response.error == 222) {
+                    error(response.mensaje);
+                }
+            }
+        });
+    }
 }

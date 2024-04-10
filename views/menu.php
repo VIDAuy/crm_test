@@ -223,7 +223,7 @@
                         </li>';
                     $registros_equifax = '
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="registros_equifax()">
+                            <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="registros_equifax(false)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-arrow-up" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M8 11a.5.5 0 0 0 .5-.5V6.707l1.146 1.147a.5.5 0 0 0 .708-.708l-2-2a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L7.5 6.707V10.5a.5.5 0 0 0 .5.5"/>
                                     <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
@@ -255,36 +255,26 @@
 
 
                     $usuario = $_SESSION['usuario'];
-                    $usuarios_auditoria = ['Audit1', 'Audit2', 'Audit3'];
 
                     if ($_SESSION['nivel'] == 3) {
 
-                        $items = $item_afiliaciones_competencia;
-
+                        $items = "";
+                        if (!in_array($usuario, ['Cobranzas'])) $items .= $item_afiliaciones_competencia;
                         if (in_array($usuario, ['Calidad'])) $items .= $item_vida_te_lleva;
-
                         $items .= $items_alertas;
-
-                        if (!in_array($usuario, $usuarios_auditoria)) $items .= $agenda_volver_a_llamar;
-
+                        if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas'])) $items .= $agenda_volver_a_llamar;
                         if (in_array($usuario, ['Morosos', 'Calidad_interna'])) $items .= $alertas_funcionarios;
                         if (in_array($usuario, ['Morosos', 'Calidad_interna'])) $items .= $cargar_documento;
-
-                        if (!in_array($usuario, $usuarios_auditoria)) $items .= $enviar_terminos_y_condiciones;
-                        if (!in_array($usuario, $usuarios_auditoria)) $items .= $historial_volver_a_llamar;
-                        if (!in_array($usuario, $usuarios_auditoria)) $items .= $historial_de_alertas;
-
+                        if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas'])) $items .= $enviar_terminos_y_condiciones;
+                        if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas'])) $items .= $historial_volver_a_llamar;
+                        if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3'])) $items .= $historial_de_alertas;
                         $items .= $historial_bajas;
-
-                        if (in_array($usuario, $usuarios_auditoria)) $items .= $registrar_auditoria_socio;
-                        if (in_array($usuario, $usuarios_auditoria)) $items .= $regisros_auditorias_socios;
-
+                        if (in_array($usuario, ['Audit1', 'Audit2', 'Audit3'])) $items .= $registrar_auditoria_socio;
+                        if (in_array($usuario, ['Audit1', 'Audit2', 'Audit3'])) $items .= $regisros_auditorias_socios;
                         $items .= $crmessage;
-
-                        //if (in_array($usuario, ['Morosos', 'Calidad_interna'])) $items .= $uploader_equifax;
-                        $items .= $uploader_equifax;
-                        $items .= $registros_equifax;
-                        $items .= $uploader_bajas_morosidad;
+                        if (in_array($usuario, ['Morosos'])) $items .= $uploader_equifax;
+                        if (!in_array($usuario, ['Rrhh_coord'])) $items .= $registros_equifax;
+                        if (in_array($usuario, ['Cobranzas'])) $items .= $uploader_bajas_morosidad;
 
                         echo '<ul class="nav flex-column mb-auto"> ' . $items . ' </ul>';
                     } else {

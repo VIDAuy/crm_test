@@ -69,30 +69,31 @@ if (isset($_SESSION['nivel'])) {
 
 			$array_cargar_modals = [
 				"alertas/modal_datos_alertas.html",
+				"alertas/modal_asignar_alerta_pendiente.html",
+				"alertas/modal_historial_registros_de_alertas.html",
 				"datos_socio/modalDatosCobranza.html",
 				"datos_socio/modalDatosCoordina.html",
 				"datos_socio/modalDatosProductos.html",
-				"bajas/modal_informacion_detallada_baja.html",
-				"modalHistoriaComunicacionDeCedula.html",
-				"bajas/modal_historial_de_bajas.html",
-				"datos_acompanantes/modal_horas_acompanantes.html",
 				"datos_socio/modalServiciosContratados.html",
-				"modal_identificar_persona_logueada.html",
-				"modalSesionExpirada.html",
+				"bajas/modal_informacion_detallada_baja.html",
+				"bajas/modal_historial_de_bajas.html",
+				"bajas/modal_solicitar_baja_filiales.html",
+				"bajas_morosidad/modal_upload_bajas_morosidad.html",
+				"modalHistoriaComunicacionDeCedula.html",
+				"datos_acompanantes/modal_horas_acompanantes.html",
 				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
-				"alertas/modal_asignar_alerta_pendiente.html",
-				"alertas/modal_historial_registros_de_alertas.html",
 				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
-				"modal_agregar_patologia_socio.html",
 				"volver_a_llamar/modal_cambiar_fecha_y_hora_volver_a_llamar.html",
 				"etiquetas_socio/modal_ver_etiquetas_socio.html",
-				"modal_mostrar_imagenes.html",
 				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
-				"modal_crmessage.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
-				"bajas_morosidad/modal_upload_bajas_morosidad.html",
+				"modal_agregar_patologia_socio.html",
+				"modal_identificar_persona_logueada.html",
+				"modalSesionExpirada.html",
+				"modal_mostrar_imagenes.html",
+				"modal_crmessage.html",
 			];
 
 			/** Carga Modals **/
@@ -160,6 +161,7 @@ if (isset($_SESSION['nivel'])) {
 				"datos_socio/modalDatosCoordina.html",
 				"datos_socio/modalDatosProductos.html",
 				"bajas/modal_informacion_detallada_baja.html",
+				"bajas/modal_solicitar_baja.html",
 				"datos_socio/modalServiciosContratados.html",
 				"modal_identificar_persona_logueada.html",
 				"modalSesionExpirada.html",
@@ -259,6 +261,7 @@ if (isset($_SESSION['nivel'])) {
 				"bajas/modal_historial_de_bajas.html",
 				"bajas/modal_informacion_detallada_baja.html",
 				"bajas/modal_listar_bajas.html",
+				"bajas/modal_solicitar_baja.html",
 				"datos_acompanantes/modal_faltas_acompanantes.html",
 				"datos_acompanantes/modal_horas_acompanantes.html",
 				"datos_acompanantes/modal_licencia_acompanantes.html",
@@ -331,6 +334,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
+				"bajas/modal_solicitar_baja.html",
 			];
 
 
@@ -379,6 +383,7 @@ if (isset($_SESSION['nivel'])) {
 				"modalGestionDomiciliario.html",
 				"modalHistoriaComunicacionDeCedula.html",
 				"bajas/modal_historial_de_bajas.html",
+				"bajas/modal_solicitar_baja.html",
 				"volver_a_llamar/modalLlamadasPendientes.html",
 				"datos_socio/modalServiciosContratados.html",
 				"modal_identificar_persona_logueada.html",
@@ -453,6 +458,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
+				"bajas/modal_solicitar_baja.html",
 			];
 
 

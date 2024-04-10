@@ -8,22 +8,14 @@ $(document).ready(function () {
 function abrir_modal_identificarse(openModal = false) {
     let sector = $("#sector").val();
 
-    if (sector == "Recepcion" ||
-        sector == "Morosos" ||
-        sector == "Calidad" ||
-        sector == "Servicios" ||
-        sector == "Coordinacion" ||
-        sector == "Bajas" ||
-        sector == "Calidad_interna") {
+    if (["Recepcion", "Morosos", "Calidad", "Servicios", "Coordinacion", "Bajas", "Calidad_interna", "Cobranzas"].includes(sector)) {
         if (openModal === true) {
             $('#modal_identificar_persona_en_sesion').modal({ backdrop: 'static', keyboard: false })
             $('#modal_identificar_persona_en_sesion').modal("show");
 
             $('#cedula_identificar_persona').keypress(function (event) {
                 var keycode = (event.keyCode ? event.keyCode : event.which);
-                if (keycode == '13') {
-                    identificar_persona();
-                }
+                if (keycode == '13') identificar_persona();
             });
         } else {
 
@@ -65,8 +57,12 @@ function identificar_persona() {
                     $('#modal_identificar_persona_en_sesion').modal("hide");
                     $('#nombre_usuario_en_sesion').text(`➡ ${datos.nombre} ${datos.apellido}`);
 
-                    if ((sector == "Calidad" && (cedula == 43382081 || cedula == 49554284 || cedula == 45909437 || cedula == 46955506 || cedula == 48936512)) ||
-                        (sector == "Bajas" && (cedula == 44417851 || cedula == 50709395))) {
+
+
+                    if (
+                        (sector == "Calidad" && ["43382081", "49554284", "45909437", "46955506", "48936512"].includes(cedula)) ||
+                        (sector == "Bajas" && ["44417851", "50709395"].includes(cedula))
+                    ) {
                         tabla_llamadas_pendientes();
                         setInterval(tabla_llamadas_pendientes, 300000);
                         tabla_alertas_pendientes();
@@ -77,9 +73,17 @@ function identificar_persona() {
                         $(".administrar_pendientes").css("display", "block");
                     }
 
-                    if (sector == "Calidad" || sector == "Morosos" || sector == "Bajas") $(".ctr_agendar_volver_a_llamar").css("display", "block");
+                    if ((sector == "Cobranzas" && ["47070163"].includes(cedula))) {
+                        tabla_alertas_pendientes();
+                        setInterval(tabla_alertas_pendientes, 300000);
 
-                    if (sector == "Calidad" || sector == "Bajas") {
+                        $(".administrar_pendientes").css("display", "block");
+                        $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
+                    }
+
+                    if (["Calidad", "Morosos", "Bajas"].includes(sector)) $(".ctr_agendar_volver_a_llamar").css("display", "block");
+
+                    if (["Calidad", "Bajas", "Cobranzas"].includes(sector)) {
                         $("#div_agregarEtiquetaSocio").css("display", "block");
                         $("#contenedor_cobranza_abitab").css("display", "block");
                     }

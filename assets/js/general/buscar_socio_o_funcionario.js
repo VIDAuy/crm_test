@@ -76,7 +76,8 @@ function buscarSocio() {
                 tabla_patologias_socio();
                 mostrar_cantidad_etiquetas_socio();
                 let sector = $("#sector").val();
-                if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna"].includes(sector)) verificar_auditoria_socio();
+                if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Cobranzas"].includes(sector)) verificar_auditoria_socio();
+                if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord"].includes(sector)) verificar_socio_equifax();
                 if (sector == "Calidad" || sector == "Bajas") listarMensualidades();
 
                 if (datos.noSocioConRegistros) {
@@ -114,7 +115,7 @@ function buscarSocio() {
                 }
                 $("#contenido1").css("display", "block");
 
-                if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord"].includes(sector)) $("#contenido2").css("display", "block");
+                if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Cobranzas"].includes(sector)) $("#contenido2").css("display", "block");
             })
             .fail(function (error) {
                 console.log(error);
