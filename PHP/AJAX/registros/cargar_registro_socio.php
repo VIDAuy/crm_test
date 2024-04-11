@@ -1,13 +1,13 @@
 <?php
 session_start();
-include '../conexiones/conexion2.php';
+include '../../conexiones/conexion2.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-require '../lib/PHPMailer/src/PHPMailer.php';
-require '../lib/PHPMailer/src/SMTP.php';
-require '../lib/PHPMailer/src/Exception.php';
+require '../../lib/PHPMailer/src/PHPMailer.php';
+require '../../lib/PHPMailer/src/SMTP.php';
+require '../../lib/PHPMailer/src/Exception.php';
 
 
 
@@ -117,7 +117,7 @@ function insert_registro_con_imagen($documento, $cedula, $nombre, $telefono, $se
 		$nombre_archivo =  generarHash(20) . '.' . $extension_archivo;
 		$ruta_origen = $documento["tmp_name"][$i];
 
-		$destino = "../../assets/documentos/registros/" . $nombre_archivo;
+		$destino = "../../../assets/documentos/registros/" . $nombre_archivo;
 
 		if (move_uploaded_file($ruta_origen, $destino)) {
 			$insert_imagenes = "INSERT INTO imagenes_registro (id_registro, nombre_imagen) VALUES ('$id_insert', '$nombre_archivo')";

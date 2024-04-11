@@ -1,5 +1,5 @@
 <?php
-include_once '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 $cedula         = $_REQUEST['cedula'];
 $patologia      = $_REQUEST['patologia'];
@@ -63,7 +63,7 @@ function registrar_patologia($cedula, $patologia, $observacion)
 
 function insert_registro($cedula, $nombre, $telefono, $sector, $observacion, $socio, $baja, $id_sub_usuario)
 {
-    include '../conexiones/conexion2.php';
+    include '../../conexiones/conexion2.php';
 
     $sql = "INSERT INTO registros (cedula, nombre, telefono, fecha_registro, sector, observaciones, activo, socio, baja, id_sub_usuario)
 	VALUES('{$cedula}', '{$nombre}', '{$telefono}', NOW(), '{$sector}', '{$observacion}', 1, {$socio}, {$baja}, '{$id_sub_usuario}')";
@@ -85,7 +85,7 @@ function verificar_socio_y_baja($cedula)
 
 function nombre_patologia($id)
 {
-    include_once '../conexiones/conexion3.php';
+    include_once '../../conexiones/conexion3.php';
     $tabla = TABLA_PATOLOGIAS;
 
     $sql = "SELECT patologia AS 'nombre' FROM {$tabla} WHERE id_patologia = '$id' ORDER BY nombre ASC";

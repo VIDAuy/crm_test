@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include '../conexiones/conexion2.php';
+include '../../conexiones/conexion2.php';
 
 $cedula = $_REQUEST['cedula'];
 $nombre_completo = mb_convert_case($_REQUEST['nombre'], MB_CASE_UPPER, "UTF-8");
@@ -28,7 +28,7 @@ $response['mensaje'] = "Ingreso satisfactorio";
 
 
 //log
-//file_put_contents('../../logs/registros.log', "[$fecha] SOCIO: $cedula - USUARIO: " . $_SESSION['usuario'] . " SECTOR: $sector" . " QUERY: $consulta\n", FILE_APPEND);
+//file_put_contents('../../../logs/registros.log', "[$fecha] SOCIO: $cedula - USUARIO: " . $_SESSION['usuario'] . " SECTOR: $sector" . " QUERY: $consulta\n", FILE_APPEND);
 
 mysqli_close($conexion);
 header('Content-type: application/json; charset=utf-8');

@@ -1,5 +1,5 @@
 <?php
-include_once '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 $tabla["data"] = [];
 
@@ -24,8 +24,8 @@ while ($row = mysqli_fetch_assoc($lista_registros)) {
 	$baja = $row['baja'] == 1 ? "<span class='text-danger'>Si</span>" : "No";
 	$envioSector = $row['envioSector'] != "" ? obtener_datos_usuario($row['envioSector'])['usuario'] : "-";
 	$id_sub_usuario = $row['sub_usuario'];
-	$btnImagen = mysqli_num_rows(obtener_imagenes($id)) > 0 ?
-		"<button class='btn btn-sm btn-info' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS . "`, `" . $id . "`);'>Ver Archivos</button>" : "-";
+	$imagenes = obtener_imagenes($id);
+	$btnImagen = strlen($imagenes) > 0 ? "<button class='btn btn-sm btn-info' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS . "`, `" . $imagenes . "`);'>Ver Archivos</button>" : "-";
 	$btnMasInfo = "<button class='btn btn-sm btn-primary' onclick='abrir_modal_ver_mas_registro(`" . $id . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $fecha_registro . "`, `" . $sector . "`, `" . $observacion . "`, `" . $row['socio'] . "`, `" . $row['baja'] . "`);'>Más Info</button>";
 
 
@@ -58,7 +58,7 @@ echo json_encode($tabla);
 
 function obtener_registros($cedula, $filtroSector)
 {
-	include '../conexiones/conexion2.php';
+	include '../../conexiones/conexion2.php';
 	$tabla1 = TABLA_REGISTROS;
 	$tabla2 = TABLA_SUB_USUARIOS;
 
@@ -91,14 +91,13 @@ function obtener_imagenes($id)
 	$conexion = connection(DB);
 	$tabla = TABLA_IMAGENES_REGISTROS;
 
-	$sql = "SELECT 
-			nombre_imagen 
-		   FROM 
-			{$tabla} 
-		   WHERE 
-			id_registro = '$id' AND 
-			activo = 1";
+	$sql = "SELECT nombre_imagen FROM {$tabla} WHERE id_registro = '$id' AND activo = 1";
 	$consulta = mysqli_query($conexion, $sql);
 
-	return $consulta;
+	$imagenes = "";
+	while ($row = mysqli_fetch_assoc($consulta)) {
+		$imagenes .= $imagenes == "" ? $row['nombre_imagen'] : ", " . $row['nombre_imagen'];
+	}
+
+	return $imagenes;
 }

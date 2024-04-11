@@ -2,7 +2,7 @@
 header('Content-Type: application/json; charset=utf-8');
 session_start();
 
-include '../conexiones/conexion2.php';
+include '../../conexiones/conexion2.php';
 
 $app = $produccion ? 'http://192.168.1.250:82/crm' : 'http://192.168.1.250:82/crm_test';
 

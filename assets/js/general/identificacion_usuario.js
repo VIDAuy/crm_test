@@ -58,7 +58,6 @@ function identificar_persona() {
                     $('#nombre_usuario_en_sesion').text(`➡ ${datos.nombre} ${datos.apellido}`);
 
 
-
                     if (
                         (sector == "Calidad" && ["43382081", "49554284", "45909437", "46955506", "48936512"].includes(cedula)) ||
                         (sector == "Bajas" && ["44417851", "50709395"].includes(cedula))
@@ -87,6 +86,7 @@ function identificar_persona() {
                         $("#div_agregarEtiquetaSocio").css("display", "block");
                         $("#contenedor_cobranza_abitab").css("display", "block");
                     }
+
 
                     cantidad_volver_a_llamar();
                     setInterval(cantidad_volver_a_llamar, 5000);

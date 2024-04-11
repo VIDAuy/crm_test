@@ -110,9 +110,7 @@ function masInfoMLB(id) {
         $('#MIDBfechaIngreso').val(content.fecha_ingreso_baja);
 
         let sector = $('#sector').val();
-        if (sector == 'Calidad' || sector == 'Bajas') {
-          $('.class_MIDBavisar_a_elite').css('display', 'block');
-        }
+        if (["Calidad", "Bajas"].includes(sector)) $('.class_MIDBavisar_a_elite').css('display', 'block');
 
         // INFORMACIÓN DE ACTUALIZACIÓN DE LA GESTIÓN
 
@@ -328,71 +326,46 @@ function corroborarMIDBestado() {
 
   if (estado != '') {
     $('#MIDBmno').prop('disabled', false);
-    document.getElementById('MIDBmno').innerHTML =
-      "<option value='' selected>Seleccione un motivo</option>";
+
+    let select_motivo = document.getElementById('MIDBmno');
+    select_motivo.innerHTML = "<option value='' selected>Seleccione un motivo</option>";
 
     if (estado == 'Otorgada') {
-      document.getElementById('MIDBmno').innerHTML =
-        "<option value='' selected>¿Motivo de otorgada?</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='En plazo y al dia'>En plazo y al dia</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Solicitud de Depto Legal'>Solicitud de Depto Legal</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Excepción de Gerencia'>Excepción de Gerencia</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Cobranzas'>Cobranzas</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Valor Agregado'>Valor Agregado</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Fallecimiento'>Fallecimiento</option>";
+      select_motivo.innerHTML = "<option value='' selected>¿Motivo de otorgada?</option>";
+      select_motivo.innerHTML += "<option value='En plazo y al dia'>En plazo y al dia</option>";
+      select_motivo.innerHTML += "<option value='Solicitud de Depto Legal'>Solicitud de Depto Legal</option>";
+      select_motivo.innerHTML += "<option value='Excepción de Gerencia'>Excepción de Gerencia</option>";
+      select_motivo.innerHTML += "<option value='Cobranzas'>Cobranzas</option>";
+      select_motivo.innerHTML += "<option value='Valor Agregado'>Valor Agregado</option>";
+      select_motivo.innerHTML += "<option value='Fallecimiento'>Fallecimiento</option>";
     } else if (estado == 'No otorgada') {
-      document.getElementById('MIDBmno').innerHTML =
-        "<option value='' selected>¿Motivo no otorgada?</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Deuda'>Deuda</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Plazo'>Plazo</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Ilocalizable'>Ilocalizable</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Pendiente comprobante'>Pendiente comprobante</option>";
+      select_motivo.innerHTML = "<option value='' selected>¿Motivo no otorgada?</option>";
+      select_motivo.innerHTML += "<option value='Deuda'>Deuda</option>";
+      select_motivo.innerHTML += "<option value='Plazo'>Plazo</option>";
+      select_motivo.innerHTML += "<option value='Ilocalizable'>Ilocalizable</option>";
+      select_motivo.innerHTML += "<option value='Pendiente comprobante'>Pendiente comprobante</option>";
     } else if (estado == 'Continua') {
-      document.getElementById('MIDBmno').innerHTML =
-        "<option value='' selected>¿Como continua?</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Igual'>Igual</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Reduce'>Reduce</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Pasa a acotado'>Pasa a acotado</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Pasa a GF'>Pasa a GF</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Otros'>Otros</option>";
+      select_motivo.innerHTML = "<option value='' selected>¿Como continua?</option>";
+      select_motivo.innerHTML += "<option value='Igual'>Igual</option>";
+      select_motivo.innerHTML += "<option value='Reduce'>Reduce</option>";
+      select_motivo.innerHTML += "<option value='Pasa a acotado'>Pasa a acotado</option>";
+      select_motivo.innerHTML += "<option value='Pasa a GF'>Pasa a GF</option>";
+      select_motivo.innerHTML += "<option value='Otros'>Otros</option>";
     } else if (estado == 'En gestión') {
-      document.getElementById('MIDBmno').innerHTML =
-        "<option value='' selected>¿Motivo de gestión?</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Gestionando pago'>Gestionando pago</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Aguardando plazo'>Aguardando plazo</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Ilocalizable'>Ilocalizable</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Aguardando auditoria'>Aguardando auditoría</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Pendiente excepción'>Pendiente excepción</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Derivado a Elite'>Derivado a Elite</option>";
-      document.getElementById('MIDBmno').innerHTML +=
-        "<option value='Pendiente de otorgar en CRM'>Pendiente de otorgar en CRM</option>";
+      select_motivo.innerHTML = "<option value='' selected>¿Motivo de gestión?</option>";
+      select_motivo.innerHTML += "<option value='Gestionando pago'>Gestionando pago</option>";
+      select_motivo.innerHTML += "<option value='Aguardando plazo'>Aguardando plazo</option>";
+      select_motivo.innerHTML += "<option value='Ilocalizable'>Ilocalizable</option>";
+      select_motivo.innerHTML += "<option value='Aguardando auditoria'>Aguardando auditoría</option>";
+      select_motivo.innerHTML += "<option value='Pendiente excepción'>Pendiente excepción</option>";
+      select_motivo.innerHTML += "<option value='Derivado a Elite'>Derivado a Elite</option>";
+      select_motivo.innerHTML += "<option value='Pendiente de otorgar en CRM'>Pendiente de otorgar en CRM</option>";
     } else {
-      document.getElementById('MIDBmno').innerHTML = '';
+      select_motivo.innerHTML = '';
       $('#MIDBmno').prop('disabled', true);
     }
   } else {
-    document.getElementById('MIDBmno').innerHTML = '';
+    select_motivo.innerHTML = '';
     $('#MIDBmno').prop('disabled', true);
   }
 }

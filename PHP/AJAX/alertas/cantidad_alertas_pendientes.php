@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-type: application/json; charset=utf-8');
-include '../conexiones/conexion2.php';
+include '../../conexiones/conexion2.php';
 $sector = $_SESSION['id'];
 $id_sub_usuario = $_REQUEST['id_sub_usuario'];
 

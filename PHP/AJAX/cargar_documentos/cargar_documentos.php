@@ -4,11 +4,11 @@ session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-require '../lib/PHPMailer/src/PHPMailer.php';
-require '../lib/PHPMailer/src/SMTP.php';
-require '../lib/PHPMailer/src/Exception.php';
+require '../../lib/PHPMailer/src/PHPMailer.php';
+require '../../lib/PHPMailer/src/SMTP.php';
+require '../../lib/PHPMailer/src/Exception.php';
 
-include '../conexiones/conexion2.php';
+include '../../conexiones/conexion2.php';
 
 $area_carga = $_SESSION['usuario'];
 
@@ -63,7 +63,7 @@ function subir_documento($tipo_documento, $area, $documento, $app, $area_carga)
   $nombre_archivo =  generarHash(20) . '.' . $extension_archivo;
   $ruta_origen = $documento["tmp_name"];
 
-  $destino = "../../assets/documentos/" . $nombre_archivo;
+  $destino = "../../../assets/documentos/" . $nombre_archivo;
   $destinoBD = $app . "assets/documentos/" . $nombre_archivo;
   //die(var_dump($destino));
 

@@ -3,7 +3,7 @@ function ver_registros_volver_a_llamar() {
     $("#modal_historialRegistrosVolverALlamar").modal("show");
 
     $('#tabla_historial_volver_a_llamar').DataTable({
-        ajax: `${url_ajax}tabla_historial_volver_a_llamar.php?`,
+        ajax: `${url_ajax}volver_a_llamar/tabla_historial_volver_a_llamar.php?`,
         columns: [
             { data: 'id' },
             { data: 'cedula' },
@@ -29,7 +29,7 @@ function ver_registros_alertas() {
     $("#modal_historialRegistrosDeAlertas").modal("show");
 
     $('#tabla_historial_alertas').DataTable({
-        ajax: `${url_ajax}tabla_historial_alertas.php`,
+        ajax: `${url_ajax}alertas/tabla_historial_alertas.php`,
         columns: [
             { data: 'id' },
             { data: 'cedula' },

@@ -1,5 +1,5 @@
 <?php
-include_once '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 
 $cedula = $_REQUEST['cedula'];
@@ -55,7 +55,7 @@ function patologias_registradas($cedula)
 
 function patologias_sin_registrar($filtro)
 {
-    include_once '../conexiones/conexion3.php';
+    include_once '../../conexiones/conexion3.php';
     $tabla = TABLA_PATOLOGIAS;
     $sql = "";
 

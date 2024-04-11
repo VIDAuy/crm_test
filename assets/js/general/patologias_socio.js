@@ -11,12 +11,14 @@ $(document).ready(function () {
 
 
 function tabla_patologias_socio() {
+    let sector = $("#sector").val();
 
     if (!["Cobranzas"].includes(sector)) $(".patologias_socio").css("display", "block");
+    if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas"].includes(sector)) $("#btn_agregar_patologia_socio").css("display", "block");
 
     let cedula = $("#ci").val();
     $("#tabla_patologias_socio").DataTable({
-        ajax: `${url_ajax}tabla_patologias_socio.php?cedula=${cedula}`,
+        ajax: `${url_ajax}patologias_socio/tabla_patologias_socio.php?cedula=${cedula}`,
         columns: [
             { data: "id" },
             { data: "patologia" },
@@ -63,7 +65,7 @@ function agregar_patologia_socio(openModal = false) {
 
             $.ajax({
                 type: "POST",
-                url: `${url_ajax}agregar_patologia_socio.php`,
+                url: `${url_ajax}patologias_socio/agregar_patologia_socio.php`,
                 data: {
                     cedula,
                     patologia,
@@ -107,7 +109,7 @@ function select_patologias_socio() {
 
     $.ajax({
         type: "GET",
-        url: `${url_ajax}select_patologia_socio.php?cedula=${cedula}`,
+        url: `${url_ajax}patologias_socio/select_patologia_socio.php?cedula=${cedula}`,
         dataType: "JSON",
         beforeSend: function () {
             mostrarLoader();

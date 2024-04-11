@@ -1,5 +1,5 @@
 <?php
-include_once '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 $sector = $_SESSION['id'];
 

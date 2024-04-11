@@ -42,7 +42,7 @@ const tablaBajas = async (event, recargar = false) => {
   ];
 
   showLoading();
-  await tabla('tabla_bajas', 'PHP/AJAX/bajas.php', datos, columns, recargar);
+  await tabla('tabla_bajas', 'PHP/AJAX/sistemaBajas/bajas.php', datos, columns, recargar);
   hideLoading();
 };
 

@@ -20,7 +20,7 @@ function cargar_select_tipo_documento() {
     document.getElementById("select_tipo_documento").innerHTML = '<option value="" selected disabled>Seleccione el tipo de documento ...</option>';
 
     $.ajax({
-        url: url_app + "select_tipo_documento.php",
+        url: `${url_app}cargar_documentos/select_tipo_documento.php`,
         dataType: "JSON",
         success: function (r) {
             $.each(r.datos, function (i, v) {
@@ -128,7 +128,7 @@ function cargar_documento() {
 
         $.ajax({
             type: "POST",
-            url: url_app + 'cargar_documentos.php',
+            url: `${url_app}cargar_documentos/cargar_documentos.php`,
             data: formData,
             dataType: "JSON",
             contentType: false,
@@ -155,7 +155,7 @@ function alertas_de_documentos_cargados() {
 
 function tabla_documentos_cargados() {
     $('#tabla_documentos_cargados').DataTable({
-        ajax: url_app + 'documentos_cargados.php',
+        ajax: `${url_app}cargar_documentos/documentos_cargados.php`,
         columns: [
             { data: 'nro_carga' },
             { data: 'tipo_documento' },
@@ -175,7 +175,7 @@ function tabla_documentos_cargados() {
 
 function tabla_alertas_respondidas() {
     $('#tabla_alertas_respondidas').DataTable({
-        ajax: url_app + 'alertas_respondidas.php',
+        ajax: `${url_app}cargar_documentos/alertas_respondidas.php`,
         columns: [
             { data: 'fila' },
         ],
@@ -250,7 +250,7 @@ function cambiar_estado_respuesta(nro_carga, estado) {
 
     $.ajax({
         type: "POST",
-        url: url_app + 'cambiar_estado_respuesta.php',
+        url: `${url_app}cargar_documentos/cambiar_estado_respuesta.php`,
         data: {
             'nro_carga': nro_carga,
             'estado': estado
@@ -272,7 +272,7 @@ function cambiar_estado_respuesta(nro_carga, estado) {
 function alertar_funcionario() {
     $.ajax({
         type: "GET",
-        url: url_app + 'contar_pendientes.php',
+        url: `${url_app}cargar_documentos/contar_pendientes.php`,
         dataType: "JSON",
         success: function (response) {
             if (response.error === false) {

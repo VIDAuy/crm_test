@@ -1,4 +1,4 @@
-const url_operaciones = 'http://192.168.1.250:82/' + app + '/php/ajax/operaciones/';
+const url_operaciones = `${url_app}/php/ajax/operaciones/`;
 
 
 

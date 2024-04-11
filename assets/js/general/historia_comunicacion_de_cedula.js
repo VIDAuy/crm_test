@@ -2,7 +2,7 @@ function historiaComunicacionDeCedula() {
     let cedula = $("#ci").val();
 
     $("#tabla_historia_comunicacion_de_cedula").DataTable({
-        ajax: `${url_ajax}historiaComunicacionDeCedula.php?cedula=${cedula}`,
+        ajax: `${url_ajax}registros/tabla_registros_socio.php?cedula=${cedula}`,
         columns: [
             { data: "id" },
             { data: "fecha" },
@@ -22,38 +22,18 @@ function historiaComunicacionDeCedula() {
     });
 }
 
-function modal_ver_imagen_registro(ruta, id) {
-    document.getElementById('mostrar_imagenes_relamos').innerHTML = '';
+function modal_ver_imagen_registro(ruta_registros, string_imagenes) {
+    let div = document.getElementById('mostrar_imagenes_relamos');
+    div.innerHTML = '';
 
-    $.ajax({
-        type: 'GET',
-        url: `${url_ajax}imagenes_de_registros.php`,
-        data: {
-            id: id,
-        },
-        dataType: 'JSON',
-        success: function (response) {
-            if (response.error === false) {
-                let imagenes = response.datos;
-
-                imagenes.map((val) => {
-                    let separar_nombre_archivo = val.split('.');
-                    let extencion_archivo = separar_nombre_archivo[1];
-
-                    if (extencion_archivo != 'pdf') {
-                        document.getElementById(
-                            'mostrar_imagenes_relamos'
-                        ).innerHTML += `<img src="${ruta}/${val}" style="width: 100%; height: auto"> <br> <br>`;
-                    } else {
-                        document.getElementById(
-                            'mostrar_imagenes_relamos'
-                        ).innerHTML += `<iframe src="${ruta}/${val}" width=100% height=600></iframe>`;
-                    }
-                });
-            } else {
-                error(response.mensaje);
-            }
-        },
+    let obtener_imagenes = string_imagenes.split(',');
+    obtener_imagenes.map((val) => {
+        let imagen = val.trim();
+        let separar_nombre_archivo = imagen.split('.');
+        let extencion_archivo = separar_nombre_archivo[1];
+        div.innerHTML += extencion_archivo != 'pdf' ?
+            `<img src="${ruta_registros}/${imagen}" style="width: 100%; height: auto"> <br> <br>` :
+            `<iframe src="${ruta_registros}/${imagen}" width=100% height=600></iframe>`;
     });
 
     $('#modalVerImagenesRegistro').modal('show');
@@ -80,7 +60,7 @@ function historiaComunicacionDeCedula_funcionarios() {
     let cedula = $("#ci").val();
 
     $("#tabla_historia_comunicacion_de_cedula_funcionario").DataTable({
-        ajax: `${url_ajax}historiaComunicacionDeCedula_funcionarios.php?cedula=${cedula}`,
+        ajax: `${url_ajax}registros/tabla_registros_funcionario.php?cedula=${cedula}`,
         columns: [
             { data: "id" },
             { data: "fecha" },

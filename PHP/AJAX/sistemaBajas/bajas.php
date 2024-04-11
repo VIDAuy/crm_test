@@ -1,5 +1,5 @@
 <?php
-include_once "../conexiones/conexion2.php";
+include_once "../../conexiones/conexion2.php";
 
 error_reporting(E_ALL);
 

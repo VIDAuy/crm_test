@@ -7,9 +7,11 @@ date_default_timezone_set('America/Montevideo');
 define("PATH_APP", __DIR__);
 
 const PRODUCCION = false; // para definir si es test o produccion la APP
+const PROTOCOL = "http";
+const SERVER = PRODUCCION ? "192.168.1.250:82" : "192.168.1.250:82";
 const APP = PRODUCCION ? "crm" : "crm_test";
-const URL_APP = "http://192.168.1.250:82/" . APP;
-const URL_DOCUMENTOS = 'http://192.168.1.250:82/' . APP . '/assets/documentos/registros';
+const URL_APP = PROTOCOL . "://" . SERVER . "/" . APP;
+const URL_DOCUMENTOS = URL_APP . '/assets/documentos/registros';
 
 error_reporting(PRODUCCION ? 0 : E_ALL);
 
@@ -37,7 +39,7 @@ const LOGS_DIR = PATH_APP . "../logs";
 
 
 // DB PRODUCCION
-const DB_CRM_PROD                    = array("host" => "192.168.1.250", "user" => "root", "password" => "sist.2k8", "db" => "crm");
+const DB_CRM_PROD                    = array("host" => "localhost", "user" => "root", "password" => "root", "db" => "crm");
 const DB_ABMMOD_PROD                 = array("host" => "localhost", "user" => "root", "password" => "root", "db" => "abmmod");
 const DB_TERMINOS_Y_CONDICIONES_PROD = array("host" => "localhost", "user" => "root", "password" => "root", "db" => "terminos_y_condiciones");
 const DB_STATUS_PROD                 = array("host" => "192.168.250.11", "user" => "root", "password" => "sist.2k8", "db" => "status");
@@ -57,7 +59,7 @@ const DB_COBRA_PROD                  = array("host" => "192.168.250.11", "user" 
 
 
 //DEV O DB TEST
-const DB_CRM_TEST                    = array("host" => "192.168.1.250", "user" => "root", "password" => "sist.2k8", "db" => "crm_test");
+const DB_CRM_TEST                    = array("host" => "localhost", "user" => "root", "password" => "root", "db" => "crm_test");
 const DB_ABMMOD_TEST                 = array("host" => "localhost", "user" => "root", "password" => "root", "db" => "abmmod");
 const DB_TERMINOS_Y_CONDICIONES_TEST = array("host" => "localhost", "user" => "root", "password" => "root", "db" => "terminos_y_condiciones");
 const DB_STATUS_TEST                 = array("host" => "192.168.250.11", "user" => "root", "password" => "sist.2k8", "db" => "status");

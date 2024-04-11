@@ -78,7 +78,7 @@ function buscarSocio() {
                 let sector = $("#sector").val();
                 if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Cobranzas"].includes(sector)) verificar_auditoria_socio();
                 if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord"].includes(sector)) verificar_socio_equifax();
-                if (sector == "Calidad" || sector == "Bajas") listarMensualidades();
+                if (["Calidad", "Bajas", "Cobranzas"].includes(sector)) tabla_cobranza_abitab();
 
                 if (datos.noSocioConRegistros) {
                     alerta("Problema!", datos.mensaje, "warning");

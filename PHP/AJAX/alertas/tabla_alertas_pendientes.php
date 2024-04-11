@@ -1,5 +1,5 @@
 <?php
-include_once '../configuraciones.php';
+include_once '../../configuraciones.php';
 
 $opcion = $_REQUEST['opcion'];
 $sector         = isset($_SESSION['id']) ? $_SESSION['id'] : "";

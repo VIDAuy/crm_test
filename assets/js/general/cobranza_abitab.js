@@ -1,9 +1,9 @@
-function listarMensualidades() {
+function tabla_cobranza_abitab() {
 
   let cedula = $("#ci").val();
 
   $("#tabla_cobranza_abitab").DataTable({
-    ajax: `${url_ajax}listar_cobranza_abitab.php?cedula=${cedula}`,
+    ajax: `${url_ajax}tabla_cobranza_abitab.php?cedula=${cedula}`,
     columns: [
       { data: "fecha_orden" },
       { data: "id" },

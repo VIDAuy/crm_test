@@ -7,7 +7,7 @@ const crearTabla = () => {
   const motivoBaja = $("#motivoBaja").val();
 
   table = new Tabulator("#main-table", {
-    ajaxURL: `ajax/bajas.php?fechas=${fechas}&motivoBaja=${motivoBaja}`,
+    ajaxURL: `ajax/sistemaBajas/bajas.php?fechas=${fechas}&motivoBaja=${motivoBaja}`,
     ajaxResponse: (url, params, response) => {
       if (response.data.length == 0) {
         Swal.fire({
@@ -33,7 +33,7 @@ const crearTabla = () => {
     resizableColumns: true,
     paginationSize: 15,
     layout: "fitDataFill",
-    initialSort: [{column: "Id", dir: "asc"}],
+    initialSort: [{ column: "Id", dir: "asc" }],
     columns: [
       {
         title: "Fecha ingreso",
@@ -120,7 +120,7 @@ async function actualizarTablaHorasFictas() {
   const fechas = $("#reportrange").val();
   const motivoBaja = $("#motivoBaja").val();
   const res = await fetch(
-    `ajax/bajas.php?fechas=${fechas}&motivoBaja=${motivoBaja}`
+    `ajax/sistemaBajas/bajas.php?fechas=${fechas}&motivoBaja=${motivoBaja}`
   ).then((res) => res.json());
 
   Swal.close();
@@ -208,9 +208,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("download-xlsx")
     .addEventListener("click", function () {
       const date = new Date();
-      const currentDate = `${date.getDate()}-${
-        date.getMonth() + 1
-      }-${date.getFullYear()}`;
+      const currentDate = `${date.getDate()}-${date.getMonth() + 1
+        }-${date.getFullYear()}`;
 
       table.download("xlsx", `Reporte ${currentDate}.xlsx`, {
         sheetName: `Reporte ${currentDate}`,

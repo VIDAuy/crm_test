@@ -4,7 +4,7 @@ include_once '../../configuraciones.php';
 $cedula          = $_REQUEST['cedula'];
 $descripcion     = $_REQUEST['descripcion'];
 $fecha_auditoria = $_REQUEST['fecha_auditoria'];
-$usuario         = $_SESSION['usuario'];
+$usuario         = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : $_SESSION['id'];
 
 
 if ($cedula == "" || $descripcion == "" || $fecha_auditoria == "" || $usuario == "") {

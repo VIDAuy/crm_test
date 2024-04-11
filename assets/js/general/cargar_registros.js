@@ -55,7 +55,7 @@ function cargo(param, socioParam) {
         $.ajax({
             type: "POST",
             data: form_data,
-            url: `${url_ajax}datos.php`,
+            url: `${url_ajax}registros/cargar_registro_socio.php`,
             dataType: "JSON",
             contentType: false,
             processData: false,
@@ -110,7 +110,7 @@ function cargo_registro_fucionario() {
     } else {
         $.ajax({
             type: "POST",
-            url: url_ajax + "datos_funcionarios.php",
+            url: `${url_ajax}registros/cargar_registro_funcionario.php`,
             data: {
                 cedula: cedula,
                 nombre: nombre,

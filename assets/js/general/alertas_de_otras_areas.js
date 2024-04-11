@@ -29,7 +29,7 @@ function cantidad_alertas() {
                     nivel: $("#nivel").val(),
                     id_sub_usuario: id_sub_usuario
                 },
-                url: `${url_ajax}cantidad_alertas_pendientes.php`,
+                url: `${url_ajax}alertas/cantidad_alertas_pendientes.php`,
                 type: "POST",
                 dataType: "JSON",
                 success: function (content) {
@@ -44,7 +44,7 @@ function cantidad_alertas() {
             data: {
                 nivel: $("#nivel").val(),
             },
-            url: `${url_ajax}datos2.php`,
+            url: `${url_ajax}alertas/cantidad_alertas_del_area.php`,
             type: "POST",
             dataType: "JSON",
             success: function (content) {
@@ -58,7 +58,7 @@ function cantidad_alertas() {
 function tabla_alertas_pendientes() {
 
     $("#tabla_alertas_pendientes").DataTable({
-        ajax: `${url_ajax}tabla_alertas_pendientes.php?opcion=1`,
+        ajax: `${url_ajax}alertas/tabla_alertas_pendientes.php?opcion=1`,
         columns: [
             { data: "id" },
             { data: "cedula" },
@@ -81,7 +81,7 @@ function badge_cantidad_alertas_pendientes() {
 
     $.ajax({
         type: "GET",
-        url: `${url_ajax}tabla_alertas_pendientes.php?opcion=2`,
+        url: `${url_ajax}alertas/tabla_alertas_pendientes.php?opcion=2`,
         dataType: "JSON",
         success: function (response) {
             let cantidad = response.cantidad;
@@ -137,7 +137,7 @@ function abrir_asignar_alerta(openModal = false, id, cedula, nombre, telefono, s
 
             $.ajax({
                 type: "POST",
-                url: `${url_ajax}asignar_alerta_a_usuario.php`,
+                url: `${url_ajax}alertas/asignar_alerta_a_usuario.php`,
                 data: {
                     "id_registro": id_registro,
                     "id_usuario_asignador": id_usuario_asignador,

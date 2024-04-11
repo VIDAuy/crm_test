@@ -9,7 +9,7 @@ $(document).ready(function () {
 function alertas_de_vida_te_lleva() {
     let sector = $("#sector").val();
 
-    if (sector == "Calidad") {
+    if (["Calidad"].includes(sector)) {
         $.ajax({
             type: "GET",
             url: `${url_ajax}contar_pendientes_vida_te_lleva.php`,

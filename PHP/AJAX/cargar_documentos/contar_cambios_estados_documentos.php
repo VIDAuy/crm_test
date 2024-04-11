@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 session_start();
-include '../conexiones/conexion2.php';
+include '../../conexiones/conexion2.php';
 
 $usuario = $_SESSION['usuario'];
 $cantidad_pendientes = consulta($usuario);

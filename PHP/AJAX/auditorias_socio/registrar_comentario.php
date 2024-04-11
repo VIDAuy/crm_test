@@ -3,8 +3,8 @@ include_once '../../configuraciones.php';
 
 $id_auditoria_socio = $_REQUEST['id'];
 $comentario = $_REQUEST['comentario'];
+$usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : $_SESSION['id'];
 $id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
-$usuario = $_SESSION['usuario'];
 
 
 if ($id_auditoria_socio == "" || $comentario == "") {

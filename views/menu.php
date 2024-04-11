@@ -259,26 +259,45 @@
                     if ($_SESSION['nivel'] == 3) {
 
                         $items = "";
+                        //Si no es Cobranzas: Mostrar Afiliaciones competencia / Convenios especiales
                         if (!in_array($usuario, ['Cobranzas'])) $items .= $item_afiliaciones_competencia;
+                        //Si es Calidad: Mostrar Vida te lleva
                         if (in_array($usuario, ['Calidad'])) $items .= $item_vida_te_lleva;
+                        //Mostrar para todos: Alertas
                         $items .= $items_alertas;
+                        //Si no es Auditoría ni Cobranzas: Mostrar Agenda volver a llamar
                         if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas'])) $items .= $agenda_volver_a_llamar;
-                        if (in_array($usuario, ['Morosos', 'Calidad_interna'])) $items .= $alertas_funcionarios;
-                        if (in_array($usuario, ['Morosos', 'Calidad_interna'])) $items .= $cargar_documento;
+                        //Si es Morosidad o Calidad_Interna: Mostrar Alertas funcionarios y Cargar Documentos
+                        if (in_array($usuario, ['Morosos', 'Calidad_interna'])) {
+                            $items .= $alertas_funcionarios;
+                            $items .= $cargar_documento;
+                        }
+                        //Si no es Auditoría ni Cobranzas: Mostrar Enviar términos y condiciones
                         if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas'])) $items .= $enviar_terminos_y_condiciones;
+                        //Si no es de Auditoría ni Cobranzas: Mostrar historial volver a llamar
                         if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas'])) $items .= $historial_volver_a_llamar;
+                        //Si no es de Auditoría: Mostrar historial de alertas
                         if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3'])) $items .= $historial_de_alertas;
+                        //Mostrar para todos: Historial de bajas
                         $items .= $historial_bajas;
+                        //Si es de Auditoría: Mostrar registrar auditorias a socios
                         if (in_array($usuario, ['Audit1', 'Audit2', 'Audit3'])) $items .= $registrar_auditoria_socio;
+                        //Si es de Auditoría: Mostrar los registros de auditorias de socios
                         if (in_array($usuario, ['Audit1', 'Audit2', 'Audit3'])) $items .= $regisros_auditorias_socios;
+                        //Mostrar para todos: CRMMessage
                         $items .= $crmessage;
+                        //Si es Morosidad: Mostrar uploader Equifax
                         if (in_array($usuario, ['Morosos'])) $items .= $uploader_equifax;
+                        //Si no es RRHH_Coord: Mostrar uploader de bajas
                         if (!in_array($usuario, ['Rrhh_coord'])) $items .= $registros_equifax;
+                        //Si es Cobranzas: Mostrar uploader de bajas
                         if (in_array($usuario, ['Cobranzas'])) $items .= $uploader_bajas_morosidad;
 
                         echo '<ul class="nav flex-column mb-auto"> ' . $items . ' </ul>';
                     } else {
 
+                        $items = "";
+                        //Si no es de nivel 3: Mostrar alertas
                         $items = $items_alertas;
                         echo '<ul class="nav flex-column mb-auto"> ' . $items . ' </ul>';
                     }
