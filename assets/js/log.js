@@ -2,10 +2,6 @@ $(document).keypress(function (e) {
 	if (e.which == 13) log();
 });
 
-$('#boton').on('click', function () {
-	log();
-});
-
 function log() {
 	let usuario = $('#usuario').val();
 	let password = $('#password').val();
