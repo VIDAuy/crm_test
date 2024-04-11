@@ -18,16 +18,16 @@ $(document).ready(function () {
 function cantidad_alertas() {
 
     let sector = $("#sector").val();
+    let nivel = $("#nivel").val();
+    let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 
-    if (["Calidad", "sector"].includes(sector)) {
-
-        let id_sub_usuario = localStorage.getItem("id_sub_usuario");
+    if (["Calidad", "Bajas", "Cobranzas"].includes(sector)) {
 
         if (id_sub_usuario != null) {
             $.ajax({
                 data: {
-                    nivel: $("#nivel").val(),
-                    id_sub_usuario: id_sub_usuario
+                    nivel,
+                    id_sub_usuario
                 },
                 url: `${url_ajax}alertas/cantidad_alertas_pendientes.php`,
                 type: "POST",
@@ -42,7 +42,7 @@ function cantidad_alertas() {
 
         $.ajax({
             data: {
-                nivel: $("#nivel").val(),
+                nivel
             },
             url: `${url_ajax}alertas/cantidad_alertas_del_area.php`,
             type: "POST",

@@ -11,6 +11,7 @@ if ($id_sub_usuario != "") {
     $q = "SELECT cedula FROM registros WHERE envioSector = '$sector' AND activo = 1 AND cedula != ''";
 }
 
+
 $r = mysqli_query($conexion, $q);
 
 $qtot = mysqli_num_rows($r);
