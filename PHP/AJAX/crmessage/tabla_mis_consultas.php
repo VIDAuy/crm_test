@@ -23,7 +23,8 @@ while ($row = mysqli_fetch_assoc($listado_consultas_area)) {
   $consulta        = $datos_mensajes['mensaje'];
   $usuario_consultado = $row['usuario_consultado'];
   $usuario_consultado = $usuario_consultado != "" || $usuario_consultado != null ? " ➡ " . ucfirst(obtener_nombre_sub_usuario(($usuario_consultado))) : "";
-
+  $archivos = obtener_imagenes($id);
+  $btnArchivos = strlen($archivos) > 0 ? "<button class='btn btn-sm btn-info' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS_CRMESSAGE . "`, `" . $archivos . "`);'>Ver Archivos</button>" : "-";
   $canitdad_no_leidos = cantidad_mis_consultas_no_leidos($id);
   $mostrar_canitdad_no_leidos = $canitdad_no_leidos > 0 ? "<span class='bg-danger rounded-circle p-1 fw-bolder'>$canitdad_no_leidos+</span>" : "";
   $habilitar_marcar_leido = $canitdad_no_leidos > 0 ? 1 : 0;
@@ -59,13 +60,14 @@ while ($row = mysqli_fetch_assoc($listado_consultas_area)) {
                 </span>
               </small>
               <span class='mb-3 ms-auto'>
-                <button class='btn btn-sm btn-primary' onclick='abrir_menu_chat(false, $id, 1, $habilitar_marcar_leido)'>
+                <button class='btn btn-sm btn-primary d-block mb-3' onclick='abrir_menu_chat(false, $id, 1, $habilitar_marcar_leido)'>
                   <span>
                     <i class='bi bi-chat-left-dots me-1'></i>
                     Mensajes
                   </span>
                   " . $mostrar_canitdad_no_leidos . "
                 </button>
+                " . $btnArchivos . "
               </span>
             </div>
             <div></div>
@@ -99,7 +101,8 @@ if ($id_sub_usuario != "") {
     $consulta           = $datos_mensajes['mensaje'];
     $usuario_consultado = $row['usuario_consultado'];
     $usuario_consultado = $usuario_consultado != "" || $usuario_consultado != null ? " ➡ " . ucfirst(obtener_nombre_sub_usuario(($usuario_consultado))) : "";
-
+    $archivos = obtener_imagenes($id);
+    $btnArchivos = strlen($archivos) > 0 ? "<button class='btn btn-sm btn-info' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS_CRMESSAGE . "`, `" . $archivos . "`);'>Ver Archivos</button>" : "";
     $canitdad_no_leidos = cantidad_mis_consultas_no_leidos($id);
     $mostrar_canitdad_no_leidos = $canitdad_no_leidos > 0 ? "<span class='bg-danger rounded-circle p-1 fw-bolder'>$canitdad_no_leidos+</span>" : "";
     $habilitar_marcar_leido = $canitdad_no_leidos > 0 ? 1 : 0;
@@ -135,13 +138,14 @@ if ($id_sub_usuario != "") {
                   </span>
                 </small>
                 <span class='mb-3 ms-auto'>
-                  <button class='btn btn-sm btn-primary' onclick='abrir_menu_chat(false, $id, 1, $habilitar_marcar_leido)'>
+                  <button class='btn btn-sm btn-primary d-block mb-3' onclick='abrir_menu_chat(false, $id, 1, $habilitar_marcar_leido)'>
                     <span>
                       <i class='bi bi-chat-left-dots me-1'></i>
                       Mensajes
                     </span>
                     " . $mostrar_canitdad_no_leidos . "
                   </button>
+                  " . $btnArchivos . "
                 </span>
               </div>
               <div></div>
@@ -192,6 +196,23 @@ function obtener_consultas_usuario($id_area, $id_sub_usuario)
     return false;
   }
 }
+
+function obtener_imagenes($id)
+{
+  $conexion = connection(DB);
+  $tabla = TABLA_ARCHIVOS_CRMESSAGE;
+
+  $sql = "SELECT nombre_archivo FROM {$tabla} WHERE id_consulta = '$id' AND activo = 1";
+  $consulta = mysqli_query($conexion, $sql);
+
+  $imagenes = "";
+  while ($row = mysqli_fetch_assoc($consulta)) {
+    $imagenes .= $imagenes == "" ? $row['nombre_archivo'] : ", " . $row['nombre_archivo'];
+  }
+
+  return $imagenes;
+}
+
 
 function obtener_datos_mensajes($id)
 {

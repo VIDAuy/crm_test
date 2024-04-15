@@ -14,10 +14,11 @@ while ($row = mysqli_fetch_assoc($listado_respuestas)) {
     $id                    = $row['id'];
     $id_consulta_transarea = $row['id_consulta_transarea'];
     $mensajes              = $row['mensaje'];
-    $fecha_respuesta       = $row['fecha_registro'];
+    $fecha_respuesta       = $row['fecha_registro'] != "" ? date("d/m/Y H:i:s", strtotime($row['fecha_registro'])) : "-";
     $id_sub_usuario        = $row['id_sub_usuario'];
     $datos_consulta        = obtener_datos_consulta($id_consulta_transarea);
     $area_consulta         = ucfirst(obtener_datos_usuario($datos_consulta['area_consulta'])['usuario']);
+    $usuario               = $row['id_sub_usuario'] != "" && $row['id_sub_usuario'] != null ? " ➡ " . ucfirst(obtener_nombre_sub_usuario(($row['id_sub_usuario']))) : "";
     $area_consultada       = ucfirst(obtener_datos_usuario($datos_consulta['area_consultada'])['usuario']);
     $estado                = $datos_consulta['estado'];
 
@@ -36,7 +37,7 @@ while ($row = mysqli_fetch_assoc($listado_respuestas)) {
             <text x='50%' y='50%' fill='" . $color_icono . "' dy='.3em'>32x32</text>
         </svg>
         <p class='pb-3 mb-0 small lh-sm border-bottom'>
-            <strong class='d-block text-gray-dark'>" . $area_consultada . "</strong>
+            <strong class='d-block text-gray-dark'>" . $area_consultada . $usuario . "</strong>
             " . $mensajes . "
             <small class='d-block mt-3'>
                 <a href='#'>" . $fecha_respuesta . "</a>

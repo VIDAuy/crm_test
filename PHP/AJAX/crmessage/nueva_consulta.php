@@ -13,15 +13,28 @@ if (
     $area_consulta == "" ||
     $area_consultada == "" ||
     $consulta == "" ||
-    ($id_usuario_consultado != "" && !is_numeric($id_usuario_consultado))
+    (!in_array($id_usuario_consultado, ["", "null"]) && !is_numeric($id_usuario_consultado))
 ) devolver_error(ERROR_GENERAL);
 
 
-$insert_consulta = registrar_consulta($area_consulta, $id_sub_usuario, $area_consultada, $cedula_socio, $id_usuario_consultado);
-if ($insert_consulta === false) devolver_error("Ocurrieron errores al registrar la consulta");
+
+if (count($_FILES) > 0) {
+    $imagen = $_FILES['imagen'];
+    if (controlarExtension($imagen, ["jpg", "jpeg", "png", "pdf"]) <= 0) devolver_error("Los archivos cargados solo pueden ser de tipo .jpg, .jpeg, .png, .pdf");
+
+    $id_consulta = registrar_consulta($area_consulta, $id_sub_usuario, $area_consultada, $cedula_socio, $id_usuario_consultado);
+    if ($id_consulta === false) devolver_error("Ocurrieron errores al registrar la consulta");
+
+    $archivo_registrado = registrar_imagen_consulta($id_consulta, $imagen);
+    if ($archivo_registrado === false) devolver_error("Error al cargar el registro");
+} else {
+
+    $id_consulta = registrar_consulta($area_consulta, $id_sub_usuario, $area_consultada, $cedula_socio, $id_usuario_consultado);
+    if ($id_consulta === false) devolver_error("Ocurrieron errores al registrar la consulta");
+}
 
 
-$insert_mensaje = registrar_mensaje($insert_consulta, $consulta, $id_sub_usuario);
+$insert_mensaje = registrar_mensaje($id_consulta, $consulta, $id_sub_usuario);
 if ($insert_mensaje === false) devolver_error("Ocurrieron errores al registrar el mensaje");
 
 
@@ -44,9 +57,10 @@ function registrar_consulta($area_consulta, $id_sub_usuario, $area_consultada, $
     $conexion = connection(DB);
     $tabla = TABLA_CONSULTA_TRANSAREA;
     $id_sub_usuario = $id_sub_usuario != "" ? $id_sub_usuario : "";
+    $id_usuario_consultado = is_numeric($id_usuario_consultado) ? $id_usuario_consultado : "";
 
     try {
-        $sql = "INSERT INTO {$tabla} (area_consulta, area_consultada, usuario_consulto, usuario_consultado, cedula_socio, fecha_consulta) VALUES ('$area_consulta', '$area_consultada', $id_sub_usuario, '$id_usuario_consultado', '$cedula_socio', NOW())";
+        $sql = "INSERT INTO {$tabla} (area_consulta, area_consultada, usuario_consulto, usuario_consultado, cedula_socio, fecha_consulta) VALUES ('$area_consulta', '$area_consultada', '$id_sub_usuario', '$id_usuario_consultado', '$cedula_socio', NOW())";
         $consulta = mysqli_query($conexion, $sql);
         $id_insert = mysqli_insert_id($conexion);
         return $consulta != false ? $id_insert : false;
@@ -55,6 +69,35 @@ function registrar_consulta($area_consulta, $id_sub_usuario, $area_consultada, $
         return false;
     }
 }
+
+function registrar_imagen_consulta($id_registro, $imagen)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_ARCHIVOS_CRMESSAGE;
+
+    $errores = 0;
+    for ($i = 0; $i < count($imagen["name"]); $i++) {
+
+        $extension_archivo = strtolower(pathinfo(basename($imagen["name"][$i]), PATHINFO_EXTENSION));
+        $nombre_archivo =  generarHash(50) . '.' . $extension_archivo;
+        $ruta_origen = $imagen["tmp_name"][$i];
+
+        $destino = "../../../assets/documentos/archivos_crmessage/" . $nombre_archivo;
+
+        if (move_uploaded_file($ruta_origen, $destino)) {
+            try {
+                $sql = "INSERT INTO {$tabla} (id_consulta, nombre_archivo) VALUES ('$id_registro', '$nombre_archivo')";
+                $consulta = mysqli_query($conexion, $sql);
+            } catch (\Throwable $error) {
+                registrar_errores($sql, "nueva_consulta.php", $error);
+                $errores++;
+            }
+        }
+    }
+
+    return $errores > 0 ? false : true;
+}
+
 
 function registrar_mensaje($id_consulta, $mensaje, $id_sub_usuario)
 {

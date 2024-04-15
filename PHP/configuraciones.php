@@ -13,6 +13,7 @@ const APP = PRODUCCION ? "crm" : "crm_test";
 const URL_APP = PROTOCOL . "://" . SERVER . "/" . APP;
 const URL_DOCUMENTOS = URL_APP . '/assets/documentos/registros';
 const URL_DOCUMENTOS_AUDITORIA = URL_APP . '/assets/documentos/archivos_auditorias';
+const URL_DOCUMENTOS_CRMESSAGE = URL_APP . '/assets/documentos/archivos_crmessage';
 
 error_reporting(PRODUCCION ? 0 : E_ALL);
 
@@ -135,6 +136,7 @@ const TABLA_HISTORIAL_UPLOADERS          = "historial_uploaders";
 const TABLA_REGISTROS_EQUIFAX            = "registros_equifax";
 const TABLA_BAJAS_MOROSIDAD              = "bajas_morosidad";
 const TABLA_ARCHIVOS_AUDITORIAS          = "archivos_auditorias";
+const TABLA_ARCHIVOS_CRMESSAGE           = "archivos_crmessage";
 
 
 //SERVER - COORDINACIÓN

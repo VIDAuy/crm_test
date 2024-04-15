@@ -8,7 +8,7 @@ $(document).ready(function () {
 function abrir_modal_identificarse(openModal = false) {
     let sector = $("#sector").val();
 
-    if (["Recepcion", "Morosos", "Calidad", "Servicios", "Coordinacion", "Bajas", "Calidad_interna", "Cobranzas"].includes(sector)) {
+    if (["Recepcion", "Morosos", "Calidad", "Servicios", "Coordinacion", "Bajas", "Calidad_interna", "Cobranzas", "Rrhh_coord"].includes(sector)) {
         if (openModal === true) {
             $('#modal_identificar_persona_en_sesion').modal({ backdrop: 'static', keyboard: false })
             $('#modal_identificar_persona_en_sesion').modal("show");
@@ -60,7 +60,8 @@ function identificar_persona() {
 
                     if (
                         (sector == "Calidad" && ["43382081", "49554284", "45909437", "46955506", "48936512"].includes(cedula)) ||
-                        (sector == "Bajas" && ["44417851", "50709395"].includes(cedula))
+                        (sector == "Bajas" && ["44417851", "50709395"].includes(cedula)) ||
+                        (sector == "Rrhh_coord" && ["49651319", "54608246"].includes(cedula))
                     ) {
                         tabla_llamadas_pendientes();
                         setInterval(tabla_llamadas_pendientes, 300000);
@@ -70,6 +71,7 @@ function identificar_persona() {
                         setInterval(badge_cantidad_pendientes_volver_a_llamar, 15000);
 
                         $(".administrar_pendientes").css("display", "block");
+                        $("#vista_tabla_volver_a_llamar-tab").css("display", "block");
                     }
 
                     if ((sector == "Cobranzas" && ["47070163"].includes(cedula))) {
@@ -80,9 +82,9 @@ function identificar_persona() {
                         $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
                     }
 
-                    if (["Calidad", "Morosos", "Bajas"].includes(sector)) $(".ctr_agendar_volver_a_llamar").css("display", "block");
+                    if (["Calidad", "Morosos", "Bajas", "Rrhh_coord"].includes(sector)) $(".ctr_agendar_volver_a_llamar").css("display", "block");
 
-                    if (["Calidad", "Bajas", "Cobranzas"].includes(sector)) {
+                    if (["Calidad", "Bajas", "Cobranzas", "Rrhh_coord"].includes(sector)) {
                         $("#div_agregarEtiquetaSocio").css("display", "block");
                         $("#contenedor_cobranza_abitab").css("display", "block");
                     }

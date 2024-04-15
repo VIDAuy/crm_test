@@ -125,6 +125,12 @@ function mostrar_mensajes_chat(id = null, opcionResponder = false) {
         type: "GET",
         url: `${url_ajax}crmessage/registros_chat.php?id=${id_chat}`,
         dataType: "JSON",
+        beforeSend: function () {
+            mostrarLoader();
+        },
+        complete: function () {
+            mostrarLoader("O");
+        },
         success: function (response) {
             if (response.error === false) {
                 let html_consulta = response.datos;
@@ -162,16 +168,29 @@ function nueva_consulta_crmessage() {
         error("Debe ingresar una cédula válida");
     } else {
 
+        var form_data = new FormData();
+        form_data.append("consulta", consulta);
+        form_data.append("area_consultada", area_consultada);
+        form_data.append("cedula_socio", cedula_socio);
+        form_data.append("id_usuario_consultado", id_usuario_consultado);
+        let totalImagenes = $("#file_archivos_crmessage").prop("files").length;
+        for (let i = 0; i < totalImagenes; i++) {
+            form_data.append("imagen[]", $("#file_archivos_crmessage").prop("files")[i]);
+        }
+
         $.ajax({
             type: "POST",
             url: `${url_ajax}crmessage/nueva_consulta.php`,
-            data: {
-                consulta,
-                area_consultada,
-                cedula_socio,
-                id_usuario_consultado
-            },
+            contentType: false,
+            processData: false,
+            data: form_data,
             dataType: "JSON",
+            beforeSend: function () {
+                mostrarLoader();
+            },
+            complete: function () {
+                mostrarLoader("O");
+            },
             success: function (response) {
                 if (response.error === false) {
                     correcto(response.mensaje);

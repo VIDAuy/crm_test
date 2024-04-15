@@ -260,9 +260,9 @@
 
                         $items = "";
                         //Si no es Cobranzas: Mostrar Afiliaciones competencia / Convenios especiales
-                        if (!in_array($usuario, ['Cobranzas'])) $items .= $item_afiliaciones_competencia;
+                        if (!in_array($usuario, ['Cobranzas', 'Rrhh_coord'])) $items .= $item_afiliaciones_competencia;
                         //Si es Calidad: Mostrar Vida te lleva
-                        if (in_array($usuario, ['Calidad'])) $items .= $item_vida_te_lleva;
+                        if (in_array($usuario, ['Calidad', 'Rrhh_coord'])) $items .= $item_vida_te_lleva;
                         //Mostrar para todos: Alertas
                         $items .= $items_alertas;
                         //Si no es Auditoría ni Cobranzas: Mostrar Agenda volver a llamar
@@ -273,7 +273,7 @@
                             $items .= $cargar_documento;
                         }
                         //Si no es Auditoría ni Cobranzas: Mostrar Enviar términos y condiciones
-                        if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas'])) $items .= $enviar_terminos_y_condiciones;
+                        if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas', 'Rrhh_coord'])) $items .= $enviar_terminos_y_condiciones;
                         //Si no es de Auditoría ni Cobranzas: Mostrar historial volver a llamar
                         if (!in_array($usuario, ['Audit1', 'Audit2', 'Audit3', 'Cobranzas'])) $items .= $historial_volver_a_llamar;
                         //Si no es de Auditoría: Mostrar historial de alertas

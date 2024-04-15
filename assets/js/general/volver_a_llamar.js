@@ -203,7 +203,7 @@ function cantidad_volver_a_llamar() {
     let area = $("#sector").val();
     let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 
-    if (area == "Morosos" || area == "Calidad" || area == "Bajas") {
+    if (["Morosos", "Calidad", "Bajas"].includes(area)) {
         document.getElementById("cantidad_pendientes_volver_a_llamar").innerHTML = "0+";
 
         $.ajax({
