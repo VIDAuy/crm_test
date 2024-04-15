@@ -14,6 +14,7 @@ function ver_crmessage() {
     $("#txt_area_consultada_nueva_consulta_crmessage").val('');
     $("#txt_cedula_nueva_consulta_crmessage").val('');
     $("#txt_respuesta_consulta_asignada_crmessage").val('');
+    $("#txt_usuario_consultar_nueva_consulta_crmessage").val('');
     $("#nav-mis-consultas-tab").trigger('click'); //Muestro por defecto la ventana de ❝Mis Consultas❞
 
     select_usuarios("txt_area_consultada_nueva_consulta_crmessage"); //Lleno el select de usuarios
@@ -21,9 +22,45 @@ function ver_crmessage() {
     /** Lleno las tablas **/
     tabla_mis_consultas();
     tabla_consultas_asignadas();
+    $("#div_sub_usuario_crmessage").css("display", "none");
 
     $("#modalCRMessage").modal("show"); //Abro modal
 }
+
+
+function mostrar_select_usuarios_crmessage() {
+    let area = $("#txt_area_consultada_nueva_consulta_crmessage").val();
+    $("#div_sub_usuario_crmessage").css("display", "none");
+    $("#txt_usuario_consultar_nueva_consulta_crmessage").val('');
+
+    $.ajax({
+        type: "GET",
+        url: `${url_ajax}crmessage/verificar_area_con_sub_usuarios.php`,
+        data: {
+            area
+        },
+        dataType: "JSON",
+        success: function (response) {
+            if (response.error === false) {
+                if (response.estado != 222) {
+                    document.getElementById("txt_usuario_consultar_nueva_consulta_crmessage").innerHTML = `<option value=""> Seleccione si desea consultar a un usuario: </option>`;
+                    let datos = response.datos;
+                    datos.map((val) => {
+                        document.getElementById("txt_usuario_consultar_nueva_consulta_crmessage").innerHTML += `<option value="${val['id']}">${val['usuario']}</option>`;
+                    });
+                    $("#div_sub_usuario_crmessage").css("display", "block");
+                } else {
+                    $("#div_sub_usuario_crmessage").css("display", "none");
+                    $("#txt_usuario_consultar_nueva_consulta_crmessage").val('');
+                }
+            } else {
+                error(response.mensaje);
+            }
+        }
+    });
+}
+
+
 
 function tabla_mis_consultas() {
     $("#tabla_mis_consultas_crmessage").DataTable({
@@ -115,6 +152,7 @@ function nueva_consulta_crmessage() {
     let consulta = $("#txt_consulta_nueva_consulta_crmessage").val();
     let area_consultada = $("#txt_area_consultada_nueva_consulta_crmessage").val();
     let cedula_socio = $("#txt_cedula_nueva_consulta_crmessage").val();
+    let id_usuario_consultado = $("#txt_usuario_consultar_nueva_consulta_crmessage").val();
 
     if (consulta == "") {
         error("Debe ingresar una consulta");
@@ -130,7 +168,8 @@ function nueva_consulta_crmessage() {
             data: {
                 consulta,
                 area_consultada,
-                cedula_socio
+                cedula_socio,
+                id_usuario_consultado
             },
             dataType: "JSON",
             success: function (response) {
@@ -140,6 +179,7 @@ function nueva_consulta_crmessage() {
                     $("#txt_area_consultada_nueva_consulta_crmessage").val('');
                     $("#txt_cedula_nueva_consulta_crmessage").val('');
                     tabla_mis_consultas();
+                    if ($("#ci").val() != "") historiaComunicacionDeCedula();
                     $("#nav-mis-consultas-tab").trigger('click'); //Muestro por defecto la ventana de ❝Mis Consultas❞
                 } else {
                     error(response.mensaje);
@@ -175,6 +215,7 @@ function responder_consulta() {
                     mostrar_mensajes_chat();
                     tabla_mis_consultas();
                     tabla_consultas_asignadas();
+                    if ($("#ci").val() != "") historiaComunicacionDeCedula();
                 } else {
                     error(response.mensaje);
                 }
@@ -184,6 +225,10 @@ function responder_consulta() {
 }
 
 function cantidad_consultas_no_leidas() {
+    $("#span_cantidad_respuestas_mis_consultas").text(`0+`);
+    $("#span_cantidad_consultas_asignadas").text(`0+`);
+    $("#cantidad_pendientes_crmessage").text(`0+`);
+
     $.ajax({
         type: "GET",
         url: `${url_ajax}crmessage/cantidad_consultas_no_leidas.php`,

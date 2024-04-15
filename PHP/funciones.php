@@ -83,6 +83,18 @@ function obtener_nombre_sub_usuario($id_sub_usuario)
     return $resultado['nombre'] . " " . $resultado['apellido'];
 }
 
+/** Obtener datos de padron del socio **/
+function obtener_datos_padron_del_socio($cedula)
+{
+    $conexion = connection(DB_ABMMOD);
+    $tabla = TABLA_PADRON_DATOS_SOCIO;
+
+    $sql = "SELECT * FROM {$tabla} WHERE cedula = '$cedula' ORDER BY id DESC LIMIT 1";
+    $consulta = mysqli_query($conexion, $sql);
+
+    return mysqli_fetch_assoc($consulta);
+}
+
 /** Generar color random **/
 function randomColor()
 {
@@ -245,6 +257,23 @@ function generarHash($largo)
 {
     $caracteres_permitidos = '0123456789abcdefghijklmnopqrstuvwxyz';
     return substr(str_shuffle($caracteres_permitidos), 0, $largo);
+}
+
+//Controlar extención de un array de archivos
+function controlarExtension($files, $tipo)
+{
+    $validar_extension = $tipo;
+    $valido = 0;
+    for ($i = 0; $i < count($files["name"]); $i++) {
+        $extension_archivo = strtolower(pathinfo(basename($files["name"][$i]), PATHINFO_EXTENSION));
+
+        if (in_array($extension_archivo, $validar_extension)) {
+            $valido++;
+        } else {
+            $valido = 0;
+        }
+    }
+    return $valido;
 }
 
 //Suma un array de numeros

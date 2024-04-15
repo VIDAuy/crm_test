@@ -90,6 +90,7 @@ function identificar_persona() {
 
                     cantidad_volver_a_llamar();
                     setInterval(cantidad_volver_a_llamar, 5000);
+                    cantidad_consultas_no_leidas();
 
                 } else {
                     error(response.mensaje);

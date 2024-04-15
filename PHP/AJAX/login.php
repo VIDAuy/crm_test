@@ -30,7 +30,7 @@ echo json_encode($respuesta);
 
 function verificar_usuario($usuario, $password)
 {
-	$conexion = connection(DB);
+	include_once '../conexiones/conexion2.php';
 	$tabla = TABLA_USUARIOS;
 
 	$sql = "SELECT 

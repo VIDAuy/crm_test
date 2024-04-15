@@ -14,15 +14,6 @@ if ($cedula == "" || $descripcion == "" || $fecha_auditoria == "" || $usuario ==
 }
 
 
-$verificar_existencia_auditoria = comprobar_auditoria($cedula);
-
-if ($verificar_existencia_auditoria === false) {
-    $response['error'] = true;
-    $response['mensaje'] = "El socio ya tiene una auditoría registrada";
-    die(json_encode($response));
-}
-
-
 $insert_auditoria = registrar_auditoria($cedula, $descripcion, $fecha_auditoria, $usuario);
 
 if ($insert_auditoria === false) {
@@ -35,25 +26,10 @@ if ($insert_auditoria === false) {
 
 $response['error'] = false;
 $response['mensaje'] = EXITO_AL_REGISTRAR;
-
-
 echo json_encode($response);
 
 
 
-
-function comprobar_auditoria($cedula)
-{
-    $conexion = connection(DB);
-    $tabla = TABLA_AUDITORIAS_SOCIO;
-
-    $sql = "SELECT * FROM {$tabla} WHERE cedula = '$cedula' AND activo = 1";
-    $consulta = mysqli_query($conexion, $sql);
-
-    $resultado = mysqli_num_rows($consulta) > 0 ? false : true;
-
-    return $resultado;
-}
 
 function registrar_auditoria($cedula, $descripcion, $fecha_auditoria, $usuario)
 {

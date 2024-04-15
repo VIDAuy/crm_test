@@ -32,8 +32,6 @@ function registrar_auditoria_socio(openModal = false) {
             error("Debe ingresar una descripción");
         } else if (fecha_auditoria == "") {
             error("Debe ingresar una fecha para la auditoría");
-        } else if (fecha_actual >= fecha_auditoria) {
-            error("La fecha y hora de auditoría debe ser mayor a la fecha y hora actual");
         } else {
 
             $.ajax({
@@ -66,6 +64,7 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
     if (openModal == true) {
         $("#txt_id_registrar_comentario_auditoria").val(id);
         $("#txt_mensaje_registrar_comentario_auditoria").val('');
+        $("#file_archivos_auditoria_socio").val('');
         $("#modal_registrarComentarioAuditoria").modal("show");
     } else {
         let id = $("#txt_id_registrar_comentario_auditoria").val();
@@ -77,20 +76,34 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
             error("Debe ingresar un comentario");
         } else {
 
+            var form_data = new FormData();
+            form_data.append("id", id);
+            form_data.append("comentario", comentario);
+            let totalImagenes = $("#file_archivos_auditoria_socio").prop("files").length;
+            for (let i = 0; i < totalImagenes; i++) {
+                form_data.append("imagen[]", $("#file_archivos_auditoria_socio").prop("files")[i]);
+            }
+
             $.ajax({
                 type: "POST",
                 url: `${url_ajax}auditorias_socio/registrar_comentario.php`,
-                data: {
-                    id,
-                    comentario
-                },
+                contentType: false,
+                processData: false,
+                data: form_data,
                 dataType: "JSON",
+                beforeSend: function () {
+                    mostrarLoader();
+                },
+                complete: function () {
+                    mostrarLoader("O");
+                },
                 success: function (response) {
                     if (response.error === false) {
                         correcto(response.mensaje);
-                        tabla_auditorias_socio();
+                        tabla_registros_auditoria_socio(true, false);
                         $("#txt_id_registrar_comentario_auditoria").val('');
                         $("#txt_mensaje_registrar_comentario_auditoria").val('');
+                        $("#file_archivos_auditoria_socio").val('');
                         $("#modal_registrarComentarioAuditoria").modal("hide");
                     } else {
                         error(response.mensaje);
@@ -102,6 +115,7 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
     }
 }
 
+
 function ver_comentarios_auditorias_socio(id, cedula) {
     $("#span_id_auditoria").text(`#${id}`);
     $("#span_cedula_socio").text(cedula);
@@ -112,6 +126,7 @@ function ver_comentarios_auditorias_socio(id, cedula) {
             { data: "id" },
             { data: "comentario" },
             { data: "fecha_registro" },
+            { data: "acciones" },
         ],
         order: [[0, "asc"]],
         bDestroy: true,
@@ -121,10 +136,38 @@ function ver_comentarios_auditorias_socio(id, cedula) {
     $("#modal_verComentariosAuditoriaSocio").modal("show");
 }
 
-function tabla_registros_auditoria_socio(btnRegistrarComentario = false) {
+
+function modal_ver_mp3(ruta_registros, string_imagenes) {
+    let div = document.getElementById('mostrar_imagenes_relamos');
+    div.innerHTML = '';
+
+    let count = 1;
+    let obtener_imagenes = string_imagenes.split(',');
+    obtener_imagenes.map((val) => {
+        let imagen = val.trim();
+        let separar_nombre_archivo = imagen.split('.');
+        let extencion_archivo = separar_nombre_archivo[1];
+        div.innerHTML += `
+        <h3>Audio ${count}:</h3>
+        <audio controls class='player_audio mb-4' id="audio_nro_${count}" loop>
+            <source src="${ruta_registros}/${imagen}">
+        </audio>`;
+        count++;
+    });
+
+    $('#modalVerImagenesRegistro').modal('show');
+}
+
+function pausar_audios_al_cerrar_modal() {
+    $('.player_audio').trigger("pause");
+}
+
+function tabla_registros_auditoria_socio(btnRegistrarComentario = false, filtrarCedula = false) {
+
+    let cedula = filtrarCedula != false ? $("#ci").val() : "";
 
     $("#tabla_auditorias_registradas").DataTable({
-        ajax: `${url_ajax}auditorias_socio/tabla_auditorias.php?btnRegistrarComentario=${btnRegistrarComentario}`,
+        ajax: `${url_ajax}auditorias_socio/tabla_auditorias.php?btnRegistrarComentario=${btnRegistrarComentario}&cedula=${cedula}`,
         columns: [
             { data: "id" },
             { data: "cedula" },
@@ -153,7 +196,7 @@ function verificar_auditoria_socio() {
             dataType: "JSON",
             success: function (response) {
                 if (response.error === false) {
-                    $("#div_auditorias_socio").html("<button class='btn btn-info' onclick='tabla_registros_auditoria_socio(false)'> Auditoría Socio </button>");
+                    $("#div_auditorias_socio").html("<button class='btn btn-info' onclick='tabla_registros_auditoria_socio(false, true)'> Auditoría Socio </button>");
                 } else if (response.error == 222) {
                     error(response.mensaje);
                 }
