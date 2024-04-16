@@ -137,6 +137,8 @@ const TABLA_REGISTROS_EQUIFAX            = "registros_equifax";
 const TABLA_BAJAS_MOROSIDAD              = "bajas_morosidad";
 const TABLA_ARCHIVOS_AUDITORIAS          = "archivos_auditorias";
 const TABLA_ARCHIVOS_CRMESSAGE           = "archivos_crmessage";
+const TABLA_MENU                         = "menu";
+const TABLA_ITEMS_MENU                   = "items_menu";
 
 
 //SERVER - COORDINACIÓN

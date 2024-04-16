@@ -91,7 +91,7 @@ function identificar_persona() {
 
 
                     cantidad_volver_a_llamar();
-                    setInterval(cantidad_volver_a_llamar, 5000);
+                    setInterval(cantidad_volver_a_llamar, 15000);
                     cantidad_consultas_no_leidas();
 
                 } else {

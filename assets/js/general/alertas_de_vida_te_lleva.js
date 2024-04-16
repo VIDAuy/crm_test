@@ -1,6 +1,6 @@
 $(document).ready(function () {
     alertas_de_vida_te_lleva();
-    setInterval(alertas_de_vida_te_lleva, 5000);
+    setInterval(alertas_de_vida_te_lleva, 15000);
 
 });
 

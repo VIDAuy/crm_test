@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.0.91';
+$version = '?v=1.0.94';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
@@ -16,6 +16,7 @@ if (isset($_SESSION['nivel'])) {
 		case 1:
 
 			$array_cargar_js = [
+				"general/menu.js",
 				"funciones.js",
 				"masDatos/datosAlertas.js",
 				"masDatos/datosCobranza.js",
@@ -107,6 +108,7 @@ if (isset($_SESSION['nivel'])) {
 		case 2:
 
 			$array_cargar_js = [
+				"general/menu.js",
 				"funciones.js",
 				"masDatos/datosAlertas.js",
 				"masDatos/datosCobranza.js",
@@ -191,6 +193,7 @@ if (isset($_SESSION['nivel'])) {
 
 		case 3:
 			$array_ruta_cargar_js = [
+				"general/menu.js",
 				"index.js",
 				"funciones.js",
 				"masDatos/datosAlertas.js",
@@ -303,6 +306,7 @@ if (isset($_SESSION['nivel'])) {
 		case 4:
 
 			$array_ruta_cargar_js = [
+				"general/menu.js",
 				"nivel4/js.js",
 				"funciones.js",
 				"general/sesion.js",
@@ -349,6 +353,7 @@ if (isset($_SESSION['nivel'])) {
 		case 5:
 
 			$array_ruta_cargar_js = [
+				"general/menu.js",
 				"nivel5/js.js",
 				"masDatos/datosCobranza.js",
 				"masDatos/datosCoordina.js",
@@ -415,6 +420,7 @@ if (isset($_SESSION['nivel'])) {
 		case 6:
 
 			$array_ruta_cargar_js = [
+				"general/menu.js",
 				"nivel6/js.js",
 				"nivel6/alertas/js.js",
 				"general/sesion.js",

@@ -24,42 +24,291 @@
 
 <body>
 
-    <div class="alert alert-light border-secondary ms-2 me-2 mt-3 mb-5" role="alert">
-        <h3 class="text-center mb-3"><u>Desestimar Baja:</u></h3>
-        <div class="input-group mb-3">
-            <span class="input-group-text">Ingrese la cédula:</span>
-            <input type="number" class="form-control" id="txt_cedula" maxlength="8" />
-            <button class="btn btn-danger input-group-text" onclick="desestimar_baja()">Enviar</button>
+    <button class="btn btn-danger mb-3" onclick="desestimar_baja(true)">Desestiamar Baja</button>
+
+    <button class="btn btn-danger mb-3" onclick="tabla_registros(true)">Dar Baja Registros</button>
+
+    <button class="btn btn-primary mb-3" onclick="tabla_items_menu(true)">Gestionar items menú</button>
+
+    <button class="btn btn-primary mb-3" onclick="tabla_menu(true)">Gestionar menú por área</button>
+
+
+    <!-- Modal Desestimar Baja -->
+    <div class="modal fade" id="modal_desestimarBaja" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Desestimar Baja</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="txt_cedula" placeholder="Ingrese la cédula:" maxlength="8">
+                        <label for="txt_cedula">Ingrese la cédula:</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="desestimar_baja(false)">Enviar</button>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- End Modal Desestimar Baja -->
 
+    <!-- Modal Gestionar Registros -->
+    <div class="modal fade" id="modal_gestionarRegistros" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dar Baja Registros</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
+                    <div class="table-responsive">
+                        <table id="tabla_registros" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col-auto">#</th>
+                                    <th scope="col-auto">Cédula</th>
+                                    <th scope="col-auto">Nombre</th>
+                                    <th scope="col-auto">Teléfono</th>
+                                    <th scope="col-auto">Fecha/Hora</th>
+                                    <th scope="col-auto">Sector</th>
+                                    <th scope="col-auto">Usuario</th>
+                                    <th scope="col-auto">Socio</th>
+                                    <th scope="col-auto">Baja</th>
+                                    <th scope="col-auto">Comentario</th>
+                                    <th scope="col-auto">Avisar a</th>
+                                    <th scope="col-auto">Acciones</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
 
-    <div class="alert alert-light border-secondary ms-2 me-2" role="alert">
-        <h3 class="text-center"><u>Registros:</u></h3>
-        <div class="table-responsive">
-            <table id="tabla_registros" class="table table-sm table-bordered table-striped table-hover" width="100%">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col-auto">#</th>
-                        <th scope="col-auto">Cédula</th>
-                        <th scope="col-auto">Nombre</th>
-                        <th scope="col-auto">Teléfono</th>
-                        <th scope="col-auto">Fecha/Hora</th>
-                        <th scope="col-auto">Sector</th>
-                        <th scope="col-auto">Usuario</th>
-                        <th scope="col-auto">Socio</th>
-                        <th scope="col-auto">Baja</th>
-                        <th scope="col-auto">Comentario</th>
-                        <th scope="col-auto">Avisar a</th>
-                        <th scope="col-auto">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider" id="historiaComunicacionDeCedula">
-                </tbody>
-            </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- End Modal Gestionar Registros -->
+
+    <!-- Modal Gestionar Items Menú -->
+    <div class="modal fade" id="modal_gestionarItemsMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Gestionar Items Menú</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="d-flex justify-content-end mb-3">
+                        <button class="btn btn-success" onclick="agregar_items_menu(true)">➕</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="tabla_items_menu" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col-auto">#</th>
+                                    <th scope="col-auto">Icono SVG</th>
+                                    <th scope="col-auto">Ruta Enlace</th>
+                                    <th scope="col-auto">Función</th>
+                                    <th scope="col-auto">Nombre</th>
+                                    <th scope="col-auto">Badge</th>
+                                    <th scope="col-auto">Acciones</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Gestionar Items Menú -->
+
+    <!-- Modal Agregar Items Menú -->
+    <div class="modal fade" id="modal_agregarItemsMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Item Menú</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Icono SVG" id="txt_icono_svg_aim"></textarea>
+                        <label for="txt_icono_svg_aim">Icono SVG</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txt_ruta_enlace_aim" placeholder="Ruta Enlace">
+                        <label for="txt_ruta_enlace_aim">Ruta Enlace</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txt_funcion_aim" placeholder="Función">
+                        <label for="txt_funcion_aim">Función</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txt_nombre_aim" placeholder="Nombre">
+                        <label for="txt_nombre_aim">Nombre</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txt_badge_aim" placeholder="Badge">
+                        <label for="txt_badge_aim">Badge</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregar_items_menu(false)">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Agregar Items Menú -->
+
+    <!-- Modal Editar Items Menú -->
+    <div class="modal fade" id="modal_editarItemsMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Gestionar Item Menú</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="txt_id_eim" placeholder="ID" disabled>
+                        <label for="txt_id_eim">ID</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Icono SVG" id="txt_icono_svg_eim"></textarea>
+                        <label for="txt_icono_svg_eim">Icono SVG</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txt_ruta_enlace_eim" placeholder="Ruta Enlace">
+                        <label for="txt_ruta_enlace_eim">Ruta Enlace</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txt_funcion_eim" placeholder="Función">
+                        <label for="txt_funcion_eim">Función</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txt_nombre_eim" placeholder="Nombre">
+                        <label for="txt_nombre_eim">Nombre</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txt_badge_eim" placeholder="Badge">
+                        <label for="txt_badge_eim">Badge</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="editar_items_menu(false)">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Editar Items Menú -->
+
+    <!-- Modal Gestionar Menú -->
+    <div class="modal fade" id="modal_gestionarMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Gestionar Menú</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="d-flex justify-content-end mb-3">
+                        <button class="btn btn-success" onclick="agregar_menu(true)">➕</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="tabla_menu" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col-auto">#</th>
+                                    <th scope="col-auto">Área</th>
+                                    <th scope="col-auto">Item</th>
+                                    <th scope="col-auto">Acciones</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Gestionar Menú -->
+
+    <!-- Modal Agregar Menú -->
+    <div class="modal fade" id="modal_agregarMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Item Menú</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="select_area_am" aria-label="Seleccione un área">
+                        </select>
+                        <label for="select_area_am">Seleccione un área</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="select_item_am" aria-label="Seleccione un item">
+                            <option selected>Seleccione una opción</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <label for="select_item_am">Seleccione un item</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregar_menu(false)">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Agregar Menú -->
+
+
+
+
+
+
 
 
     <!-- Modals -->
