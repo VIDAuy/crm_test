@@ -25,6 +25,7 @@ if ($datos_usuario == "" || $datos_usuario == false || $datos_usuario == null) {
 $id_sub_usuario = $datos_usuario['id'];
 $nombre = $datos_usuario['nombre'];
 $apellido = $datos_usuario['apellido'];
+$es_gestor = $datos_usuario['gestor'];
 
 
 $_SESSION['id_sub_usuario'] = $id_sub_usuario;
@@ -33,6 +34,7 @@ $_SESSION['sector'] = $sector;
 $_SESSION['cedula'] = $cedula;
 $_SESSION['nombre'] = $nombre;
 $_SESSION['apellido'] = $apellido;
+$_SESSION['gestor'] = $es_gestor;
 
 
 $response['error'] = false;
@@ -43,7 +45,8 @@ $response['datos'] = [
     "sector" => $sector,
     "cedula" => $cedula,
     "nombre" => $nombre,
-    "apellido" => $apellido
+    "apellido" => $apellido,
+    "gestor" => $es_gestor,
 ];
 
 echo json_encode($response);
@@ -66,7 +69,7 @@ function validar_usuario($id_sector, $cedula)
     $conexion = connection(DB);
     $tabla = TABLA_SUB_USUARIOS;
 
-    $sql = "SELECT id, nombre, apellido FROM {$tabla} WHERE id_sector = '$id_sector' AND cedula = '$cedula' AND activo = 1";
+    $sql = "SELECT id, nombre, apellido, gestor FROM {$tabla} WHERE id_sector = '$id_sector' AND cedula = '$cedula' AND activo = 1";
     $consulta = mysqli_query($conexion, $sql);
 
     return mysqli_fetch_assoc($consulta);

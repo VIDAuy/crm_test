@@ -1,11 +1,3 @@
-$(document).ready(function () {
-
-    $(".ctr_agendar_volver_a_llamar").css("display", "none");
-    $(".administrar_pendientes").css("display", "none");
-
-});
-
-
 function tabla_llamadas_pendientes() {
     let cedula = localStorage.getItem("cedula");
     let id_sector = localStorage.getItem("id_sector");
@@ -203,26 +195,24 @@ function cantidad_volver_a_llamar() {
     let area = $("#sector").val();
     let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 
-    if (["Morosos", "Calidad", "Bajas"].includes(area)) {
-        document.getElementById("cantidad_pendientes_volver_a_llamar").innerHTML = "0+";
+    document.getElementById("cantidad_pendientes_volver_a_llamar").innerHTML = "0+";
 
-        $.ajax({
-            type: "GET",
-            url: `${url_ajax}volver_a_llamar/contar_pendientes_volver_a_llamar.php`,
-            data: {
-                area: area,
-                id_sub_usuario: id_sub_usuario
-            },
-            dataType: "JSON",
-            success: function (response) {
-                if (response.error === false) {
-                    let cantidad = response.cantidad;
-                    $("#cantidad_pendientes_volver_a_llamar").text(`${cantidad}+`);
-                    if (cantidad > 0) mostrar_recordatorio();
-                }
-            },
-        });
-    }
+    $.ajax({
+        type: "GET",
+        url: `${url_ajax}volver_a_llamar/contar_pendientes_volver_a_llamar.php`,
+        data: {
+            area: area,
+            id_sub_usuario: id_sub_usuario
+        },
+        dataType: "JSON",
+        success: function (response) {
+            if (response.error === false) {
+                let cantidad = response.cantidad;
+                $("#cantidad_pendientes_volver_a_llamar").text(`${cantidad}+`);
+                if (cantidad > 0) mostrar_recordatorio();
+            }
+        },
+    });
 }
 
 function cargar_registro_volver_a_llamar(openModal = false, id, area, cedula, nombre, telefono, es_socio, fecha_hora, mensaje, fecha_registro) {
@@ -411,38 +401,22 @@ select_sub_usuarios("Editar", "select_asignar_llamada_a_usuario_editar", id_sub_
 function select_sub_usuarios(opcion, div, id_sub_usuario = null, nombre_sub_usuario = null) {
 
     let id_area = localStorage.getItem("id_sector");
+    let option = opcion == "Agregar" ? `<option value='0' selected>Seleccione un usuario</option>` : `<option value='${id_sub_usuario}' selected>${nombre_sub_usuario}</option>`;
+    let params = opcion == "Agregar" ? `area=${id_area}` : `id_sub_usuario=${id_sub_usuario}`;
 
-    if (opcion == "Agregar") {
+    document.getElementById(div).innerHTML = `${option}`;
 
-        document.getElementById(div).innerHTML = "<option value='0' selected>Seleccione un usuario</option>";
-
-        $.ajax({
-            type: "GET",
-            url: `${url_ajax}volver_a_llamar/select_sub_usuarios.php?area=${id_area}`,
-            dataType: "JSON",
-            success: function (response) {
-                let datos = response.datos;
-                datos.map((val) => {
-                    document.getElementById(div).innerHTML += `<option value="${val['id']}">${val['nombre']}</option>`;
-                });
-            }
-        });
-    } else {
-
-        document.getElementById(div).innerHTML = `<option value='${id_sub_usuario}' selected>${nombre_sub_usuario}</option>`;
-
-        $.ajax({
-            type: "GET",
-            url: `${url_ajax}volver_a_llamar/select_sub_usuarios.php?id_sub_usuario=${id_sub_usuario}`,
-            dataType: "JSON",
-            success: function (response) {
-                let datos = response.datos;
-                datos.map((val) => {
-                    document.getElementById(div).innerHTML += `<option value="${val['id']}">${val['nombre']}</option>`;
-                });
-            }
-        });
-    }
+    $.ajax({
+        type: "GET",
+        url: `${url_ajax}volver_a_llamar/select_sub_usuarios.php?${params}`,
+        dataType: "JSON",
+        success: function (response) {
+            let datos = response.datos;
+            datos.map((val) => {
+                document.getElementById(div).innerHTML += `<option value="${val['id']}">${val['nombre']}</option>`;
+            });
+        }
+    });
 
 }
 

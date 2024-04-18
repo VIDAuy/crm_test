@@ -1,6 +1,4 @@
 function registrar_auditoria_socio(openModal = false) {
-    let fecha_actual = fecha_hora_actual();
-
     if (openModal == true) {
         $("#txt_registrar_cedula_auditoria_socio").val('');
         $("#txt_registrar_descripcion_auditoria_socio").val('');
@@ -14,7 +12,7 @@ function registrar_auditoria_socio(openModal = false) {
             error('Debe ingresar una cédula válida');
         } else {
             $("#txt_registrar_cedula_auditoria_socio").val(cedula);
-            $("#txt_registrar_fecha_auditoria_socio").val(`${fecha_actual}`);
+            $("#txt_registrar_fecha_auditoria_socio").val('');
             $("#modal_registrarAuditoriaSocio").modal("show");
         }
 
@@ -186,6 +184,7 @@ function tabla_registros_auditoria_socio(btnRegistrarComentario = false, filtrar
 }
 
 function verificar_auditoria_socio() {
+
     let cedula = $("#ci").val();
     $("#div_auditorias_socio").html("");
 

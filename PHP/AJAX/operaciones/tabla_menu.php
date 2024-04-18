@@ -10,13 +10,13 @@ while ($row = mysqli_fetch_assoc($obtener_menu)) {
     $id = $row['id'];
     $id_usuario = ucfirst(obtener_datos_usuario($row['id_usuario'])['usuario']);
     $id_item = obtener_item($row['id_item'])['nombre'];
-    $btnEliminar = "<button class='btn btn-sm btn-danger' onclick='eliminar_menu(`" . $id . "`);'>❌</button>";
+    $acciones = "<button class='btn btn-sm btn-danger' onclick='eliminar_menu(`" . $id . "`);'>Eliminar</button>";
 
     $tabla["data"][] = [
         'id' => $id,
         'area' => $id_usuario,
         'item' => $id_item,
-        'acciones' => "-",
+        'acciones' => $acciones,
     ];
 }
 

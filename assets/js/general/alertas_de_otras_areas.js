@@ -6,7 +6,6 @@ $(document).ready(function () {
     setInterval(cantidad_alertas, 15000);
     badge_cantidad_alertas_pendientes();
     setInterval(badge_cantidad_alertas_pendientes, 15000);
-    $(".administrar_pendientes").css("display", "none");
     $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
     agregarFiliales();
 });
@@ -21,7 +20,7 @@ function cantidad_alertas() {
     let nivel = $("#nivel").val();
     let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 
-    if (["Calidad", "Bajas", "Cobranzas"].includes(sector)) {
+    if (["Calidad", "Bajas", "Cobranzas", "Rrhh_coord", "Coordinacion", "Morosos", "Comercial"].includes(sector)) {
 
         if (id_sub_usuario != null) {
             $.ajax({

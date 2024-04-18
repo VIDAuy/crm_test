@@ -201,6 +201,40 @@ function agregar_menu(openModal = false) {
     }
 }
 
+function eliminar_menu(id) {
+    Swal.fire({
+        title: "Estas seguro?",
+        text: `Vas a eliminar el menú #${id}!`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: "POST",
+                url: `${url_operaciones}eliminar_menu.php`,
+                data: {
+                    id
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    if (response.error === false) {
+                        correcto(response.mensaje);
+                        tabla_menu(false);
+                    } else {
+                        error(response.mensaje);
+                    }
+                }
+            });
+
+        }
+    });
+}
+
 function select_areas() {
     let div = document.getElementById("select_area_am");
     div.innerHTML = '<option selected value="">Seleccione una opción</option>';
@@ -240,40 +274,6 @@ function select_items() {
                 div.innerHTML += `<option value="${v.id}">${v.nombre}</option>`;
             });
         },
-    });
-}
-
-function eliminar_menu(id) {
-    Swal.fire({
-        title: "Estas seguro?",
-        text: `Vas a eliminar el item #${id}!`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, eliminar!",
-        cancelButtonText: "Cancelar"
-    }).then((result) => {
-        if (result.isConfirmed) {
-
-            $.ajax({
-                type: "POST",
-                url: `${url_operaciones}eliminar_menu.php`,
-                data: {
-                    id
-                },
-                dataType: "JSON",
-                success: function (response) {
-                    if (response.error === false) {
-                        correcto(response.mensaje);
-                        tabla_menu(false);
-                    } else {
-                        error(response.mensaje);
-                    }
-                }
-            });
-
-        }
     });
 }
 

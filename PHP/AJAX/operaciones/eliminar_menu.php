@@ -9,12 +9,12 @@ if ($id == "") devolver_error(ERROR_GENERAL);
 
 
 $eliminar_menu = eliminar_menu($id);
-if ($eliminar_menu == false) devolver_error("Ocurrieron errores al eliminar el registro");
+if ($eliminar_menu == false) devolver_error("Ocurrieron errores al eliminar el menú");
 
 
 
 $response['error'] = false;
-$response['mensaje'] = "Se elimino el registro con éxito";
+$response['mensaje'] = "Se elimino el menú con éxito";
 echo json_encode($response);
 
 

@@ -4,10 +4,19 @@ $agenda_volver_a_llamar = "";
 if ($_SESSION['nivel'] != 1)
     $agenda_volver_a_llamar = "
     <div class='d-flex justify-content-center'>
-        <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)'>
+        <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)' style='display: none'>
             Agregar a agenda 📞
         </button>
     </div>";
+
+if ($_SESSION['nivel'] == 1 && $_SESSION['sector'] == "Coordinacion") {
+    $agenda_volver_a_llamar = "
+        <div class='d-flex justify-content-center'>
+            <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)' style='display: none'>
+                Agregar a agenda 📞
+            </button>
+        </div>";
+}
 
 ?>
 

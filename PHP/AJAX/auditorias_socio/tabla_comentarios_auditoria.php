@@ -14,6 +14,15 @@ while ($row = mysqli_fetch_assoc($comentarios_auditoria)) {
     $archivos_del_comentario = imagenes_comentario($id);
     $btnArchivos = strlen($archivos_del_comentario) > 0 ? "<button class='btn btn-sm btn-info' onclick='modal_ver_mp3(`" . URL_DOCUMENTOS_AUDITORIA . "`, `" . $archivos_del_comentario . "`);'>Ver Archivos</button>" : "-";
 
+    if (strlen($comentario) > 20) {
+        $br  = array("<br />", "<br>", "<br/>");
+        $comentario = str_ireplace($br, "\r\n", $comentario);
+
+        $comentario_sin_editar = $comentario;
+        $comentario = substr($comentario, 0, 50) . " ...<button class='btn btn-link' onclick='verMasTabla(`" . $comentario_sin_editar . "`);'>Ver Más</button>";
+        $comentario = mb_convert_encoding($comentario, 'UTF-8', 'UTF-8');
+    }
+
 
     $tabla["data"][] = [
         "id" => $id,

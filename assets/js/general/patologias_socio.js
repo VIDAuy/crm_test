@@ -4,18 +4,11 @@ $(document).ready(function () {
         dropdownParent: $('#modalAgregarPatologiaSocio')
     });
 
-    $(".patologias_socio").css("display", "none");
-
 });
 
 
 
 function tabla_patologias_socio() {
-    let sector = $("#sector").val();
-
-    if (!["Cobranzas"].includes(sector)) $(".patologias_socio").css("display", "block");
-    if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas"].includes(sector)) $("#btn_agregar_patologia_socio").css("display", "block");
-
     let cedula = $("#ci").val();
     $("#tabla_patologias_socio").DataTable({
         ajax: `${url_ajax}patologias_socio/tabla_patologias_socio.php?cedula=${cedula}`,

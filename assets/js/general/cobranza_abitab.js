@@ -1,7 +1,6 @@
 function tabla_cobranza_abitab() {
 
   let cedula = $("#ci").val();
-
   $("#tabla_cobranza_abitab").DataTable({
     ajax: `${url_ajax}tabla_cobranza_abitab.php?cedula=${cedula}`,
     columns: [
@@ -26,4 +25,5 @@ function tabla_cobranza_abitab() {
     bDestroy: true,
     language: { url: url_lenguage },
   });
+
 }

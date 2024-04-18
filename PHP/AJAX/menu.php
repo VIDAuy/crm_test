@@ -2,10 +2,8 @@
 include_once '../configuraciones.php';
 
 $id_area = $_SESSION['id'];
-$cedula = isset($_REQUEST['cedula']) ? $_REQUEST['cedula'] : "";
 
-
-$obtener_items = obtener_menu($id_area, $cedula);
+$obtener_items = obtener_menu($id_area);
 
 
 while ($row = mysqli_fetch_assoc($obtener_items)) {
@@ -60,7 +58,8 @@ function obtener_menu($id_area)
         WHERE
 	      m.id_usuario = '$id_area' AND 
           m.activo = 1 AND 
-          im.activo = 1";
+          im.activo = 1
+          ORDER BY im.id ASC";
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;

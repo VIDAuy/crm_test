@@ -6,7 +6,7 @@ $opcion = $_REQUEST['opcion'];
 if (isset($_REQUEST['cedula'])) $cedula = $_REQUEST['cedula'];
 if (isset($_REQUEST['etiqueta'])) $mensaje = $_REQUEST['etiqueta'];
 if (isset($_REQUEST['id_sub_usuario'])) $id_sub_usuario = $_REQUEST['id_sub_usuario'];
-
+$id_area = $_SESSION['id'];
 
 
 /** Tabla Etiquetas **/
@@ -19,14 +19,17 @@ if ($opcion == 1) {
 
         $id             = $row['id'];
         $etiqueta       = $row['mensaje'];
-        $usuario_agrego = obtener_usuario($row['id_sub_usuario']);
+        $usuario_agrego = $row['id_sub_usuario'] != "" || $row['id_sub_usuario'] != null ? obtener_usuario($row['id_sub_usuario']) : "-";
+        $area_agrego    = $row['id_area'] != "" || $row['id_area'] != null ? ucfirst(obtener_datos_usuario($row['id_area'])['usuario']) : "-";
+        $usuario_agrego = ($area_agrego == "Audit1") ? "Nathalia Horvat" : (($area_agrego == "Audit2") ? "Andrea Horvat" : (($area_agrego == "Audit3") ? "Tatiana Landa" : $usuario_agrego));
         $fecha_registro = date("d/m/Y H:i:s", strtotime($row['fecha_registro']));
 
         $tabla["data"][] = [
             "id"             => $id,
             "etiqueta"       => $etiqueta,
+            "area_agrego"    => $area_agrego,
             "usuario_agrego" => $usuario_agrego,
-            "fecha_registro" => $fecha_registro
+            "fecha_registro" => $fecha_registro,
         ];
     }
 
@@ -51,7 +54,7 @@ if ($opcion == 3) {
         die(json_encode($response));
     }
 
-    $insert_etiqueta = registrar_nueva_etiqueta($cedula, $mensaje, $id_sub_usuario);
+    $insert_etiqueta = registrar_nueva_etiqueta($cedula, $mensaje, $id_area, $id_sub_usuario);
 
     if ($insert_etiqueta === false) {
         $response['error'] = true;
@@ -97,12 +100,12 @@ function obtener_cantidad_etiquetas($cedula)
     return mysqli_fetch_assoc($consulta)['cantidad'];
 }
 
-function registrar_nueva_etiqueta($cedula, $mensaje, $id_sub_usuario)
+function registrar_nueva_etiqueta($cedula, $mensaje, $id_area, $id_sub_usuario)
 {
     $conexion = connection(DB);
     $tabla = TABLA_ETIQUETA_SOCIO;
 
-    $sql = "INSERT INTO {$tabla} (cedula, mensaje, id_sub_usuario, fecha_registro) VALUES ('$cedula', '$mensaje', '$id_sub_usuario', NOW())";
+    $sql = "INSERT INTO {$tabla} (cedula, mensaje, id_area, id_sub_usuario, fecha_registro) VALUES ('$cedula', '$mensaje', '$id_area', '$id_sub_usuario', NOW())";
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;

@@ -61,10 +61,8 @@ if (isset($_SESSION['nivel'])) {
 			echo '</div>';
 			include('views/content/funcionarios.html');
 			include('views/content/registros_socio.html');
-			echo '<div id="contenido2" style="display: none;">';
 			include('views/content/patologias_socio.html');
 			include('views/content/cobranza_abitab.html');
-			echo '</div>';
 			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
 
 
@@ -150,10 +148,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/si_es_socio.php');
 			echo '</div>';
 			include('views/content/funcionarios.html');
-			echo '<div id="contenido2" style="display: none;">';
 			include('views/content/patologias_socio.html');
 			include('views/content/cobranza_abitab.html');
-			echo '</div>';
 			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
 
 
@@ -244,10 +240,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/funcionarios.html');
 			include('views/content/registros_socio.html');
 			include('views/content/registros_funcionario.html');
-			echo '<div id="contenido2" style="display: none;">';
 			include('views/content/patologias_socio.html');
 			include('views/content/cobranza_abitab.html');
-			echo '</div>';
 			include('views/content/administrar_alertas_y_llamadas_pendientes.html');
 
 

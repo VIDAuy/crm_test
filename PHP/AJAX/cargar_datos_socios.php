@@ -1,6 +1,7 @@
 <?php
 include_once '../configuraciones.php';
 
+
 $sucursales_inspira = ['1372', '1373', '1374', '1375', '1376'];
 $mostrar_inspira = $_SESSION['id'] == 2 || $_SESSION['id'] == 34 ? true : false;
 
@@ -8,10 +9,9 @@ $cedula = $_GET['CI'];
 $consulta_padron = datos_padron($cedula);
 $datos_padron = mysqli_fetch_assoc($consulta_padron);
 
-
 if ($datos_padron != "") {
 	$datos_padron['fecha_afiliacion'] = (new DateTime($datos_padron['fecha_afiliacion']))->format('d/m/Y');
-	$datos_padron['nombre'] = eliminarAcentos($datos_padron['nombre']);
+	$datos_padron['nombre'] = remplazarAcentos($datos_padron['nombre']);
 }
 
 
@@ -26,7 +26,7 @@ if (mysqli_num_rows($consulta_padron) == 0) {
 			'noSocioConRegistros' => true,
 			'mensaje' 			  => "La cédula ingresada no pertenece a un socio pero ya tiene registros.\nSe le mostrará un formulario diferente.",
 			'nombre' 			  => $f2["nombre"],
-			'telefono' 			  => $f2['telefono'] == "" || $f2['telefono'] == 0 ? 0 : corregirTelefono($f2['telefono']),
+			'telefono' 			  => trim($f2['telefono']) == "" || trim($f2['telefono']) == 0 ? 0 : trim(corregirTelefono($f2['telefono'])),
 		];
 	} else {
 
@@ -38,8 +38,8 @@ if (mysqli_num_rows($consulta_padron) == 0) {
 } else {
 
 	$datos_padron['inspira'] = in_array($datos_padron['sucursal'], $sucursales_inspira) ? 'SI' : 'NO';
-
 	$baja_procesada = tiene_baja_procesada($cedula);
+
 	if (mysqli_num_rows($baja_procesada) == 1) {
 		$consulta_registros = datos_registros($cedula);
 		$datos_registros = mysqli_fetch_assoc($consulta_registros);
@@ -50,7 +50,7 @@ if (mysqli_num_rows($consulta_padron) == 0) {
 			'mensaje'		=> "La cédula ingresada no pertenece a un socio pero ya tiene registros.\nSe le mostrará un formulario diferente."
 		];
 	} else {
-		$datos_padron['tel'] = $datos_padron['tel'] == "" || $datos_padron['tel'] == 0 ? 0 : corregirTelefono($datos_padron['tel']);
+		$datos_padron['tel'] = trim($datos_padron['tel']) == "" || trim($datos_padron['tel']) == 0 ? 0 : trim(corregirTelefono($datos_padron['tel']));
 	}
 }
 $datos_padron['mostrar_inspira'] = $mostrar_inspira;
@@ -68,8 +68,7 @@ function datos_padron($cedula)
 	$tabla1 = TABLA_PADRON_DATOS_SOCIO;
 	$tabla2 = TABLA_PADRON_PRODUCTO_SOCIO;
 
-	try {
-		$sql = "SELECT 
+	$sql = "SELECT 
 		pds.nombre, 
 		pds.tel, 
 		pds.cedula, 
@@ -83,11 +82,8 @@ function datos_padron($cedula)
 	   pds.cedula = $cedula
   	  ORDER BY pds.id DESC
   	  LIMIT 1";
-		$consulta = mysqli_query($conexion, $sql);
-	} catch (\Throwable $error) {
-		registrar_errores($sql, "cargar_datos_socios.php", $error);
-		$consulta = false;
-	}
+
+	$consulta = mysqli_query($conexion, $sql);
 
 	return $consulta;
 }

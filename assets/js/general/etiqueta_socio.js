@@ -75,6 +75,7 @@ function tabla_etiquetas(cedula) {
         columns: [
             { data: "id" },
             { data: "etiqueta" },
+            { data: "area_agrego" },
             { data: "usuario_agrego" },
             { data: "fecha_registro" },
         ],
