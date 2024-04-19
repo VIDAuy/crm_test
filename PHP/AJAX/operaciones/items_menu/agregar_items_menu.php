@@ -1,5 +1,5 @@
 <?php
-include_once '../../configuraciones.php';
+include_once '../../../configuraciones.php';
 
 $icon_svg = $_REQUEST['icon_svg'];
 $ruta_enlace = $_REQUEST['ruta_enlace'];
@@ -29,8 +29,12 @@ function registrar_items_menu($icon_svg, $ruta_enlace, $funcion, $nombre, $badge
     $conexion = connection(DB);
     $tabla = TABLA_ITEMS_MENU;
 
-    $sql = "INSERT INTO {$tabla} (icon_svg, ruta_enlace, funcion, nombre, badge) VALUES ('$icon_svg', '$ruta_enlace', '$funcion', '$nombre', '$badge')";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "INSERT INTO {$tabla} (icon_svg, ruta_enlace, funcion, nombre, badge) VALUES ('$icon_svg', '$ruta_enlace', '$funcion', '$nombre', '$badge')";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "agregar_items_menu.php", $error);
+    }
 
     return $consulta;
 }

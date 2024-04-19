@@ -46,8 +46,12 @@ function verificar_socio_padron($cedula)
     $tabla1 = TABLA_PADRON_DATOS_SOCIO;
     $tabla2 = TABLA_PADRON_PRODUCTO_SOCIO;
 
-    $sql = "SELECT * FROM {$tabla1} pds INNER JOIN {$tabla2} pps ON pds.cedula = pps.cedula WHERE pds.cedula = '$cedula'";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "SELECT * FROM {$tabla1} pds INNER JOIN {$tabla2} pps ON pds.cedula = pps.cedula WHERE pds.cedula = '$cedula'";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "desestimar_baja.php", $error);
+    }
 
     return $consulta;
 }
@@ -58,10 +62,19 @@ function comprobar_baja_padron($cedula)
     $tabla1 = TABLA_PADRON_DATOS_SOCIO;
     $tabla2 = TABLA_PADRON_PRODUCTO_SOCIO;
 
-    $sql1 = "SELECT * FROM {$tabla1} WHERE cedula = '$cedula' AND abm = 'baja' AND abmactual = 1";
-    $sql2 = "SELECT * FROM {$tabla2} WHERE cedula = '$cedula' AND abm = 'baja' AND abmactual = 1";
-    $consulta1 = mysqli_query($conexion, $sql1);
-    $consulta2 = mysqli_query($conexion, $sql2);
+    try {
+        $sql1 = "SELECT * FROM {$tabla1} WHERE cedula = '$cedula' AND abm = 'baja' AND abmactual = 1";
+        $consulta1 = mysqli_query($conexion, $sql1);
+    } catch (\Throwable $error) {
+        registrar_errores($sql1, "desestimar_baja.php", $error);
+    }
+
+    try {
+        $sql2 = "SELECT * FROM {$tabla2} WHERE cedula = '$cedula' AND abm = 'baja' AND abmactual = 1";
+        $consulta2 = mysqli_query($conexion, $sql2);
+    } catch (\Throwable $error) {
+        registrar_errores($sql2, "desestimar_baja.php", $error);
+    }
 
     return mysqli_num_rows($consulta1) <= 0 && mysqli_num_rows($consulta2) <= 0 ? false : true;
 }
@@ -71,8 +84,12 @@ function revertir_baja_padron_datos_socio($cedula)
     $conexion = connection(DB_ABMMOD);
     $tabla = TABLA_PADRON_DATOS_SOCIO;
 
-    $sql = "UPDATE {$tabla} SET abm = '0', abmactual = 0, observaciones = 'Baja Desestimada' WHERE cedula = '$cedula' AND abm = 'baja' AND abmactual = 1";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "UPDATE {$tabla} SET abm = '0', abmactual = 0, observaciones = 'Baja Desestimada' WHERE cedula = '$cedula' AND abm = 'baja' AND abmactual = 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "desestimar_baja.php", $error);
+    }
 
     return $consulta;
 }
@@ -82,8 +99,12 @@ function revertir_baja_padron_producto_socio($cedula)
     $conexion = connection(DB_ABMMOD);
     $tabla = TABLA_PADRON_PRODUCTO_SOCIO;
 
-    $sql = "UPDATE {$tabla} SET abm = '0', abmactual = 0 WHERE cedula = '$cedula' AND abm = 'baja' AND abmactual = 1";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "UPDATE {$tabla} SET abm = '0', abmactual = 0 WHERE cedula = '$cedula' AND abm = 'baja' AND abmactual = 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "desestimar_baja.php", $error);
+    }
 
     return $consulta;
 }
@@ -93,8 +114,12 @@ function obtener_datos_padron($cedula)
     $conexion = connection(DB_ABMMOD);
     $tabla = TABLA_PADRON_DATOS_SOCIO;
 
-    $sql = "SELECT * FROM {$tabla} WHERE cedula = '$cedula'";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE cedula = '$cedula'";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "desestimar_baja.php", $error);
+    }
 
     return mysqli_fetch_assoc($consulta);
 }
@@ -104,8 +129,12 @@ function dejar_registro_crm($cedula, $nombre, $telefono)
     $conexion = connection(DB);
     $tabla = TABLA_REGISTROS;
 
-    $sql = "INSERT INTO {$tabla} (cedula, nombre, telefono, fecha_registro, sector, observaciones, socio, baja) VALUES ('$cedula', '$nombre', '$telefono', NOW(), 'Sistema', 'Desestimo Baja', 1, 0)";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "INSERT INTO {$tabla} (cedula, nombre, telefono, fecha_registro, sector, observaciones, socio, baja) VALUES ('$cedula', '$nombre', '$telefono', NOW(), 'Sistema', 'Desestimo Baja', 1, 0)";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "desestimar_baja.php", $error);
+    }
 
     return $consulta;
 }

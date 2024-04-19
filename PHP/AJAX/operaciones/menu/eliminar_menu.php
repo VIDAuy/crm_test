@@ -1,5 +1,5 @@
 <?php
-include_once '../../configuraciones.php';
+include_once '../../../configuraciones.php';
 
 $id = $_REQUEST['id'];
 
@@ -23,10 +23,14 @@ echo json_encode($response);
 function eliminar_menu($id)
 {
     $conexion = connection(DB);
-    $tabla = TABLA_MENU;
+    $tabla = TABLA_MENU_POR_AREA;
 
-    $sql = "UPDATE {$tabla} SET activo = 0 WHERE id = '$id'";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "UPDATE {$tabla} SET activo = 0 WHERE id = '$id'";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "eliminar_menu.php", $error);
+    }
 
     return $consulta;
 }

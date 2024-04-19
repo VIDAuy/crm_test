@@ -1,5 +1,5 @@
 <?php
-include_once '../../configuraciones.php';
+include_once '../../../configuraciones.php';
 
 $tabla["data"] = [];
 
@@ -46,8 +46,12 @@ function obtener_items()
     $conexion = connection(DB);
     $tabla = TABLA_ITEMS_MENU;
 
-    $sql = "SELECT * FROM {$tabla} WHERE activo = 1";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE activo = 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "tabla_items_menu.php", $error);
+    }
 
     return $consulta;
 }

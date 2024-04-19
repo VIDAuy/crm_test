@@ -1,0 +1,45 @@
+<!-- Modal Agregar Items Menú -->
+<div class="modal fade" id="modal_agregarItemsMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 10000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Item Menú</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" placeholder="Icono SVG" id="txt_icono_svg_aim" style="height: 200px"></textarea>
+                    <label for="txt_icono_svg_aim">Icono SVG</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_ruta_enlace_aim" placeholder="Ruta Enlace">
+                    <label for="txt_ruta_enlace_aim">Ruta Enlace</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_funcion_aim" placeholder="Función">
+                    <label for="txt_funcion_aim">Función</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_nombre_aim" placeholder="Nombre">
+                    <label for="txt_nombre_aim">Nombre</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_badge_aim" placeholder="Badge">
+                    <label for="txt_badge_aim">Badge</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="agregar_items_menu(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal Agregar Items Menú -->

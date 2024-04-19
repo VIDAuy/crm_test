@@ -100,7 +100,7 @@ function identificar_persona() {
                         $(".ctr_agendar_volver_a_llamar").css("display", "block");
                     }
 
-                    if (["Cobranzas"].includes(sector) && gestor == 1) {
+                    if (["Cobranzas", "Comercial"].includes(sector) && gestor == 1) {
                         tabla_alertas_pendientes();
                         setInterval(tabla_alertas_pendientes, 300000);
 

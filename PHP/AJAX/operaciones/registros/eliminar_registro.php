@@ -1,5 +1,5 @@
 <?php
-include_once '../../configuraciones.php';
+include_once '../../../configuraciones.php';
 
 $id = $_REQUEST['id'];
 if ($id == "") devolver_error(ERROR_GENERAL);
@@ -28,8 +28,12 @@ function comprobar_registro($id)
     $conexion = connection(DB);
     $tabla = TABLA_REGISTROS;
 
-    $sql = "SELECT * FROM {$tabla} WHERE id = '$id' AND eliminado = 0";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE id = '$id' AND eliminado = 0";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "eliminar_registro.php", $error);
+    }
 
     return $consulta;
 }
@@ -39,8 +43,12 @@ function dar_baja_registro($id)
     $conexion = connection(DB);
     $tabla = TABLA_REGISTROS;
 
-    $sql = "UPDATE {$tabla} SET eliminado = 1 WHERE id = '$id'";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "UPDATE {$tabla} SET eliminado = 1 WHERE id = '$id'";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "eliminar_registro.php", $error);
+    }
 
     return $consulta;
 }
@@ -50,8 +58,12 @@ function dar_baja_imagenes_registro($id)
     $conexion = connection(DB);
     $tabla = TABLA_IMAGENES_REGISTROS;
 
-    $sql = "UPDATE {$tabla} SET activo = 0 WHERE id_registro = '$id'";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "UPDATE {$tabla} SET activo = 0 WHERE id_registro = '$id'";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "eliminar_registro.php", $error);
+    }
 
     return $consulta;
 }

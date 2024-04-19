@@ -1,5 +1,5 @@
 <?php
-include_once '../../configuraciones.php';
+include_once '../../../configuraciones.php';
 
 $select_area = $_REQUEST['select_area'];
 $select_item = $_REQUEST['select_item'];
@@ -30,10 +30,14 @@ echo json_encode($response);
 function verificar_menu($select_area, $select_item)
 {
     $conexion = connection(DB);
-    $tabla = TABLA_MENU;
+    $tabla = TABLA_MENU_POR_AREA;
 
-    $sql = "SELECT * FROM {$tabla} WHERE id_usuario = '$select_area' AND id_item = '$select_item' AND activo = 1";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE id_usuario = '$select_area' AND id_item = '$select_item' AND activo = 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "agregar_menu.php", $error);
+    }
 
     return $consulta;
 }
@@ -41,10 +45,14 @@ function verificar_menu($select_area, $select_item)
 function agregar_menu($select_area, $select_item)
 {
     $conexion = connection(DB);
-    $tabla = TABLA_MENU;
+    $tabla = TABLA_MENU_POR_AREA;
 
-    $sql = "INSERT INTO {$tabla} (id_usuario, id_item) VALUES ('$select_area', '$select_item')";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "INSERT INTO {$tabla} (id_usuario, id_item) VALUES ('$select_area', '$select_item')";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "agregar_menu.php", $error);
+    }
 
     return $consulta;
 }

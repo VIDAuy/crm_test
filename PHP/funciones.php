@@ -5,7 +5,18 @@ function obtener_usuarios()
 {
     $conexion = connection(DB);
     $tabla = TABLA_USUARIOS;
-    $sql = "SELECT * FROM {$tabla} ORDER BY usuario ASC";
+    $sql = "SELECT * FROM {$tabla} WHERE activo = 1 ORDER BY usuario ASC";
+    $consulta = mysqli_query($conexion, $sql);
+
+    return $consulta;
+}
+
+/** Obtener todos los sub usuarios */
+function obtener_sub_usuarios()
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_SUB_USUARIOS;
+    $sql = "SELECT * FROM {$tabla} WHERE activo = 1 ORDER BY id ASC";
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;

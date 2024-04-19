@@ -41,7 +41,8 @@ function verificar_usuario($usuario, $password)
 			{$tabla}
 		   WHERE 
 			usuario = '$usuario' AND 
-			codigo = '$password'";
+			codigo = '$password' AND
+			activo = 1";
 	$consulta = mysqli_query($conexion, $sql);
 
 	return $consulta;

@@ -1,5 +1,5 @@
 <?php
-include_once '../../configuraciones.php';
+include_once '../../../configuraciones.php';
 
 $id = $_REQUEST['id'];
 $icon_svg = $_REQUEST['icon_svg'];
@@ -30,8 +30,12 @@ function editar_items_menu($id, $icon_svg, $ruta_enlace, $funcion, $nombre, $bad
     $conexion = connection(DB);
     $tabla = TABLA_ITEMS_MENU;
 
-    $sql = "UPDATE {$tabla} SET icon_svg = '$icon_svg', ruta_enlace = '$ruta_enlace', funcion = '$funcion', nombre = '$nombre', badge = '$badge' WHERE id = '$id';";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "UPDATE {$tabla} SET icon_svg = '$icon_svg', ruta_enlace = '$ruta_enlace', funcion = '$funcion', nombre = '$nombre', badge = '$badge' WHERE id = '$id';";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "editar_items_menu.php", $error);
+    }
 
     return $consulta;
 }

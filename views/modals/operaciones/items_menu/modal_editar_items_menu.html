@@ -1,0 +1,50 @@
+<!-- Modal Editar Items Menú -->
+<div class="modal fade" id="modal_editarItemsMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 10000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Item Menú</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="txt_id_eim" placeholder="ID" disabled>
+                    <label for="txt_id_eim">ID</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" placeholder="Icono SVG" id="txt_icono_svg_eim" style="height: 200px"></textarea>
+                    <label for="txt_icono_svg_eim">Icono SVG</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_ruta_enlace_eim" placeholder="Ruta Enlace">
+                    <label for="txt_ruta_enlace_eim">Ruta Enlace</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_funcion_eim" placeholder="Función">
+                    <label for="txt_funcion_eim">Función</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_nombre_eim" placeholder="Nombre">
+                    <label for="txt_nombre_eim">Nombre</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_badge_eim" placeholder="Badge">
+                    <label for="txt_badge_eim">Badge</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="editar_items_menu(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal Editar Items Menú -->

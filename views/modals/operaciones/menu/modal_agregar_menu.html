@@ -1,0 +1,36 @@
+<!-- Modal Agregar Menú -->
+<div class="modal fade" id="modal_agregarMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 10000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Item Menú</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_area_am" aria-label="Seleccione un área">
+                    </select>
+                    <label for="select_area_am">Seleccione un área</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_item_am" aria-label="Seleccione un item">
+                        <option selected>Seleccione una opción</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label for="select_item_am">Seleccione un item</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="agregar_menu(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal Agregar Menú -->

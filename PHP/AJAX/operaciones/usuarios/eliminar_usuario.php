@@ -1,5 +1,5 @@
 <?php
-include_once '../../configuraciones.php';
+include_once '../../../configuraciones.php';
 
 $id = $_REQUEST['id'];
 
@@ -8,22 +8,22 @@ if ($id == "") devolver_error(ERROR_GENERAL);
 
 
 
-$eliminar_items_menu = eliminar_items_menu($id);
-if ($eliminar_items_menu == false) devolver_error("Ocurrieron errores al eliminar el registro");
+$eliminar_menu = eliminar_menu($id);
+if ($eliminar_menu == false) devolver_error("Ocurrieron errores al eliminar el usuario");
 
 
 
 $response['error'] = false;
-$response['mensaje'] = "Se elimino el registro con éxito";
+$response['mensaje'] = "Se elimino el usuario con éxito";
 echo json_encode($response);
 
 
 
 
-function eliminar_items_menu($id)
+function eliminar_menu($id)
 {
     $conexion = connection(DB);
-    $tabla = TABLA_ITEMS_MENU;
+    $tabla = TABLA_USUARIOS;
 
     $sql = "UPDATE {$tabla} SET activo = 0 WHERE id = '$id'";
     $consulta = mysqli_query($conexion, $sql);

@@ -20,8 +20,12 @@ function obtener_items()
     $conexion = connection(DB);
     $tabla = TABLA_ITEMS_MENU;
 
-    $sql = "SELECT id, nombre FROM {$tabla} WHERE activo = 1 ORDER BY id DESC";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "SELECT id, nombre FROM {$tabla} WHERE activo = 1 ORDER BY id DESC";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "select_items.php", $error);
+    }
 
     return $consulta;
 }

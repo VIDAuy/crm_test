@@ -269,6 +269,19 @@ function mostrarLoader(opcion = 'M') {
       : $loader.close();
 }
 
+function loading(mostrar = false) {
+  if (mostrar == true) {
+    Swal.fire({
+      title: "Cargando...",
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading(),
+    });
+  } else {
+    Swal.close();
+  }
+}
+
 function correcto_pasajero(mensaje) {
   const Toast = Swal.mixin({
     toast: true,

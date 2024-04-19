@@ -42,7 +42,7 @@ echo json_encode($response);
 function obtener_menu($id_area)
 {
     $conexion = connection(DB);
-    $tabla1 = TABLA_MENU;
+    $tabla1 = TABLA_MENU_POR_AREA;
     $tabla2 = TABLA_ITEMS_MENU;
 
     $sql = "SELECT

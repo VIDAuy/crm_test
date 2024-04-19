@@ -1,5 +1,5 @@
 <?php
-include_once '../../configuraciones.php';
+include_once '../../../configuraciones.php';
 
 $tabla["data"] = [];
 
@@ -33,7 +33,7 @@ while ($row = mysqli_fetch_assoc($lista_registros)) {
     } else {
         $usuario = $id_sub_usuario != "" ? @utf8_encode($id_sub_usuario) : "-";
     }
-    $acciones .= "<button class='btn btn-sm btn-danger' onclick='confirmar_eliminar_registro(`" . $id . "`);'>Eliminar</button>";
+    $acciones .= "<button class='btn btn-sm btn-danger' onclick='eliminar_registro(`" . $id . "`);'>❌</button>";
 
 
     $tabla["data"][] = [
@@ -61,11 +61,12 @@ echo json_encode($tabla);
 
 function obtener_registros()
 {
-    include '../../conexiones/conexion2.php';
+    include '../../../conexiones/conexion2.php';
     $tabla1 = TABLA_REGISTROS;
     $tabla2 = TABLA_SUB_USUARIOS;
 
-    $sql = "SELECT
+    try {
+        $sql = "SELECT
 	        r.id,
 	        r.cedula,
             r.nombre,
@@ -85,7 +86,10 @@ function obtener_registros()
             r.eliminado = 0
           ORDER BY r.id DESC 
 	      LIMIT 500";
-    $consulta = mysqli_query($conexion, $sql);
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "tabla_registros.php", $error);
+    }
 
     return $consulta;
 }
@@ -96,7 +100,8 @@ function obtener_imagenes($id)
     $tabla = TABLA_IMAGENES_REGISTROS;
     $imagen = "";
 
-    $sql = "SELECT 
+    try {
+        $sql = "SELECT 
 			nombre_imagen 
 		   FROM 
 			{$tabla} 
@@ -104,7 +109,10 @@ function obtener_imagenes($id)
 			id_registro = '$id' AND 
 			activo = 1
             ORDER BY id DESC";
-    $consulta = mysqli_query($conexion, $sql);
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "tabla_registros.php", $error);
+    }
 
 
     if (mysqli_num_rows($consulta) > 0) {
