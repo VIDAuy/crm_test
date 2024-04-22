@@ -10,6 +10,7 @@ $cedula = $_REQUEST['cedula'];
 
 $lista_registros = obtener_registros($cedula, $filtroSector);
 
+
 while ($row = mysqli_fetch_assoc($lista_registros)) {
 
 	$id = $row['id'];
@@ -34,6 +35,7 @@ while ($row = mysqli_fetch_assoc($lista_registros)) {
 	} else {
 		$usuario = $id_sub_usuario != "" ? @utf8_encode($id_sub_usuario) : "-";
 	}
+
 
 	$tabla["data"][] = [
 		'id'			=> $id,

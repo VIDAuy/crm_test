@@ -162,6 +162,7 @@ const TABLA_EMPRESAS_TEMPORAL           = "empresas_temporal";
 const TABLA_TIPO_PRODUCTO_TEMPORAL      = "tipo_productos_temporal";
 const TABLA_PATOLOGIAS                  = "patologias";
 const TABLA_COBROS_CUOTAS_ABITAB        = "cobros_cuotas_abitab";
+const TABLA_ESTADOS_PEDIDO              = "estados_pedido";
 
 
 //SERVER - 1310

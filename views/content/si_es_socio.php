@@ -59,18 +59,13 @@ if ($_SESSION['nivel'] == 1) {
                 <label for='' class='col-form-label'>Inspira?:</label>
                 <p id='inspira' style='font-weight: bold;'></p>
             </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Servicios Activos?</label>
+                <div id='span_comprobar_servicios'></div>
+            </div>
         </div>
     </div>";
 
-    $agenda_volver_a_llamar = "
-    <div class='d-flex justify-content-center'>
-        <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)' style='display: none'>
-            Agregar a agenda 📞
-        </button>
-    </div>";
-}
-
-if ($_SESSION['nivel'] == 1 && $_SESSION['sector'] == "Coordinacion") {
     $agenda_volver_a_llamar = "
     <div class='d-flex justify-content-center'>
         <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)' style='display: none'>

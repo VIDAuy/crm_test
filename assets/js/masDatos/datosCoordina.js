@@ -55,3 +55,29 @@ function tabla_coordinacion(cedula) {
 
 	$("#modalDatosCoordina").modal("show");
 }
+
+
+function comprobar_servicios_activos() {
+	let cedula = $('#cedulas').text();
+
+	$.ajax({
+		type: "GET",
+		url: `${url_ajax}comprobar_servicio_activo.php`,
+		data: {
+			cedula
+		},
+		dataType: "JSON",
+		beforeSend: function () {
+			$("#span_comprobar_servicios").html(`<span class='fw-bolder'>?</span>`);
+		},
+		success: function (response) {
+			if (response.error === false) {
+				let servicios_activos = response.servicios_activos;
+				servicios_activos = servicios_activos == true ? `<span class='text-success fw-bolder'>Si</span>` : `<span class='text-danger fw-bolder'>No</span>`;
+				$("#span_comprobar_servicios").html(`${servicios_activos}`);
+			} else {
+				error(response.mensaje);
+			}
+		}
+	});
+}
