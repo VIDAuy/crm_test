@@ -13,6 +13,9 @@ $consultar_usuario = verificar_usuario($usuario, $password);
 if (mysqli_num_rows($consultar_usuario) <= 0) {
 	$respuesta = array('result' => false, 'error' => true, 'message' => 'Usuario o contraseña incorrecta.');
 } else {
+
+	$modificar_fecha_ultima_sesion = modificar_ultima_fecha_sesion($usuario);
+
 	$datos_usuario = mysqli_fetch_assoc($consultar_usuario);
 	$_SESSION['usuario'] = ucfirst(strtolower($usuario));
 	$_SESSION['nivel'] 	 = $datos_usuario['nivel'];
@@ -43,6 +46,18 @@ function verificar_usuario($usuario, $password)
 			usuario = '$usuario' AND 
 			codigo = '$password' AND
 			activo = 1";
+	$consulta = mysqli_query($conexion, $sql);
+
+	return $consulta;
+}
+
+
+function modificar_ultima_fecha_sesion($usuario)
+{
+	$conexion = connection(DB);
+	$tabla = TABLA_USUARIOS;
+
+	$sql = "UPDATE {$tabla} SET fecha_ultima_sesion = NOW() WHERE usuario = '$usuario' AND activo = 1";
 	$consulta = mysqli_query($conexion, $sql);
 
 	return $consulta;

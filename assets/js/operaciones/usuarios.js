@@ -8,6 +8,7 @@ function tabla_usuarios() {
             { data: "nivel" },
             { data: "filial" },
             { data: "email" },
+            { data: "fecha_ultima_sesion" },
             { data: "acciones" },
         ],
         bDestroy: true,

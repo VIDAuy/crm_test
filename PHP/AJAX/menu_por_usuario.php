@@ -1,9 +1,9 @@
 <?php
 include_once '../configuraciones.php';
 
-$id_area = $_SESSION['id'];
+$id_sub_usuario = $_SESSION['id_sub_usuario'];
 
-$obtener_items = obtener_menu($id_area);
+$obtener_items = obtener_menu($id_sub_usuario);
 
 
 while ($row = mysqli_fetch_assoc($obtener_items)) {
@@ -41,10 +41,10 @@ echo json_encode($response);
 
 
 
-function obtener_menu($id_area)
+function obtener_menu($id_sub_usuario)
 {
     $conexion = connection(DB);
-    $tabla1 = TABLA_MENU_POR_AREA;
+    $tabla1 = TABLA_MENU_POR_USUARIO;
     $tabla2 = TABLA_ITEMS_MENU;
 
     $sql = "SELECT
@@ -58,7 +58,7 @@ function obtener_menu($id_area)
 	      {$tabla1} m
 	      INNER JOIN {$tabla2} im ON m.id_item = im.id 
         WHERE
-	      m.id_usuario = '$id_area' AND 
+	      m.id_sub_usuario = '$id_sub_usuario' AND 
           m.activo = 1 AND 
           im.activo = 1
           ORDER BY im.id ASC";

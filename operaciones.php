@@ -72,12 +72,18 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
 
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <nav class="mt-3">
+                    <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-gestionar-registros-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-registros" type="button" role="tab" aria-controls="nav-gestionar-registros" aria-selected="true" onclick="tabla_registros(true)">Gestionar Registros</button>
+
                         <button class="nav-link" id="nav-gestionar-items-menu-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-items-menu" type="button" role="tab" aria-controls="nav-gestionar-items-menu" aria-selected="false" onclick="tabla_items_menu(true)">Gestionar items menú</button>
-                        <button class="nav-link" id="nav-gestionar-menu-por-area-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-menu-por-area" type="button" role="tab" aria-controls="nav-gestionar-menu-por-area" aria-selected="false" onclick="tabla_menu(true)">Gestionar menu por área</button>
+
+                        <button class="nav-link" id="nav-gestionar-menu-por-area-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-menu-por-area" type="button" role="tab" aria-controls="nav-gestionar-menu-por-area" aria-selected="false" onclick="tabla_menu(true)">Gestionar menú por área</button>
+
+                        <button class="nav-link" id="nav-gestionar-menu-por-usuario-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-menu-por-usuario" type="button" role="tab" aria-controls="nav-gestionar-menu-por-usuario" aria-selected="false" onclick="tabla_menu_por_usuarios(true)">Gestionar menú por usuario</button>
+
                         <button class="nav-link" id="nav-gestionar-usuarios-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-usuarios" type="button" role="tab" aria-controls="nav-gestionar-usuarios" aria-selected="false" onclick="tabla_usuarios(true)">Gestionar Usuarios</button>
+
                         <button class="nav-link" id="nav-gestionar-sub-usuarios-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-sub-usuarios" type="button" role="tab" aria-controls="nav-gestionar-sub-usuarios" aria-selected="false" onclick="tabla_sub_usuarios(true)">Gestionar Sub Usuarios</button>
                     </div>
                 </nav>
@@ -104,6 +110,7 @@
                             </table>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="nav-gestionar-items-menu" role="tabpanel" aria-labelledby="nav-gestionar-items-menu-tab" tabindex="0">
                         <div class="d-flex justify-content-end mb-3">
                             <button class="btn btn-success" onclick="agregar_items_menu(true)">➕</button>
@@ -124,6 +131,7 @@
                             </table>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="nav-gestionar-menu-por-area" role="tabpanel" aria-labelledby="nav-gestionar-menu-por-area-tab" tabindex="0">
                         <div class="d-flex justify-content-end mb-3">
                             <button class="btn btn-success" onclick="agregar_menu(true)">➕</button>
@@ -141,6 +149,26 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="nav-gestionar-menu-por-usuario" role="tabpanel" aria-labelledby="nav-gestionar-menu-por-usuario-tab" tabindex="0">
+                        <div class="d-flex justify-content-end mb-3">
+                            <button class="btn btn-success" onclick="agregar_menu_por_usuario(true)">➕</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla_menu_por_usuario" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col-auto">#</th>
+                                        <th scope="col-auto">Área</th>
+                                        <th scope="col-auto">Usuario</th>
+                                        <th scope="col-auto">Item</th>
+                                        <th scope="col-auto">Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
                     <div class="tab-pane fade" id="nav-gestionar-usuarios" role="tabpanel" aria-labelledby="nav-gestionar-usuarios-tab" tabindex="0">
                         <div class="d-flex justify-content-end mb-3">
                             <button class="btn btn-success" onclick="agregar_usuario(true)">➕</button>
@@ -155,12 +183,14 @@
                                         <th scope="col-auto">Nivel</th>
                                         <th scope="col-auto">Filial</th>
                                         <th scope="col-auto">Email</th>
+                                        <th scope="col-auto">Fecha Última Sesión</th>
                                         <th scope="col-auto">Acciones</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="nav-gestionar-sub-usuarios" role="tabpanel" aria-labelledby="nav-gestionar-sub-usuarios-tab" tabindex="0">
                         <div class="d-flex justify-content-end mb-3">
                             <button class="btn btn-success" onclick="agregar_sub_usuario(true)">➕</button>
@@ -195,6 +225,7 @@
                 "operaciones/items_menu/modal_agregar_items_menu.html",
                 "operaciones/items_menu/modal_editar_items_menu.html",
                 "operaciones/menu/modal_agregar_menu.html",
+                "operaciones/menu_por_usuario/modal_agregar_menu_por_usuario.html",
                 "operaciones/sub_usuarios/modal_agregar_sub_usuario.html",
                 "operaciones/sub_usuarios/modal_editar_sub_usuario.html",
                 "operaciones/usuarios/modal_agregar_usuario.html",
@@ -232,6 +263,7 @@
             <script src="./assets/js/operaciones/funciones.js"></script>
             <script src="./assets/js/operaciones/items_menu.js"></script>
             <script src="./assets/js/operaciones/menu.js"></script>
+            <script src="./assets/js/operaciones/menu_por_usuarios.js"></script>
             <script src="./assets/js/operaciones/registros.js"></script>
             <script src="./assets/js/operaciones/usuarios.js"></script>
             <script src="./assets/js/operaciones/sub_usuarios.js"></script>

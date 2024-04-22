@@ -67,8 +67,8 @@ function select_areas(opcion, div, id_area, nombre_area) {
 
 
 
-function select_items() {
-    let div = document.getElementById("select_item_am");
+function select_items(id_div) {
+    let div = document.getElementById(id_div);
     div.innerHTML = '<option selected value="">Seleccione una opción</option>';
 
     $.ajax({
@@ -86,4 +86,58 @@ function select_items() {
             });
         },
     });
+}
+
+
+function select_areas_con_identificacion(opcion, div, id_area, nombre_area) {
+
+    let option = opcion == "Agregar" ? `<option value='' selected>Seleccione un área</option>` : `<option value='${id_area}' selected>${nombre_area}</option>`;
+    let params = opcion == "Agregar" ? "" : `id_area=${id_area}`;
+
+    document.getElementById(div).innerHTML = `${option}`;
+
+    $.ajax({
+        type: "GET",
+        url: `${url_operaciones}select_areas_con_identificacion.php?${params}`,
+        dataType: "JSON",
+        beforeSend: function () {
+            loading(true);
+        },
+        complete: function () {
+            loading(false);
+        },
+        success: function (response) {
+            let datos = response.datos;
+            datos.map((val) => {
+                document.getElementById(div).innerHTML += `<option value="${val['id']}">${val['usuario']}</option>`;
+            });
+        }
+    });
+
+}
+
+
+function select_usuarios_del_area(id_div, id_area) {
+
+    $(`#${id_div}`).prop('disabled', false);
+
+    let div = document.getElementById(id_div);
+    div.innerHTML = '<option selected value="">Seleccione una opción</option>';
+
+    $.ajax({
+        url: `${url_operaciones}select_usuarios_del_area.php?id_area=${id_area}`,
+        dataType: 'JSON',
+        beforeSend: function () {
+            loading(true);
+        },
+        complete: function () {
+            loading(false);
+        },
+        success: function (r) {
+            $.each(r.datos, function (i, v) {
+                div.innerHTML += `<option value="${v.id}">${v.nombre}</option>`;
+            });
+        },
+    });
+
 }

@@ -21,7 +21,7 @@ function obtener_items()
     $tabla = TABLA_ITEMS_MENU;
 
     try {
-        $sql = "SELECT id, nombre FROM {$tabla} WHERE activo = 1 ORDER BY id DESC";
+        $sql = "SELECT id, nombre FROM {$tabla} WHERE activo = 1 ORDER BY nombre ASC";
         $consulta = mysqli_query($conexion, $sql);
     } catch (\Throwable $error) {
         registrar_errores($sql, "select_items.php", $error);

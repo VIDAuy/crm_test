@@ -73,6 +73,7 @@ function identificar_persona() {
                     $('#cedula_identificar_persona').val('');
                     $('#modal_identificar_persona_en_sesion').modal("hide");
                     $('#nombre_usuario_en_sesion').text(`➡ ${datos.nombre} ${datos.apellido}`);
+                    mostrar_menu_por_usuarios();
 
 
                     if (["Calidad"].includes(sector)) {

@@ -1,0 +1,40 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_agregarMenuUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Menú Usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_area_agregar_menu_por_usuario"
+                        aria-label="Seleccione un área">
+                    </select>
+                    <label for="select_area_agregar_menu_por_usuario">Seleccione un área</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_usuario_agregar_menu_por_usuario"
+                        aria-label="Seleccione un usuario">
+                    </select>
+                    <label for="select_usuario_agregar_menu_por_usuario">Seleccione un usuario</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_item_agregar_menu_por_usuario"
+                        aria-label="Seleccione un item">
+                    </select>
+                    <label for="select_item_agregar_menu_por_usuario">Seleccione un item</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="agregar_menu_por_usuario(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

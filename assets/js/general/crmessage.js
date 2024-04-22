@@ -27,7 +27,6 @@ function ver_crmessage() {
     $("#modalCRMessage").modal("show"); //Abro modal
 }
 
-
 function mostrar_select_usuarios_crmessage() {
     let area = $("#txt_area_consultada_nueva_consulta_crmessage").val();
     $("#div_sub_usuario_crmessage").css("display", "none");
@@ -59,8 +58,6 @@ function mostrar_select_usuarios_crmessage() {
         }
     });
 }
-
-
 
 function tabla_mis_consultas() {
     $("#tabla_mis_consultas_crmessage").DataTable({
@@ -288,4 +285,49 @@ function marcar_mensajes_como_leidos(id, tipoConsulta, marcarLeidos) {
             }
         });
     }
+}
+
+function historial_crmessage(openModal = false, opcion = 1) {
+
+    let div = opcion == 1 ? "tabla_historial_mis_consultas_crmessage" : "tabla_historial_consultas_asignadas_crmessage";
+
+    $(`#${div}`).DataTable({
+        ajax: `${url_ajax}crmessage/tabla_historial_crmessage.php?opcion=${opcion}`,
+        columns: [
+            { data: "id" },
+            { data: "area_y_usuario_consulta" },
+            { data: "area_y_usuario_consultado" },
+            { data: "consulta" },
+            { data: "cedula_socio" },
+            { data: "fecha_consulta" },
+            { data: "estado" },
+            { data: "acciones" },
+        ],
+        bDestroy: true,
+        order: [[0, "asc"]],
+        language: { url: url_lenguage },
+    });
+
+    if (openModal == true) $("#modal_historialCRMessage").modal("show");
+}
+
+
+function mostrar_mensajes_consulta(id) {
+    $("#tabla_mostrar_mensajes_crmessage").DataTable({
+        ajax: `${url_ajax}crmessage/tabla_mostrar_mensajes_crmessage.php?id=${id}`,
+        columns: [
+            { data: "id" },
+            { data: "area" },
+            { data: "usuario" },
+            { data: "mensaje" },
+            { data: "cedula_socio" },
+            { data: "fecha_registro" },
+            { data: "tipo" },
+        ],
+        bDestroy: true,
+        order: [[0, "asc"]],
+        language: { url: url_lenguage },
+    });
+
+    $("#modal_mostrarMensajesCRMessage").modal("show");
 }

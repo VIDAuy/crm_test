@@ -19,12 +19,25 @@ echo json_encode($respuesta);
 function obtener_areas($id_area)
 {
     $conexion = connection(DB);
-    $tabla = TABLA_USUARIOS;
+    $tabla1 = TABLA_USUARIOS;
+    $tabla2 = TABLA_SUB_USUARIOS;
 
-    $where = $id_area != "" ? "id != '$id_area' AND" : "";
+    $where = $id_area != "" ? "u.id != '$id_area' AND" : "";
 
     try {
-        $sql = "SELECT id, usuario FROM {$tabla} WHERE $where id != 43 AND activo = 1 ORDER BY usuario ASC";
+        $sql = "SELECT 
+        u.id, 
+        u.usuario 
+        FROM 
+        {$tabla1} u
+        INNER JOIN {$tabla2} su ON u.id = su.id_sector 
+        WHERE 
+        $where 
+        u.id != 43 AND
+        u.activo = 1 AND
+        su.activo = 1
+        GROUP BY u.id
+        ORDER BY u.usuario ASC";
         $consulta = mysqli_query($conexion, $sql);
     } catch (\Throwable $error) {
         registrar_errores($sql, "select_areas.php", $error);

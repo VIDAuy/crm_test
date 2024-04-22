@@ -138,6 +138,7 @@ const TABLA_BAJAS_MOROSIDAD              = "bajas_morosidad";
 const TABLA_ARCHIVOS_AUDITORIAS          = "archivos_auditorias";
 const TABLA_ARCHIVOS_CRMESSAGE           = "archivos_crmessage";
 const TABLA_MENU_POR_AREA                = "menu_por_area";
+const TABLA_MENU_POR_USUARIO             = "menu_por_usuario";
 const TABLA_ITEMS_MENU                   = "items_menu";
 
 

@@ -19,7 +19,7 @@ function agregar_menu(openModal = false) {
         $("#select_area_am").val('');
         $("#select_item_am").val('');
         select_areas("Agregar", "select_area_am", null, null);
-        select_items();
+        select_items("select_item_am");
         $("#modal_agregarMenu").modal('show');
     } else {
         let select_area = $("#select_area_am").val();
