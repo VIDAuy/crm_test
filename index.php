@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.1.3';
+$version = '?v=1.1.4';
 session_start();
 date_default_timezone_set('America/Montevideo');
 
@@ -78,6 +78,7 @@ if (isset($_SESSION['nivel'])) {
 				"bajas/modal_historial_de_bajas.html",
 				"bajas/modal_solicitar_baja_filiales.html",
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
+				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 				"modalHistoriaComunicacionDeCedula.html",
 				"datos_acompanantes/modal_horas_acompanantes.html",
 				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
@@ -179,6 +180,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
+				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 			];
 
 			/** Carga Modals **/
@@ -292,6 +294,7 @@ if (isset($_SESSION['nivel'])) {
 				"modalHistoriaComunicacionDeCedula.html",
 				"modalSesionExpirada.html",
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
+				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 			];
 
 

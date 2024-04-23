@@ -23,14 +23,19 @@ for ($indice_hoja = 0; $indice_hoja < $total_hojas; $indice_hoja++) {
     $letra = $hoja_actual->getHighestColumn();
 
     for ($indice_fila = 2; $indice_fila <= $numero_filas; $indice_fila++) {
-        $cedula = $hoja_actual->getCell("A" . $indice_fila)->getValue();
+        $cedula   = $hoja_actual->getCell("A" . $indice_fila)->getValue();
+        $nombre   = $hoja_actual->getCell("B" . $indice_fila)->getValue();
+        $telefono = $hoja_actual->getCell("C" . $indice_fila)->getValue();
 
         if ($cedula != "")
             $datos[] = [
-                "cedula" => $cedula
+                "cedula"   => $cedula,
+                "nombre"   => $nombre,
+                "telefono" => $telefono,
             ];
     }
 }
+
 
 $cantidad_registros = count($datos);
 $id_insert_historial = registrar_historial_carga_excel($cantidad_registros, $nuevo_nombre);
@@ -38,35 +43,30 @@ if ($id_insert_historial === true) devolver_error("Ocurrieron errores al registr
 
 
 $errores = 0;
+$mensaje = "";
 for ($i = 0; $i < $cantidad_registros; $i++) {
 
-    $cedula = $datos[$i]['cedula'];
+    $cedula   = $datos[$i]['cedula'];
+    $nombre   = $datos[$i]['nombre'];
+    $telefono = $datos[$i]['telefono'];
 
-    $datos_padron = obtener_datos_padron($cedula);
-    if (count($datos_padron) == 0) $errores++;
-    $nombre   = $datos_padron['nombre'];
-    $telefono = $datos_padron['tel'];
-    $telefono = buscarCelular($telefono)[0];
-    if (intval($telefono) == 0 || $telefono == "" || !is_numeric($telefono)) $telefono = 0;
 
     $dejar_registro_crm = dejar_registro_crm($cedula, $nombre, $telefono);
-    if ($dejar_registro_crm === true) $errores++;
+    if ($dejar_registro_crm === false) {
+        $errores++;
+        $mensaje .= "Error al registrar cédula: $cedula, nombre: $nombre y teléfono: $telefono";
+    }
 
     $id_registro_bajas_morosidad = registrar_bajas_morosidad($cedula);
-    if ($id_registro_bajas_morosidad === true) $errores++;
-
-    $baja_padron_datos_socios = dar_baja_padron_datos_socios($cedula);
-    if ($baja_padron_datos_socios === true) $errores++;
-
-    $baja_padron_productos_socio = dar_baja_padron_productos_socio($cedula);
-    if ($baja_padron_productos_socio === true) $errores++;
+    if ($id_registro_bajas_morosidad === false) {
+        $errores++;
+        $mensaje .= "Error al registrar cédula: $cedula";
+    }
 }
-if ($errores > 0) devolver_error("Hubo errores al guardar la información");
 
 
-
-$response['error'] = false;
-$response['mensaje'] = "Se guardaron los datos con éxito";
+$response['error'] = $errores > 0 ? true : false;
+$response['mensaje'] = $mensaje == "" ? "Se guardaron los datos con éxito" : $mensaje;
 echo json_encode($response);
 
 
@@ -90,6 +90,22 @@ function registrar_historial_carga_excel($cantidad_registros, $nuevo_nombre)
     return $return == true ? true : $id_insert_historial;
 }
 
+function obtener_datos_registros($cedula)
+{
+    include '../../conexiones/conexion2.php';
+    $tabla = TABLA_REGISTROS;
+
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE cedula = '$cedula' ORDER BY id DESC LIMIT 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (Exception $error) {
+        registrar_errores($sql, "uploader_bajas_morosidad.php", $error);
+        $consulta = false;
+    }
+
+    return $consulta != false ? mysqli_fetch_assoc($consulta) : false;
+}
+
 function registrar_bajas_morosidad($cedula)
 {
     $conexion = connection(DB);
@@ -106,58 +122,13 @@ function registrar_bajas_morosidad($cedula)
     return $consulta;
 }
 
-function obtener_datos_padron($cedula)
-{
-    $conexion = connection(DB_ABMMOD);
-    $tabla = TABLA_PADRON_DATOS_SOCIO;
-
-    try {
-        $sql = "SELECT * FROM {$tabla} WHERE cedula = '$cedula'";
-        $consulta = mysqli_query($conexion, $sql);
-    } catch (Exception $error) {
-        registrar_errores($sql, "uploader_bajas_morosidad.php", $error);
-    }
-
-    return mysqli_fetch_assoc($consulta);
-}
-
 function dejar_registro_crm($cedula, $nombre, $telefono)
 {
-    $conexion = connection(DB);
+    include '../../conexiones/conexion2.php';
     $tabla = TABLA_REGISTROS;
 
     try {
         $sql = "INSERT INTO {$tabla} (cedula, nombre, telefono, fecha_registro, sector, observaciones, socio, baja) VALUES ('$cedula', '$nombre', '$telefono', NOW(), 'Sistema', 'Baja por morosidad', 0, 1)";
-        $consulta = mysqli_query($conexion, $sql);
-    } catch (Exception $error) {
-        registrar_errores($sql, "uploader_bajas_morosidad.php", $error);
-    }
-
-    return $consulta;
-}
-
-function dar_baja_padron_datos_socios($cedula)
-{
-    $conexion = connection(DB_ABMMOD);
-    $tabla = TABLA_PADRON_DATOS_SOCIO;
-
-    try {
-        $sql = "UPDATE {$tabla} SET abmactual = 1, abm = 'baja', observaciones = 'Baja por morosidad' WHERE cedula = '$cedula'";
-        $consulta = mysqli_query($conexion, $sql);
-    } catch (Exception $error) {
-        registrar_errores($sql, "uploader_bajas_morosidad.php", $error);
-    }
-
-    return $consulta;
-}
-
-function dar_baja_padron_productos_socio($cedula)
-{
-    $conexion = connection(DB_ABMMOD);
-    $tabla = TABLA_PADRON_PRODUCTO_SOCIO;
-
-    try {
-        $sql = "UPDATE {$tabla} SET abmactual = 1, abm = 'baja' WHERE cedula = '$cedula'";
         $consulta = mysqli_query($conexion, $sql);
     } catch (Exception $error) {
         registrar_errores($sql, "uploader_bajas_morosidad.php", $error);

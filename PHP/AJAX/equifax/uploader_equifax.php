@@ -11,6 +11,10 @@ $archivo = $_FILES["file"]["name"];
 $nuevo_nombre = generarHash(50) . ".xlsx";
 
 
+$dar_baja_registros_equifax = dar_baja_registros_equifax();
+if ($dar_baja_registros_equifax === false) devolver_error("Ha ocurrido un error al intentar vaciar la tabla");
+
+
 if (move_uploaded_file($file["tmp_name"], "../../../assets/documentos/equifax/$nuevo_nombre") === false) devolver_error("Ocurrieron errores al subir el archivo");
 $nombre_archivo = "../../../assets/documentos/equifax/$nuevo_nombre";
 $documento = IOFactory::load($nombre_archivo);
@@ -99,6 +103,22 @@ echo json_encode($response);
 
 
 
+
+function dar_baja_registros_equifax()
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_REGISTROS_EQUIFAX;
+
+    try {
+        $sql = "UPDATE {$tabla} SET activo = 0";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (Exception $error) {
+        registrar_errores($sql, "uploader_equifax.php", $error);
+        $consulta = false;
+    }
+
+    return $consulta;
+}
 
 function registrar_historial_carga_excel($cantidad_registros, $nuevo_nombre)
 {
