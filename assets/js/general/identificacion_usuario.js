@@ -94,6 +94,14 @@ function identificar_persona() {
                         $(".administrar_pendientes").css("display", "block");
                         $("#vista_tabla_volver_a_llamar-tab").css("display", "block");
                     }
+                    
+
+                    if (["Calidad", "Bajas"].includes(sector) && gestor == 1) {
+                        $("#vista_tabla_crmessage-tab").css("display", "block");
+                        cantidad_total_pendientes_crmessage();
+                        setInterval(cantidad_total_pendientes_crmessage, 15000);
+                        tabla_gestionar_pendientes_crmessage();
+                    }
 
                     if (["Calidad", "Bajas", "Rrhh_coord", "Morosos", "Coordinacion"].includes(sector)) {
                         cantidad_volver_a_llamar();

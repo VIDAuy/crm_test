@@ -1,3 +1,10 @@
+$(document).ready(function () {
+
+    mostrar_contenido("gestionar_items_menu", tabla_items_menu());
+
+});
+
+
 function tabla_items_menu() {
     $("#tabla_items_menu").DataTable({
         ajax: `${url_operaciones}items_menu/tabla_items_menu.php`,

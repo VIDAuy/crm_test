@@ -1,9 +1,7 @@
 <script>
 	$(function() {
 		$('#ci').keypress(function(e) {
-			if (e.which == 13) {
-				buscarDatos(false);
-			}
+			if (e.which == 13) buscarDatos(false);
 		});
 	})
 </script>

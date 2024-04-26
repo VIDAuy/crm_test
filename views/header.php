@@ -1,4 +1,5 @@
 <?php
+$version = '?v=1.1.11';
 const PRODUCCION = false;
 $title = PRODUCCION ? "CRM" : "CRM_TEST";
 $title_html = PRODUCCION ? "<span class='text-danger'> CRM </span>" : "<span class='text-success'> CRM TEST </span>";
@@ -66,7 +67,20 @@ $title_html = PRODUCCION ? "<span class='text-danger'> CRM </span>" : "<span cla
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
-	<script src="./assets/js/color-modes.js"></script>
+	<?php
+	$js_cargar = [
+		"funciones.js",
+		"general/menu.js",
+		"permisos_usuario.js",
+		"general/identificacion_usuario.js",
+		"general/buscar_socio_o_funcionario.js",
+		"color-modes.js",
+	];
+
+	foreach ($js_cargar as $archivo) {
+		echo '<script src="./assets/js/' . $archivo . $version . '"></script>';
+	}
+	?>
 
 
 </head>
@@ -77,9 +91,6 @@ $title_html = PRODUCCION ? "<span class='text-danger'> CRM </span>" : "<span cla
 	<?php include_once 'menu.php'; ?>
 
 	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-
-
 
 
 

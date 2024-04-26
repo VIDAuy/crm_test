@@ -1,11 +1,3 @@
-$(document).ready(function () {
-
-    tabla_registros();
-
-});
-
-
-
 function tabla_registros() {
     $("#tabla_registros").DataTable({
         ajax: `${url_operaciones}registros/tabla_registros.php`,

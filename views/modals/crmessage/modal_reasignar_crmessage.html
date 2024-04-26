@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_reasignarCRMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Reasignar CRMessage</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <input type="txt" class="form-control" id="txt_id_reasignar_crmessage" placeholder="ID" disabled>
+                    <label for="txt_id_reasignar_crmessage">ID</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_sub_usuarios_reasignar_crmessage" aria-label="Select sub usuarios CRMessage">
+                    </select>
+                    <label for="select_sub_usuarios_reasignar_crmessage">Seleccione un funcionario</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-warning" onclick="reasignar_crmessage(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -53,6 +53,55 @@
 
                         <ul class="nav flex-column mb-auto">
                             <li class='nav-item'>
+                                <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='mostrar_contenido("gestionar_items_menu", tabla_items_menu())'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-up" viewBox="0 0 16 16">
+                                        <path d="M7.646 15.854a.5.5 0 0 0 .708 0L10.207 14H14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3.793zM1 9V6h14v3zm14 1v2a1 1 0 0 1-1 1h-3.793a1 1 0 0 0-.707.293l-1.5 1.5-1.5-1.5A1 1 0 0 0 5.793 13H2a1 1 0 0 1-1-1v-2zm0-5H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zM2 11.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 0-1h-8a.5.5 0 0 0-.5.5m0-4a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11a.5.5 0 0 0-.5.5m0-4a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 0-1h-6a.5.5 0 0 0-.5.5" />
+                                    </svg>
+                                    Items Menú
+                                </a>
+                                <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='mostrar_contenido("gestionar_menu_por_area", tabla_menu())'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                                    </svg>
+                                    Menú por Área
+                                </a>
+                                <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='mostrar_contenido("gestionar_menu_por_usuario", tabla_menu_por_usuarios())'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                                    </svg>
+                                    Menú por usuario
+                                </a>
+                                <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='mostrar_contenido("gestionar_contenido", tabla_contenido())'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                        <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z" />
+                                    </svg>
+                                    Contenido
+                                </a>
+                                <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='mostrar_contenido("gestionar_contenido_por_area", tabla_contenido_por_area())'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-body-text" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5m0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+                                    </svg>
+                                    Contenido por Área
+                                </a>
+                                <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='mostrar_contenido("gestionar_usuarios", tabla_usuarios())'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                    </svg>
+                                    Usuarios
+                                </a>
+                                <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='mostrar_contenido("gestionar_sub_usuarios", tabla_sub_usuarios())'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
+                                    </svg>
+                                    Sub Usuarios
+                                </a>
+                                <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='mostrar_contenido("gestionar_registros", tabla_registros())'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                                        <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                                    </svg>
+                                    Registros
+                                </a>
                                 <a href='#' class='nav-link d-flex align-items-center gap-2' onclick='desestimar_baja(true)'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
                                         <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
@@ -71,25 +120,161 @@
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-
-                <nav class="mt-3">
-                    <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-gestionar-registros-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-registros" type="button" role="tab" aria-controls="nav-gestionar-registros" aria-selected="true" onclick="tabla_registros(true)">Gestionar Registros</button>
-
-                        <button class="nav-link" id="nav-gestionar-items-menu-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-items-menu" type="button" role="tab" aria-controls="nav-gestionar-items-menu" aria-selected="false" onclick="tabla_items_menu(true)">Gestionar items menú</button>
-
-                        <button class="nav-link" id="nav-gestionar-menu-por-area-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-menu-por-area" type="button" role="tab" aria-controls="nav-gestionar-menu-por-area" aria-selected="false" onclick="tabla_menu(true)">Gestionar menú por área</button>
-
-                        <button class="nav-link" id="nav-gestionar-menu-por-usuario-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-menu-por-usuario" type="button" role="tab" aria-controls="nav-gestionar-menu-por-usuario" aria-selected="false" onclick="tabla_menu_por_usuarios(true)">Gestionar menú por usuario</button>
-
-                        <button class="nav-link" id="nav-gestionar-usuarios-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-usuarios" type="button" role="tab" aria-controls="nav-gestionar-usuarios" aria-selected="false" onclick="tabla_usuarios(true)">Gestionar Usuarios</button>
-
-                        <button class="nav-link" id="nav-gestionar-sub-usuarios-tab" data-bs-toggle="tab" data-bs-target="#nav-gestionar-sub-usuarios" type="button" role="tab" aria-controls="nav-gestionar-sub-usuarios" aria-selected="false" onclick="tabla_sub_usuarios(true)">Gestionar Sub Usuarios</button>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-gestionar-registros" role="tabpanel" aria-labelledby="nav-gestionar-registros-tab" tabindex="0">
+                <div id="container" style="width: 100%">
+                    <!-- Contenedor Gestionar Items Menú -->
+                    <div id="gestionar_items_menu" style="display: none">
+                        <div class="d-flex justify-content-center mt-4 mb-3">
+                            <button class="btn btn-lg btn-outline-success rounded-4" onclick="agregar_items_menu(true)">Agregar Item Menú</button>
+                        </div>
                         <div class="table-responsive">
+                            <table id="tabla_items_menu" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col-auto">#</th>
+                                        <th scope="col-auto">Icono SVG</th>
+                                        <th scope="col-auto">Ruta Enlace</th>
+                                        <th scope="col-auto">Función</th>
+                                        <th scope="col-auto">Nombre</th>
+                                        <th scope="col-auto">Badge</th>
+                                        <th scope="col-auto">Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Contenedor Gestionar Items Menu -->
+
+                    <!-- Contenedor Gestionar Menú Por Área -->
+                    <div id="gestionar_menu_por_area" style="display: none">
+                        <div class="d-flex justify-content-center mt-4 mb-3">
+                            <button class="btn btn-lg btn-outline-success rounded-4" onclick="agregar_menu(true)">Agregar Menú por Área</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla_menu" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col-auto">#</th>
+                                        <th scope="col-auto">Área</th>
+                                        <th scope="col-auto">Item</th>
+                                        <th scope="col-auto">Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Contenedor Gestionar Menú Por Área -->
+
+                    <!-- Contenedor Gestionar Menú Por Usuario -->
+                    <div id="gestionar_menu_por_usuario" style="display: none">
+                        <div class="d-flex justify-content-center mt-4 mb-3">
+                            <button class="btn btn-lg btn-outline-success rounded-4" onclick="agregar_menu_por_usuario(true)">Agregar Menú Por Usuario</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla_menu_por_usuario" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col-auto">#</th>
+                                        <th scope="col-auto">Área</th>
+                                        <th scope="col-auto">Usuario</th>
+                                        <th scope="col-auto">Item</th>
+                                        <th scope="col-auto">Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Contenedor Gestionar Menú Por Usuario -->
+
+                    <!-- Contenedor Gestionar Contenido CRM -->
+                    <div id="gestionar_contenido" style="display: none">
+                        <div class="d-flex justify-content-center mt-4 mb-3">
+                            <button class="btn btn-lg btn-outline-success rounded-4" onclick="agregar_contenido(true)">Agregar Contenido</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla_contenido" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col-auto">#</th>
+                                        <th scope="col-auto">Nombre</th>
+                                        <th scope="col-auto">Div</th>
+                                        <th scope="col-auto">Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Contenedor Gestionar Contenido CRM -->
+
+                    <!-- Contenedor Gestionar Contenido CRM Por Área -->
+                    <div id="gestionar_contenido_por_area" style="display: none">
+                        <div class="d-flex justify-content-center mt-4 mb-3">
+                            <button class="btn btn-lg btn-outline-success rounded-4" onclick="agregar_contenido_por_area(true)">Agregar Contenido Por Área</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla_contenido_por_area" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col-auto">#</th>
+                                        <th scope="col-auto">Nombre</th>
+                                        <th scope="col-auto">Contenido</th>
+                                        <th scope="col-auto">Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Contenedor Gestionar Contenido CRM Por Área -->
+
+                    <!-- Contenedor Gestionar Usuarios -->
+                    <div id="gestionar_usuarios" style="display: none">
+                        <div class="d-flex justify-content-center mt-4 mb-3">
+                            <button class="btn btn-lg btn-outline-success rounded-4" onclick="agregar_usuario(true)">Agregar Usuario</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla_usuarios" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col-auto">#</th>
+                                        <th scope="col-auto">Usuario</th>
+                                        <th scope="col-auto">Código</th>
+                                        <th scope="col-auto">Nivel</th>
+                                        <th scope="col-auto">Filial</th>
+                                        <th scope="col-auto">Email</th>
+                                        <th scope="col-auto">Fecha Última Sesión</th>
+                                        <th scope="col-auto">Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Contenedor Gestionar Usuarios -->
+
+                    <!-- Contenedor Gestionar Sub Usuarios -->
+                    <div id="gestionar_sub_usuarios" style="display: none">
+                        <div class="d-flex justify-content-center mt-4 mb-3">
+                            <button class="btn btn-lg btn-outline-success rounded-4" onclick="agregar_sub_usuario(true)">Agregar Sub Usuario</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla_sub_usuarios" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col-auto">#</th>
+                                        <th scope="col-auto">Área</th>
+                                        <th scope="col-auto">Nombre</th>
+                                        <th scope="col-auto">Apellido</th>
+                                        <th scope="col-auto">Cedula</th>
+                                        <th scope="col-auto">Gestor</th>
+                                        <th scope="col-auto">Acciones</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Contenedor Gestionar Sub Usuarios -->
+
+                    <!-- Contenedor Gestionar Registros De Socios -->
+                    <div id="gestionar_registros" style="display: none">
+                        <div class="table-responsive mt-4">
                             <table id="tabla_registros" class="table table-sm table-bordered table-striped table-hover" width="100%">
                                 <thead class="table-dark">
                                     <tr>
@@ -110,107 +295,7 @@
                             </table>
                         </div>
                     </div>
-
-                    <div class="tab-pane fade" id="nav-gestionar-items-menu" role="tabpanel" aria-labelledby="nav-gestionar-items-menu-tab" tabindex="0">
-                        <div class="d-flex justify-content-end mb-3">
-                            <button class="btn btn-success" onclick="agregar_items_menu(true)">➕</button>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="tabla_items_menu" class="table table-sm table-bordered table-striped table-hover" width="100%">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col-auto">#</th>
-                                        <th scope="col-auto">Icono SVG</th>
-                                        <th scope="col-auto">Ruta Enlace</th>
-                                        <th scope="col-auto">Función</th>
-                                        <th scope="col-auto">Nombre</th>
-                                        <th scope="col-auto">Badge</th>
-                                        <th scope="col-auto">Acciones</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="nav-gestionar-menu-por-area" role="tabpanel" aria-labelledby="nav-gestionar-menu-por-area-tab" tabindex="0">
-                        <div class="d-flex justify-content-end mb-3">
-                            <button class="btn btn-success" onclick="agregar_menu(true)">➕</button>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="tabla_menu" class="table table-sm table-bordered table-striped table-hover" width="100%">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col-auto">#</th>
-                                        <th scope="col-auto">Área</th>
-                                        <th scope="col-auto">Item</th>
-                                        <th scope="col-auto">Acciones</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="nav-gestionar-menu-por-usuario" role="tabpanel" aria-labelledby="nav-gestionar-menu-por-usuario-tab" tabindex="0">
-                        <div class="d-flex justify-content-end mb-3">
-                            <button class="btn btn-success" onclick="agregar_menu_por_usuario(true)">➕</button>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="tabla_menu_por_usuario" class="table table-sm table-bordered table-striped table-hover" width="100%">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col-auto">#</th>
-                                        <th scope="col-auto">Área</th>
-                                        <th scope="col-auto">Usuario</th>
-                                        <th scope="col-auto">Item</th>
-                                        <th scope="col-auto">Acciones</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="nav-gestionar-usuarios" role="tabpanel" aria-labelledby="nav-gestionar-usuarios-tab" tabindex="0">
-                        <div class="d-flex justify-content-end mb-3">
-                            <button class="btn btn-success" onclick="agregar_usuario(true)">➕</button>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="tabla_usuarios" class="table table-sm table-bordered table-striped table-hover" width="100%">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col-auto">#</th>
-                                        <th scope="col-auto">Usuario</th>
-                                        <th scope="col-auto">Código</th>
-                                        <th scope="col-auto">Nivel</th>
-                                        <th scope="col-auto">Filial</th>
-                                        <th scope="col-auto">Email</th>
-                                        <th scope="col-auto">Fecha Última Sesión</th>
-                                        <th scope="col-auto">Acciones</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="nav-gestionar-sub-usuarios" role="tabpanel" aria-labelledby="nav-gestionar-sub-usuarios-tab" tabindex="0">
-                        <div class="d-flex justify-content-end mb-3">
-                            <button class="btn btn-success" onclick="agregar_sub_usuario(true)">➕</button>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="tabla_sub_usuarios" class="table table-sm table-bordered table-striped table-hover" width="100%">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col-auto">#</th>
-                                        <th scope="col-auto">Área</th>
-                                        <th scope="col-auto">Nombre</th>
-                                        <th scope="col-auto">Apellido</th>
-                                        <th scope="col-auto">Cedula</th>
-                                        <th scope="col-auto">Gestor</th>
-                                        <th scope="col-auto">Acciones</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
+                    <!-- Contenedor Gestionar Registros De Socios -->
                 </div>
 
 
@@ -226,6 +311,8 @@
                 "operaciones/items_menu/modal_editar_items_menu.html",
                 "operaciones/menu/modal_agregar_menu.html",
                 "operaciones/menu_por_usuario/modal_agregar_menu_por_usuario.html",
+                "operaciones/contenido/modal_agregar_contenido.html",
+                "operaciones/contenido_por_area/modal_agregar_contenido_por_area.html",
                 "operaciones/sub_usuarios/modal_agregar_sub_usuario.html",
                 "operaciones/sub_usuarios/modal_editar_sub_usuario.html",
                 "operaciones/usuarios/modal_agregar_usuario.html",
@@ -264,6 +351,7 @@
             <script src="./assets/js/operaciones/items_menu.js"></script>
             <script src="./assets/js/operaciones/menu.js"></script>
             <script src="./assets/js/operaciones/menu_por_usuarios.js"></script>
+            <script src="./assets/js/operaciones/contenido.js"></script>
             <script src="./assets/js/operaciones/registros.js"></script>
             <script src="./assets/js/operaciones/usuarios.js"></script>
             <script src="./assets/js/operaciones/sub_usuarios.js"></script>

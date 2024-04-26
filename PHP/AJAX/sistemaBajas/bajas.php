@@ -70,7 +70,7 @@ function recortarCampo($campo, $largo = 120)
 function obtener_area($id_relacion)
 {
   global $conexion;
-  $sql = "SELECT * FROM derivacion_bajas WHERE id_relacion = '$id_relacion'";
+  $sql = "SELECT * FROM derivacion_bajas WHERE id_relacion = '$id_relacion' AND activo = 1";
   $consulta = mysqli_query($conexion, $sql);
 
   $fetch = mysqli_fetch_assoc($consulta);

@@ -5,8 +5,9 @@ include_once '../configuraciones.php';
 $opcion = $_REQUEST['opcion'];
 if (isset($_REQUEST['cedula'])) $cedula = $_REQUEST['cedula'];
 if (isset($_REQUEST['etiqueta'])) $mensaje = $_REQUEST['etiqueta'];
-if (isset($_REQUEST['id_sub_usuario'])) $id_sub_usuario = $_REQUEST['id_sub_usuario'];
+$id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
 $id_area = $_SESSION['id'];
+
 
 
 /** Tabla Etiquetas **/
@@ -48,7 +49,7 @@ if ($opcion == 2) {
 /** Registrar Nueva Etiqueta **/
 if ($opcion == 3) {
 
-    if ($cedula == "" || $mensaje == "" || $id_sub_usuario == "") {
+    if ($cedula == "" || $mensaje == "" || $id_area == "") {
         $response['error'] = true;
         $response['mensaje'] = ERROR_GENERAL;
         die(json_encode($response));

@@ -8,7 +8,9 @@ $(function () {
 
 // AJAX
 
-function listarDatos(CI) {
+function listarDatos() {
+	let CI = $("#ci").val();
+
 	if (CI != '') {
 		if (comprobarCI(CI)) {
 			$.ajax(

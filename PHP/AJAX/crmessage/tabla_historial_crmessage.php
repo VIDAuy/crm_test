@@ -17,7 +17,8 @@ while ($row = mysqli_fetch_assoc($historial_crmessage)) {
     $usuario_consultado = $row['usuario_consultado'] != "" ?  " ➡ " . obtener_nombre_sub_usuario($row['usuario_consultado']) : "";
     $area_y_usuario_consulta = $area_consulta . $usuario_consulto;
     $area_y_usuario_consultado = $area_consultada . $usuario_consultado;
-    $consulta = $row['mensaje'];
+    $consulta = obtener_datos_mensajes($id)['mensaje'];
+    $consulta = $consulta != false ? $consulta : "-";
     $cedula_socio = $row['cedula_socio'];
     $fecha_consulta = $row['fecha_consulta'];
     $estado = $row['estado'] == 1 ? "En Proceso" : "Terminado";
@@ -52,30 +53,44 @@ echo json_encode($tabla);
 function obtener_historial_crmessage($opcion, $id_area)
 {
     $conexion = connection(DB);
-    $tabla1 = TABLA_CONSULTA_TRANSAREA;
-    $tabla2 = TABLA_MENSAJES_CONSULTA_TRANSAREA;
+    $tabla = TABLA_CONSULTA_TRANSAREA;
 
-    $where = $opcion == 1 ? "ct.area_consulta = '$id_area'" : "ct.area_consultada = '$id_area'";
+    $where = $opcion == 1 ? "area_consulta = '$id_area'" : "area_consultada = '$id_area'";
 
     $sql = "SELECT 
-            ct.id,
-            ct.area_consulta,
-            ct.usuario_consulto,
-            ct.area_consultada,
-            ct.usuario_consultado,
-            mct.mensaje,
-            ct.cedula_socio,
-            ct.fecha_consulta,
-            ct.estado
-            FROM 
-            {$tabla1} ct
-            INNER JOIN {$tabla2} mct ON ct.id = mct.id_consulta_transarea
-            WHERE 
+            id,
+            area_consulta,
+            usuario_consulto,
+            area_consultada,
+            usuario_consultado,
+            cedula_socio,
+            fecha_consulta,
+            estado
+           FROM 
+            {$tabla}
+           WHERE 
             $where AND 
-            ct.activo = 1";
+            activo = 1";
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;
+}
+
+
+function obtener_datos_mensajes($id)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_MENSAJES_CONSULTA_TRANSAREA;
+
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND activo = 1 ORDER BY id ASC LIMIT 1";
+        $consulta = mysqli_query($conexion, $sql);
+        $resultado = mysqli_fetch_assoc($consulta);
+        return $resultado;
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "tabla_historial_crmessage.php", $error);
+        return false;
+    }
 }
 
 

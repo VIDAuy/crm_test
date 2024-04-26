@@ -13,12 +13,12 @@ if ($icon_svg == "" || $nombre == "") devolver_error(ERROR_GENERAL);
 
 
 $registrar_items_menu = registrar_items_menu($icon_svg, $ruta_enlace, $funcion, $nombre, $badge);
-if ($registrar_items_menu == false) devolver_error("Ocurrieron errores al modificar el registro");
+if ($registrar_items_menu == false) devolver_error("Ocurrieron errores al registrar el item del menú");
 
 
 
 $response['error'] = false;
-$response['mensaje'] = "Se modifico el registro con éxito";
+$response['mensaje'] = EXITO_AL_REGISTRAR;
 echo json_encode($response);
 
 

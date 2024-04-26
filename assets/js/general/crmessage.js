@@ -5,6 +5,8 @@ $(document).ready(function () {
 
     cantidad_consultas_no_leidas();
     setInterval(cantidad_consultas_no_leidas, 15000);
+
+    $("#vista_tabla_crmessage-tab").css("display", "none");
 });
 
 
@@ -311,7 +313,6 @@ function historial_crmessage(openModal = false, opcion = 1) {
     if (openModal == true) $("#modal_historialCRMessage").modal("show");
 }
 
-
 function mostrar_mensajes_consulta(id) {
     $("#tabla_mostrar_mensajes_crmessage").DataTable({
         ajax: `${url_ajax}crmessage/tabla_mostrar_mensajes_crmessage.php?id=${id}`,
@@ -330,4 +331,88 @@ function mostrar_mensajes_consulta(id) {
     });
 
     $("#modal_mostrarMensajesCRMessage").modal("show");
+}
+
+function tabla_gestionar_pendientes_crmessage() {
+    $("#tabla_crmessage_todos_pendientes").DataTable({
+        ajax: `${url_ajax}crmessage/tabla_gestionar_pendientes.php?opcion=1`,
+        columns: [
+            { data: "id" },
+            { data: "area_y_usuario_consulta" },
+            { data: "area_y_usuario_consultado" },
+            { data: "consulta" },
+            { data: "cedula_socio" },
+            { data: "fecha_consulta" },
+            { data: "estado" },
+            { data: "acciones" },
+        ],
+        bDestroy: true,
+        order: [[0, "asc"]],
+        language: { url: url_lenguage },
+    });
+}
+
+function cantidad_total_pendientes_crmessage() {
+    $("#cantidad_total_pendientes_crmessage").text(`0+`);
+
+    $.ajax({
+        type: "GET",
+        url: `${url_ajax}crmessage/tabla_gestionar_pendientes.php`,
+        data: {
+            opcion: 2
+        },
+        dataType: "JSON",
+        success: function (response) {
+            if (response.error === false) {
+                let cantidad = response.cantidad;
+                $("#cantidad_total_pendientes_crmessage").text(`${cantidad}+`);
+            } else {
+                error(response.mensaje);
+            }
+        }
+    });
+}
+
+function reasignar_crmessage(openModal = false, id = null, id_usuario_consultado = null, usuario_consultado = null) {
+    if (openModal == true) {
+        $("#txt_id_reasignar_crmessage").val('');
+        $("#select_sub_usuarios_reasignar_crmessage").val('');
+        $("#txt_id_reasignar_crmessage").val(id);
+        select_sub_usuarios("Editar", "select_sub_usuarios_reasignar_crmessage", id_usuario_consultado, usuario_consultado);
+        $("#modal_reasignarCRMessage").modal("show");
+    } else {
+
+        let id = $("#txt_id_reasignar_crmessage").val();
+        let sub_usuario = $("#select_sub_usuarios_reasignar_crmessage").val();
+
+        if (id == "") {
+            error("Debe ingresar un id");
+        } else if (sub_usuario == "") {
+            error("Debe seleccionar un funcionario");
+        } else {
+
+            $.ajax({
+                type: "POST",
+                url: `${url_ajax}crmessage/reasignar_crmessage.php`,
+                data: {
+                    id,
+                    sub_usuario
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    if (response.error === false) {
+                        correcto(response.mensaje);
+                        $("#txt_id_reasignar_crmessage").val('');
+                        $("#select_sub_usuarios_reasignar_crmessage").val('');
+                        tabla_gestionar_pendientes_crmessage();
+                        $("#modal_reasignarCRMessage").modal("hide");
+                    } else {
+                        error(response.mensaje);
+                    }
+                }
+            });
+
+        }
+
+    }
 }

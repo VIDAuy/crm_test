@@ -65,9 +65,10 @@ function obtener_auditorias_socio($cedula)
     $tabla = TABLA_AUDITORIAS_SOCIO;
 
     $where = $cedula != "" ? "cedula = '$cedula' AND" : "";
+    $limit = $cedula == "" ? "ORDER BY id DESC LIMIT 100" : "";
 
     try {
-        $sql = "SELECT * FROM {$tabla} WHERE $where activo = 1";
+        $sql = "SELECT * FROM {$tabla} WHERE $where activo = 1 $limit";
         $consulta = mysqli_query($conexion, $sql);
     } catch (\Throwable $error) {
         registrar_errores($sql, "tabla_auditorias.php", $error);

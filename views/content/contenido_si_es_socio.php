@@ -8,7 +8,7 @@ if ($_SESSION['nivel'] == 1) {
             <span id='cedulas'></span>
         </h3>
 		<div class='row text-center'>
-			<div class='col-12'>
+			<div class='col-3'>
 				<label for='' class='col-form-label'>Nombre completo:</label>
 				<p id='nom' style='font-weight: bold;'></p>
 			</div>
@@ -68,7 +68,7 @@ if ($_SESSION['nivel'] == 1) {
 
     $agenda_volver_a_llamar = "
     <div class='d-flex justify-content-center'>
-        <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)' style='display: none'>
+        <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' id='contenedor_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)' style='display: none'>
             Agregar a agenda 📞
         </button>
     </div>";

@@ -1,6 +1,25 @@
 const url_operaciones = `${url_app}/php/ajax/operaciones/`;
 
 
+function mostrar_contenido(div) {
+    let array = [
+        "gestionar_items_menu",
+        "gestionar_menu_por_area",
+        "gestionar_menu_por_usuario",
+        "gestionar_contenido",
+        "gestionar_contenido_por_area",
+        "gestionar_usuarios",
+        "gestionar_sub_usuarios",
+        "gestionar_registros",
+    ];
+
+    array.map((val) => {
+        $(`#${val}`).css("display", "none");
+    });
+
+    $(`#${div}`).css("display", "block");
+}
+
 
 function desestimar_baja(openModal = false) {
     if (openModal == true) {
@@ -138,6 +157,34 @@ function select_usuarios_del_area(id_div, id_area) {
                 div.innerHTML += `<option value="${v.id}">${v.nombre}</option>`;
             });
         },
+    });
+
+}
+
+
+function select_contenido(opcion, div, id_contenido, nombre_contenido) {
+
+    let option = opcion == "Agregar" ? `<option value='' selected>Seleccione un contenido</option>` : `<option value='${id_contenido}' selected>${nombre_contenido}</option>`;
+    let params = opcion == "Agregar" ? "" : `id_contenido=${id_contenido}`;
+
+    document.getElementById(div).innerHTML = `${option}`;
+
+    $.ajax({
+        type: "GET",
+        url: `${url_operaciones}select_contenido.php?${params}`,
+        dataType: "JSON",
+        beforeSend: function () {
+            loading(true);
+        },
+        complete: function () {
+            loading(false);
+        },
+        success: function (response) {
+            let datos = response.datos;
+            datos.map((val) => {
+                document.getElementById(div).innerHTML += `<option value="${val['id']}">${val['nombre']}</option>`;
+            });
+        }
     });
 
 }

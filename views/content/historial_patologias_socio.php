@@ -1,4 +1,4 @@
-<div class="container patologias_socio" style="display: none;">
+<div class="container patologias_socio" id="contenedor_patologias_socio" style="display: none;">
 
     <hr class="style5 container">
 

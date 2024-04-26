@@ -1,0 +1,34 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_agregarContenidoPorArea" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Contenido Por Área</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_area_agregar_contenido_por_area"
+                        aria-label="Seleccione un área">
+                    </select>
+                    <label for="select_area_agregar_contenido_por_area">Seleccione un área</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_contenido_agregar_contenido_por_area"
+                        aria-label="Seleccione un contenido">
+                    </select>
+                    <label for="select_contenido_agregar_contenido_por_area">Seleccione un contenido</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary"
+                    onclick="agregar_contenido_por_area(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
