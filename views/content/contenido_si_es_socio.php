@@ -7,12 +7,41 @@ if ($_SESSION['nivel'] == 1) {
             Cédula consultada: 
             <span id='cedulas'></span>
         </h3>
-		<div class='row text-center'>
-			<div class='col-3'>
-				<label for='' class='col-form-label'>Nombre completo:</label>
-				<p id='nom' style='font-weight: bold;'></p>
-			</div>
-		</div>
+        <div class='row text-center'>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Nombre completo:</label>
+                <p id='nom' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Teléfono:</label>
+                <p id='telefono' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-2'>
+                <label for='' class='col-form-label'>Fecha de afiliación:</label>
+                <p id='fechafil' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-4 justify-content-center'>
+                <label class='col-form-label d-block text-center'>Más datos:</label>
+                <div class='d-flex'>
+                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='btnDatosCobranza' onclick='datos_cobranza()'>Cobranza</button>
+                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='btnDatosProductos' onclick='datos_productos()'>Productos</button>
+                </div>
+            </div>
+        </div>
+        <div class='row text-center'>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Radio:</label>
+                <p id='radio' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Sucursal:</label>
+                <p id='sucursal' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-3' id='div_inspira'>
+                <label for='' class='col-form-label'>Inspira?:</label>
+                <p id='inspira' style='font-weight: bold;'></p>
+            </div>
+        </div>
     </div>";
 
     $agenda_volver_a_llamar = "";

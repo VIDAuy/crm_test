@@ -3,25 +3,25 @@ include_once '../../configuraciones.php';
 
 $id_auditoria_socio = $_REQUEST['id'];
 $comentario = $_REQUEST['comentario'];
-$usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : $_SESSION['id'];
+$id_area = $_SESSION['id'];
 $id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
 
 
-if ($id_auditoria_socio == "" || $comentario == "") devolver_error(ERROR_GENERAL);
+if ($id_auditoria_socio == "" || $comentario == "" || $id_area == "") devolver_error(ERROR_GENERAL);
 
 
 if (count($_FILES) > 0) {
     $imagen = $_FILES['imagen'];
     if (controlarExtension($imagen, array("mp3")) <= 0) devolver_error("Los archivos cargados solo pueden ser de tipo .mp3");
 
-    $id_registro = registrar_comentario($id_auditoria_socio, $comentario, $usuario, $id_sub_usuario);
+    $id_registro = registrar_comentario($id_auditoria_socio, $comentario, $id_area, $id_sub_usuario);
     if ($id_registro === false) devolver_error("Ocurrieron errores al registrar el comentario");
 
     $archivo_registrado = registrar_imagen_comentario($id_registro, $imagen);
     if ($archivo_registrado === false) devolver_error("Error al cargar el registro");
 } else {
 
-    $id_registro = registrar_comentario($id_auditoria_socio, $comentario, $usuario, $id_sub_usuario);
+    $id_registro = registrar_comentario($id_auditoria_socio, $comentario, $id_area, $id_sub_usuario);
     if ($id_registro === false) devolver_error("Ocurrieron errores al registrar el comentario");
 }
 
@@ -34,12 +34,12 @@ echo json_encode($response);
 
 
 
-function registrar_comentario($id_auditoria_socio, $comentario, $usuario, $id_sub_usuario)
+function registrar_comentario($id_auditoria_socio, $comentario, $id_area, $id_sub_usuario)
 {
     $conexion = connection(DB);
     $tabla = TABLA_COMENTARIO_AUDITORIAS_SOCIO;
 
-    $sql = "INSERT INTO {$tabla} (id_auditoria_socio, comentario, area_registro, usuario_registro, fecha_registro) VALUES ('$id_auditoria_socio', '$comentario', '$usuario', '$id_sub_usuario', NOW())";
+    $sql = "INSERT INTO {$tabla} (id_auditoria_socio, comentario, area_registro, usuario_registro, fecha_registro) VALUES ('$id_auditoria_socio', '$comentario', '$id_area', '$id_sub_usuario', NOW())";
     $consulta = mysqli_query($conexion, $sql);
     $id_insert = $consulta != false ? mysqli_insert_id($conexion) : false;
 

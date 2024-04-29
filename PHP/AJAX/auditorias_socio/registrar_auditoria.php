@@ -4,23 +4,15 @@ include_once '../../configuraciones.php';
 $cedula          = $_REQUEST['cedula'];
 $descripcion     = $_REQUEST['descripcion'];
 $fecha_auditoria = $_REQUEST['fecha_auditoria'];
-$usuario         = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : $_SESSION['id'];
+$id_area         = $_SESSION['id'];
+$id_sub_usuario  = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
 
 
-if ($cedula == "" || $descripcion == "" || $fecha_auditoria == "" || $usuario == "") {
-    $response['error'] = true;
-    $response['mensaje'] = ERROR_GENERAL;
-    die(json_encode($response));
-}
+if ($cedula == "" || $descripcion == "" || $fecha_auditoria == "" || $id_area == "") devolver_error(ERROR_GENERAL);
 
 
-$insert_auditoria = registrar_auditoria($cedula, $descripcion, $fecha_auditoria, $usuario);
-
-if ($insert_auditoria === false) {
-    $response['error'] = true;
-    $response['mensaje'] = ERROR_AL_REGISTRAR;
-    die(json_encode($response));
-}
+$insert_auditoria = registrar_auditoria($cedula, $descripcion, $fecha_auditoria, $id_area, $id_sub_usuario);
+if ($insert_auditoria === false) devolver_error(ERROR_AL_REGISTRAR);
 
 
 
@@ -31,13 +23,18 @@ echo json_encode($response);
 
 
 
-function registrar_auditoria($cedula, $descripcion, $fecha_auditoria, $usuario)
+function registrar_auditoria($cedula, $descripcion, $fecha_auditoria, $id_area, $id_sub_usuario)
 {
     $conexion = connection(DB);
     $tabla = TABLA_AUDITORIAS_SOCIO;
 
-    $sql = "INSERT INTO {$tabla} (cedula, descripcion, fecha, fecha_registro, usuario_registro) VALUES ('$cedula', '$descripcion', '$fecha_auditoria', NOW(), '$usuario')";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "INSERT INTO {$tabla} (cedula, descripcion, fecha, fecha_registro, area_registro, usuario_registro) VALUES ('$cedula', '$descripcion', '$fecha_auditoria', NOW(), '$id_area', '$id_sub_usuario')";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "registrar_auditoria.php", $error);
+        $consulta = false;
+    }
 
     return $consulta;
 }

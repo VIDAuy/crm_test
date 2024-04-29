@@ -59,6 +59,7 @@ function buscarSocio() {
             },
         }).done(function (datos) {
             let sector = $("#sector").val();
+            let nivel = $("#nivel").val();
             $("#cedulas").text(cedula);
             historiaComunicacionDeCedula();
             mostrar_cantidad_etiquetas_socio();
@@ -86,6 +87,12 @@ function buscarSocio() {
             }
 
             if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Cobranzas"].includes(sector)) $("#btn_agregar_patologia_socio").css("display", "block");
+
+
+            if (nivel == 1) {
+                $("#contenedor_cobranza_abitab").css("display", "block");
+                tabla_cobranza_abitab();
+            }
 
 
             if (datos.noSocioConRegistros) {

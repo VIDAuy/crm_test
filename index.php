@@ -83,6 +83,8 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
+				"auditorias/modal_editar_auditorias.html",
+				"auditorias/modal_editar_comentario_auditoria.html",
 				"modal_agregar_patologia_socio.html",
 				"modal_identificar_persona_logueada.html",
 				"modalSesionExpirada.html",
@@ -170,6 +172,8 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
+				"auditorias/modal_editar_auditorias.html",
+				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 			];
@@ -245,6 +249,8 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_auditorias_socio.html",
 				"auditorias/modal_registrar_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
+				"auditorias/modal_editar_auditorias.html",
+				"auditorias/modal_editar_comentario_auditoria.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"bajas/modal_historial_de_bajas.html",
 				"bajas/modal_informacion_detallada_baja.html",
@@ -328,6 +334,8 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
+				"auditorias/modal_editar_auditorias.html",
+				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas/modal_solicitar_baja.html",
 			];
 
@@ -395,6 +403,8 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
+				"auditorias/modal_editar_auditorias.html",
+				"auditorias/modal_editar_comentario_auditoria.html",
 			];
 
 
@@ -457,6 +467,8 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_ver_comentarios_auditoria_socio.html",
 				"auditorias/modal_registrar_comentario_auditoria.html",
+				"auditorias/modal_editar_auditorias.html",
+				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas/modal_solicitar_baja.html",
 			];
 
