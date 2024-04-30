@@ -1,14 +1,18 @@
 <?php
 include_once '../../configuraciones.php';
 
+
 $tabla["data"] = [];
-
-$usuario = $_SESSION['usuario'];
-$btnRegistrarComentario = $_REQUEST['btnRegistrarComentario'];
-$cedula = $_REQUEST['cedula'];
 $area = ucfirst(obtener_datos_usuario($_SESSION['id'])['usuario']);
+$opcion = $_REQUEST['opcion'];
+$cedula = isset($_REQUEST['cedula']) ? $_REQUEST['cedula'] : null;
+$id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
 
-$auditorias = obtener_auditorias_socio($cedula);
+
+if ($opcion == 1) $auditorias = obtener_auditorias_socio(1, $cedula, $id);
+if ($opcion == 2) $auditorias = obtener_auditorias_socio(2, $cedula, $id);
+if ($opcion == 3) $auditorias = obtener_auditorias_socio(3, $cedula, $id);
+
 
 while ($row = mysqli_fetch_assoc($auditorias)) {
 
@@ -23,7 +27,7 @@ while ($row = mysqli_fetch_assoc($auditorias)) {
     if (mysqli_num_rows($comentarios) > 0)
         $acciones .= "<button class='btn btn-sm btn-info me-2' onclick='mostrar_comentarios_auditoria(true, `" . $id . "`, `" . $cedula . "`)'>🔍</button>";
 
-    if ($btnRegistrarComentario == "true" && in_array($area, ["Audit1", "Audit2", "Audit3"])) {
+    if (in_array($area, ["Audit1", "Audit2", "Audit3"])) {
         $acciones .= "<button class='btn btn-sm btn-success me-2' onclick='registrar_comentario_auditoria_socio(true, `" . $id . "`)'>➕</button>";
         $acciones .= "<button class='btn btn-sm btn-primary' onclick='editar_auditoria_socio(true, `" . $id . "`, `" . $descripcion . "`, `" . $fecha_auditoria . "`)'>✏</button>";
     }
@@ -63,16 +67,17 @@ echo json_encode($tabla);
 
 
 
-function obtener_auditorias_socio($cedula)
+function obtener_auditorias_socio($opcion = 1, $cedula = null, $id = null)
 {
     $conexion = connection(DB);
     $tabla = TABLA_AUDITORIAS_SOCIO;
 
-    $where = $cedula != "" ? "cedula = '$cedula' AND" : "";
-    $limit = $cedula == "" ? "ORDER BY id DESC LIMIT 100" : "";
+    if ($opcion == 1) $where = "";
+    if ($opcion == 2) $where = "cedula = '$cedula' AND";
+    if ($opcion == 3) $where = "id = '$id' AND";
 
     try {
-        $sql = "SELECT * FROM {$tabla} WHERE $where activo = 1 $limit";
+        $sql = "SELECT * FROM {$tabla} WHERE $where activo = 1 ORDER BY id DESC LIMIT 100";
         $consulta = mysqli_query($conexion, $sql);
     } catch (\Throwable $error) {
         registrar_errores($sql, "tabla_auditorias.php", $error);

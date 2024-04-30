@@ -304,3 +304,76 @@ function buscarCelular($numeros)
     $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
     return $respuesta;
 }
+
+/** Registrar una alerta a un área **/
+function registrar_alerta($id_registro, $area_alerto, $id_sub_usuario, $area_alertada, $funcionalidad, $id_sub_registro)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_ALERTAS;
+
+    try {
+        $sql = "INSERT INTO {$tabla} (id_registro, area_alerto, usuario_alerto, area_alertada, id_funcionalidad, id_sub_registro, fecha_registro) 
+        VALUES ('$id_registro', '$area_alerto', '$id_sub_usuario', '$area_alertada', '$funcionalidad', '$id_sub_registro', NOW())";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "funciones.php", $error);
+        $consulta = false;
+    }
+
+    return $consulta;
+}
+
+/** Obtener todas las alertas pendientes $opcion = 1 para área y $opcion = 2 para usuario **/
+function obtener_todas_alertas_pendientes($opcion, $id_area, $id_sub_usuario, $id_funcionalidad)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_ALERTAS;
+
+    $where = $opcion == 1 ? "usuario_alertado IS NULL AND" : "usuario_alertado = '$id_sub_usuario' AND";
+
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE area_alertada = '$id_area' AND $where id_funcionalidad = '$id_funcionalidad' AND leido = 0 AND activo = 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "funciones.php", $error);
+        $consulta = false;
+    }
+
+    return $consulta;
+}
+
+/** Obtener datos de la funcionalidad **/
+function obtener_funcionalidad($id)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_FUNCIONALIDAD;
+
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE id = '$id' AND activo = 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "funciones.php", $error);
+        $consulta = false;
+    }
+
+    $consulta = $consulta != false ? mysqli_fetch_assoc($consulta) : false;
+
+    return $consulta;
+}
+
+/** Marcar las alertas generales como leidas **/
+function marcar_alerta_leida($id, $id_sub_usuario)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_ALERTAS;
+
+    try {
+        $sql = "UPDATE {$tabla} SET leido = 1, usuario_leido = '$id_sub_usuario', fecha_leido = NOW() WHERE id = '$id'";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "funciones.php", $error);
+        $consulta = false;
+    }
+
+    return $consulta;
+}

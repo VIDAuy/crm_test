@@ -1,12 +1,19 @@
-function tabla_registros_auditoria_socio(btnRegistrarComentario = false, filtrarCedula = false) {
+$(document).ready(function () {
+
+    obtener_alertas([1, 2]);
+    setInterval(obtener_alertas, 15000, [1, 2]);
+
+});
+
+function tabla_registros_auditoria_socio(opcion = 1, id = null) {
 
     $("#contenedor_titulo_modal_auditorias_socio").html("Auditorias Registradas");
     mostrar_comentarios_auditoria(false);
-
-    let cedula = filtrarCedula != false ? $("#ci").val() : "";
+    let cedula = $("#ci").val();
+    let param = opcion == 2 ? `&cedula=${cedula}` : opcion == 3 ? `&id=${id}` : "";
 
     $("#tabla_auditorias_registradas").DataTable({
-        ajax: `${url_ajax}auditorias_socio/tabla_auditorias.php?btnRegistrarComentario=${btnRegistrarComentario}&cedula=${cedula}`,
+        ajax: `${url_ajax}auditorias_socio/tabla_auditorias.php?opcion=${opcion}${param}`,
         columns: [
             { data: "id" },
             { data: "cedula" },
@@ -16,7 +23,7 @@ function tabla_registros_auditoria_socio(btnRegistrarComentario = false, filtrar
             { data: "usuario_registro" },
             { data: "acciones" },
         ],
-        order: [[0, "asc"]],
+        order: [[0, "desc"]],
         bDestroy: true,
         language: { url: url_lenguage },
     });
@@ -30,6 +37,7 @@ function registrar_auditoria_socio(openModal = false) {
         $("#txt_registrar_cedula_auditoria_socio").val('');
         $("#txt_registrar_descripcion_auditoria_socio").val('');
         $("#txt_registrar_fecha_auditoria_socio").val('');
+        $("#txt_avisar_carga_auditoria").val('');
 
         let cedula = $("#ci").val();
 
@@ -48,6 +56,7 @@ function registrar_auditoria_socio(openModal = false) {
         let cedula = $("#txt_registrar_cedula_auditoria_socio").val();
         let descripcion = $("#txt_registrar_descripcion_auditoria_socio").val();
         let fecha_auditoria = $("#txt_registrar_fecha_auditoria_socio").val();
+        let avisar_a = $("#txt_avisar_carga_auditoria").val();
 
         if (cedula == "") {
             error("Debe ingresar la cédula del socio");
@@ -65,7 +74,8 @@ function registrar_auditoria_socio(openModal = false) {
                 data: {
                     cedula,
                     descripcion,
-                    fecha_auditoria
+                    fecha_auditoria,
+                    avisar_a
                 },
                 dataType: "JSON",
                 success: function (response) {
@@ -110,7 +120,7 @@ function editar_auditoria_socio(openModal = false, id, descripcion, fecha_audito
             success: function (response) {
                 if (response.error === false) {
                     correcto(response.mensaje);
-                    tabla_registros_auditoria_socio(true, false);
+                    tabla_registros_auditoria_socio(1, null);
                     $("#txt_id_editar_auditoria_socio").val('');
                     $("#txt_descripcion_editar_auditoria_socio").val('');
                     $("#txt_fecha_auditoria_editar_auditoria_socio").val('');
@@ -185,10 +195,12 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
         $("#txt_id_registrar_comentario_auditoria").val(id);
         $("#txt_mensaje_registrar_comentario_auditoria").val('');
         $("#file_archivos_auditoria_socio").val('');
+        $("#txt_avisar_carga_comentario_auditoria").val('');
         $("#modal_registrarComentarioAuditoria").modal("show");
     } else {
         let id = $("#txt_id_registrar_comentario_auditoria").val();
         let comentario = $("#txt_mensaje_registrar_comentario_auditoria").val();
+        let avisar_a = $("#txt_avisar_carga_comentario_auditoria").val();
 
         if (id == "") {
             error("El campo ID no puede estar vacío");
@@ -199,6 +211,7 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
             var form_data = new FormData();
             form_data.append("id", id);
             form_data.append("comentario", comentario);
+            form_data.append("avisar_a", avisar_a);
             let totalImagenes = $("#file_archivos_auditoria_socio").prop("files").length;
             for (let i = 0; i < totalImagenes; i++) {
                 form_data.append("imagen[]", $("#file_archivos_auditoria_socio").prop("files")[i]);
@@ -220,7 +233,7 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
                 success: function (response) {
                     if (response.error === false) {
                         correcto(response.mensaje);
-                        tabla_registros_auditoria_socio(true, false);
+                        tabla_registros_auditoria_socio(1, null);
                         $("#txt_id_registrar_comentario_auditoria").val('');
                         $("#txt_mensaje_registrar_comentario_auditoria").val('');
                         $("#file_archivos_auditoria_socio").val('');
@@ -258,7 +271,7 @@ function editar_comentario_auditoria(openModal = false, id, comentario) {
                 if (response.error === false) {
                     let datos = response.datos;
                     correcto(response.mensaje);
-                    tabla_registros_auditoria_socio(true, false);
+                    tabla_registros_auditoria_socio(1, null);
                     tabla_comentarios_auditoria(datos.id);
                     $("#txt_id_editar_comentario_auditoria_socio").val('');
                     $("#txt_descripcion_editar_comentario_auditoria_socio").val('');
@@ -299,7 +312,6 @@ function pausar_audios_al_cerrar_modal() {
 }
 
 
-
 function verificar_auditoria_socio() {
 
     let cedula = $("#ci").val();
@@ -313,7 +325,7 @@ function verificar_auditoria_socio() {
             success: function (response) {
                 if (response.error === false) {
                     $("#contenedor_auditorias_socio").css("display", "block");
-                    $("#div_auditorias_socio").html("<button class='btn btn-info' onclick='tabla_registros_auditoria_socio(true, true)'> Auditoría Socio </button>");
+                    $("#div_auditorias_socio").html(`<button class='btn btn-info' onclick='tabla_registros_auditoria_socio(2, ${cedula})'> Auditoría Socio </button>`);
                 } else if (response.error == 222) {
                     error(response.mensaje);
                 }
@@ -321,4 +333,84 @@ function verificar_auditoria_socio() {
         });
     }
 
+}
+
+
+function obtener_alertas(id_funcionalidad) {
+
+    $("#span_alertas_auditoria").text(`0+`);
+
+    $.ajax({
+        type: "GET",
+        url: `${url_ajax}alertas/cantidad_alertas_generales_pendientes.php`,
+        data: {
+            id_funcionalidad
+        },
+        dataType: "JSON",
+        success: function (response) {
+            if (response.error === false) {
+                let cantidad = response.cantidad;
+                $("#span_alertas_auditoria").text(`${cantidad}+`);
+            }
+        }
+    });
+}
+
+
+function mostrar_alertas(id_funcionalidad) {
+    let cantidad_alertas = $("#span_alertas_auditoria").text();
+
+    if (cantidad_alertas != "0+") {
+        tabla_alertas_generales(id_funcionalidad);
+        $("#span_alertas_generales").text("Alertas - Registros de auditoría");
+        $("#modal_alertasGenerales").modal("show");
+    } else {
+        error("No hay alertas pendientes");
+    }
+}
+
+function tabla_alertas_generales(id_funcionalidad) {
+    $("#tabla_alertas_generales").DataTable({
+        ajax: `${url_ajax}alertas/tabla_alertas_generales.php?id_funcionalidad=${id_funcionalidad}`,
+        columns: [
+            { data: "id" },
+            { data: "area" },
+            { data: "usuario" },
+            { data: "descripcion" },
+            { data: "fecha_registro" },
+            { data: "acciones" },
+        ],
+        order: [[0, "asc"]],
+        bDestroy: true,
+        language: { url: url_lenguage },
+    });
+}
+
+
+function alerta_leida(id, id_registro, string_funcionalidades) {
+    let id_funcionalidades = string_funcionalidades.split(",");
+
+    $.ajax({
+        type: "POST",
+        url: `${url_ajax}alertas/alerta_leida.php`,
+        data: {
+            id
+        },
+        dataType: "JSON",
+        beforeSend: function () {
+            mostrarLoader();
+        },
+        complete: function () {
+            mostrarLoader("O");
+        },
+        success: function (response) {
+            if (response.error === false) {
+                if (string_funcionalidades == "1,2") tabla_registros_auditoria_socio(3, id_registro);
+                obtener_alertas(id_funcionalidades);
+                tabla_alertas_generales(id_funcionalidades);
+            } else {
+                error(response.mensaje);
+            }
+        }
+    });
 }

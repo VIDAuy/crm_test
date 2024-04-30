@@ -93,6 +93,7 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_historial_crmessage.html",
 				"crmessage/modal_mensajes_crmessage.html",
 				"crmessage/modal_reasignar_crmessage.html",
+				"modal_alertas_generales.html",
 			];
 
 			/** Carga Modals **/
@@ -176,6 +177,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
+				"modal_alertas_generales.html",
 			];
 
 			/** Carga Modals **/
@@ -287,6 +289,7 @@ if (isset($_SESSION['nivel'])) {
 				"modalSesionExpirada.html",
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
+				"modal_alertas_generales.html",
 			];
 
 
@@ -337,6 +340,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_editar_auditorias.html",
 				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas/modal_solicitar_baja.html",
+				"modal_alertas_generales.html",
 			];
 
 
@@ -405,6 +409,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_registrar_comentario_auditoria.html",
 				"auditorias/modal_editar_auditorias.html",
 				"auditorias/modal_editar_comentario_auditoria.html",
+				"modal_alertas_generales.html",
 			];
 
 
@@ -470,6 +475,7 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_editar_auditorias.html",
 				"auditorias/modal_editar_comentario_auditoria.html",
 				"bajas/modal_solicitar_baja.html",
+				"modal_alertas_generales.html",
 			];
 
 

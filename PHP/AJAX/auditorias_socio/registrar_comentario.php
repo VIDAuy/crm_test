@@ -2,9 +2,10 @@
 include_once '../../configuraciones.php';
 
 $id_auditoria_socio = $_REQUEST['id'];
-$comentario = $_REQUEST['comentario'];
-$id_area = $_SESSION['id'];
-$id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
+$comentario         = $_REQUEST['comentario'];
+$id_area            = $_SESSION['id'];
+$id_sub_usuario     = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
+$avisar_a           = $_REQUEST['avisar_a'];
 
 
 if ($id_auditoria_socio == "" || $comentario == "" || $id_area == "") devolver_error(ERROR_GENERAL);
@@ -23,6 +24,12 @@ if (count($_FILES) > 0) {
 
     $id_registro = registrar_comentario($id_auditoria_socio, $comentario, $id_area, $id_sub_usuario);
     if ($id_registro === false) devolver_error("Ocurrieron errores al registrar el comentario");
+}
+
+
+if ($avisar_a != "") {
+    $registrar_alerta = registrar_alerta($id_auditoria_socio, $id_area, $id_sub_usuario, $avisar_a, 2, $id_registro);
+    if ($registrar_alerta === false) devolver_error("Ocurrieron errores al registrar la alerta");
 }
 
 

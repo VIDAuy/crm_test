@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="modal_registrarComentarioAuditoria" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 2001;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-success">
@@ -25,6 +25,13 @@
                         (opcional):</label>
                     <input class="form-control" type="file" id="file_archivos_auditoria_socio" accept=".mp3" multiple>
                 </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select agregarFiliales" id="txt_avisar_carga_comentario_auditoria"
+                        aria-label="Seleccione un área a avisar si se requiere">
+                    </select>
+                    <label for="txt_avisar_carga_comentario_auditoria">Seleccione un área a avisar (opcional):</label>
+                </div>
+
 
             </div>
             <div class="modal-footer">
