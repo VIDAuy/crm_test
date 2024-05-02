@@ -377,3 +377,31 @@ function marcar_alerta_leida($id, $id_sub_usuario)
 
     return $consulta;
 }
+
+/** Verificar si el string esta vacío **/
+function verificar_letras($cadena)
+{
+    if (preg_match("/^(?=.{3,18}$)[a-zñA-ZÑ](\s?[a-zñA-ZÑ])*$/", $cadena)) {
+        $respuesta = true;
+    } else {
+        $respuesta = false;
+    }
+
+    return $respuesta;
+}
+
+/** Obtener tipo de licencia, actividad o empresa. **/
+function obtener_tipos($opcion, $codigo)
+{
+    $conexion = connection(DB);
+    if ($opcion == 1) $tabla = TABLA_TIPO_LICENCIA;
+    if ($opcion == 2) $tabla = TABLA_TIPO_ACTIVIDAD;
+    if ($opcion == 3) $tabla = TABLA_TIPO_EMPRESA;
+
+    $sql = "SELECT * FROM {$tabla} WHERE identificador = '$codigo' AND activo = 1";
+
+    $consulta = mysqli_query($conexion, $sql);
+    $resultado = ($consulta == false ? false : mysqli_num_rows($consulta) > 0) ? mysqli_fetch_assoc($consulta)['nombre'] : "";
+
+    return $resultado;
+}

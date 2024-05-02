@@ -1,4 +1,5 @@
 <?php
+include_once '../../configuraciones.php';
 include '../../conexiones/conexion5.php';
 $fecha_desde = $_GET['fecha_desde'];
 $fecha_hasta = $_GET['fecha_hasta'];
@@ -95,18 +96,5 @@ function licencias_generadas($fecha_desde, $fecha_hasta, $opcion)
     } else {
         $respuesta = sqlsrv_fetch_array($consulta) != "" ? true : false;
     }
-    return $respuesta;
-}
-
-
-
-function verificar_letras($cadena)
-{
-    if (preg_match("/^(?=.{3,18}$)[a-zñA-ZÑ](\s?[a-zñA-ZÑ])*$/", $cadena)) {
-        $respuesta = true;
-    } else {
-        $respuesta = false;
-    }
-
     return $respuesta;
 }

@@ -144,6 +144,9 @@ const TABLA_CONTENIDO_CRM                = "contenido_crm";
 const TABLA_CONTENIDO_CRM_POR_AREA       = "contenido_crm_por_area";
 const TABLA_ALERTAS                      = "alertas";
 const TABLA_FUNCIONALIDAD                = "funcionalidad";
+const TABLA_TIPO_LICENCIA                = "tipo_licencia";
+const TABLA_TIPO_ACTIVIDAD               = "tipo_actividad";
+const TABLA_TIPO_EMPRESA                 = "tipo_empresa";
 
 
 //SERVER - COORDINACIÓN

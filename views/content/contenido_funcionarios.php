@@ -21,7 +21,7 @@
                     <label for="" class="col-form-label"><u>Teléfono:</u></label>
                     <p id="telefono_funcionario" style="font-weight: bold;"></p>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3">
                     <label for="" class="col-form-label"><u>Correo electrónico:</u></label>
                     <p id="correo_funcionario" style="font-weight: bold;"></p>
                 </div>
@@ -89,27 +89,19 @@
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text bg-danger text-white"
-                                            for="inputGroupSelect01">Desde</label>
-                                    </div>
-                                    <input type="date" class="form-control" id="fecha_desde">
+                                    <span class="input-group-text bg-danger text-white" id="basic-addon1">Desde</span>
+                                    <input type="date" class="form-control" id="fecha_desde" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </div>
                             <div class="col-auto">
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text bg-danger text-white"
-                                            for="inputGroupSelect01">Hasta</label>
-                                    </div>
-                                    <input type="date" class="form-control" id="fecha_hasta">
+                                    <span class="input-group-text bg-danger text-white" id="basic-addon1">Hasta</span>
+                                    <input type="date" class="form-control" id="fecha_hasta" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <button type="button" class="btn btn-info" onclick="consultas('horas')">Horas del
-                                    acompañante</button>
-                                <button type="button" class="btn btn-info" onclick="consultas('faltas')">Reporte de
-                                    faltas</button>
+                                <button type="button" class="btn btn-info" onclick="consultas('horas')">Horas del acompañante</button>
+                                <button type="button" class="btn btn-info" onclick="consultas('faltas')">Reporte de faltas</button>
                             </div>
                         </div>
                     </div>

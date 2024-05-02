@@ -27,7 +27,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/sesion.js",
 				"general/alertas_de_otras_areas.js",
 				"general/buscar_socio_o_funcionario.js",
-				"general/consultas_datos_socio_o_funcionario.js",
+				"general/consultas_acompanantes.js",
 				"general/alertas_de_vida_te_lleva.js",
 				"general/cargar_registros.js",
 				"general/historia_comunicacion_de_cedula.js",
@@ -117,7 +117,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/sesion.js",
 				"general/alertas_de_otras_areas.js",
 				"general/buscar_socio_o_funcionario.js",
-				"general/consultas_datos_socio_o_funcionario.js",
+				"general/consultas_acompanantes.js",
 				"general/alertas_de_vida_te_lleva.js",
 				"general/cargar_registros.js",
 				"general/historia_comunicacion_de_cedula.js",
@@ -207,7 +207,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/sesion.js",
 				"general/alertas_de_otras_areas.js",
 				"general/buscar_socio_o_funcionario.js",
-				"general/consultas_datos_socio_o_funcionario.js",
+				"general/consultas_acompanantes.js",
 				"general/alertas_de_vida_te_lleva.js",
 				"general/cargar_registros.js",
 				"general/historia_comunicacion_de_cedula.js",
@@ -218,6 +218,8 @@ if (isset($_SESSION['nivel'])) {
 				"general/crmessage.js",
 				"general/equifax.js",
 				"general/bajas_morosidad.js",
+				"general/consultas_generales.js",
+				"general/cierre_de_horas_personalizado.js",
 			];
 
 			/** Carga JS **/
@@ -240,6 +242,8 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/historial_patologias_socio.php');
 			include('views/content/cobranza_abitab.php');
 			include('views/content/administrar_alertas_y_llamadas_pendientes.php');
+			include('views/content/consultas_generales.php');
+			include('views/content/cierre_de_horas_personalizado.php');
 
 
 			$array_cargar_modals = [
@@ -261,6 +265,10 @@ if (isset($_SESSION['nivel'])) {
 				"datos_acompanantes/modal_faltas_acompanantes.html",
 				"datos_acompanantes/modal_horas_acompanantes.html",
 				"datos_acompanantes/modal_licencia_acompanantes.html",
+				"datos_acompanantes/modal_todas_licencias_acompanantes.html",
+				"datos_acompanantes/modal_todas_las_horas_acompanantes_personal.html",
+				"datos_acompanantes/modal_todos_registros_faltas_acompanantes_personal.html",
+				"datos_acompanantes/modal_capacitacion_acompanantes.html",
 				"datos_socio/modalDatosCobranza.html",
 				"datos_socio/modalDatosCoordina.html",
 				"datos_socio/modalDatosProductos.html",
@@ -409,72 +417,6 @@ if (isset($_SESSION['nivel'])) {
 				"auditorias/modal_registrar_comentario_auditoria.html",
 				"auditorias/modal_editar_auditorias.html",
 				"auditorias/modal_editar_comentario_auditoria.html",
-				"modal_alertas_generales.html",
-			];
-
-
-			/** Carga Modals **/
-			foreach ($array_cargar_modals as $modal) {
-				include('./views/modals/' . $modal);
-			}
-			/** END Carga Modals **/
-
-
-			break;
-
-
-		case 6:
-
-			$array_ruta_cargar_js = [
-				"nivel6/js.js",
-				"nivel6/alertas/js.js",
-				"general/sesion.js",
-				"nivel6/crmessage.js",
-				"general/equifax.js",
-				"general/bajas_morosidad.js",
-			];
-
-			/** Carga JS **/
-			foreach ($array_ruta_cargar_js as $ruta_archivo) {
-				echo '<script src="./assets/js/' . $ruta_archivo . $version . '"></script>';
-			}
-			/** END Carga JS **/
-
-
-			include('./views/content/nivel6.php');
-
-
-			$array_cargar_modals = [
-				"nivel6/modal_licencia_acompanantes.html",
-				"nivel6/modal_horas_acompanantes_personal.html",
-				"nivel6/modal_faltas_acompanantes_personal.html",
-				"nivel6/modalDatosCoordina_personal.html",
-				"nivel6/modalDatosCobranza_personal.html",
-				"nivel6/modalDatosProductos_personal.html",
-				"nivel6/modal_todas_licencias_acompanantes.html",
-				"nivel6/modal_todas_las_horas_acompanantes_personal.html",
-				"nivel6/modal_todos_registros_faltas_acompanantes_personal.html",
-				"nivel6/alertas/modal_alertas_contenido_funcionarios.php",
-				"nivel6/modal_capacitacion_acompanantes.html",
-				"modal_identificar_persona_logueada.html",
-				"modalSesionExpirada.html",
-				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
-				"alertas/modal_asignar_alerta_pendiente.html",
-				"alertas/modal_historial_registros_de_alertas.html",
-				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
-				"etiquetas_socio/modal_ver_etiquetas_socio.html",
-				"modal_mostrar_imagenes.html",
-				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
-				"crmessage/modal_crmessage.html",
-				"crmessage/modal_historial_crmessage.html",
-				"crmessage/modal_mensajes_crmessage.html",
-				"crmessage/modal_reasignar_crmessage.html",
-				"auditorias/modal_auditorias_socio_registradas.html",
-				"auditorias/modal_ver_comentarios_auditoria_socio.html",
-				"auditorias/modal_registrar_comentario_auditoria.html",
-				"auditorias/modal_editar_auditorias.html",
-				"auditorias/modal_editar_comentario_auditoria.html",
-				"bajas/modal_solicitar_baja.html",
 				"modal_alertas_generales.html",
 			];
 

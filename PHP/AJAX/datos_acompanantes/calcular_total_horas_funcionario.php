@@ -1,16 +1,13 @@
 <?php
-header('Content-Type: application/json; charset=utf-8');
-session_start();
+include_once '../../configuraciones.php';
 
-
-include '../conexiones/conexion3.php';
 $cedula = $_REQUEST['cedula'];
 $fecha_desde = $_REQUEST['fecha_desde'];
 $fecha_hasta = $_REQUEST['fecha_hasta'];
 $cantidad_horas = 0;
 
 
-$consulta = consulta_general($conexion, $cedula, $fecha_desde, $fecha_hasta);
+$consulta = consulta_general($cedula, $fecha_desde, $fecha_hasta);
 
 while ($resultado = mysqli_fetch_array($consulta)) {
 
@@ -24,16 +21,21 @@ while ($resultado = mysqli_fetch_array($consulta)) {
 
 
     if ($horario_cortado == 1) {
+        include '../../conexiones/conexion3.php';
         $_fecha = date('Y-m-d', strtotime($fecha_servicio . '+1 day'));
-        $query = "SELECT h.hora_fin 
-                  FROM servicios_new s INNER JOIN horarios h ON s.id = h.id_servicio 
-                  WHERE h.activo = 1 
-                      AND h.hora_inicio = '00:00' 
-                      AND h.horario_cortado = 1 
-                      AND s.activo = 1 
-                      AND s.fecha = '$_fecha' 
-                      AND s.idinfo='$idinfo'
-                      AND h.cedula_acompanante = '$cedula'";
+        $query = "SELECT 
+                  h.hora_fin 
+                 FROM 
+                  servicios_new s 
+                  INNER JOIN horarios h ON s.id = h.id_servicio 
+                 WHERE 
+                  h.activo = 1 AND 
+                  h.hora_inicio = '00:00' AND 
+                  h.horario_cortado = 1 AND 
+                  s.activo = 1 AND 
+                  s.fecha = '$_fecha' AND 
+                  s.idinfo='$idinfo' AND 
+                  h.cedula_acompanante = '$cedula'";
         $hora_fin = mysqli_fetch_assoc(mysqli_query($conexion, $query))['hora_fin'];
     }
 
@@ -46,21 +48,18 @@ while ($resultado = mysqli_fetch_array($consulta)) {
 }
 
 
+
 $response['error'] = false;
 $response['datos'] = $cantidad_horas;
-
-
-
 echo json_encode($response);
 
 
 
 
-
-
-
-function consulta_general($conexion, $cedula, $fecha_desde, $fecha_hasta)
+function consulta_general($cedula, $fecha_desde, $fecha_hasta)
 {
+    include '../../conexiones/conexion3.php';
+
     $sql = "SELECT 
             s.id AS 'id_servicio', 
             h.hora_inicio, 
