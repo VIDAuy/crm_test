@@ -72,7 +72,7 @@ if ($_SESSION['nivel'] == 1) {
                 </div>
             </div>
             <div class='col-lg-4 mb-3' style='margin-top: -1%;'>
-                <label>Cargar Imagen:</label>
+                <label>Cargar Archivos (opcional):</label>
                 <div class='d-flex justify-content-center'>
                     <input type='file' class='form-control mb-3' name='cargar_imagen_registro_1[]' id='cargar_imagen_registro_1' accept='.jpg, .jpeg, .png, .pdf' multiple>
                 </div>

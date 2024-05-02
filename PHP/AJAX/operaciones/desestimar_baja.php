@@ -4,14 +4,11 @@ include_once '../../configuraciones.php';
 $cedula = $_REQUEST['cedula'];
 
 
-
 $verificar_socio = verificar_socio_padron($cedula);
 if (mysqli_num_rows($verificar_socio) <= 0) devolver_error("No se encontrarón registros en padrón con la cédula ingresada");
 
-
 $comprobar_baja_padron = comprobar_baja_padron($cedula);
 if ($comprobar_baja_padron == false) devolver_error("La cédula ingresada no esta de baja");
-
 
 $datos_padron = obtener_datos_padron($cedula);
 if (count($datos_padron) == 0) devolver_error("La cédula ingresada no esta registrada en padrón");
@@ -20,14 +17,11 @@ $telefono = $datos_padron['tel'];
 $telefono = buscarCelular($telefono)[0];
 if (intval($telefono) == 0 || $telefono == "" || !is_numeric($telefono)) $telefono = 0;
 
-
 $registrar_crm = dejar_registro_crm($cedula, $nombre, $telefono);
 if ($registrar_crm == false) devolver_error("Ocurrieron errores al dejar registro en CRM");
 
-
 $revertir_baja_padron_socios = revertir_baja_padron_datos_socio($cedula);
 if ($revertir_baja_padron_socios == false) devolver_error("Ocurrieron errores al modificar en padrón datos socio");
-
 
 $revertir_baja_padron_productos = revertir_baja_padron_producto_socio($cedula);
 if ($revertir_baja_padron_productos == false) devolver_error("Ocurrieron errores al modificar en padrón producto socio");

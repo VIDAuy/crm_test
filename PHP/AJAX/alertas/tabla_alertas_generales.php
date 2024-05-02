@@ -26,7 +26,6 @@ foreach ($array_id_string as $id_funcionalidad) {
         $area            = ucfirst(obtener_datos_usuario($row['area_alerto'])['usuario']);
         $id_usuario      = $row['usuario_alerto'];
         $usuario         = $id_usuario != "0" ? obtener_nombre_sub_usuario($id_usuario) : "-";
-        $usuario = $usuario == "Audit1" ? "Nathalia Horvat" : ($usuario == "Audit2" ? "Andrea Horvat" : ($usuario == "Audit3" ? "Tatiana Landa" : $usuario));
         $descripcion     = obtener_funcionalidad($row['id_funcionalidad'])['nombre'] . " - <span class='text-danger fw-bolder'>#$id_numero</span>";
         $fecha_registro  = $row['fecha_registro'];
         $acciones        = "<button class='btn btn-primary' onclick='alerta_leida(`" . $id . "`, `" . $id_registro . "`, `" . $id_funcionalidades . "`)'>Ver</button>";
@@ -56,7 +55,6 @@ foreach ($array_id_string as $id_funcionalidad) {
         $area            = ucfirst(obtener_datos_usuario($row['area_alerto'])['usuario']);
         $id_usuario      = $row['usuario_alerto'];
         $usuario         = $id_usuario != "0" ? obtener_nombre_sub_usuario($id_usuario) : "-";
-        $usuario = $usuario == "Audit1" ? "Nathalia Horvat" : ($usuario == "Audit2" ? "Andrea Horvat" : ($usuario == "Audit3" ? "Tatiana Landa" : $usuario));
         $descripcion     = obtener_funcionalidad($row['id_funcionalidad'])['nombre'] . " - <span class='text-danger fw-bolder'>#$id_numero</span>";
         $fecha_registro  = $row['fecha_registro'];
         $acciones        = "<button class='btn btn-primary' onclick='alerta_leida(`" . $id . "`, `" . $id_registro . "`, `" . $id_funcionalidades . "`)'>Ver</button>";

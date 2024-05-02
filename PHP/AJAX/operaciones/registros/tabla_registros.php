@@ -26,13 +26,7 @@ while ($row = mysqli_fetch_assoc($lista_registros)) {
     $id_sub_usuario = $row['sub_usuario'];
     $imagenes = obtener_imagenes($id);
     if ($imagenes != 0) $acciones .= "<button class='btn btn-sm btn-info' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS . "`, `" . $imagenes . "`);'>Ver Archivos</button>";
-
-
-    if (in_array($sector, ['Audit1', 'Audit2', 'Audit3'])) {
-        $usuario = ($sector == "Audit1") ? "Nathalia Horvat" : (($sector == "Audit2") ? "Andrea Horvat" : (($sector == "Audit3") ? "Tatiana Landa" : ""));
-    } else {
-        $usuario = $id_sub_usuario != "" ? @utf8_encode($id_sub_usuario) : "-";
-    }
+    $usuario = $id_sub_usuario != "" ? @utf8_encode($id_sub_usuario) : "-";
     $acciones .= "<button class='btn btn-sm btn-danger' onclick='eliminar_registro(`" . $id . "`);'>❌</button>";
 
 

@@ -10,7 +10,6 @@ $cedula = $_REQUEST['cedula'];
 
 $lista_registros = obtener_registros($cedula, $filtroSector);
 
-
 while ($row = mysqli_fetch_assoc($lista_registros)) {
 
 	$id = $row['id'];
@@ -23,19 +22,12 @@ while ($row = mysqli_fetch_assoc($lista_registros)) {
 	$resumen_observacion = strlen($row['observaciones']) > 29 ? $row['observaciones'] = mb_substr($row['observaciones'], 0, 40) . ' ' . '(...)' : $row['observaciones'];
 	$socio = $row['socio'] == 1 ? "Si" : "<span class='text-danger'>No</span>";
 	$baja = $row['baja'] == 1 ? "<span class='text-danger'>Si</span>" : "No";
-	$envioSector = $row['envioSector'] != "" ? obtener_datos_usuario($row['envioSector'])['usuario'] : "-";
+	$envioSector = $row['envioSector'] != "" ? ucfirst(obtener_datos_usuario($row['envioSector'])['usuario']) : "-";
 	$id_sub_usuario = $row['sub_usuario'];
 	$imagenes = obtener_imagenes($id);
 	$btnImagen = strlen($imagenes) > 0 ? "<button class='btn btn-sm btn-info' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS . "`, `" . $imagenes . "`);'>Ver Archivos</button>" : "-";
 	$btnMasInfo = "<button class='btn btn-sm btn-primary' onclick='abrir_modal_ver_mas_registro(`" . $id . "`, `" . $cedula . "`, `" . $nombre . "`, `" . $telefono . "`, `" . $fecha_registro . "`, `" . $sector . "`, `" . $observacion . "`, `" . $row['socio'] . "`, `" . $row['baja'] . "`);'>Más Info</button>";
-
-
-	if (in_array($sector, ['Audit1', 'Audit2', 'Audit3'])) {
-		$usuario = ($sector == "Audit1") ? "Nathalia Horvat" : (($sector == "Audit2") ? "Andrea Horvat" : (($sector == "Audit3") ? "Tatiana Landa" : ""));
-	} else {
-		$usuario = $id_sub_usuario != "" ? @utf8_encode($id_sub_usuario) : "-";
-	}
-
+	$usuario = $id_sub_usuario != "" ? @utf8_encode($id_sub_usuario) : "-";
 
 	$tabla["data"][] = [
 		'id'			=> $id,

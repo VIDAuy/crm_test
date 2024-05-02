@@ -97,7 +97,7 @@ if ($_SESSION['nivel'] == 1) {
 
     $agenda_volver_a_llamar = "
     <div class='d-flex justify-content-center'>
-        <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' id='contenedor_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)' style='display: none'>
+        <button class='btn btn-secondary center-block mt-3 mb-5 ctr_agendar_volver_a_llamar' onclick='agendar_volver_a_llamar(true)' style='display: none'>
             Agregar a agenda 📞
         </button>
     </div>";
@@ -130,7 +130,7 @@ if ($_SESSION['nivel'] == 1) {
                 </div>
             </div>
             <div class='col-lg-4 mb-3' style='margin-top: -1%;'>
-                <label>Cargar Imagen:</label>
+                <label>Cargar Archivos (opcional):</label>
                 <div class='d-flex justify-content-center'>
                     <input type='file' class='form-control mb-3' name='cargar_imagen_registro_3[]' id='cargar_imagen_registro_3' accept='.jpg, .jpeg, .png, .pdf' multiple>
                 </div>

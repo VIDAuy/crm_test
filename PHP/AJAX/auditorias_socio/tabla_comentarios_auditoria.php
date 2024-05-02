@@ -14,13 +14,13 @@ while ($row = mysqli_fetch_assoc($comentarios_auditoria)) {
     $id = $row['id'];
     $comentario = $row['comentario'];
     $area_registro = $row['area_registro'] != "" ? ucfirst(obtener_datos_usuario($row['area_registro'])['usuario']) : "-";
-    $usuario_registro = ($area_registro == "Audit1") ? "Nathalia Horvat" : (($area_registro == "Audit2") ? "Andrea Horvat" : (($area_registro == "Audit3") ? "Tatiana Landa" : $area_registro));
+    $usuario_registro = obtener_nombre_sub_usuario($row['usuario_registro']);
     $fecha_registro = $row['fecha_registro'];
     $archivos_del_comentario = imagenes_comentario($id);
     $acciones = "";
     if (strlen($archivos_del_comentario) > 0)
         $acciones .= "<button class='btn btn-sm btn-info me-2' onclick='modal_ver_mp3(`" . URL_DOCUMENTOS_AUDITORIA . "`, `" . $archivos_del_comentario . "`);'>📑</button>";
-    if (in_array($area, ["Audit1", "Audit2", "Audit3"]))
+    if (in_array($area, ["Auditoria"]))
         $acciones .= "<button class='btn btn-sm btn-primary' onclick='editar_comentario_auditoria(true, `" . $id . "`, `" . $comentario . "`)'>✏</button>";
 
     if (strlen($comentario) > 20) {

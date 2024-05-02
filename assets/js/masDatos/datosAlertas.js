@@ -40,7 +40,7 @@ function ver(CI, idRegistro) {
 		success: function (content) {
 			b = content.message;
 			$('#ci').val(CI);
-			$('#modalDatosAlertas .close').click();
+			$('#modalDatosAlertas').modal("hide");
 			$('#buscarCI').click();
 		}
 	});

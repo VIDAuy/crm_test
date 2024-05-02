@@ -40,7 +40,7 @@ function ver(CI) {
 			success: function (content) {
 				b = content.message;
 				$('#ci').val(CI);
-				$('#modalDatosAlertasNivel1 .close').click();
+				$('#modalDatosAlertasNivel1').modal("hide");
 			}
 		});
 }

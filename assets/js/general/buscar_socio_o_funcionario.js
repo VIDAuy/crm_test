@@ -78,12 +78,11 @@ function buscarSocio() {
             comprobar_servicios_activos();
 
 
-            if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Cobranzas", "Comercial"].includes(sector)) {
-                $("#contenedor_auditorias_socio").css("display", "block");
+            if (["Auditoria", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Cobranzas", "Comercial"].includes(sector)) {
                 verificar_auditoria_socio();
                 verificar_socio_equifax();
             }
-            if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Coordinacion", "Cobranzas"].includes(sector)) {
+            if (["Auditoria", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Coordinacion", "Cobranzas"].includes(sector)) {
                 $("#contenedor_cobranza_abitab").css("display", "block");
                 tabla_cobranza_abitab();
                 $(".patologias_socio").css("display", "block");
@@ -93,11 +92,11 @@ function buscarSocio() {
                 $("#contenedor_cobranza_abitab").css("display", "block");
                 tabla_cobranza_abitab();
             }
-            if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Coordinacion", "Cobranzas"].includes(sector)) {
+            if (["Auditoria", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Coordinacion", "Cobranzas"].includes(sector)) {
                 $("#div_agregarEtiquetaSocio").css("display", "block");
             }
 
-            if (["Audit1", "Audit2", "Audit3", "Calidad", "Bajas", "Cobranzas"].includes(sector)) $("#btn_agregar_patologia_socio").css("display", "block");
+            if (["Auditoria", "Calidad", "Bajas", "Cobranzas"].includes(sector)) $("#btn_agregar_patologia_socio").css("display", "block");
 
 
             if (nivel == 1) {

@@ -22,7 +22,6 @@ if ($opcion == 1) {
         $etiqueta       = $row['mensaje'];
         $usuario_agrego = $row['id_sub_usuario'] != "" || $row['id_sub_usuario'] != null ? obtener_usuario($row['id_sub_usuario']) : "-";
         $area_agrego    = $row['id_area'] != "" || $row['id_area'] != null ? ucfirst(obtener_datos_usuario($row['id_area'])['usuario']) : "-";
-        $usuario_agrego = ($area_agrego == "Audit1") ? "Nathalia Horvat" : (($area_agrego == "Audit2") ? "Andrea Horvat" : (($area_agrego == "Audit3") ? "Tatiana Landa" : $usuario_agrego));
         $fecha_registro = date("d/m/Y H:i:s", strtotime($row['fecha_registro']));
 
         $tabla["data"][] = [
