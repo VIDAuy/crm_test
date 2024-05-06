@@ -63,7 +63,6 @@ function tabla_alertas_pendientes() {
             { data: "id" },
             { data: "cedula" },
             { data: "sector" },
-            { data: "observaciones" },
             { data: "nombre" },
             { data: "telefono" },
             { data: "usuario_asignado" },

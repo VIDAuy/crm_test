@@ -39,7 +39,6 @@
                                 <th>#</th>
                                 <th>Cédula</th>
                                 <th>Sector</th>
-                                <th>Observación</th>
                                 <th>Nombre Cliente</th>
                                 <th>Teléfono</th>
                                 <th>Usuario Asignado</th>
