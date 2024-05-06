@@ -1,10 +1,3 @@
-$(document).ready(function () {
-
-    obtener_alertas([1, 2]);
-    setInterval(obtener_alertas, 15000, [1, 2]);
-
-});
-
 function tabla_registros_auditoria_socio(opcion = 1, id = null) {
 
     $("#contenedor_titulo_modal_auditorias_socio").html("Auditorias Registradas");
@@ -307,6 +300,7 @@ function modal_ver_mp3(ruta_registros, string_imagenes) {
     $('#modalVerImagenesRegistro').modal('show');
 }
 
+
 function pausar_audios_al_cerrar_modal() {
     $('.player_audio').trigger("pause");
 }
@@ -333,84 +327,4 @@ function verificar_auditoria_socio() {
         });
     }
 
-}
-
-
-function obtener_alertas(id_funcionalidad) {
-
-    $("#span_alertas_auditoria").text(`0+`);
-
-    $.ajax({
-        type: "GET",
-        url: `${url_ajax}alertas/cantidad_alertas_generales_pendientes.php`,
-        data: {
-            id_funcionalidad
-        },
-        dataType: "JSON",
-        success: function (response) {
-            if (response.error === false) {
-                let cantidad = response.cantidad;
-                $("#span_alertas_auditoria").text(`${cantidad}+`);
-            }
-        }
-    });
-}
-
-
-function mostrar_alertas(id_funcionalidad) {
-    let cantidad_alertas = $("#span_alertas_auditoria").text();
-
-    if (cantidad_alertas != "0+") {
-        tabla_alertas_generales(id_funcionalidad);
-        $("#span_alertas_generales").text("Alertas - Registros de auditoría");
-        $("#modal_alertasGenerales").modal("show");
-    } else {
-        error("No hay alertas pendientes");
-    }
-}
-
-function tabla_alertas_generales(id_funcionalidad) {
-    $("#tabla_alertas_generales").DataTable({
-        ajax: `${url_ajax}alertas/tabla_alertas_generales.php?id_funcionalidad=${id_funcionalidad}`,
-        columns: [
-            { data: "id" },
-            { data: "area" },
-            { data: "usuario" },
-            { data: "descripcion" },
-            { data: "fecha_registro" },
-            { data: "acciones" },
-        ],
-        order: [[0, "asc"]],
-        bDestroy: true,
-        language: { url: url_lenguage },
-    });
-}
-
-
-function alerta_leida(id, id_registro, string_funcionalidades) {
-    let id_funcionalidades = string_funcionalidades.split(",");
-
-    $.ajax({
-        type: "POST",
-        url: `${url_ajax}alertas/alerta_leida.php`,
-        data: {
-            id
-        },
-        dataType: "JSON",
-        beforeSend: function () {
-            mostrarLoader();
-        },
-        complete: function () {
-            mostrarLoader("O");
-        },
-        success: function (response) {
-            if (response.error === false) {
-                if (string_funcionalidades == "1,2") tabla_registros_auditoria_socio(3, id_registro);
-                obtener_alertas(id_funcionalidades);
-                tabla_alertas_generales(id_funcionalidades);
-            } else {
-                error(response.mensaje);
-            }
-        }
-    });
 }

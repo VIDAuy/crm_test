@@ -61,7 +61,7 @@ function obtener_menu($id_area)
 	      m.id_usuario = '$id_area' AND 
           m.activo = 1 AND 
           im.activo = 1
-          ORDER BY im.id ASC";
+          ORDER BY im.nombre ASC";
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;

@@ -54,6 +54,7 @@ function cantidad_alertas() {
 
 }
 
+
 function tabla_alertas_pendientes() {
 
     $("#tabla_alertas_pendientes").DataTable({
@@ -62,6 +63,7 @@ function tabla_alertas_pendientes() {
             { data: "id" },
             { data: "cedula" },
             { data: "sector" },
+            { data: "observaciones" },
             { data: "nombre" },
             { data: "telefono" },
             { data: "usuario_asignado" },
@@ -73,6 +75,7 @@ function tabla_alertas_pendientes() {
         language: { url: url_lenguage },
     });
 }
+
 
 function badge_cantidad_alertas_pendientes() {
 
@@ -88,6 +91,7 @@ function badge_cantidad_alertas_pendientes() {
         }
     });
 }
+
 
 function abrir_asignar_alerta(openModal = false, id, cedula, nombre, telefono, sector, id_sub_usuario, id_usuario_asignado = null, id_usuario_asignador = null, usuario_asignado = null, usuario_asignador = null) {
     if (openModal === true) {
@@ -163,4 +167,28 @@ function abrir_asignar_alerta(openModal = false, id, cedula, nombre, telefono, s
 
         }
     }
+}
+
+
+function ver_registros_alertas() {
+
+    $("#modal_historialRegistrosDeAlertas").modal("show");
+
+    $('#tabla_historial_alertas').DataTable({
+        ajax: `${url_ajax}alertas/tabla_historial_alertas.php`,
+        columns: [
+            { data: 'id' },
+            { data: 'cedula' },
+            { data: 'sector' },
+            { data: 'observaciones' },
+            { data: 'nombre' },
+            { data: 'telefono' },
+            { data: 'fecha_registro' },
+            { data: 'usuario_asignado' },
+            { data: 'usuario_asignador' },
+        ],
+        "order": [[0, 'desc']],
+        "bDestroy": true,
+        language: { url: url_lenguage },
+    });
 }

@@ -324,15 +324,17 @@ function registrar_alerta($id_registro, $area_alerto, $id_sub_usuario, $area_ale
 }
 
 /** Obtener todas las alertas pendientes $opcion = 1 para área y $opcion = 2 para usuario **/
-function obtener_todas_alertas_pendientes($opcion, $id_area, $id_sub_usuario, $id_funcionalidad)
+function obtener_todas_alertas_pendientes($opcion, $id_area, $id_sub_usuario)
 {
     $conexion = connection(DB);
     $tabla = TABLA_ALERTAS;
 
-    $where = $opcion == 1 ? "usuario_alertado IS NULL AND" : "usuario_alertado = '$id_sub_usuario' AND";
+    if ($opcion == 1) $where = "usuario_alertado = '$id_sub_usuario' AND";
+    if ($opcion == 2) $where = "( usuario_alertado IS NULL OR usuario_alertado = '$id_sub_usuario' ) AND";
+    if ($opcion == 3) $where = "";
 
     try {
-        $sql = "SELECT * FROM {$tabla} WHERE area_alertada = '$id_area' AND $where id_funcionalidad = '$id_funcionalidad' AND leido = 0 AND activo = 1";
+        $sql = "SELECT * FROM {$tabla} WHERE area_alertada = '$id_area' AND $where leido = 0 AND activo = 1";
         $consulta = mysqli_query($conexion, $sql);
     } catch (\Throwable $error) {
         registrar_errores($sql, "funciones.php", $error);

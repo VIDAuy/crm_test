@@ -10,6 +10,11 @@
                 <span class="badge text-bg-secondary" id="cantidad_total_alertas_pendientes"></span>
             </button>
 
+            <button class="nav-link" id="vista_tabla_alertas_generales-tab" data-bs-toggle="tab" data-bs-target="#vista_tabla_alertas_generales" type="button" role="tab" aria-controls="vista_tabla_alertas_generales" aria-selected="false">
+                Alertas generales
+                <span class="badge text-bg-secondary" id="cantidad_total_pendientes_alertas_generales"></span>
+            </button>
+
             <button class="nav-link" id="vista_tabla_volver_a_llamar-tab" data-bs-toggle="tab" data-bs-target="#vista_tabla_volver_a_llamar" type="button" role="tab" aria-controls="vista_tabla_volver_a_llamar" aria-selected="false">
                 Volver a llamar
                 <span class="badge text-bg-secondary" id="cantidad_total_pendientes_volver_a_llamar"></span>
@@ -34,8 +39,33 @@
                                 <th>#</th>
                                 <th>Cédula</th>
                                 <th>Sector</th>
+                                <th>Observación</th>
                                 <th>Nombre Cliente</th>
                                 <th>Teléfono</th>
+                                <th>Usuario Asignado</th>
+                                <th>Usuario Asignador</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="vista_tabla_alertas_generales" role="tabpanel" aria-labelledby="vista_tabla_alertas_generales-tab" tabindex="0">
+            <div class="alert alert-primary border-primary" role="alert">
+                <div class="table-responsive">
+                    <h3 class="text-center mb-3"><u>Alertas generales:</u></h3>
+                    <table id="tabla_reasignar_alertas_auditoria_pendientes" class="table table-sm table-bordered table-striped table-hover" width="100%">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Sector</th>
+                                <th>Usuario Registro</th>
+                                <th>Descripción</th>
+                                <th>Fecha Registro</th>
                                 <th>Usuario Asignado</th>
                                 <th>Usuario Asignador</th>
                                 <th>Acciones</th>

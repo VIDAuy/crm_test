@@ -7,7 +7,7 @@ $tipo_consulta = $_REQUEST['tipoConsulta'];
 $id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
 
 
-$modificar_visto = marcar_alerta_leida($id, $tipo_consulta, $id_sub_usuario);
+$modificar_visto = marcar_crmessage_alerta_leida($id, $tipo_consulta, $id_sub_usuario);
 
 if ($modificar_visto === false) {
     $response['error'] = true;
@@ -25,7 +25,7 @@ echo json_encode($response);
 
 
 
-function marcar_alerta_leida($id, $tipo_consulta, $id_sub_usuario)
+function marcar_crmessage_alerta_leida($id, $tipo_consulta, $id_sub_usuario)
 {
     $conexion = connection(DB);
     $tabla = TABLA_MENSAJES_CONSULTA_TRANSAREA;
