@@ -1,4 +1,4 @@
-const produccion = false;
+const produccion = true;
 const protocolo = "http";
 const server = produccion ? "192.168.1.250:82" : "192.168.1.250:82";
 const app = produccion ? "crm" : "crm_test";
@@ -101,6 +101,18 @@ function enviar_terminos_y_condiciones_socio(openModal = false) {
   }
 }
 
+// Funciones complementarias
+
+function ocultarContenido() {
+  if ($('#ci').val() != $('cedulas').text()) {
+    $('.contenido').css('display', 'none');
+    $('.contenido_funcionario').css('display', 'none');
+    $('#historiaComunicacionDeCedulaDiv').css('display', 'none');
+    $(".patologias_socio").css("display", "none");
+    $('#historiaComunicacionDeCedulaDiv_funcionarios').css('display', 'none');
+    $('#acciones_socios_nivel_3').css('display', 'none');
+  }
+}
 
 // Funciones de control
 

@@ -6,9 +6,9 @@ $sector = $_SESSION['id'];
 $id_sub_usuario = $_REQUEST['id_sub_usuario'];
 
 if ($id_sub_usuario != "") {
-    $q = "SELECT cedula FROM registros WHERE envioSector = '$sector' AND activo = 1 AND cedula != '' AND id_usuario_asignado = '$id_sub_usuario'";
+    $q = "SELECT cedula FROM registros WHERE envioSector = '$sector' AND activo = 1 AND cedula != '' AND id_usuario_asignado = '$id_sub_usuario' AND eliminado = 0";
 } else {
-    $q = "SELECT cedula FROM registros WHERE envioSector = '$sector' AND activo = 1 AND cedula != ''";
+    $q = "SELECT cedula FROM registros WHERE envioSector = '$sector' AND activo = 1 AND cedula != '' AND eliminado = 0";
 }
 
 

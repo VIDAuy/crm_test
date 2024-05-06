@@ -41,6 +41,7 @@ function abrir_modal_identificarse(openModal = false) {
     }
 }
 
+
 function identificar_persona() {
     let sector = $("#sector").val();
     let cedula = $('#cedula_identificar_persona').val();
@@ -76,17 +77,32 @@ function identificar_persona() {
                     mostrar_menu_por_usuarios();
 
 
-                    if (["Calidad"].includes(sector)) {
+                    if (["Calidad", "Bajas"].includes(sector)) {
                         alertas_de_vida_te_lleva();
                         setInterval(alertas_de_vida_te_lleva, 15000);
+
+                        cantidad_volver_a_llamar();
+                        setInterval(cantidad_volver_a_llamar, 15000);
+
+                        $(".ctr_agendar_volver_a_llamar").css("display", "block");
                     }
+
+
+                    if (["Rrhh_coord", "Morosos", "Coordinacion"].includes(sector)) {
+                        cantidad_volver_a_llamar();
+                        setInterval(cantidad_volver_a_llamar, 15000);
+                        $(".ctr_agendar_volver_a_llamar").css("display", "block");
+                    }
+
 
                     if (["Calidad", "Bajas", "Rrhh_coord", "Morosos", "Coordinacion"].includes(sector) && gestor == 1) {
                         tabla_llamadas_pendientes();
-                        setInterval(tabla_llamadas_pendientes, 60000);
+                        setInterval(tabla_llamadas_pendientes, 15000);
 
+                        badge_cantidad_alertas_pendientes();
+                        setInterval(badge_cantidad_alertas_pendientes, 15000);
                         tabla_alertas_pendientes();
-                        setInterval(tabla_alertas_pendientes, 60000);
+                        setInterval(tabla_alertas_pendientes, 30000);
 
                         badge_cantidad_pendientes_volver_a_llamar();
                         setInterval(badge_cantidad_pendientes_volver_a_llamar, 15000);
@@ -95,25 +111,31 @@ function identificar_persona() {
                         $("#vista_tabla_volver_a_llamar-tab").css("display", "block");
                     }
 
+
                     if (["Calidad", "Bajas", "Auditoria"].includes(sector) && gestor == 1) {
                         $("#vista_tabla_crmessage-tab").css("display", "block");
                         cantidad_total_pendientes_crmessage();
                         setInterval(cantidad_total_pendientes_crmessage, 15000);
                         tabla_gestionar_pendientes_crmessage();
-                        setInterval(tabla_gestionar_pendientes_crmessage, 60000);
+                        setInterval(tabla_gestionar_pendientes_crmessage, 30000);
+
+
+                        obtener_alertas_generales();
+                        setInterval(obtener_alertas_generales, 15000);
+
+                        badge_cantidad_alertas_generales_pendientes();
+                        setInterval(badge_cantidad_alertas_generales_pendientes, 15000);
+
                         tabla_reasignar_alertas_generales();
-                        setInterval(tabla_reasignar_alertas_generales, 60000);
+                        setInterval(tabla_reasignar_alertas_generales, 30000);
                     }
 
-                    if (["Calidad", "Bajas", "Rrhh_coord", "Morosos", "Coordinacion"].includes(sector)) {
-                        cantidad_volver_a_llamar();
-                        setInterval(cantidad_volver_a_llamar, 15000);
-                        $(".ctr_agendar_volver_a_llamar").css("display", "block");
-                    }
 
                     if (["Cobranzas", "Comercial", "Auditoria"].includes(sector) && gestor == 1) {
+                        badge_cantidad_alertas_pendientes();
+                        setInterval(badge_cantidad_alertas_pendientes, 15000);
                         tabla_alertas_pendientes();
-                        setInterval(tabla_alertas_pendientes, 60000);
+                        setInterval(tabla_alertas_pendientes, 30000);
 
                         $(".administrar_pendientes").css("display", "block");
                         $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
@@ -123,6 +145,7 @@ function identificar_persona() {
                     cantidad_alertas();
                     cantidad_consultas_no_leidas();
                     ejecutar_acciones_sesion();
+
                 } else {
                     error(response.mensaje);
                 }

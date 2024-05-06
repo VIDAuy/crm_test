@@ -157,11 +157,9 @@ function mostrar_comentarios_auditoria(openModal = false, id, cedula) {
     }
 }
 
+
 function ver_comentarios_auditorias_socio(id, cedula) {
-
-
     tabla_comentarios_auditoria(id);
-
     $("#modal_verComentariosAuditoriaSocio").modal("show");
 }
 

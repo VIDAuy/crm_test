@@ -1,16 +1,4 @@
-$(document).ready(function () {
-
-    obtener_alertas();
-    setInterval(obtener_alertas, 15000);
-
-    badge_cantidad_alertas_auditoria_pendientes();
-    setInterval(badge_cantidad_alertas_auditoria_pendientes, 15000);
-
-});
-
-
-
-function obtener_alertas() {
+function obtener_alertas_generales() {
 
     $("#span_alertas_auditoria").text(`0+`);
 
@@ -77,10 +65,10 @@ function alerta_leida(id, id_registro) {
         success: function (response) {
             if (response.error === false) {
                 tabla_registros_auditoria_socio(3, id_registro);
-                obtener_alertas();
+                obtener_alertas_generales();
                 tabla_alertas_generales();
                 tabla_reasignar_alertas_generales();
-                badge_cantidad_alertas_auditoria_pendientes();
+                badge_cantidad_alertas_generales_pendientes();
             } else {
                 error(response.mensaje);
             }
@@ -88,7 +76,7 @@ function alerta_leida(id, id_registro) {
     });
 }
 
-function badge_cantidad_alertas_auditoria_pendientes() {
+function badge_cantidad_alertas_generales_pendientes() {
 
     $("#cantidad_total_pendientes_alertas_generales").text('0+');
 
@@ -168,8 +156,8 @@ function reasignar_alerta_general(openModal = false, id, id_registro, id_sub_reg
                     $("#usuario_asignador_asignar_alerta_general").text('');
                     $("#select_asignar_alerta_general").val('');
                     tabla_reasignar_alertas_generales();
-                    obtener_alertas();
-                    badge_cantidad_alertas_auditoria_pendientes();
+                    obtener_alertas_generales();
+                    badge_cantidad_alertas_generales_pendientes();
                     $("#modal_asignarAlertasGenerales").modal("hide");
                 } else {
                     error(response.mensaje);
