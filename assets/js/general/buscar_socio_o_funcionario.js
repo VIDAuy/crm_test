@@ -69,40 +69,26 @@ function buscarSocio() {
                 ocultar_todo_funcionario();
             },
         }).done(function (datos) {
-            let sector = $("#sector").val();
-            let nivel = $("#nivel").val();
             $("#cedulas").text(cedula);
             historiaComunicacionDeCedula();
             mostrar_cantidad_etiquetas_socio();
-            $("#contenedor_etiquetas_de_socio").css("display", "block");
             comprobar_servicios_activos();
 
 
-            if (["Auditoria", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Cobranzas", "Comercial"].includes(sector)) {
-                verificar_auditoria_socio();
-                verificar_socio_equifax();
-            }
-            if (["Auditoria", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Coordinacion", "Cobranzas"].includes(sector)) {
-                $("#contenedor_cobranza_abitab").css("display", "block");
-                tabla_cobranza_abitab();
-                $(".patologias_socio").css("display", "block");
-                tabla_patologias_socio();
-            }
-            if (["Comercial"].includes(sector)) {
-                $("#contenedor_cobranza_abitab").css("display", "block");
-                tabla_cobranza_abitab();
-            }
-            if (["Auditoria", "Calidad", "Bajas", "Morosos", "Calidad_interna", "Rrhh_coord", "Coordinacion", "Cobranzas"].includes(sector)) {
-                $("#div_agregarEtiquetaSocio").css("display", "block");
-            }
-
-            if (["Auditoria", "Calidad", "Bajas", "Cobranzas"].includes(sector)) $("#btn_agregar_patologia_socio").css("display", "block");
+            /** Muestro el contenido según los permisos que tenga el usuario **/
+            let contenido = datos.todo_contenido;
+            contenido.map((val) => {
+                if (val == 3) verificar_auditoria_socio();
+                if (val == 4) mostrar_agregar_etiqueta_socio();
+                if (val == 5) mostrar_agregar_patologia_socio();
+                if (val == 6) tabla_cobranza_abitab();
+                if (val == 7) tabla_patologias_socio();
+                if (val == 8) verificar_socio_equifax();
+            });
 
 
-            if (nivel == 1) {
-                $("#contenedor_cobranza_abitab").css("display", "block");
-                tabla_cobranza_abitab();
-            }
+            if (nivel == 1) tabla_cobranza_abitab();
+
 
 
             if (datos.noSocioConRegistros) {

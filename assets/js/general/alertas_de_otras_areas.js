@@ -2,14 +2,8 @@ $(document).ready(function () {
 
     $("#q").css("visibility", "visible");
     $("#bq").text("0+");
-    cantidad_alertas();
-    setInterval(cantidad_alertas, 15000);
-    badge_cantidad_alertas_pendientes();
-    setInterval(badge_cantidad_alertas_pendientes, 15000);
-    $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
     agregarFiliales();
 });
-
 
 
 

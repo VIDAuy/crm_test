@@ -1,6 +1,7 @@
 <?php
 include_once '../configuraciones.php';
 
+$id_area = $_SESSION['id'];
 $sector = $_REQUEST['sector'];
 $cedula = $_REQUEST['cedula'];
 
@@ -37,6 +38,21 @@ $_SESSION['apellido'] = $apellido;
 $_SESSION['gestor'] = $es_gestor;
 
 
+
+$contenido = [];
+if ($es_gestor == 1) {
+    $permiso_contenido = comprobar_permisos(2, $id_area, null, 3);
+    if ($permiso_contenido === false) devolver_error("Ocurrieron errores al obtener los permisos");
+    if (mysqli_num_rows($permiso_contenido) > 0) {
+        while ($row = mysqli_fetch_assoc($permiso_contenido)) {
+            $id = $row['id'];
+            array_push($contenido, $id);
+        }
+    }
+}
+
+
+
 $response['error'] = false;
 $response['mensaje'] = "Bienvenid@ de vuelta $nombre";
 $response['datos'] = [
@@ -48,6 +64,7 @@ $response['datos'] = [
     "apellido" => $apellido,
     "gestor" => $es_gestor,
 ];
+$response['todo_contenido'] = $contenido;
 
 echo json_encode($response);
 

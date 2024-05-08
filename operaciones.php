@@ -196,7 +196,7 @@
                                     <tr>
                                         <th scope="col-auto">#</th>
                                         <th scope="col-auto">Nombre</th>
-                                        <th scope="col-auto">Div</th>
+                                        <th scope="col-auto">Referencia</th>
                                         <th scope="col-auto">Acciones</th>
                                     </tr>
                                 </thead>

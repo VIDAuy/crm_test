@@ -9,8 +9,3 @@ function getAfiliacionesCompetencia() {
         }
     });
 }
-
-$(document).ready(function () {
-    getAfiliacionesCompetencia();
-    let interval = window.setInterval(getAfiliacionesCompetencia, 15000);
-});

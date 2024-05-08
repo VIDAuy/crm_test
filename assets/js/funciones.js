@@ -1,4 +1,4 @@
-const produccion = true;
+const produccion = false;
 const protocolo = "http";
 const server = produccion ? "192.168.1.250:82" : "192.168.1.250:82";
 const app = produccion ? "crm" : "crm_test";

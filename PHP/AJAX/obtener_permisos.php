@@ -8,7 +8,7 @@ $opcion = $_REQUEST['opcion'];
 //Consultar permisos para consultar funcionarios y gestionar bajas
 if ($opcion == 1) {
 
-    $permiso_funcionario = comprobar_permisos($id_area, 1);
+    $permiso_funcionario = comprobar_permisos(1, $id_area, 1, null);
     if (mysqli_num_rows($permiso_funcionario) <= 0) {
         $mostrar_radio_buttons = '';
         $seccion_consulta_cedula = '
@@ -34,7 +34,7 @@ if ($opcion == 1) {
 
 
 
-    $permiso_gestionar_baja = comprobar_permisos($id_area, 2);
+    $permiso_gestionar_baja = comprobar_permisos(1, $id_area, 2, null);
     $btn_gestionar_bajas = mysqli_num_rows($permiso_gestionar_baja) > 0 ?
         '<input type="button" class="btn btn-success" value="Gestionar bajas" onclick="corroborarBajas();">' : "";
     $btn_solicitar_baja = '<input type="button" class="btn btn-danger" value="Solicitar la baja" onclick="listarDatos();">';
@@ -68,28 +68,4 @@ if ($opcion == 1) {
     $response['error'] = false;
     $response['html'] = $html;
     echo json_encode($response);
-}
-
-
-
-function comprobar_permisos($id_area, $id_herramienta)
-{
-    $conexion = connection(DB);
-    $tabla1 = TABLA_CONTENIDO_CRM;
-    $tabla2 = TABLA_CONTENIDO_CRM_POR_AREA;
-
-    $sql = "SELECT
-	        cc.id,
-	        cc.nombre 
-           FROM
-	        {$tabla1} cc
-	        INNER JOIN {$tabla2} ccpa ON cc.id = ccpa.id_contenido_crm 
-           WHERE
-	        cc.activo = 1 AND
-            ccpa.activo = 1 AND 
-            ccpa.id_usuario = '$id_area' AND 
-            cc.id = '$id_herramienta'";
-    $consulta = mysqli_query($conexion, $sql);
-
-    return $consulta;
 }

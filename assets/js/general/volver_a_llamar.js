@@ -1,3 +1,10 @@
+$(document).ready(function () {
+
+    $("#vista_tabla_volver_a_llamar-tab").css("display", "none");
+});
+
+
+
 function tabla_llamadas_pendientes() {
     let cedula = localStorage.getItem("cedula");
     let id_sector = localStorage.getItem("id_sector");
@@ -116,8 +123,6 @@ function agendar_volver_a_llamar(openModal = false) {
 function abrir_agenda_volver_a_llamar(openModal = false) {
     if (openModal === true) {
         $("#modal_agrega_volver_a_llamar").modal("show");
-
-        setInterval(abrir_agenda_volver_a_llamar, 60000);
     }
 
     let area = $("#sector").val();
@@ -192,6 +197,8 @@ function cambiar_fecha_y_hora_volver_a_llamar(openModal = false, id) {
 }
 
 function cantidad_volver_a_llamar() {
+    $(".ctr_agendar_volver_a_llamar").css("display", "block");
+
     let area = $("#sector").val();
     let id_sub_usuario = localStorage.getItem("id_sub_usuario");
 

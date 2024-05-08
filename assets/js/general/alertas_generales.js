@@ -1,3 +1,10 @@
+$(document).ready(function () {
+
+    $("#vista_tabla_alertas_generales-tab").css("display", "none");
+});
+
+
+
 function obtener_alertas_generales() {
 
     $("#span_alertas_auditoria").text(`0+`);

@@ -4,7 +4,7 @@ function tabla_contenido(openModal = false) {
         columns: [
             { data: "id" },
             { data: "nombre" },
-            { data: "div" },
+            { data: "referencia" },
             { data: "acciones" },
         ],
         bDestroy: true,

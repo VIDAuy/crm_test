@@ -1,9 +1,6 @@
-$(document).ready(function () {
-
-    mostrar_cantidad_etiquetas_socio();
-    setInterval(mostrar_cantidad_etiquetas_socio, 60000);
-
-});
+function mostrar_agregar_etiqueta_socio() {
+    $("#div_agregarEtiquetaSocio").css("display", "block");
+}
 
 
 
@@ -103,6 +100,7 @@ function mostrar_cantidad_etiquetas_socio() {
             if (response.error === false) {
                 let cantidad = response.cantidad;
                 document.getElementById("cantidad_etiquetas_socio").innerHTML = cantidad + "+";
+                $("#contenedor_etiquetas_de_socio").css("display", "block");
             } else {
                 error(response.mensaje);
             }

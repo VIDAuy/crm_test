@@ -1,7 +1,7 @@
 <?php
 include_once '../configuraciones.php';
 
-
+$id_area = $_SESSION['id'];
 $sucursales_inspira = ['1372', '1373', '1374', '1375', '1376'];
 $mostrar_inspira = $_SESSION['id'] == 2 || $_SESSION['id'] == 34 ? true : false;
 
@@ -54,6 +54,19 @@ if (mysqli_num_rows($consulta_padron) == 0) {
 	}
 }
 $datos_padron['mostrar_inspira'] = $mostrar_inspira;
+
+
+
+$contenido = [];
+$permiso_contenido = comprobar_permisos(2, $id_area, null, 2);
+if ($permiso_contenido === false) devolver_error("Ocurrieron errores al obtener los permisos");
+if (mysqli_num_rows($permiso_contenido) > 0) {
+	while ($row = mysqli_fetch_assoc($permiso_contenido)) {
+		$id = $row['id'];
+		array_push($contenido, $id);
+	}
+}
+$datos_padron['todo_contenido'] = $contenido;
 
 
 

@@ -2,10 +2,6 @@ $(document).ready(function () {
 
     let usuario = $("#sector").val();
     $("#span_usuario").text(usuario);
-
-    cantidad_consultas_no_leidas();
-    setInterval(cantidad_consultas_no_leidas, 15000);
-
     $("#vista_tabla_crmessage-tab").css("display", "none");
 });
 

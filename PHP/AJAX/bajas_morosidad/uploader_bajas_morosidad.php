@@ -11,12 +11,15 @@ $archivo = $_FILES["file"]["name"];
 $nuevo_nombre = generarHash(50) . ".xlsx";
 
 
+/** Guardo el archivo en el servidor **/
 if (move_uploaded_file($file["tmp_name"], "../../../assets/documentos/bajas_morosidad/$nuevo_nombre") === false) devolver_error("Ocurrieron errores al subir el archivo");
 $nombre_archivo = "../../../assets/documentos/bajas_morosidad/$nuevo_nombre";
 $documento = IOFactory::load($nombre_archivo);
 $total_hojas = $documento->getSheetCount();
 
 
+
+/** Proceso para procesar el excel y obtener la cédula, nombre y teléfono para generar un array **/
 for ($indice_hoja = 0; $indice_hoja < $total_hojas; $indice_hoja++) {
     $hoja_actual = $documento->getSheet($indice_hoja);
     $numero_filas = $hoja_actual->getHighestDataRow();
@@ -27,25 +30,41 @@ for ($indice_hoja = 0; $indice_hoja < $total_hojas; $indice_hoja++) {
         $nombre   = $hoja_actual->getCell("B" . $indice_fila)->getValue();
         $telefono = $hoja_actual->getCell("C" . $indice_fila)->getValue();
 
-        if ($cedula != "")
+
+        if ($cedula != "") {
+            $obtener_datos_padron = obtener_datos_padron($cedula);
+            if (is_array($obtener_datos_padron)) {
+                $nombre = $obtener_datos_padron['nombre'];
+                $telefono = $obtener_datos_padron['tel'];
+            }
+
+            $telefono = corregirTelefono($telefono);
+            $telefono = buscarNumero($telefono);
+
+
             $datos[] = [
                 "cedula"   => $cedula,
                 "nombre"   => $nombre,
                 "telefono" => $telefono,
             ];
+        }
     }
 }
 
 
+
+/** Guardo el historial de carga **/
 $cantidad_registros = count($datos);
 $id_insert_historial = registrar_historial_carga_excel($cantidad_registros, $nuevo_nombre);
 if ($id_insert_historial === true) devolver_error("Ocurrieron errores al registrar la carga del archivo");
 
 
+
+
+/** Proceso para registrar en registros de crm y en bajas morosidad **/
 $errores = 0;
 $mensaje = "";
 for ($i = 0; $i < $cantidad_registros; $i++) {
-
     $cedula   = $datos[$i]['cedula'];
     $nombre   = $datos[$i]['nombre'];
     $telefono = $datos[$i]['telefono'];
@@ -63,6 +82,7 @@ for ($i = 0; $i < $cantidad_registros; $i++) {
         $mensaje .= "Error al registrar cédula: $cedula";
     }
 }
+
 
 
 $response['error'] = $errores > 0 ? true : false;
@@ -88,22 +108,6 @@ function registrar_historial_carga_excel($cantidad_registros, $nuevo_nombre)
     }
 
     return $return == true ? true : $id_insert_historial;
-}
-
-function obtener_datos_registros($cedula)
-{
-    include '../../conexiones/conexion2.php';
-    $tabla = TABLA_REGISTROS;
-
-    try {
-        $sql = "SELECT * FROM {$tabla} WHERE cedula = '$cedula' ORDER BY id DESC LIMIT 1";
-        $consulta = mysqli_query($conexion, $sql);
-    } catch (Exception $error) {
-        registrar_errores($sql, "uploader_bajas_morosidad.php", $error);
-        $consulta = false;
-    }
-
-    return $consulta != false ? mysqli_fetch_assoc($consulta) : false;
 }
 
 function registrar_bajas_morosidad($cedula)
@@ -135,4 +139,23 @@ function dejar_registro_crm($cedula, $nombre, $telefono)
     }
 
     return $consulta;
+}
+
+function obtener_datos_padron($cedula)
+{
+    $conexion = connection(DB_ABMMOD);
+    $tabla = TABLA_PADRON_DATOS_SOCIO;
+
+    try {
+        $sql = "SELECT nombre, tel FROM {$tabla} WHERE cedula = '$cedula' ORDER BY id DESC LIMIT 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (Exception $error) {
+        registrar_errores($sql, "uploader_bajas_morosidad.php", $error);
+        $consulta = false;
+    }
+
+    if ($consulta === false) devolver_error("Ocurrieron errores al realizar la consulta");
+    $resultados = mysqli_num_rows($consulta) > 0 ? mysqli_fetch_assoc($consulta) : false;
+
+    return $resultados;
 }
