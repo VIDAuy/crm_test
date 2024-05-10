@@ -1,2 +1,2 @@
-# crm_test
-CRM Uruguay - Testing
+# crm
+CRM Uruguay

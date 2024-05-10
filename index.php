@@ -26,7 +26,6 @@ if (isset($_SESSION['nivel'])) {
 				"general/volver_a_llamar.js",
 				"general/sesion.js",
 				"general/alertas_de_otras_areas.js",
-				"general/buscar_socio_o_funcionario.js",
 				"general/consultas_acompanantes.js",
 				"general/alertas_de_vida_te_lleva.js",
 				"general/cargar_registros.js",
@@ -36,6 +35,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/crmessage.js",
 				"general/equifax.js",
 				"general/bajas_morosidad.js",
+				"general/alertas_generales.js",
 			];
 
 			/** JS General **/
@@ -44,6 +44,8 @@ if (isset($_SESSION['nivel'])) {
 			}
 			/** END JS General **/
 
+
+			//include('./views/content/nivel1.php');
 
 			include('./views/content/contenido_niveles.php');
 
@@ -54,7 +56,7 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/contenido_si_es_socio.php');
 			include('views/content/contenido_funcionarios.php');
 			include('views/content/historial_registros_socio.php');
-			include('views/content/historial_patologias_socio.php');
+			include('views/content/patologias_socio.php');
 			include('views/content/cobranza_abitab.php');
 			include('views/content/administrar_pendientes.php');
 
@@ -63,7 +65,6 @@ if (isset($_SESSION['nivel'])) {
 				"alertas/modal_datos_alertas.html",
 				"alertas/modal_asignar_alerta_pendiente.html",
 				"alertas/modal_historial_registros_de_alertas.html",
-				"alertas/modal_asignar_alertas_generales.html",
 				"datos_socio/modalDatosCobranza.html",
 				"datos_socio/modalDatosCoordina.html",
 				"datos_socio/modalDatosProductos.html",
@@ -75,9 +76,12 @@ if (isset($_SESSION['nivel'])) {
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 				"modalHistoriaComunicacionDeCedula.html",
 				"datos_acompanantes/modal_horas_acompanantes.html",
+				"volver_a_llamar/modal_agenda_volver_a_llamar.html",
+				"volver_a_llamar/modal_agendar_volver_a_llamar.html",
 				"volver_a_llamar/modal_asignar_llamada_a_usuario.html",
-				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
 				"volver_a_llamar/modal_cambiar_fecha_y_hora_volver_a_llamar.html",
+				"volver_a_llamar/modal_cargar_registro_volver_a_llamar.html",
+				"volver_a_llamar/modal_historial_registros_volver_a_llamar.html",
 				"etiquetas_socio/modal_ver_etiquetas_socio.html",
 				"etiquetas_socio/modal_agregar_etiquetas_socio.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
@@ -116,7 +120,6 @@ if (isset($_SESSION['nivel'])) {
 				"general/volver_a_llamar.js",
 				"general/sesion.js",
 				"general/alertas_de_otras_areas.js",
-				"general/buscar_socio_o_funcionario.js",
 				"general/consultas_acompanantes.js",
 				"general/alertas_de_vida_te_lleva.js",
 				"general/cargar_registros.js",
@@ -126,6 +129,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/crmessage.js",
 				"general/equifax.js",
 				"general/bajas_morosidad.js",
+				"general/alertas_generales.js",
 			];
 
 			/** JS General **/
@@ -135,6 +139,8 @@ if (isset($_SESSION['nivel'])) {
 			/** END JS General **/
 
 
+			//include('./views/content/nivel2.php');
+
 			include('./views/content/contenido_niveles.php');
 
 
@@ -143,14 +149,13 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/contenido_no_es_socio.php');
 			include('views/content/contenido_si_es_socio.php');
 			include('views/content/contenido_funcionarios.php');
-			include('views/content/historial_patologias_socio.php');
+			include('views/content/patologias_socio.php');
 			include('views/content/cobranza_abitab.php');
 			include('views/content/administrar_pendientes.php');
 
 
 			$array_cargar_modals = [
 				"alertas/modal_datos_alertas.html",
-				"alertas/modal_asignar_alertas_generales.html",
 				"datos_socio/modalDatosCobranza.html",
 				"datos_socio/modalDatosCoordina.html",
 				"datos_socio/modalDatosProductos.html",
@@ -206,7 +211,6 @@ if (isset($_SESSION['nivel'])) {
 				"general/volver_a_llamar.js",
 				"general/sesion.js",
 				"general/alertas_de_otras_areas.js",
-				"general/buscar_socio_o_funcionario.js",
 				"general/consultas_acompanantes.js",
 				"general/alertas_de_vida_te_lleva.js",
 				"general/cargar_registros.js",
@@ -229,6 +233,8 @@ if (isset($_SESSION['nivel'])) {
 			/** END Carga JS **/
 
 
+			//include('./views/content/nivel3.php');
+
 			include('./views/content/contenido_niveles.php');
 
 
@@ -239,7 +245,7 @@ if (isset($_SESSION['nivel'])) {
 			include('views/content/contenido_funcionarios.php');
 			include('views/content/historial_registros_socio.php');
 			include('views/content/historial_registros_funcionarios.php');
-			include('views/content/historial_patologias_socio.php');
+			include('views/content/patologias_socio.php');
 			include('views/content/cobranza_abitab.php');
 			include('views/content/administrar_pendientes.php');
 			include('views/content/consultas_generales.php');
@@ -251,7 +257,6 @@ if (isset($_SESSION['nivel'])) {
 				"alertas/modal_asignar_alerta_pendiente.html",
 				"alertas/modal_datos_alertas.html",
 				"alertas/modal_historial_registros_de_alertas.html",
-				"alertas/modal_asignar_alertas_generales.html",
 				"auditorias/modal_auditorias_socio_registradas.html",
 				"auditorias/modal_auditorias_socio.html",
 				"auditorias/modal_registrar_auditoria_socio.html",
