@@ -48,7 +48,6 @@ function cantidad_alertas() {
 
 }
 
-
 function tabla_alertas_pendientes() {
 
     $("#tabla_alertas_pendientes").DataTable({
@@ -69,7 +68,6 @@ function tabla_alertas_pendientes() {
     });
 }
 
-
 function badge_cantidad_alertas_pendientes() {
 
     $("#cantidad_total_alertas_pendientes").text('0+');
@@ -84,7 +82,6 @@ function badge_cantidad_alertas_pendientes() {
         }
     });
 }
-
 
 function abrir_asignar_alerta(openModal = false, id, cedula, nombre, telefono, sector, id_sub_usuario, id_usuario_asignado = null, id_usuario_asignador = null, usuario_asignado = null, usuario_asignador = null) {
     if (openModal === true) {
@@ -165,8 +162,6 @@ function abrir_asignar_alerta(openModal = false, id, cedula, nombre, telefono, s
 
 function ver_registros_alertas() {
 
-    $("#modal_historialRegistrosDeAlertas").modal("show");
-
     $('#tabla_historial_alertas').DataTable({
         ajax: `${url_ajax}alertas/tabla_historial_alertas.php`,
         columns: [
@@ -184,4 +179,6 @@ function ver_registros_alertas() {
         "bDestroy": true,
         language: { url: url_lenguage },
     });
+
+    $("#modal_historialRegistrosDeAlertas").modal("show");
 }

@@ -25,6 +25,7 @@ function ver_crmessage() {
     $("#modalCRMessage").modal("show"); //Abro modal
 }
 
+
 function mostrar_select_usuarios_crmessage() {
     let area = $("#txt_area_consultada_nueva_consulta_crmessage").val();
     $("#div_sub_usuario_crmessage").css("display", "none");
@@ -57,6 +58,8 @@ function mostrar_select_usuarios_crmessage() {
     });
 }
 
+
+
 function tabla_mis_consultas() {
     $("#tabla_mis_consultas_crmessage").DataTable({
         ajax: `${url_ajax}crmessage/tabla_mis_consultas.php`,
@@ -67,13 +70,11 @@ function tabla_mis_consultas() {
         order: [[0, "asc"]],
         bDestroy: true,
         language: { url: url_lenguage },
-        columnDefs: [
-            {
-                targets: [0],
-                visible: false,
-                searchable: false,
-            },
-        ],
+        columnDefs: [{
+            targets: [0],
+            visible: false,
+            searchable: false,
+        }],
         ordering: false,
         dom: 'frtip',
     });
@@ -93,7 +94,7 @@ function tabla_consultas_asignadas() {
             targets: [0],
             visible: false,
             searchable: false,
-        }],
+        },],
         ordering: false,
         dom: 'frtip',
     });
@@ -190,6 +191,7 @@ function nueva_consulta_crmessage() {
                     $("#txt_consulta_nueva_consulta_crmessage").val('');
                     $("#txt_area_consultada_nueva_consulta_crmessage").val('');
                     $("#txt_cedula_nueva_consulta_crmessage").val('');
+                    cantidad_consultas_no_leidas();
                     tabla_mis_consultas();
                     if ($("#ci").val() != "") historiaComunicacionDeCedula();
                     $("#nav-mis-consultas-tab").trigger('click'); //Muestro por defecto la ventana de ❝Mis Consultas❞
@@ -308,6 +310,7 @@ function historial_crmessage(openModal = false, opcion = 1) {
 
     if (openModal == true) $("#modal_historialCRMessage").modal("show");
 }
+
 
 function mostrar_mensajes_consulta(id) {
     $("#tabla_mostrar_mensajes_crmessage").DataTable({

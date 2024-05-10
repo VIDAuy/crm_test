@@ -21,7 +21,7 @@ function obtener_areas()
     $conexion = connection(DB);
     $tabla = TABLA_USUARIOS;
 
-    $sql = "SELECT id, usuario FROM {$tabla} WHERE id != 43 ORDER BY usuario ASC";
+    $sql = "SELECT id, usuario FROM {$tabla} WHERE id != 43 AND activo = 1 ORDER BY usuario ASC";
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;

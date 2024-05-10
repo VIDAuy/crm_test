@@ -37,8 +37,6 @@ while ($row = mysqli_fetch_assoc($obtener_items)) {
     ];
 }
 
-
-
 $response['error'] = false;
 $response['id_items'] = $id_items;
 $response['items_menu'] = $items_menu;

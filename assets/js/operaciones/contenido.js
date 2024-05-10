@@ -1,4 +1,4 @@
-function tabla_contenido(openModal = false) {
+function tabla_contenido() {
     $("#tabla_contenido").DataTable({
         ajax: `${url_operaciones}contenido/tabla_contenido.php`,
         columns: [
@@ -14,33 +14,20 @@ function tabla_contenido(openModal = false) {
 }
 
 
-function tabla_contenido_por_area(openModal = false) {
-    $("#tabla_contenido_por_area").DataTable({
-        ajax: `${url_operaciones}contenido_por_area/tabla_contenido_por_area.php`,
-        columns: [
-            { data: "id" },
-            { data: "area" },
-            { data: "contenido" },
-            { data: "acciones" },
-        ],
-        bDestroy: true,
-        order: [[0, "asc"]],
-        language: { url: url_lenguage },
-    });
-}
-
-
 function agregar_contenido(openModal = false) {
     if (openModal == true) {
         $("#txt_nombre_agregar_contenido").val('');
-        $("#txt_div_agregar_contenido").val('');
+        $("#select_agregar_referencia_contenido").val('');
+        select_referencia_contenido("Agregar", "select_agregar_referencia_contenido", null, null);
         $("#modal_agregarContenido").modal("show");
     } else {
         let nombre = $("#txt_nombre_agregar_contenido").val();
-        let div = $("#txt_div_agregar_contenido").val();
+        let referencia = $("#select_agregar_referencia_contenido").val();
 
         if (nombre == "") {
             error("Debe ingresar un nombre");
+        } else if (referencia == "") {
+            error("Debe seleccionar una referencia");
         } else {
 
             $.ajax({
@@ -48,14 +35,14 @@ function agregar_contenido(openModal = false) {
                 url: `${url_operaciones}contenido/agregar_contenido.php`,
                 data: {
                     nombre,
-                    div
+                    referencia
                 },
                 dataType: "JSON",
                 success: function (response) {
                     if (response.error == false) {
                         correcto(response.mensaje);
                         $("#txt_nombre_agregar_contenido").val('');
-                        $("#txt_div_agregar_contenido").val('');
+                        $("#select_agregar_referencia_contenido").val('');
                         tabla_contenido();
                         $("#modal_agregarContenido").modal("hide");
                     } else {
@@ -69,38 +56,43 @@ function agregar_contenido(openModal = false) {
 }
 
 
-function agregar_contenido_por_area(openModal = false) {
+function editar_contenido(openModal = false, id, nombre, id_referencia, referencia) {
     if (openModal == true) {
-        $('#select_area_agregar_contenido_por_area').val('');
-        $('#select_contenido_agregar_contenido_por_area').val('');
-        select_areas("Agregar", "select_area_agregar_contenido_por_area", null, null);
-        select_contenido("Agregar", "select_contenido_agregar_contenido_por_area", null, null);
-        $("#modal_agregarContenidoPorArea").modal("show");
+        $("#txt_id_editar_contenido").val(id);
+        $("#txt_nombre_editar_contenido").val(nombre);
+        select_referencia_contenido("Editar", "select_editar_referencia_contenido", id_referencia, referencia);
+        $("#modal_editarContenido").modal("show");
     } else {
-        let id_usuario = $("#select_area_agregar_contenido_por_area").val();
-        let id_contenido = $("#select_contenido_agregar_contenido_por_area").val();
 
-        if (id_usuario == "") {
-            error("Debe seleccionar un área");
-        } else if (id_contenido == "") {
-            error("Debe seleccionar un contenido");
+        let id = $("#txt_id_editar_contenido").val();
+        let nombre = $("#txt_nombre_editar_contenido").val();
+        let referencia = $("#select_editar_referencia_contenido").val();
+
+        if (id == "") {
+            error("Debe ingresar un id");
+        } else if (nombre == "") {
+            error("Debe ingresar un nombre");
+        } else if (referencia == "") {
+            error("Debe seleccionar una referencia");
         } else {
 
             $.ajax({
                 type: "POST",
-                url: `${url_operaciones}contenido_por_area/agregar_contenido_por_area.php`,
+                url: `${url_operaciones}contenido/editar_contenido.php`,
                 data: {
-                    id_usuario,
-                    id_contenido
+                    id,
+                    nombre,
+                    referencia
                 },
                 dataType: "JSON",
                 success: function (response) {
                     if (response.error == false) {
                         correcto(response.mensaje);
-                        $("#select_area_agregar_contenido_por_area").val('');
-                        $("#select_contenido_agregar_contenido_por_area").val('');
-                        tabla_contenido_por_area();
-                        $("#modal_agregarContenidoPorArea").modal("hide");
+                        $("#txt_id_editar_contenido").val('');
+                        $("#txt_nombre_editar_contenido").val('');
+                        $("#select_editar_referencia_contenido").val('');
+                        tabla_contenido();
+                        $("#modal_editarContenido").modal("hide");
                     } else {
                         error(response.mensaje);
                     }
@@ -112,7 +104,7 @@ function agregar_contenido_por_area(openModal = false) {
 }
 
 
-function dar_baja_registro(id, url_archivo, tabla) {
+function eliminar_contenido(id) {
     Swal.fire({
         title: "Estas seguro?",
         text: `Vas a eliminar el item #${id}!`,
@@ -127,7 +119,7 @@ function dar_baja_registro(id, url_archivo, tabla) {
 
             $.ajax({
                 type: "POST",
-                url: `${url_operaciones}${url_archivo}`,
+                url: `${url_operaciones}contenido/eliminar_contenido.php`,
                 data: {
                     id
                 },
@@ -135,7 +127,7 @@ function dar_baja_registro(id, url_archivo, tabla) {
                 success: function (response) {
                     if (response.error === false) {
                         correcto(response.mensaje);
-                        tabla == "contenido" ? tabla_contenido(false) : tabla_contenido_por_area(false);
+                        tabla_contenido();
                     } else {
                         error(response.mensaje);
                     }

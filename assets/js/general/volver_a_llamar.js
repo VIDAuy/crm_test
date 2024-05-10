@@ -107,6 +107,9 @@ function agendar_volver_a_llamar(openModal = false) {
                         $("#fecha_nueva_agenda_volver_a_llamar").val("");
                         $("#hora_nueva_agenda_volver_a_llamar").val("");
                         $("#mensaje_nueva_agenda_volver_a_llamar").val("");
+                        badge_cantidad_pendientes_volver_a_llamar();
+                        tabla_llamadas_pendientes();
+                        cantidad_volver_a_llamar();
                         $("#modal_agregar_volver_a_llamar").modal("hide");
                     } else {
                         error(response.mensaje);
@@ -115,9 +118,7 @@ function agendar_volver_a_llamar(openModal = false) {
             });
         }
 
-
     }
-
 }
 
 function abrir_agenda_volver_a_llamar(openModal = false) {
@@ -142,13 +143,11 @@ function abrir_agenda_volver_a_llamar(openModal = false) {
             { data: "fecha_registro" },
             { data: "acciones" },
         ],
-        columnDefs: [
-            {
-                targets: [0],
-                visible: false,
-                searchable: false,
-            },
-        ],
+        columnDefs: [{
+            targets: [0],
+            visible: false,
+            searchable: false,
+        }],
         order: [[0, "asc"]],
         bDestroy: true,
         language: { url: url_lenguage },

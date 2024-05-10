@@ -40,6 +40,7 @@ function modal_ver_imagen_registro(ruta_registros, string_imagenes) {
 }
 
 function abrir_modal_ver_mas_registro(id, cedula, nombre, telefono, fecha_registro, sector, observacion, socio, baja) {
+
     $("#MHCDCtitulo").text(`#${id}`);
     $("#MHCDCcedula").val(cedula);
     $("#MHCDCnombre").val(nombre);

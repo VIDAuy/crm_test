@@ -112,7 +112,6 @@ function tabla_registros_equifax(cedula) {
 
 
 function verificar_socio_equifax() {
-
     let cedula = $("#ci").val();
     $("#div_socio_equifax").html("");
 
@@ -130,5 +129,4 @@ function verificar_socio_equifax() {
             }
         });
     }
-
 }

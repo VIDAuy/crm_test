@@ -84,9 +84,13 @@ function mostrar_menu_por_usuarios() {
         success: function (response) {
             if (response.error === false) {
                 let items = response.items_menu;
-                items.map((item) => {
-                    div.innerHTML += item;
-                });
+                let estatus = response.estatus;
+
+                if (estatus == 222) {
+                    items.map((item) => {
+                        div.innerHTML += item;
+                    });
+                }
             } else {
                 error(response.mensaje);
             }

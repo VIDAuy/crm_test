@@ -236,7 +236,7 @@ function cantidad_mis_consultas_no_leidos($id)
   $tabla = TABLA_MENSAJES_CONSULTA_TRANSAREA;
 
   try {
-    $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND visto_consultor = 0 AND activo = 1";
+    $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND visto_consultor = 0 AND activo = 1 LIMIT 100";
     $consulta = mysqli_query($conexion, $sql);
     $resultado = $consulta != false ? mysqli_num_rows($consulta) : false;
     return $resultado;

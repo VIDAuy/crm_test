@@ -54,7 +54,7 @@ function obtener_respuestas($id)
     $tabla = TABLA_MENSAJES_CONSULTA_TRANSAREA;
 
     try {
-        $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND activo = 1 ORDER BY id ASC";
+        $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND activo = 1 ORDER BY id ASC LIMIT 100";
         $consulta = mysqli_query($conexion, $sql);
         return $consulta;
     } catch (\Throwable $error) {
@@ -69,7 +69,7 @@ function obtener_datos_consulta($id_consulta_transarea)
     $tabla = TABLA_CONSULTA_TRANSAREA;
 
     try {
-        $sql = "SELECT * FROM {$tabla} WHERE id = '$id_consulta_transarea' AND activo = 1";
+        $sql = "SELECT * FROM {$tabla} WHERE id = '$id_consulta_transarea' AND activo = 1 LIMIT 100";
         $consulta = mysqli_query($conexion, $sql);
         $resultado = mysqli_fetch_assoc($consulta);
         return $resultado;

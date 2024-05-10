@@ -1,6 +1,6 @@
 function tabla_menu_por_usuarios() {
     $("#tabla_menu_por_usuario").DataTable({
-        ajax: `${url_operaciones}menu_por_usuarios/tabla_menu.php`,
+        ajax: `${url_operaciones}menu_por_usuarios/tabla_menu_por_usuario.php`,
         columns: [
             { data: "id" },
             { data: "area" },
@@ -39,7 +39,7 @@ function agregar_menu_por_usuario(openModal = false) {
 
             $.ajax({
                 type: "POST",
-                url: `${url_operaciones}menu_por_usuarios/agregar_menu.php`,
+                url: `${url_operaciones}menu_por_usuarios/agregar_menu_por_usuario.php`,
                 data: {
                     id_area,
                     id_usuario,
@@ -61,9 +61,42 @@ function agregar_menu_por_usuario(openModal = false) {
             });
 
         }
-
-
     }
+}
+
+
+function eliminar_menu_por_usuario(id) {
+    Swal.fire({
+        title: "Estas seguro?",
+        text: `Vas a eliminar el menú #${id}!`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            $.ajax({
+                type: "POST",
+                url: `${url_operaciones}menu_por_usuarios/eliminar_menu_por_usuario.php`,
+                data: {
+                    id
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    if (response.error === false) {
+                        correcto(response.mensaje);
+                        tabla_menu_por_usuarios();
+                    } else {
+                        error(response.mensaje);
+                    }
+                }
+            });
+
+        }
+    });
 }
 
 

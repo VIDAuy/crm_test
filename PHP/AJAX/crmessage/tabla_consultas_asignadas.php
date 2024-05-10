@@ -174,7 +174,7 @@ function obtener_consultas_area($id_area)
   $tabla = TABLA_CONSULTA_TRANSAREA;
 
   try {
-    $sql = "SELECT * FROM {$tabla} WHERE area_consultada = '$id_area' AND (usuario_consultado IS NULL OR usuario_consultado = '') AND activo = 1";
+    $sql = "SELECT * FROM {$tabla} WHERE area_consultada = '$id_area' AND (usuario_consultado IS NULL OR usuario_consultado = '') AND activo = 1 LIMIT 100";
     $consulta = mysqli_query($conexion, $sql);
     return $consulta;
   } catch (\Throwable $error) {
@@ -189,7 +189,7 @@ function obtener_consultas_usuario($id_area, $id_sub_usuario)
   $tabla = TABLA_CONSULTA_TRANSAREA;
 
   try {
-    $sql = "SELECT * FROM {$tabla} WHERE area_consultada = '$id_area' AND usuario_consultado = '$id_sub_usuario' AND activo = 1";
+    $sql = "SELECT * FROM {$tabla} WHERE area_consultada = '$id_area' AND usuario_consultado = '$id_sub_usuario' AND activo = 1 LIMIT 100";
     $consulta = mysqli_query($conexion, $sql);
     return $consulta;
   } catch (\Throwable $error) {
@@ -203,7 +203,7 @@ function obtener_imagenes($id)
   $conexion = connection(DB);
   $tabla = TABLA_ARCHIVOS_CRMESSAGE;
 
-  $sql = "SELECT nombre_archivo FROM {$tabla} WHERE id_consulta = '$id' AND activo = 1";
+  $sql = "SELECT nombre_archivo FROM {$tabla} WHERE id_consulta = '$id' AND activo = 1 LIMIT 100";
   $consulta = mysqli_query($conexion, $sql);
 
   $imagenes = "";
@@ -220,7 +220,7 @@ function obtener_datos_mensajes($id)
   $tabla = TABLA_MENSAJES_CONSULTA_TRANSAREA;
 
   try {
-    $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND activo = 1 ORDER BY id ASC LIMIT 1";
+    $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND activo = 1 ORDER BY id ASC LIMIT 1 LIMIT 100";
     $consulta = mysqli_query($conexion, $sql);
     $resultado = mysqli_fetch_assoc($consulta);
     return $resultado;
@@ -236,7 +236,7 @@ function cantidad_consultas_asignadas_no_leidos($id)
   $tabla = TABLA_MENSAJES_CONSULTA_TRANSAREA;
 
   try {
-    $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND visto_consultado = 0 AND activo = 1";
+    $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND visto_consultado = 0 AND activo = 1 LIMIT 100";
     $consulta = mysqli_query($conexion, $sql);
     $resultado = $consulta != false ? mysqli_num_rows($consulta) : false;
     return $resultado;

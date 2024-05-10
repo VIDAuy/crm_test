@@ -7,10 +7,14 @@ $tabla["data"] = [];
 $obtener_contenido_por_area = obtener_contenido_por_area();
 
 while ($row = mysqli_fetch_assoc($obtener_contenido_por_area)) {
-    $id        = $row['id'];
-    $area      = ucfirst($row['usuario']);
-    $contenido = $row['nombre'];
-    $acciones = "<button class='btn btn-sm btn-danger' onclick='dar_baja_registro(`" . $id . "`, `contenido_por_area/eliminar_contenido_por_area.php`, `contenido_por_area`);'>❌</button>";
+    $id           = $row['id'];
+    $id_usuario   = $row['id_usuario'];
+    $area         = ucfirst($row['usuario']);
+    $id_contenido = $row['id_contenido'];
+    $contenido    = $row['nombre'];
+    $acciones = "
+    <button class='btn btn-sm btn-primary' onclick='editar_contenido_por_area(true, `" . $id . "`, `" . $id_usuario . "`, `" . $area . "`, `" . $id_contenido . "`, `" . $contenido . "`);'>✏</button>
+    <button class='btn btn-sm btn-danger' onclick='eliminar_contenido_por_area(`" . $id . "`);'>❌</button>";
 
     $tabla["data"][] = [
         'id'        => $id,
@@ -35,7 +39,9 @@ function obtener_contenido_por_area()
     try {
         $sql = "SELECT 
                 ccpa.id,
+                u.id AS 'id_usuario',
                 u.usuario,
+                cc.id AS 'id_contenido',
                 cc.nombre
                FROM 
                 {$tabla1} ccpa

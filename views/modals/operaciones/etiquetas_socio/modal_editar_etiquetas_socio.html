@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_editarEtiquetaSocio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar etiqueta de socio</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_id_editar_etiquetas_socio" placeholder="ID"
+                        disabled>
+                    <label for="txt_id_editar_etiquetas_socio">ID</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_cedula_editar_etiquetas_socio" placeholder="Cédula">
+                    <label for="txt_cedula_editar_etiquetas_socio">Cédula</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" placeholder="Ingrese un mensaje" id="txt_mensaje_editar_etiquetas_socio" style="height: 100px"></textarea>
+                    <label for="txt_mensaje_editar_etiquetas_socio">Mensaje</label>
+                  </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_area_editar_etiquetas_socio"
+                        aria-label="Seleccione un área">
+                    </select>
+                    <label for="select_area_editar_etiquetas_socio">Seleccione un área</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="select_sub_usuarios_editar_etiquetas_socio"
+                        aria-label="Seleccione un usuario">
+                    </select>
+                    <label for="select_sub_usuarios_editar_etiquetas_socio">Seleccione un contenido</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="editar_etiqueta_socio(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

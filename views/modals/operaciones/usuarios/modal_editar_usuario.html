@@ -1,0 +1,62 @@
+<!-- Modal Editar Usuario -->
+<div class="modal fade" id="modal_editarUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 10000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_id_editar_usuario_admin" placeholder="ID">
+                    <label for="txt_id_editar_usuario_admin">ID</label>
+                  </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_usuario_editar_usuario_admin"
+                        placeholder="Ingrese un usuario ...">
+                    <label for="txt_usuario_editar_usuario_admin">Usuario</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_codigo_editar_usuario_admin"
+                        placeholder="Ingrese un código ...">
+                    <label for="txt_codigo_editar_usuario_admin">Código</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="txt_nivel_editar_usuario_admin" aria-label="Seleccione un nivel">
+                        <option value="" selected>Seleccione una opción</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                    <label for="txt_nivel_editar_usuario_admin">Seleccione un nivel</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="txt_filial_editar_usuario_admin"
+                        placeholder="Ingrese una filial ...">
+                    <label for="txt_filial_editar_usuario_admin">Filial</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="txt_email_editar_usuario_admin"
+                        placeholder="Ingrese un email ...">
+                    <label for="txt_email_editar_usuario_admin">Email</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="editar_usuario(false)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal Agregar Usuario -->

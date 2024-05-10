@@ -1,12 +1,13 @@
 $(document).ready(function () {
   eliminar_local_storage();
+
+  ejecutar_acciones_sesion();
 });
 
 function eliminar_local_storage() {
   localStorage.clear();
   localStorage.setItem('status', 'ok');
 }
-
 
 function ejecutar_acciones_sesion() {
   if (localStorage.getItem('status') == 'pendiente') cerrarSesion();

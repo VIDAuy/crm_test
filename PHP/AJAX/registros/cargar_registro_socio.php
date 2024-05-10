@@ -22,12 +22,14 @@ $sector = $_REQUEST['sector'];
 $id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
 
 
-if ($area == "" || $nombre == "" || $observacion == "" || $cedula == "" || $socio == "" || $sector == "") {
+
+if ($area == "" || $observacion == "" || $cedula == "" || $socio == "" || $sector == "") {
 	$respuesta['error'] = true;
 	$respuesta['message'] = "Ha ocurrido un error, contacte al administrador";
 	die(json_encode($respuesta));
 }
 
+$nombre = $nombre == "" ? obtener_datos_registros($cedula)['nombre'] : $nombre;
 
 if (in_array($_REQUEST['sector'], array('19585073', '50709395'))) $sector = 'Bajas';
 
@@ -97,6 +99,17 @@ echo json_encode($respuesta);
 
 
 
+
+function obtener_datos_registros($cedula)
+{
+	global $conexion;
+
+	$sql = "SELECT * FROM registros WHERE cedula = '$cedula' ORDER BY id DESC LIMIT 1";
+	$consulta = mysqli_query($conexion, $sql);
+	$resultados = mysqli_fetch_assoc($consulta);
+
+	return $resultados;
+}
 
 function insert_registro_con_imagen($documento, $cedula, $nombre, $telefono, $sector, $observacion, $envioSector, $socio, $id_sub_usuario)
 {

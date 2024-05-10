@@ -11,15 +11,26 @@ $email   = $_REQUEST['email'];
 if ($usuario == "" || $codigo == "" || $nivel == "") devolver_error(ERROR_GENERAL);
 
 
-$verificar_usuario_existente = verificar_usuario($usuario);
-if ($verificar_usuario_existente == false) devolver_error("Ocurrieron errores al verificar el usuario");
+$comprobar_existencia = comprobar_existencia($usuario);
+if ($comprobar_existencia == false) devolver_error("Ocurrieron errores al comprobar la existencia del registro");
 
+if (mysqli_num_rows($comprobar_existencia) > 0) {
+    $result = mysqli_fetch_assoc($comprobar_existencia);
+    $id = $result['id'];
+    $activo = $result['activo'];
 
-if (mysqli_num_rows($verificar_usuario_existente) > 0) devolver_error("Ya existe el usuario");
+    if ($id != "" && $activo == 1) devolver_error("Ya existe un usuario con este nombre");
 
+    if ($id != "" && $activo == 0) {
+        $reactivar_contenido = reactivar_contenido(TABLA_USUARIOS, $id);
+        if ($reactivar_contenido == false) devolver_error("Ocurrieron errores al reactivar el item");
+    }
+} else {
 
-$agregar_usuario = agregar_usuario($usuario, $codigo, $nivel, $filial, $email);
-if ($agregar_usuario == false) devolver_error("Ocurrieron errores al registrar el usuario");
+    $usuario = ucfirst($usuario);
+    $agregar_usuario = agregar_usuario($usuario, $codigo, $nivel, $filial, $email);
+    if ($agregar_usuario == false) devolver_error("Ocurrieron errores al registrar el usuario");
+}
 
 
 
@@ -30,13 +41,19 @@ echo json_encode($response);
 
 
 
-function verificar_usuario($usuario)
+function comprobar_existencia($usuario)
 {
     $conexion = connection(DB);
     $tabla = TABLA_USUARIOS;
 
-    $sql = "SELECT * FROM {$tabla} WHERE usuario = '$usuario' AND activo = 1";
-    $consulta = mysqli_query($conexion, $sql);
+
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE usuario = '$usuario' ORDER BY id DESC LIMIT 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "agregar_usuario.php", $error);
+        $consulta = false;
+    }
 
     return $consulta;
 }
@@ -46,8 +63,13 @@ function agregar_usuario($usuario, $codigo, $nivel, $filial, $email)
     $conexion = connection(DB);
     $tabla = TABLA_USUARIOS;
 
-    $sql = "INSERT INTO {$tabla} (usuario, codigo, nivel, filial, email) VALUES ('$usuario', '$codigo', '$nivel', '$filial', '$email')";
-    $consulta = mysqli_query($conexion, $sql);
+    try {
+        $sql = "INSERT INTO {$tabla} (usuario, codigo, nivel, filial, email) VALUES ('$usuario', '$codigo', '$nivel', '$filial', '$email')";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "agregar_usuario.php", $error);
+        $consulta = false;
+    }
 
     return $consulta;
 }

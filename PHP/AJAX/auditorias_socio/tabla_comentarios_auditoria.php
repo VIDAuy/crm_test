@@ -54,7 +54,7 @@ function imagenes_comentario($id_comentario)
     $conexion = connection(DB);
     $tabla = TABLA_ARCHIVOS_AUDITORIAS;
 
-    $sql = "SELECT * FROM {$tabla} WHERE id_comentario_auditoria = '$id_comentario' AND activo = 1";
+    $sql = "SELECT * FROM {$tabla} WHERE id_comentario_auditoria = '$id_comentario' AND activo = 1 LIMIT 100";
     $consulta = mysqli_query($conexion, $sql);
 
     $archivos = "";

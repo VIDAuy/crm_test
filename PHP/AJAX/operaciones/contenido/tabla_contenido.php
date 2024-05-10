@@ -7,10 +7,14 @@ $tabla["data"] = [];
 $obtener_contenido = obtener_contenido();
 
 while ($row = mysqli_fetch_assoc($obtener_contenido)) {
-    $id         = $row['id'];
-    $nombre     = $row['nombre'];
-    $referencia = $row['referencia'];
-    $acciones   = "<button class='btn btn-sm btn-danger' onclick='dar_baja_registro(`" . $id . "`, `contenido/eliminar_contenido.php`, `contenido`);'>❌</button>";
+    $id            = $row['id'];
+    $nombre        = $row['nombre'];
+    $id_referencia = $row['id_referencia'];
+    $referencia    = $row['referencia'];
+
+    $acciones   = "
+    <button class='btn btn-sm btn-primary' onclick='editar_contenido(true, `" . $id . "`, `" . $nombre . "`, `" . $id_referencia . "`, `" . $referencia . "`);'>✏</button>
+    <button class='btn btn-sm btn-danger' onclick='eliminar_contenido(`" . $id . "`);'>❌</button>";
 
     $tabla["data"][] = [
         'id'         => $id,
@@ -35,6 +39,7 @@ function obtener_contenido()
         $sql = "SELECT 
                 cc.id,
                 cc.nombre,
+                rcc.id AS 'id_referencia',
                 rcc.nombre AS 'referencia'
                 FROM 
                 {$tabla1} cc

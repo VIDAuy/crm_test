@@ -3,8 +3,13 @@ include_once '../../../configuraciones.php';
 
 $tabla["data"] = [];
 
+$fecha_desde = $_REQUEST['fecha_desde'];
+$fecha_hasta = $_REQUEST['fecha_hasta'];
+$cedula = $_REQUEST['cedula'];
+$fecha_hasta = date("Y-m-d", strtotime($fecha_hasta . " + 1 days"));
 
-$lista_registros = obtener_registros();
+
+$lista_registros = obtener_registros($fecha_desde, $fecha_hasta, $cedula);
 
 while ($row = mysqli_fetch_assoc($lista_registros)) {
     $acciones = "";
@@ -25,7 +30,7 @@ while ($row = mysqli_fetch_assoc($lista_registros)) {
     $envioSector = $row['envioSector'] != "" ? obtener_datos_usuario($row['envioSector'])['usuario'] : "-";
     $id_sub_usuario = $row['sub_usuario'];
     $imagenes = obtener_imagenes($id);
-    if ($imagenes != 0) $acciones .= "<button class='btn btn-sm btn-info' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS . "`, `" . $imagenes . "`);'>Ver Archivos</button>";
+    if ($imagenes != 0) $acciones .= "<button class='btn btn-sm btn-info me-2' onclick='modal_ver_imagen_registro(`" . URL_DOCUMENTOS . "`, `" . $imagenes . "`);'>📑</button>";
     $usuario = $id_sub_usuario != "" ? @utf8_encode($id_sub_usuario) : "-";
     $acciones .= "<button class='btn btn-sm btn-danger' onclick='eliminar_registro(`" . $id . "`);'>❌</button>";
 
@@ -47,17 +52,18 @@ while ($row = mysqli_fetch_assoc($lista_registros)) {
 }
 
 
-
 echo json_encode($tabla);
 
 
 
 
-function obtener_registros()
+function obtener_registros($fecha_desde, $fecha_hasta, $cedula)
 {
     include '../../../conexiones/conexion2.php';
     $tabla1 = TABLA_REGISTROS;
     $tabla2 = TABLA_SUB_USUARIOS;
+
+    $where = $cedula != "null" ? "r.cedula = '$cedula' AND" : "r.fecha_registro BETWEEN '$fecha_desde' AND '$fecha_hasta' AND";
 
     try {
         $sql = "SELECT
@@ -77,6 +83,7 @@ function obtener_registros()
 	        {$tabla1} r
 	        LEFT JOIN {$tabla2} su ON r.id_sub_usuario = su.id
           WHERE
+            $where
             r.eliminado = 0
           ORDER BY r.id DESC 
 	      LIMIT 500";

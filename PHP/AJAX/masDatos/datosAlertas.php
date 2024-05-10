@@ -20,7 +20,7 @@ if (isset($_POST['CI'])) {
 
 	echo json_encode($jsondata);
 } else {
-	$id_sub_usuario = isset($_SESSION['id_sub_usuario']) ? $_SESSION['id_sub_usuario'] : "";
+	$id_sub_usuario = $_SESSION['id_sub_usuario'];
 
 	if ($id_sub_usuario != "") {
 		$q 	= "SELECT sector, nombre, telefono, cedula, id FROM registros WHERE activo=1 AND envioSector = $sector AND cedula != '' AND id_usuario_asignado = '$id_sub_usuario'";
@@ -35,10 +35,10 @@ if (isset($_POST['CI'])) {
 
 		$f[] = array(
 			'idRegistro' => $row['id'],
-			'sector'	 => $row['sector'],
-			'nombre'	 => $row['nombre'],
-			'telefono'	 => corregirTelefono($row['telefono']),
-			'cedula'	 => $row['cedula']
+			'sector'	=> $row['sector'],
+			'nombre'	=> $row['nombre'],
+			'telefono'	=> corregirTelefono($row['telefono']),
+			'cedula'	=> $row['cedula']
 		);
 	}
 

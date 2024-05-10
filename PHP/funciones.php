@@ -106,6 +106,207 @@ function obtener_datos_padron_del_socio($cedula)
     return mysqli_fetch_assoc($consulta);
 }
 
+/** Registrar una alerta a un área **/
+function registrar_alerta($id_registro, $area_alerto, $id_sub_usuario, $area_alertada, $funcionalidad, $id_sub_registro)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_ALERTAS;
+
+    try {
+        $sql = "INSERT INTO {$tabla} (id_registro, area_alerto, usuario_alerto, area_alertada, id_funcionalidad, id_sub_registro, fecha_registro) 
+        VALUES ('$id_registro', '$area_alerto', '$id_sub_usuario', '$area_alertada', '$funcionalidad', '$id_sub_registro', NOW())";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "funciones.php", $error);
+        $consulta = false;
+    }
+
+    return $consulta;
+}
+
+/** Obtener todas las alertas pendientes $opcion = 1 para área y $opcion = 2 para usuario **/
+function obtener_todas_alertas_pendientes($opcion, $id_area, $id_sub_usuario)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_ALERTAS;
+
+    if ($opcion == 1) $where = "usuario_alertado = '$id_sub_usuario' AND";
+    if ($opcion == 2) $where = "( usuario_alertado IS NULL OR usuario_alertado = '$id_sub_usuario' ) AND";
+    if ($opcion == 3) $where = "";
+
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE area_alertada = '$id_area' AND $where leido = 0 AND activo = 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "funciones.php", $error);
+        $consulta = false;
+    }
+
+    return $consulta;
+}
+
+/** Obtener datos de la funcionalidad **/
+function obtener_funcionalidad($id)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_FUNCIONALIDAD;
+
+    try {
+        $sql = "SELECT * FROM {$tabla} WHERE id = '$id' AND activo = 1";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "funciones.php", $error);
+        $consulta = false;
+    }
+
+    $consulta = $consulta != false ? mysqli_fetch_assoc($consulta) : false;
+
+    return $consulta;
+}
+
+/** Marcar las alertas generales como leidas **/
+function marcar_alerta_leida($id, $id_sub_usuario)
+{
+    $conexion = connection(DB);
+    $tabla = TABLA_ALERTAS;
+
+    try {
+        $sql = "UPDATE {$tabla} SET leido = 1, usuario_leido = '$id_sub_usuario', fecha_leido = NOW() WHERE id = '$id'";
+        $consulta = mysqli_query($conexion, $sql);
+    } catch (\Throwable $error) {
+        registrar_errores($sql, "funciones.php", $error);
+        $consulta = false;
+    }
+
+    return $consulta;
+}
+
+/** Obtener tipo de licencia, actividad o empresa. **/
+function obtener_tipos($opcion, $codigo)
+{
+    $conexion = connection(DB);
+    if ($opcion == 1) $tabla = TABLA_TIPO_LICENCIA;
+    if ($opcion == 2) $tabla = TABLA_TIPO_ACTIVIDAD;
+    if ($opcion == 3) $tabla = TABLA_TIPO_EMPRESA;
+
+    $sql = "SELECT * FROM {$tabla} WHERE identificador = '$codigo' AND activo = 1";
+
+    $consulta = mysqli_query($conexion, $sql);
+    $resultado = ($consulta == false ? false : mysqli_num_rows($consulta) > 0) ? mysqli_fetch_assoc($consulta)['nombre'] : "";
+
+    return $resultado;
+}
+
+/** Obtener los permisos **/
+function comprobar_permisos($opcion, $id_area, $id_herramienta, $contenido)
+{
+    $conexion = connection(DB);
+    $tabla1 = TABLA_CONTENIDO_CRM;
+    $tabla2 = TABLA_CONTENIDO_CRM_POR_AREA;
+
+    if ($opcion == 1) $where = "cc.id = '$id_herramienta'";
+    if ($opcion == 2) $where = "cc.id_referencia_contenido = '$contenido'";
+
+    $sql = "SELECT
+	        cc.id,
+	        cc.nombre
+           FROM
+	        {$tabla1} cc
+	        INNER JOIN {$tabla2} ccpa ON cc.id = ccpa.id_contenido_crm 
+           WHERE
+	        cc.activo = 1 AND
+            ccpa.activo = 1 AND 
+            ccpa.id_usuario = '$id_area' AND 
+            $where";
+    $consulta = mysqli_query($conexion, $sql);
+
+    return $consulta;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+-----------------------------------------------------------------
+----------------    Funciones Complementarias    ----------------
+-----------------------------------------------------------------
+*/
+
+
+/** Carga los archivos de un directorio especificado, también se obtienen los archivos de los sub directorios **/
+function cargar_archivos_desde_ruta($ruta)
+{
+    $listado = glob("$ruta/*");
+    foreach ($listado as $ruta_archivo) {
+        $array = explode("/", $ruta_archivo);
+        $directorios_y_archivos = $array[4];
+        /** Obtenemos la extensión de los resultados para saber si hay archivos **/
+        $info = new SplFileInfo($directorios_y_archivos);
+        $extension = $info->getExtension();
+
+        if ($extension == "html" || $extension == "php") {
+            /** Si es html o php lo incluimos **/
+            include_once("$ruta_archivo");
+        } else if ($extension == "js") {
+            /** Si es js lo incluimos **/
+            echo "<script src='$ruta_archivo'></script>";
+        } else {
+            $listado2 = glob("$ruta_archivo/*");
+            foreach ($listado2 as $ruta_archivo2) {
+                include_once("$ruta_archivo2");
+            }
+        }
+    }
+}
+
+/** Saber si esta en producción mediante la url **/
+function comprobar_produccion_con_url()
+{
+    $url = $_SERVER['REQUEST_URI'];
+    $array = explode("/", $url);
+
+    return $array[1];
+}
+
+/** Obtener el primer celular o número teléfonico de un string **/
+function buscarNumero($numeros)
+{
+    if ($numeros == "") {
+        $respuesta = false;
+    } else {
+
+        $primer_numero = substr($numeros, 0, 1);
+        $primeros_dos_numeros = substr($numeros, 0, 2);
+
+        if ($primeros_dos_numeros == "09" && strlen($numeros) > 8) {
+            $respuesta = substr($numeros, 0, 9);
+        } else if (($primer_numero == "2" || $primer_numero == "4") && strlen($numeros) > 7) {
+            $respuesta = substr($numeros, 0, 8);
+        }
+    }
+
+    return $respuesta == "" ? "0" : $respuesta;
+}
+
+/** Verificar si el string esta vacío **/
+function verificar_letras($cadena)
+{
+    if (preg_match("/^(?=.{3,18}$)[a-zñA-ZÑ](\s?[a-zñA-ZÑ])*$/", $cadena)) {
+        $respuesta = true;
+    } else {
+        $respuesta = false;
+    }
+
+    return $respuesta;
+}
+
 /** Generar color random **/
 function randomColor()
 {
@@ -303,153 +504,4 @@ function buscarCelular($numeros)
     preg_match_all('/(09)[1-9]{1}\d{6}/x', $numeros, $respuesta);
     $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
     return $respuesta;
-}
-
-/** Registrar una alerta a un área **/
-function registrar_alerta($id_registro, $area_alerto, $id_sub_usuario, $area_alertada, $funcionalidad, $id_sub_registro)
-{
-    $conexion = connection(DB);
-    $tabla = TABLA_ALERTAS;
-
-    try {
-        $sql = "INSERT INTO {$tabla} (id_registro, area_alerto, usuario_alerto, area_alertada, id_funcionalidad, id_sub_registro, fecha_registro) 
-        VALUES ('$id_registro', '$area_alerto', '$id_sub_usuario', '$area_alertada', '$funcionalidad', '$id_sub_registro', NOW())";
-        $consulta = mysqli_query($conexion, $sql);
-    } catch (\Throwable $error) {
-        registrar_errores($sql, "funciones.php", $error);
-        $consulta = false;
-    }
-
-    return $consulta;
-}
-
-/** Obtener todas las alertas pendientes $opcion = 1 para área y $opcion = 2 para usuario **/
-function obtener_todas_alertas_pendientes($opcion, $id_area, $id_sub_usuario)
-{
-    $conexion = connection(DB);
-    $tabla = TABLA_ALERTAS;
-
-    if ($opcion == 1) $where = "usuario_alertado = '$id_sub_usuario' AND";
-    if ($opcion == 2) $where = "( usuario_alertado IS NULL OR usuario_alertado = '$id_sub_usuario' ) AND";
-    if ($opcion == 3) $where = "";
-
-    try {
-        $sql = "SELECT * FROM {$tabla} WHERE area_alertada = '$id_area' AND $where leido = 0 AND activo = 1";
-        $consulta = mysqli_query($conexion, $sql);
-    } catch (\Throwable $error) {
-        registrar_errores($sql, "funciones.php", $error);
-        $consulta = false;
-    }
-
-    return $consulta;
-}
-
-/** Obtener datos de la funcionalidad **/
-function obtener_funcionalidad($id)
-{
-    $conexion = connection(DB);
-    $tabla = TABLA_FUNCIONALIDAD;
-
-    try {
-        $sql = "SELECT * FROM {$tabla} WHERE id = '$id' AND activo = 1";
-        $consulta = mysqli_query($conexion, $sql);
-    } catch (\Throwable $error) {
-        registrar_errores($sql, "funciones.php", $error);
-        $consulta = false;
-    }
-
-    $consulta = $consulta != false ? mysqli_fetch_assoc($consulta) : false;
-
-    return $consulta;
-}
-
-/** Marcar las alertas generales como leidas **/
-function marcar_alerta_leida($id, $id_sub_usuario)
-{
-    $conexion = connection(DB);
-    $tabla = TABLA_ALERTAS;
-
-    try {
-        $sql = "UPDATE {$tabla} SET leido = 1, usuario_leido = '$id_sub_usuario', fecha_leido = NOW() WHERE id = '$id'";
-        $consulta = mysqli_query($conexion, $sql);
-    } catch (\Throwable $error) {
-        registrar_errores($sql, "funciones.php", $error);
-        $consulta = false;
-    }
-
-    return $consulta;
-}
-
-/** Verificar si el string esta vacío **/
-function verificar_letras($cadena)
-{
-    if (preg_match("/^(?=.{3,18}$)[a-zñA-ZÑ](\s?[a-zñA-ZÑ])*$/", $cadena)) {
-        $respuesta = true;
-    } else {
-        $respuesta = false;
-    }
-
-    return $respuesta;
-}
-
-/** Obtener tipo de licencia, actividad o empresa. **/
-function obtener_tipos($opcion, $codigo)
-{
-    $conexion = connection(DB);
-    if ($opcion == 1) $tabla = TABLA_TIPO_LICENCIA;
-    if ($opcion == 2) $tabla = TABLA_TIPO_ACTIVIDAD;
-    if ($opcion == 3) $tabla = TABLA_TIPO_EMPRESA;
-
-    $sql = "SELECT * FROM {$tabla} WHERE identificador = '$codigo' AND activo = 1";
-
-    $consulta = mysqli_query($conexion, $sql);
-    $resultado = ($consulta == false ? false : mysqli_num_rows($consulta) > 0) ? mysqli_fetch_assoc($consulta)['nombre'] : "";
-
-    return $resultado;
-}
-
-/** Obtener los permisos **/
-function comprobar_permisos($opcion, $id_area, $id_herramienta, $contenido)
-{
-    $conexion = connection(DB);
-    $tabla1 = TABLA_CONTENIDO_CRM;
-    $tabla2 = TABLA_CONTENIDO_CRM_POR_AREA;
-
-    if ($opcion == 1) $where = "cc.id = '$id_herramienta'";
-    if ($opcion == 2) $where = "cc.id_referencia_contenido = '$contenido'";
-
-    $sql = "SELECT
-	        cc.id,
-	        cc.nombre
-           FROM
-	        {$tabla1} cc
-	        INNER JOIN {$tabla2} ccpa ON cc.id = ccpa.id_contenido_crm 
-           WHERE
-	        cc.activo = 1 AND
-            ccpa.activo = 1 AND 
-            ccpa.id_usuario = '$id_area' AND 
-            $where";
-    $consulta = mysqli_query($conexion, $sql);
-
-    return $consulta;
-}
-
-/** Obtener el primer celular o número teléfonico de un string **/
-function buscarNumero($numeros)
-{
-    if ($numeros == "") {
-        $respuesta = false;
-    } else {
-
-        $primer_numero = substr($numeros, 0, 1);
-        $primeros_dos_numeros = substr($numeros, 0, 2);
-
-        if ($primeros_dos_numeros == "09" && strlen($numeros) > 8) {
-            $respuesta = substr($numeros, 0, 9);
-        } else if (($primer_numero == "2" || $primer_numero == "4") && strlen($numeros) > 7) {
-            $respuesta = substr($numeros, 0, 8);
-        }
-    }
-
-    return $respuesta == "" ? "0" : $respuesta;
 }

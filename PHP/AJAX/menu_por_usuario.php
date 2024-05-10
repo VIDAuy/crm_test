@@ -35,6 +35,7 @@ while ($row = mysqli_fetch_assoc($obtener_items)) {
 
 
 $response['error'] = false;
+$response['estatus'] = $items_menu != "" ? 222 : 0;
 $response['items_menu'] = $items_menu;
 echo json_encode($response);
 

@@ -14,7 +14,11 @@ while ($row = mysqli_fetch_assoc($obtener_usuarios)) {
     $filial              = $row['filial'] != "" ? $row['filial'] : "-";
     $email               = $row['email'] != "" ? $row['email'] : "-";
     $fecha_ultima_sesion = $row['fecha_ultima_sesion'] != "" ? date("d/m/Y H:i:s", strtotime($row['fecha_ultima_sesion'])) : "-";
-    $acciones            = "<button class='btn btn-sm btn-danger' onclick='eliminar_usuario(`" . $id . "`);'>❌</button>";
+    $acciones            = "
+    <button class='btn btn-sm btn-primary' onclick='editar_usuario(true, `" . $id . "`, `" . $usuario . "`, `" . $codigo . "`, `" . $nivel . "`, `" . $filial . "`, `" . $email . "`);'>✏</button>
+    <button class='btn btn-sm btn-danger' onclick='eliminar_usuario(`" . $id . "`);'>❌</button>";
+
+
 
     $tabla["data"][] = [
         'id'                  => $id,

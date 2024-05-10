@@ -28,6 +28,12 @@ function consulta_licencias() {
             opcion: "consulta",
         },
         dataType: "JSON",
+        beforeSend: function () {
+            mostrarLoader();
+        },
+        complete: function () {
+            mostrarLoader('O');
+        },
         success: function (response) {
             if (response.error === false) {
                 tabla_licencia_acompanante(cod_trabajador);
@@ -119,6 +125,12 @@ function buscarHorasAcompanante(cedula, fecha_desde, fecha_hasta) {
             fecha_hasta: fecha_hasta,
         },
         dataType: "JSON",
+        beforeSend: function () {
+            mostrarLoader();
+        },
+        complete: function () {
+            mostrarLoader('O');
+        },
         success: function (response) {
             if (response.error === false) {
                 tabla_horas_acompanante(cedula, fecha_desde, fecha_hasta);

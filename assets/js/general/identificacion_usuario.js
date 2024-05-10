@@ -41,7 +41,6 @@ function abrir_modal_identificarse(openModal = false) {
     }
 }
 
-
 function identificar_persona() {
     let sector = $("#sector").val();
     let cedula = $('#cedula_identificar_persona').val();
@@ -69,6 +68,8 @@ function identificar_persona() {
                     localStorage.setItem("cedula", datos.cedula);
                     localStorage.setItem("nombre", datos.nombre);
                     localStorage.setItem("apellido", datos.apellido);
+                    let gestor = datos.gestor;
+                    //correcto_pasajero(response.mensaje);
                     $('#cedula_identificar_persona').val('');
                     $('#modal_identificar_persona_en_sesion').modal("hide");
                     $('#nombre_usuario_en_sesion').text(`➡ ${datos.nombre} ${datos.apellido}`);

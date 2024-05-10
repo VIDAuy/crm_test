@@ -241,3 +241,7 @@ const ERROR_CONSULTA_CAUSAL_BAJA = "Error en la consulta causal baja";
 const ERROR_CONSULTA_MEDIO_PAGO  = "Error en la consulta medio de pago";
 const ERROR_AL_REGISTRAR         = "Ha ocurrido un error al intentar registrar";
 const ERROR_GENERAL_2            = "Ha ocurrido un error, por favor arme un ticket informando todos los pasos que siguió hasta que se efectuó este error";
+
+
+//PASSWORD
+const PASSWORD_ADMIN = "centralvida";

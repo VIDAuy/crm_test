@@ -30,7 +30,7 @@ function obtener_bajas_morosidad()
     $conexion = connection(DB);
     $tabla = TABLA_BAJAS_MOROSIDAD;
 
-    $sql = "SELECT * FROM {$tabla} WHERE activo = 1";
+    $sql = "SELECT * FROM {$tabla} WHERE activo = 1 LIMIT 100";
 
     $consulta = mysqli_query($conexion, $sql);
 

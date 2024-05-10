@@ -84,7 +84,7 @@ function obtener_historial_crmessage($id_area)
                WHERE
                 area_consultada = '$id_area' AND 
                 estado = 1 AND 
-                activo = 1";
+                activo = 1 LIMIT 100";
         $consulta = mysqli_query($conexion, $sql);
     } catch (\Throwable $error) {
         registrar_errores($sql, "tabla_gestionar_pendientes.php", $error);
@@ -101,7 +101,7 @@ function obtener_datos_mensajes($id)
     $tabla = TABLA_MENSAJES_CONSULTA_TRANSAREA;
 
     try {
-        $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND activo = 1 ORDER BY id ASC LIMIT 1";
+        $sql = "SELECT * FROM {$tabla} WHERE id_consulta_transarea = '$id' AND activo = 1 ORDER BY id ASC LIMIT 1 LIMIT 100";
         $consulta = mysqli_query($conexion, $sql);
         $resultado = mysqli_fetch_assoc($consulta);
         return $resultado;
@@ -118,7 +118,7 @@ function obtener_imagenes($id)
     $tabla = TABLA_ARCHIVOS_CRMESSAGE;
 
     try {
-        $sql = "SELECT nombre_archivo FROM {$tabla} WHERE id_consulta = '$id' AND activo = 1";
+        $sql = "SELECT nombre_archivo FROM {$tabla} WHERE id_consulta = '$id' AND activo = 1 LIMIT 100";
         $consulta = mysqli_query($conexion, $sql);
     } catch (\Throwable $error) {
         registrar_errores($sql, "tabla_gestionar_pendientes.php", $error);

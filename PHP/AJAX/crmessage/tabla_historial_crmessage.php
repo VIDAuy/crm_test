@@ -70,7 +70,7 @@ function obtener_historial_crmessage($opcion, $id_area)
             {$tabla}
            WHERE 
             $where AND 
-            activo = 1";
+            activo = 1 LIMIT 100";
     $consulta = mysqli_query($conexion, $sql);
 
     return $consulta;
@@ -99,7 +99,7 @@ function obtener_imagenes($id)
     $conexion = connection(DB);
     $tabla = TABLA_ARCHIVOS_CRMESSAGE;
 
-    $sql = "SELECT nombre_archivo FROM {$tabla} WHERE id_consulta = '$id' AND activo = 1";
+    $sql = "SELECT nombre_archivo FROM {$tabla} WHERE id_consulta = '$id' AND activo = 1 LIMIT 100";
     $consulta = mysqli_query($conexion, $sql);
 
     $imagenes = "";
