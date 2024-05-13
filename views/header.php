@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.1.34';
+$version = '?v=1.1.35';
 const PRODUCCION = false;
 $title = PRODUCCION ? "CRM" : "CRM_TEST";
 $title_html = PRODUCCION ? "<span class='text-danger'> CRM </span>" : "<span class='text-success'> CRM TEST </span>";

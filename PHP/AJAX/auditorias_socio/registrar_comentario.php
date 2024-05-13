@@ -13,7 +13,7 @@ if ($id_auditoria_socio == "" || $comentario == "" || $id_area == "") devolver_e
 
 if (count($_FILES) > 0) {
     $imagen = $_FILES['imagen'];
-    if (controlarExtension($imagen, array("mp3")) <= 0) devolver_error("Los archivos cargados solo pueden ser de tipo .mp3");
+    if (controlarExtension($imagen, array("mp3", "pdf")) <= 0) devolver_error("Los archivos cargados solo pueden ser de tipo .mp3");
 
     $id_registro = registrar_comentario($id_auditoria_socio, $comentario, $id_area, $id_sub_usuario);
     if ($id_registro === false) devolver_error("Ocurrieron errores al registrar el comentario");
