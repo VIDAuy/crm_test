@@ -36,6 +36,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/equifax.js",
 				"general/bajas_morosidad.js",
 				"general/alertas_generales.js",
+				"general/discador.js",
 			];
 
 			/** JS General **/
@@ -98,6 +99,8 @@ if (isset($_SESSION['nivel'])) {
 				"crmessage/modal_mensajes_crmessage.html",
 				"crmessage/modal_reasignar_crmessage.html",
 				"alertas/modal_alertas_generales.html",
+				"discador/modal_upload_discador.html",
+				"discador/modal_registros_discador.html",
 			];
 
 			/** Carga Modals **/
@@ -130,6 +133,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/equifax.js",
 				"general/bajas_morosidad.js",
 				"general/alertas_generales.js",
+				"general/discador.js",
 			];
 
 			/** JS General **/
@@ -183,6 +187,8 @@ if (isset($_SESSION['nivel'])) {
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 				"alertas/modal_alertas_generales.html",
+				"discador/modal_upload_discador.html",
+				"discador/modal_registros_discador.html",
 			];
 
 			/** Carga Modals **/
@@ -224,6 +230,7 @@ if (isset($_SESSION['nivel'])) {
 				"general/consultas_generales.js",
 				"general/cierre_de_horas_personalizado.js",
 				"general/alertas_generales.js",
+				"general/discador.js",
 			];
 
 			/** Carga JS **/
@@ -304,6 +311,8 @@ if (isset($_SESSION['nivel'])) {
 				"bajas_morosidad/modal_upload_bajas_morosidad.html",
 				"bajas_morosidad/modal_registros_bajas_morosidad.html",
 				"alertas/modal_alertas_generales.html",
+				"discador/modal_upload_discador.html",
+				"discador/modal_registros_discador.html",
 			];
 
 

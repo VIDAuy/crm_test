@@ -148,6 +148,7 @@ const TABLA_TIPO_LICENCIA                = "tipo_licencia";
 const TABLA_TIPO_ACTIVIDAD               = "tipo_actividad";
 const TABLA_TIPO_EMPRESA                 = "tipo_empresa";
 const TABLA_REFERENCIA_CONTENIDO_CRM     = "referencia_contenido_crm";
+const TABLA_REGISTROS_DISCADOR           = "registros_discador";
 
 
 //SERVER - COORDINACIÓN
