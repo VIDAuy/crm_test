@@ -84,6 +84,7 @@ function buscarSocio() {
                 if (val == 6) tabla_cobranza_abitab();
                 if (val == 7) tabla_patologias_socio();
                 if (val == 8) verificar_socio_equifax();
+                if (val == 23) verificar_envio_discador();
             });
 
 

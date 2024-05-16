@@ -8,6 +8,9 @@
         <div id="contenedor_socio_equifax">
             <div class="p-2" id="div_socio_equifax"></div>
         </div>
+        <div id="contenedor_envio_discador">
+            <div class="p-2" id="div_envio_discador"></div>
+        </div>
         <div class="p-2 ms-auto">
             <button type="button" class="btn btn-secondary position-relative" onclick="ver_etiquetas_socio()">
                 Ver etiquetas de socio

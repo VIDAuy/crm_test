@@ -9,126 +9,21 @@
             </div>
             <div class="modal-body">
 
-
-                <nav>
-                    <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav_discador_convenio-tab" data-bs-toggle="tab"
-                            data-bs-target="#nav_discador_convenio" type="button" role="tab"
-                            aria-controls="nav_discador_convenio" aria-selected="true"
-                            onclick="registros_discador(false, 1)">Convenio</button>
-                        <button class="nav-link" id="nav_discador_domiciliario-tab" data-bs-toggle="tab"
-                            data-bs-target="#nav_discador_domiciliario" type="button" role="tab"
-                            aria-controls="nav_discador_domiciliario" aria-selected="false"
-                            onclick="registros_discador(false, 2)">Domiciliario</button>
-                        <button class="nav-link" id="nav_discador_onajpu-tab" data-bs-toggle="tab"
-                            data-bs-target="#nav_discador_onajpu" type="button" role="tab"
-                            aria-controls="nav_discador_onajpu" aria-selected="false"
-                            onclick="registros_discador(false, 3)">Onajpu</button>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav_discador_convenio" role="tabpanel"
-                        aria-labelledby="nav_discador_convenio-tab" tabindex="0">
-                        <div class="table-responsive">
-                            <table id="tabla_registros_discador_1"
-                                class="table table-sm table-bordered table-striped table-hover" width="100%">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th class="text-success" scope="col">Cédula</th>
-                                        <!--
-                                            <th class="text-success" scope="col">Name</th>
-                                        -->
-                                        <th class="text-success" scope="col">Teléfono</th>
-                                        <th class="text-success" scope="col">Enable</th>
-                                        <th class="text-warning" scope="col">Columna1</th>
-                                        <th class="text-warning" scope="col">Columna2</th>
-                                        <th class="text-warning" scope="col">Columna3</th>
-                                        <th class="text-warning" scope="col">Columna4</th>
-                                        <th class="text-primary" scope="col">Estado</th>
-                                        <th class="text-primary" scope="col">Statetimestamp</th>
-                                        <th class="text-primary" scope="col">Lastattempt</th>
-                                        <th class="text-primary" scope="col">Attempttimestamp</th>
-                                        <th class="text-primary" scope="col">Billsec</th>
-                                        <th class="text-primary" scope="col">Uniqueid</th>
-                                        <th class="text-success" scope="col">Opción</th>
-                                        <th class="text-success" scope="col">Descripción</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav_discador_domiciliario" role="tabpanel"
-                        aria-labelledby="nav_discador_domiciliario-tab" tabindex="0">
-                        <div class="table-responsive">
-                            <table id="tabla_registros_discador_2"
-                                class="table table-sm table-bordered table-striped table-hover" width="100%">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th class="text-success" scope="col">Cédula</th>
-                                        <!--
-                                            <th class="text-success" scope="col">Name</th>
-                                        -->
-                                        <th class="text-success" scope="col">Teléfono</th>
-                                        <th class="text-success" scope="col">Enable</th>
-                                        <th class="text-warning" scope="col">Columna1</th>
-                                        <th class="text-warning" scope="col">Columna2</th>
-                                        <th class="text-warning" scope="col">Columna3</th>
-                                        <th class="text-warning" scope="col">Columna4</th>
-                                        <th class="text-primary" scope="col">Estado</th>
-                                        <th class="text-primary" scope="col">Statetimestamp</th>
-                                        <th class="text-primary" scope="col">Lastattempt</th>
-                                        <th class="text-primary" scope="col">Attempttimestamp</th>
-                                        <th class="text-primary" scope="col">Billsec</th>
-                                        <th class="text-primary" scope="col">Uniqueid</th>
-                                        <th class="text-success" scope="col">Opción</th>
-                                        <th class="text-success" scope="col">Descripción</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav_discador_onajpu" role="tabpanel"
-                        aria-labelledby="nav_discador_onajpu-tab" tabindex="0">
-                        <div class="table-responsive">
-                            <table id="tabla_registros_discador_3"
-                                class="table table-sm table-bordered table-striped table-hover" width="100%">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th class="text-success" scope="col">Cédula</th>
-                                        <!--
-                                            <th class="text-success" scope="col">Name</th>
-                                        -->
-                                        <th class="text-success" scope="col">Teléfono</th>
-                                        <th class="text-success" scope="col">Enable</th>
-                                        <th class="text-warning" scope="col">Columna1</th>
-                                        <th class="text-warning" scope="col">Columna2</th>
-                                        <th class="text-warning" scope="col">Columna3</th>
-                                        <th class="text-warning" scope="col">Columna4</th>
-                                        <th class="text-primary" scope="col">Estado</th>
-                                        <th class="text-primary" scope="col">Statetimestamp</th>
-                                        <th class="text-primary" scope="col">Lastattempt</th>
-                                        <th class="text-primary" scope="col">Attempttimestamp</th>
-                                        <th class="text-primary" scope="col">Billsec</th>
-                                        <th class="text-primary" scope="col">Uniqueid</th>
-                                        <th class="text-success" scope="col">Opción</th>
-                                        <th class="text-success" scope="col">Descripción</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table id="tabla_registros_discador" class="table table-sm table-bordered table-striped table-hover"
+                        width="100%">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Tipo Discador</th>
+                                <th>Teléfono</th>
+                                <th>Estado</th>
+                                <th>Fecha Recibio</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-
-
 
             </div>
             <div class="modal-footer">

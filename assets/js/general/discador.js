@@ -1,5 +1,3 @@
-
-
 $(document).on('change', '#file_uploader_discador', function () {
     $("#btn_uploader_discador").addClass("btn btn-success");
     $("#btn_uploader_discador").html("Cargar archivo");
@@ -68,37 +66,45 @@ function uploader_discador(openModal = false) {
 }
 
 
-function registros_discador(openModal = false, opcion = 1) {
-    if (openModal == true) {
-        registros_discador(false, 1);
-        $("#modal_registrosDiscador").modal("show");
-    } else {
+function verificar_envio_discador() {
+    let cedula = $("#ci").val();
+    $("#div_envio_discador").html("");
 
-        $(`#tabla_registros_discador_${opcion}`).DataTable({
-            ajax: `${url_ajax}discador/tabla_registros_discador.php?opcion=${opcion}`,
-            columns: [
-                { data: "id" },
-                { data: "cedula" },
-                //{ data: "name" },
-                { data: "numcall" },
-                { data: "enable" },
-                { data: "columna1" },
-                { data: "columna2" },
-                { data: "columna3" },
-                { data: "columna4" },
-                { data: "state" },
-                { data: "statetimestamp" },
-                { data: "lastattempt" },
-                { data: "attempttimestamp" },
-                { data: "billsec" },
-                { data: "uniqueid" },
-                { data: "option" },
-                { data: "description" },
-            ],
-            order: [[0, "asc"]],
-            bDestroy: true,
-            language: { url: url_lenguage },
+    if (controlCedula(cedula) === true) {
+        $.ajax({
+            type: "GET",
+            url: `${url_ajax}discador/verificar_envio_discador.php?cedula=${cedula}`,
+            dataType: "JSON",
+            success: function (response) {
+                if (response.error === false) {
+                    $("#div_envio_discador").html(`<button class='btn btn-warning' onclick='registros_discador()'>Discadores Enviados</button>`);
+                } else if (response.error == 222) {
+                    error(response.mensaje);
+                }
+            }
         });
     }
+}
 
+
+function registros_discador() {
+    let cedula = $("#ci").val();
+
+    $(`#tabla_registros_discador`).DataTable({
+        ajax: `${url_ajax}discador/tabla_registros_discador.php?cedula=${cedula}`,
+        columns: [
+            { data: "id" },
+            { data: "tipo_discador" },
+            { data: "telefono" },
+            { data: "estado" },
+            { data: "fecha_recibido" },
+            { data: "description" },
+        ],
+        order: [[0, "asc"]],
+        bDestroy: true,
+        language: { url: url_lenguage },
+    });
+
+
+    $("#modal_registrosDiscador").modal("show");
 }
