@@ -124,6 +124,9 @@ function buscarSocio() {
                 $("#historiaComunicacionDeCedulaDiv").css("display", "block");
                 $("#historiaComunicacionDeCedulaDiv_funcionarios").css("display", "none");
                 if (!datos.mostrar_inspira) $("#div_inspira").css("display", "none");
+                $("#span_direccion_titular_tarjeta_credito").text(datos.direccion);
+                $("#span_nro_tarjeta_credito").text(datos.numero_tarjeta);
+                $("#span_datos_titular_tarjeta_credito").text(datos.nombre_titular);
             }
 
         }).fail(function (err) {

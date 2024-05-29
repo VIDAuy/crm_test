@@ -47,7 +47,7 @@ if ($_SESSION['nivel'] == 1) {
     $agenda_volver_a_llamar = "";
 } else {
 
-    $siEsSocio = "
+    $siEsSocio = $_SESSION['usuario'] != "Calidad" && $_SESSION['usuario'] != "Bajas" ? "
     <div class='alert alert-info border border-info' role='alert'>
         <h3 class='text-center'>
             Cédula consultada: 
@@ -91,6 +91,64 @@ if ($_SESSION['nivel'] == 1) {
             <div class='col-3'>
                 <label for='' class='col-form-label'>Servicios Activos?</label>
                 <div id='span_comprobar_servicios'></div>
+            </div>
+        </div>
+    </div>" : "
+    <div class='alert alert-info border border-info' role='alert'>
+        <h3 class='text-center'>
+            Cédula consultada: 
+            <span id='cedulas'></span>
+        </h3>
+        <div class='row text-center'>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Nombre completo:</label>
+                <p id='nom' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Teléfono:</label>
+                <p id='telefono' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-2'>
+                <label for='' class='col-form-label'>Fecha de afiliación:</label>
+                <p id='fechafil' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-4 justify-content-center'>
+                <label class='col-form-label d-block text-center'>Más datos:</label>
+                <div class='d-flex'>
+                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='btnDatosCoordinacion' onclick='datos_coordinacion()'>Coordinación</button>
+                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='btnDatosCobranza' onclick='datos_cobranza()'>Cobranza</button>
+                    <button class='btn btn-primary btn-sm mx-auto mb-2' id='btnDatosProductos' onclick='datos_productos()'>Productos</button>
+                </div>
+            </div>
+        </div>
+        <div class='row text-center'>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Radio:</label>
+                <p id='radio' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Sucursal:</label>
+                <p id='sucursal' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-3' id='div_inspira'>
+                <label for='' class='col-form-label'>Inspira?:</label>
+                <p id='inspira' style='font-weight: bold;'></p>
+            </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Servicios Activos?</label>
+                <div id='span_comprobar_servicios'></div>
+            </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Dirección:</label>
+                <div class='fw-bolder' id='span_direccion_titular_tarjeta_credito'></div>
+            </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Número tarjeta de crédito:</label>
+                <div class='fw-bolder' id='span_nro_tarjeta_credito'></div>
+            </div>
+            <div class='col-3'>
+                <label for='' class='col-form-label'>Datos del títular:</label>
+                <div class='fw-bolder' id='span_datos_titular_tarjeta_credito'></div>
             </div>
         </div>
     </div>";

@@ -89,7 +89,10 @@ function datos_padron($cedula)
 		pds.cedula, 
 		pps.fecha_afiliacion, 
 		pds.sucursal, 
-		pds.radio
+		pds.radio,
+		pds.direccion,
+		pds.numero_tarjeta,
+		pds.nombre_titular
 	  FROM 
 	   {$tabla1} pds
 	   INNER JOIN {$tabla2} pps ON pds.cedula = pps.cedula

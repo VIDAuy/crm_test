@@ -1,5 +1,6 @@
 <?php
 include_once '../../configuraciones.php';
+$sector = $_SESSION['usuario'];
 $cedula = $_REQUEST['cedula'];
 $opcion = $_REQUEST['opcion'];
 
@@ -16,17 +17,35 @@ if ($opcion == 2 && mysqli_num_rows($datos_productos) > 0) {
 	$response["data"] = [];
 
 	while ($row = mysqli_fetch_assoc($datos_productos)) {
-		$nroServicio = $row['nro_servicio'];
-		$servicio 	 = $row['servicio'];
-		$horas 		 = $row['hora'];
-		$importe 	 = $row['importe'];
+		$nroServicio      = $row['nro_servicio'];
+		$servicio 	      = $row['servicio'];
+		$horas 		      = $row['hora'];
+		$importe 	      = $row['importe'];
+		$cod_promo        = $row['cod_promo'];
+		$fecha_afiliacion = $row['fecha_afiliacion'];
+		$count            = $row['count'];
+		$keepprice        = $row['keepprice1'];
 
-		$response["data"][] = [
-			'nroServicio' => $nroServicio,
-			'servicio' 	  => $servicio,
-			'horas' 	  => $horas,
-			'importe' 	  => "$$importe"
-		];
+
+		if ($sector == "Calidad" || $sector == "Bajas") {
+			$response["data"][] = [
+				'nroServicio'      => $nroServicio,
+				'servicio' 	       => $servicio,
+				'horas' 	       => $horas,
+				'importe' 	       => "$$importe",
+				'cod_promo'        => $cod_promo,
+				'fecha_afiliacion' => $fecha_afiliacion,
+				'count'            => $count,
+				'keepprice'        => $keepprice,
+			];
+		} else {
+			$response["data"][] = [
+				'nroServicio' => $nroServicio,
+				'servicio' 	  => $servicio,
+				'horas' 	  => $horas,
+				'importe' 	  => "$$importe"
+			];
+		}
 	}
 }
 
@@ -49,7 +68,11 @@ function obtener_productos($cedula)
 		pps.servicio AS nro_servicio, 
 		sc.servicio, 
 		pps.hora, 
-		pps.importe 
+		pps.importe,
+		pps.cod_promo,
+		pps.fecha_afiliacion,
+		pps.count,
+		pps.keepprice1
 	  FROM 
 		{$tabla1} pps 
 		INNER JOIN {$tabla2} sc ON pps.servicio = sc.nro_servicio 
