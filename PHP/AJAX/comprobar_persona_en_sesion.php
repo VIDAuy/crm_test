@@ -6,7 +6,8 @@ $sector = $_REQUEST['sector'];
 $cedula = $_REQUEST['cedula'];
 
 
-$id_sector = obtener_id_sector($sector);
+$id_sector = obtener_usuario_datos($sector)['id'];
+$tiempo_expiracion = obtener_usuario_datos($sector)['tiempo_expiracion'];
 
 if ($id_sector == "" || $id_sector == false || $id_sector == null) {
     $response['error'] = true;
@@ -16,17 +17,12 @@ if ($id_sector == "" || $id_sector == false || $id_sector == null) {
 
 
 $datos_usuario = validar_usuario($id_sector, $cedula);
-
-if ($datos_usuario == "" || $datos_usuario == false || $datos_usuario == null) {
-    $response['error'] = true;
-    $response['mensaje'] = "La cédula ingresada no pertenece a ninguna persona del sector $sector";
-    die(json_encode($response));
-}
-
+if ($datos_usuario == "" || $datos_usuario == false || $datos_usuario == null) devolver_error("La cédula ingresada no pertenece a ninguna persona del sector $sector");
 $id_sub_usuario = $datos_usuario['id'];
 $nombre = $datos_usuario['nombre'];
 $apellido = $datos_usuario['apellido'];
 $es_gestor = $datos_usuario['gestor'];
+
 
 
 $_SESSION['id_sub_usuario'] = $id_sub_usuario;
@@ -63,23 +59,25 @@ $response['datos'] = [
     "nombre" => $nombre,
     "apellido" => $apellido,
     "gestor" => $es_gestor,
+    "tiempo_expiracion" => $tiempo_expiracion,
 ];
 $response['todo_contenido'] = $contenido;
-
 echo json_encode($response);
 
 
 
-function obtener_id_sector($sector)
+
+function obtener_usuario_datos($sector)
 {
     $conexion = connection(DB);
     $tabla = TABLA_USUARIOS;
 
-    $sql = "SELECT id FROM {$tabla} WHERE usuario = '$sector'";
+    $sql = "SELECT id, tiempo_expiracion FROM {$tabla} WHERE usuario = '$sector'";
     $consulta = mysqli_query($conexion, $sql);
 
-    return mysqli_fetch_assoc($consulta)['id'];
+    return mysqli_fetch_assoc($consulta);
 }
+
 
 function validar_usuario($id_sector, $cedula)
 {

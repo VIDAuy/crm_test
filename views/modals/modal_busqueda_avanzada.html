@@ -1,0 +1,125 @@
+<!-- Modal -->
+<div class="modal fade" id="modal_busquedaAvanzada" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Busqueda Avanzada</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Cédula:</span>
+                            <input type="text" class="form-control" id="txt_cedula_busqueda_avanzada"
+                                placeholder="Ingrese una cédula" aria-label="Ingrese una cédula"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Número de referencia
+                                MercadoPago:</span>
+                            <input type="text" class="form-control"
+                                id="txt_numero_referencia_mercadopago_busqueda_avanzada"
+                                placeholder="Ingrese un número de referencia MercadoPago"
+                                aria-label="Ingrese un número de referencia MercadoPago"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div id="div_btn_buscar_busqueda_avanzada"></div>
+                    </div>
+                </div>
+
+                <div class="mt-5" id="div_contenedor_busqueda_avanzada" style="display: none;">
+                    <nav class="mb-4">
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav_contenedor_datos-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav_contenedor_datos" type="button" role="tab"
+                                aria-controls="nav_contenedor_datos" aria-selected="true">Datos Varios</button>
+                            <button class="nav-link" id="nav_datos_socio-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav_datos_socio" type="button" role="tab"
+                                aria-controls="nav_datos_socio" aria-selected="false">Datos Socio</button>
+                            <button class="nav-link" id="nav_datos_producto-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav_datos_producto" type="button" role="tab"
+                                aria-controls="nav_datos_producto" aria-selected="false">Datos Producto</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav_contenedor_datos" role="tabpanel"
+                            aria-labelledby="nav_contenedor_datos-tab" tabindex="0">
+                            <div id="contenedor_datos">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav_datos_socio" role="tabpanel"
+                            aria-labelledby="nav_datos_socio-tab" tabindex="0">
+                            <div class="table-responsive">
+                                <table id="tabla_datos_socio_busqueda_avanzada"
+                                    class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Teléfono</th>
+                                            <th>Cédula</th>
+                                            <th>Dirección</th>
+                                            <th>Sucursal</th>
+                                            <th>Ruta</th>
+                                            <th>Radio</th>
+                                            <th>Fecha Nacimiento</th>
+                                            <th>Tarjeta</th>
+                                            <th>Tipo de Tarjeta</th>
+                                            <th>Número de Tarjeta</th>
+                                            <th>Nombre Titular</th>
+                                            <th>Cédula Titular</th>
+                                            <th>Teléfono Titular</th>
+                                            <th>Observaciones</th>
+                                            <th>Origen Venta</th>
+                                            <th>Total Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav_datos_producto" role="tabpanel"
+                            aria-labelledby="nav_datos_producto-tab" tabindex="0">
+                            <div class="table-responsive">
+                                <table id="tabla_datos_producto_busqueda_avanzada"
+                                    class="table table-sm table-bordered table-striped table-hover" width="100%">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Cédula</th>
+                                            <th>Servicio</th>
+                                            <th>Hora</th>
+                                            <th>Importe</th>
+                                            <th>Cod. Promo</th>
+                                            <th>Fecha Afiliación</th>
+                                            <th>Observaciones</th>
+                                            <th>Movimiento</th>
+                                            <th>Vendedor</th>
+                                            <th>Keepprice1</th>
+                                            <th>Empresa</th>
+                                            <th>Count</th>
+                                            <th>Abm</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

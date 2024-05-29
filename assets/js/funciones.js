@@ -7,6 +7,8 @@ const url_ajax = `${url_app}/PHP/AJAX/`;
 const url_lenguage = `${url_app}/assets/js/lenguage.json`;
 
 
+
+
 // AJAX
 function agregarFiliales() {
 
@@ -33,6 +35,7 @@ function agregarFiliales() {
     },
   });
 }
+
 
 function select_usuarios(div) {
 
@@ -101,6 +104,9 @@ function enviar_terminos_y_condiciones_socio(openModal = false) {
   }
 }
 
+
+
+
 // Funciones complementarias
 
 function ocultarContenido() {
@@ -113,6 +119,9 @@ function ocultarContenido() {
     $('#acciones_socios_nivel_3').css('display', 'none');
   }
 }
+
+
+
 
 // Funciones de control
 
@@ -131,6 +140,7 @@ function comprobarCI(cedi) {
   return suma % 10 == 0;
 }
 
+
 function comprobarCelular(celular) {
   let primeros_dos_digitos = celular.substring(0, 2);
 
@@ -142,6 +152,7 @@ function comprobarCelular(celular) {
 
   return true;
 }
+
 
 function controlCargo(param) {
   let mensaje = '';
@@ -188,31 +199,38 @@ function controlCargo(param) {
   return mensaje;
 }
 
+
 function ir_a_vida_te_lleva() {
   let url = 'https://vida-apps.com/vida_te_lleva/panel_calidad/index.html';
   window.open(url, '_blank');
 }
+
 
 function verMasTabla(observacion) {
   $('#todo_comentario_funcionarios').val(observacion);
   $('#modalVerMasFuncionarios').modal('show');
 }
 
+
 function alerta(titulo, mensaje, icono) {
   Swal.fire({ title: titulo, html: mensaje, icon: icono });
 }
+
 
 function error(mensaje) {
   Swal.fire({ title: 'Error!', html: mensaje, icon: 'error' });
 }
 
+
 function warning(mensaje, titulo = "") {
   Swal.fire({ title: titulo, html: mensaje, icon: 'warning' });
 }
 
+
 function correcto(mensaje) {
   Swal.fire({ title: 'Éxito!', html: mensaje, icon: 'success' });
 }
+
 
 function alerta_ancla(titulo, mensaje, icono) {
   Swal.fire({
@@ -225,6 +243,7 @@ function alerta_ancla(titulo, mensaje, icono) {
     }
   });
 }
+
 
 function cargando(opcion = "M", mensaje = null) {
   if (opcion === "M") {
@@ -242,6 +261,7 @@ function cargando(opcion = "M", mensaje = null) {
   }
 }
 
+
 function showLoading(title = "Cargando...") {
   Swal.fire({
     title,
@@ -251,9 +271,11 @@ function showLoading(title = "Cargando...") {
   });
 }
 
+
 function hideLoading() {
   Swal.close();
 }
+
 
 function mostrarLoader(opcion = 'M') {
   $loader =
@@ -269,6 +291,7 @@ function mostrarLoader(opcion = 'M') {
       : $loader.close();
 }
 
+
 function loading(mostrar = false) {
   if (mostrar == true) {
     Swal.fire({
@@ -281,6 +304,7 @@ function loading(mostrar = false) {
     Swal.close();
   }
 }
+
 
 function correcto_pasajero(mensaje) {
   const Toast = Swal.mixin({
@@ -300,6 +324,16 @@ function correcto_pasajero(mensaje) {
     title: mensaje,
   });
 }
+
+
+function btn_cargando(div, color) {
+  $(`#${div}`).html(`
+  <button class="btn btn-${color}" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+      <span role="status">Cargando...</span>
+  </button>`);
+}
+
 
 function ocultar_todo_contenido() {
   $('.contenido_funcionario').css({ display: 'none' });
@@ -343,6 +377,7 @@ function ocultar_todo_contenido() {
   $('#observacionesNSR').val('');
 }
 
+
 function fecha_hora_actual() {
   let fecha = new Date();
   let hora = fecha.getHours();
@@ -353,6 +388,7 @@ function fecha_hora_actual() {
 
   return `${fecha} ${hora}:${minutos}`;
 }
+
 
 function fecha_actual(obtener) {
   let devolver = "";
@@ -365,6 +401,7 @@ function fecha_actual(obtener) {
   return `${devolver}`;
 }
 
+
 function controlCedula(cedula) {
   if (cedula == "") {
     error("Debe ingresar una cédula");
@@ -375,10 +412,12 @@ function controlCedula(cedula) {
   }
 }
 
+
 function esNumero(cadena) {
   const regex_numeros = /^[0-9]*$/;
   return regex_numeros.test(cadena);
 }
+
 
 //Cambiar clase y nombre de botón
 function cambiar_div(div, clase, nombre) {
