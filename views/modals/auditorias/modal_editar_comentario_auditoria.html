@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modal_editarComentarioAuditoria" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 2001;">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Comentario Auditoría</h1>
@@ -15,11 +15,7 @@
                     <label for="txt_id_editar_comentario_auditoria_socio">ID</label>
                 </div>
 
-                <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Comentario"
-                        id="txt_descripcion_editar_comentario_auditoria_socio" style="height: 300px"></textarea>
-                    <label for="txt_descripcion_editar_comentario_auditoria_socio">Comentario</label>
-                </div>
+                <textarea class="mb-3" id="txt_mensaje_editar_comentario_auditoria"></textarea>
 
             </div>
             <div class="modal-footer">

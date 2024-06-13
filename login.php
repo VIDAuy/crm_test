@@ -1,6 +1,9 @@
 <?php
 session_start();
-session_destroy();
+$array_variables_sesion = ["usuario", "nivel", "filial", "id", "id_sub_usuario", "id_sector", "sector", "cedula", "nombre", "apellido", "gestor"];
+foreach ($array_variables_sesion as $variable_sesion) {
+    unset($_SESSION[$variable_sesion]);
+}
 echo '<script>localStorage.clear();</script>';
 
 const PRODUCCION = false;
@@ -28,12 +31,13 @@ $title = PRODUCCION ? "CRM" : "CRM_TEST";
         <div class="row">
             <div class="col-sm-6 col-md-4 col-md-offset-4 mx-auto">
                 <div class="account-wall">
-                    <img class="profile-img" src="./assets/img/globito.jpg" alt="" />
+                    <img class="profile-img mb-2" src="./assets/img/globito.jpg" alt="Logo de vida" />
+                    <h2 class="text-center fw-bolder mb-3" id="titulo_login"><?= $title; ?></h2>
                     <form class="form-signin" name="form" id="form">
                         <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Usuario" autofocus>
-                        <input type="password" id="password" name="password" class="form-control mb-3" placeholder="Codigo">
+                        <input type="password" id="password" name="password" class="form-control mb-3" placeholder="Código">
                         <div class="d-flex justify-content-center">
-                            <input type="button" id="boton" class="btn btn-primary btn-block" value="Ingresar" onclick="log()">
+                            <input type="button" id="btn_login" class="btn text-white w-100" value="Ingresar" onclick="log()">
                         </div>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modal_editarAuditorias" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 2001;">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Auditoría</h1>
@@ -15,13 +15,9 @@
                     <label for="txt_id_editar_auditoria_socio">ID</label>
                 </div>
 
-                <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Descripcion" id="txt_descripcion_editar_auditoria_socio"
-                        style="height: 300px"></textarea>
-                    <label for="txt_descripcion_editar_auditoria_socio">Descripción</label>
-                </div>
+                <textarea id="txt_descripcion_editar_auditoria_socio_registrada"></textarea>
 
-                <div class="form-floating mb-3">
+                <div class="form-floating mt-3 mb-3">
                     <input type="datetime-local" class="form-control" id="txt_fecha_auditoria_editar_auditoria_socio"
                         placeholder="Fecha Auditoria">
                     <label for="txt_fecha_auditoria_editar_auditoria_socio">Fecha Auditoría</label>

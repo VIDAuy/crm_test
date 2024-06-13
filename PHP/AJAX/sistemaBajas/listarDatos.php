@@ -93,6 +93,7 @@
 						$telefono = '';
 					}
 
+
 					$nombre 	= mb_convert_case($f['nombre'], MB_CASE_TITLE, 'UTF-8');
 					$filial 	= $f['sucursal'];
 					$importe 	= $f['importe'];

@@ -1,5 +1,5 @@
 <?php
-$version = '?v=1.1.40';
+$version = '?v=1.1.50';
 const PRODUCCION = false;
 $title = PRODUCCION ? "CRM" : "CRM_TEST";
 $title_html = PRODUCCION ? "<span class='text-danger'> CRM </span>" : "<span class='text-success'> CRM TEST </span>";
@@ -65,6 +65,9 @@ $title_html = PRODUCCION ? "<span class='text-danger'> CRM </span>" : "<span cla
 	<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 	<!-- Select2 4.1.0 -->
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<!-- Tinymce -->
+	<script src="./assets/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+
 
 
 	<?php

@@ -6,8 +6,7 @@
         <div class="box-body">
             <h3 class="text-center"><u>Registros:</u><span id="cedulas"></span></h3>
             <div class="table-responsive">
-                <table id="tabla_historia_comunicacion_de_cedula"
-                    class="table table-sm table-bordered table-striped table-hover" width="100%">
+                <table id="tabla_historia_comunicacion_de_cedula" class="table table-sm table-bordered table-striped table-hover" width="100%">
                     <thead class="table-info">
                         <tr>
                             <th>#</th>

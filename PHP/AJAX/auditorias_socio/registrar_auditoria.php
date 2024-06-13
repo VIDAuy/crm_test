@@ -35,6 +35,8 @@ function registrar_auditoria($cedula, $descripcion, $fecha_auditoria, $id_area, 
     $conexion = connection(DB);
     $tabla = TABLA_AUDITORIAS_SOCIO;
 
+    $descripcion = str_replace("'", '"', $descripcion);
+
     try {
         $sql = "INSERT INTO {$tabla} (cedula, descripcion, fecha, fecha_registro, area_registro, usuario_registro) VALUES ('$cedula', '$descripcion', '$fecha_auditoria', NOW(), '$id_area', '$id_sub_usuario')";
         $consulta = mysqli_query($conexion, $sql);

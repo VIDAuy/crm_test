@@ -1,7 +1,12 @@
 <?php
 include_once '../configuraciones.php';
 
-if (isset($_SESSION['usuario'])) session_destroy();
+if (isset($_SESSION['usuario'])) {
+	$array_variables_sesion = ["usuario", "nivel", "filial", "id", "id_sub_usuario", "id_sector", "sector", "cedula", "nombre", "apellido", "gestor"];
+	foreach ($array_variables_sesion as $variable_sesion) {
+		unset($_SESSION[$variable_sesion]);
+	}
+}
 
 $usuario  = $_REQUEST['usuario'];
 $password = $_REQUEST['password'];

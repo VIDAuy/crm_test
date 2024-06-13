@@ -13,24 +13,23 @@ function log() {
 	} else {
 
 		let $data = $('#form').serialize();
-		$.ajax(
-			{
-				url: 'PHP/AJAX/login.php',
-				data: $data,
-				method: 'POST',
-				dataType: 'JSON',
-				success: function (r) {
-					if (r.result) {
-						localStorage.setItem("status", "ok");
-						location.href = "index.php";
-					} else if (r.error) {
-						alerta("Error!", r.message, "error");
-					}
-				},
-				error: function () {
-					alert('Ocurrio un error. Por favor vuelva a intentar en instantes.');
+		$.ajax({
+			url: 'PHP/AJAX/login.php',
+			data: $data,
+			method: 'POST',
+			dataType: 'JSON',
+			success: function (r) {
+				if (r.result) {
+					localStorage.setItem("status", "ok");
+					location.href = "index.php";
+				} else if (r.error) {
+					alerta("Error!", r.message, "error");
 				}
-			});
+			},
+			error: function () {
+				alert('Ocurrio un error. Por favor vuelva a intentar en instantes.');
+			}
+		});
 	}
 }
 

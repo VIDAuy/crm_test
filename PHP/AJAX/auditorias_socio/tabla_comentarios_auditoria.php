@@ -23,14 +23,15 @@ while ($row = mysqli_fetch_assoc($comentarios_auditoria)) {
     if (in_array($area, ["Auditoria"]))
         $acciones .= "<button class='btn btn-sm btn-primary' onclick='editar_comentario_auditoria(true, `" . $id . "`, `" . $comentario . "`)'>✏</button>";
 
-    if (strlen($comentario) > 20) {
-        $br  = array("<br />", "<br>", "<br/>");
-        $comentario = str_ireplace($br, "\r\n", $comentario);
 
-        $comentario_sin_editar = $comentario;
-        $comentario = substr($comentario, 0, 50) . " ...<button class='btn btn-link' onclick='verMasTabla(`" . $comentario_sin_editar . "`);'>Ver Más</button>";
-        $comentario = mb_convert_encoding($comentario, 'UTF-8', 'UTF-8');
-    }
+    $texto_tiene_formato = str_contains($comentario, "<") == true ? 1 : 0;
+
+    $texto_con_formato = $comentario;
+    $texto_sin_formato = strip_tags($comentario);
+    $texto_recortado = substr($texto_sin_formato, 0, 35);
+    $comentario = strlen($texto_sin_formato) > 35 ?
+        "$texto_recortado ...<button class='btn btn-link' onclick='modalVerMasHtml(`" . $texto_con_formato . "`, $texto_tiene_formato);'>Ver Más</button>" :
+        $texto_sin_formato;
 
 
     $tabla["data"][] = [

@@ -12,7 +12,10 @@ $datos_padron = mysqli_fetch_assoc($consulta_padron);
 
 if ($datos_padron != "") {
 	$datos_padron['fecha_afiliacion'] = (new DateTime($datos_padron['fecha_afiliacion']))->format('d/m/Y');
-	$datos_padron['nombre'] = remplazarAcentos($datos_padron['nombre']);
+	$datos_padron['nombre'] = corregir_acentos($datos_padron['nombre']);
+	$datos_padron['direccion'] = corregir_acentos($datos_padron['direccion']);
+	$datos_padron['nombre_titular'] = corregir_acentos($datos_padron['nombre_titular']);
+	$datos_padron['observaciones'] = corregir_acentos($datos_padron['observaciones']);
 }
 
 
@@ -27,7 +30,7 @@ if (mysqli_num_rows($consulta_padron) == 0) {
 			'noSocioConRegistros' => true,
 			'mensaje' 			  => "La cédula ingresada no pertenece a un socio pero ya tiene registros.\nSe le mostrará un formulario diferente.",
 			'nombre' 			  => $f2["nombre"],
-			'telefono' 			  => $f2['telefono'] == "" || $f2['telefono'] == 0 ? 0 : corregirTelefono($f2['telefono']),
+			'telefono' 			  => $f2['telefono'] == "" || $f2['telefono'] == 0 ? 0 : $f2['telefono'],
 		];
 	} else {
 
@@ -47,15 +50,14 @@ if (mysqli_num_rows($consulta_padron) == 0) {
 		$datos_padron = [
 			'bajaProcesada'	=> true,
 			'nombre' 		=> $datos_registros['nombre'],
-			'telefono' 		=> $datos_registros['telefono'] == "" || $datos_registros['telefono'] == 0 ? 0 : corregirTelefono($datos_registros['telefono']),
+			'telefono' 		=> $datos_registros['telefono'] == "" || $datos_registros['telefono'] == 0 ? 0 : $datos_registros['telefono'],
 			'mensaje'		=> "La cédula ingresada no pertenece a un socio pero ya tiene registros.\nSe le mostrará un formulario diferente."
 		];
 	} else {
-		$datos_padron['tel'] = $datos_padron['tel'] == "" || $datos_padron['tel'] == 0 ? 0 : corregirTelefono($datos_padron['tel']);
+		$datos_padron['tel'] = $datos_padron['tel'] == "" || $datos_padron['tel'] == 0 ? 0 : $datos_padron['tel'];
 	}
 }
 $datos_padron['mostrar_inspira'] = $mostrar_inspira;
-
 
 
 $contenido = [];
@@ -79,6 +81,7 @@ echo json_encode($datos_padron);
 function datos_padron($cedula)
 {
 	include '../conexiones/conexion.php';
+	mysqli_set_charset($conexion, "utf8");
 	$tabla1 = TABLA_PADRON_DATOS_SOCIO;
 	$tabla2 = TABLA_PADRON_PRODUCTO_SOCIO;
 
@@ -92,7 +95,13 @@ function datos_padron($cedula)
 		pds.radio,
 		pds.direccion,
 		pds.numero_tarjeta,
-		pds.nombre_titular
+		pds.nombre_titular,
+		pds.ruta,
+		pds.fecha_nacimiento,
+		pds.cedula_titular,
+		pds.telefono_titular,
+		pds.observaciones,
+		pds.total_importe
 	  FROM 
 	   {$tabla1} pds
 	   INNER JOIN {$tabla2} pps ON pds.cedula = pps.cedula

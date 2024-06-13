@@ -32,29 +32,29 @@ function mostrar_menu() {
                 id_items.map((val) => {
                     if (val == 1) {
                         getAfiliacionesCompetencia();
-                        setInterval(getAfiliacionesCompetencia, 15000);
+                        setInterval(getAfiliacionesCompetencia, 30000);
                     }
                     if (val == 2) {
                         alertas_de_vida_te_lleva();
-                        setInterval(alertas_de_vida_te_lleva, 15000);
+                        setInterval(alertas_de_vida_te_lleva, 30000);
                     }
                     if (val == 3) {
                         cantidad_alertas();
-                        setInterval(cantidad_alertas, 15000);
+                        setInterval(cantidad_alertas, 30000);
                         badge_cantidad_alertas_pendientes();
-                        setInterval(badge_cantidad_alertas_pendientes, 15000);
+                        setInterval(badge_cantidad_alertas_pendientes, 30000);
                     }
                     if (val == 4) {
                         cantidad_volver_a_llamar();
-                        setInterval(cantidad_volver_a_llamar, 15000);
+                        setInterval(cantidad_volver_a_llamar, 30000);
                     }
                     if (val == 13) {
                         cantidad_consultas_no_leidas();
-                        setInterval(cantidad_consultas_no_leidas, 15000);
+                        setInterval(cantidad_consultas_no_leidas, 30000);
                     }
                     if (val == 20) {
                         obtener_alertas_generales();
-                        setInterval(obtener_alertas_generales, 15000);
+                        setInterval(obtener_alertas_generales, 30000);
                     }
                 });
 

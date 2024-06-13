@@ -4,7 +4,7 @@ $(document).ready(function () {
     $('#pdfmuestra').css('display', 'none');
 
 
-    //setInterval(alertar_funcionario_estado_documento, 15000);
+    //setInterval(alertar_funcionario_estado_documento, 30000);
 });
 
 function cargar_documento_y_alertar() {

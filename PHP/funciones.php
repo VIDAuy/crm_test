@@ -377,6 +377,30 @@ function eliminarAcentos($cadena)
     return  $cadena;
 }
 
+function eliminar_acentos($cadena)
+{
+
+    //Reemplazamos la A y a
+    $cadena = str_replace(['Á', 'À', 'Â', 'Ä', 'á', 'à', 'ä', 'â', 'ª'], ['A', 'A', 'A', 'A', 'a', 'a', 'a', 'a', 'a'], $cadena);
+
+    //Reemplazamos la E y e
+    $cadena = str_replace(['É', 'È', 'Ê', 'Ë', 'é', 'è', 'ë', 'ê'], ['E', 'E', 'E', 'E', 'e', 'e', 'e', 'e'], $cadena);
+
+    //Reemplazamos la I y i
+    $cadena = str_replace(['Í', 'Ì', 'Ï', 'Î', 'í', 'ì', 'ï', 'î'], ['I', 'I', 'I', 'I', 'i', 'i', 'i', 'i'], $cadena);
+
+    //Reemplazamos la O y o
+    $cadena = str_replace(['Ó', 'Ò', 'Ö', 'Ô', 'ó', 'ò', 'ö', 'ô'], ['O', 'O', 'O', 'O', 'o', 'o', 'o', 'o'], $cadena);
+
+    //Reemplazamos la U y u
+    $cadena = str_replace(['Ú', 'Ù', 'Û', 'Ü', 'ú', 'ù', 'ü', 'û'], ['U', 'U', 'U', 'U', 'u', 'u', 'u', 'u'], $cadena);
+
+    //Reemplazamos la N, n, C y c
+    $cadena = str_replace(['Ñ', 'ñ', 'Ç', 'ç'], ['N', 'n', 'C', 'c'], $cadena);
+
+    return $cadena;
+}
+
 /** Corregir número de teléfono */
 function corregirTelefono($var)
 {
@@ -504,4 +528,21 @@ function buscarCelular($numeros)
     preg_match_all('/(09)[1-9]{1}\d{6}/x', $numeros, $respuesta);
     $respuesta = (count($respuesta[0]) !== 0) ? $respuesta[0] : false;
     return $respuesta;
+}
+
+
+function corregir_acentos($texto)
+{
+    $remplazar_array = [
+        "'" => '', '"' => ' ', '`' => ' ', '`' => '', "Âº" => "°", "NÂª" => "N°",
+        "Ã‘" => "Ñ", "Ã±" => "ñ", "ï¿½" => "Ñ",
+        "Ã‰" => "É", "Ã©" => "é", "JOS?" => "JOSÉ", "Ãˆ" => "É",
+        "Ã" => "Í", "Ã" => "í", "ÃŒ" => "í", "Ã¬" => "Í",
+        "Ã" => "Á", "Ã¡" => "Á", "Ã€" => "Á",
+        "Ã³" => "ó", 'Ã“' => "Ó", "Ã’" => "Ó",
+        "N?" => "Ú", "Ãº" => "Ú", "Ãš" => "Ú",
+    ];
+
+    $texto = strtr($texto, $remplazar_array);
+    return strtoupper($texto);
 }

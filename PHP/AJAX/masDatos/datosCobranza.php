@@ -20,12 +20,15 @@ if ($opcion == 2 && mysqli_num_rows($consulta_cobranza) > 0) {
 		$ano         = $row['ANO'];
 		$importe     = $row['IMPORTE'];
 		$mes_cobrado = $row['COBRADO_EN_EL_MES'];
+		$tipo_recibo = $row['TIPO_DE_RECIBO'];
 
+		
 		$response["data"][] = [
-			'mes' 	  => $mes = strlen($mes) == 1 ? "0$mes" : $mes,
-			'anho' 	  => $ano,
-			'importe' => "$$importe",
-			'cobrado' => $mes_cobrado,
+			'mes' 	      => $mes = strlen($mes) == 1 ? "0$mes" : $mes,
+			'anho' 	      => $ano,
+			'importe'     => "$$importe",
+			'cobrado'     => $mes_cobrado,
+			'tipo_recibo' => $tipo_recibo,
 		];
 	}
 }
@@ -48,7 +51,8 @@ function datos_cobranza($cedula)
 		MES,
 		ANO,
 		IMPORTE,
-		COBRADO_EN_EL_MES 
+		COBRADO_EN_EL_MES,
+		TIPO_DE_RECIBO
 	  FROM 
 		{$tabla} 
 	  WHERE 

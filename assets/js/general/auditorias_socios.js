@@ -1,3 +1,15 @@
+$(document).ready(function () {
+
+    formato_editor("txt_descripcion_editar_auditoria_socio_registrada");
+    formato_editor("txt_registrar_descripcion_auditoria_socio");
+    formato_editor("txt_mensaje_registrar_comentario_auditoria");
+    formato_editor("txt_mensaje_editar_comentario_auditoria");
+
+});
+
+
+
+
 function tabla_registros_auditoria_socio(opcion = 1, id = null) {
 
     $("#contenedor_titulo_modal_auditorias_socio").html("Auditorias Registradas");
@@ -28,12 +40,11 @@ function tabla_registros_auditoria_socio(opcion = 1, id = null) {
 function registrar_auditoria_socio(openModal = false) {
     if (openModal == true) {
         $("#txt_registrar_cedula_auditoria_socio").val('');
-        $("#txt_registrar_descripcion_auditoria_socio").val('');
+        tinymce.activeEditor.setContent('');
         $("#txt_registrar_fecha_auditoria_socio").val('');
         $("#txt_avisar_carga_auditoria").val('');
 
         let cedula = $("#ci").val();
-
         if (cedula == "") {
             error("Debe ingresar la cédula del socio");
         } else if (comprobarCI(cedula) === false) {
@@ -47,7 +58,7 @@ function registrar_auditoria_socio(openModal = false) {
     } else {
 
         let cedula = $("#txt_registrar_cedula_auditoria_socio").val();
-        let descripcion = $("#txt_registrar_descripcion_auditoria_socio").val();
+        let descripcion = tinymce.activeEditor.getContent();
         let fecha_auditoria = $("#txt_registrar_fecha_auditoria_socio").val();
         let avisar_a = $("#txt_avisar_carga_auditoria").val();
 
@@ -75,6 +86,7 @@ function registrar_auditoria_socio(openModal = false) {
                     if (response.error === false) {
                         correcto(response.mensaje);
                         $("#txt_registrar_cedula_auditoria_socio").val('');
+                        tinymce.activeEditor.setContent('');
                         $("#txt_registrar_descripcion_auditoria_socio").val('');
                         $("#txt_registrar_fecha_auditoria_socio").val('');
                         $("#modal_registrarAuditoriaSocio").modal("hide");
@@ -91,14 +103,19 @@ function registrar_auditoria_socio(openModal = false) {
 
 function editar_auditoria_socio(openModal = false, id, descripcion, fecha_auditoria) {
     if (openModal === true) {
+        var editor = tinymce.EditorManager.get('txt_descripcion_editar_auditoria_socio_registrada');
+        editor !== null ?
+            editor.setContent(descripcion) :
+            $("#txt_descripcion_editar_auditoria_socio_registrada").val(descripcion);
+
         $("#txt_id_editar_auditoria_socio").val(id);
-        $("#txt_descripcion_editar_auditoria_socio").val(descripcion);
         $("#txt_fecha_auditoria_editar_auditoria_socio").val(fecha_auditoria);
         $("#modal_editarAuditorias").modal("show");
+
     } else {
 
         let id = $("#txt_id_editar_auditoria_socio").val();
-        let descripcion = $("#txt_descripcion_editar_auditoria_socio").val();
+        let descripcion = tinymce.activeEditor.getContent();
         let fecha_auditoria = $("#txt_fecha_auditoria_editar_auditoria_socio").val();
 
         $.ajax({
@@ -115,7 +132,8 @@ function editar_auditoria_socio(openModal = false, id, descripcion, fecha_audito
                     correcto(response.mensaje);
                     tabla_registros_auditoria_socio(1, null);
                     $("#txt_id_editar_auditoria_socio").val('');
-                    $("#txt_descripcion_editar_auditoria_socio").val('');
+                    tinymce.activeEditor.setContent('');
+                    //$("#txt_descripcion_editar_auditoria_socio_registrada").val('');
                     $("#txt_fecha_auditoria_editar_auditoria_socio").val('');
                     $("#modal_editarAuditorias").modal("hide");
                 } else {
@@ -184,13 +202,14 @@ function tabla_comentarios_auditoria(id) {
 function registrar_comentario_auditoria_socio(openModal = false, id) {
     if (openModal == true) {
         $("#txt_id_registrar_comentario_auditoria").val(id);
-        $("#txt_mensaje_registrar_comentario_auditoria").val('');
+        tinymce.activeEditor.setContent('');
         $("#file_archivos_auditoria_socio").val('');
         $("#txt_avisar_carga_comentario_auditoria").val('');
         $("#modal_registrarComentarioAuditoria").modal("show");
     } else {
+
         let id = $("#txt_id_registrar_comentario_auditoria").val();
-        let comentario = $("#txt_mensaje_registrar_comentario_auditoria").val();
+        let comentario = tinymce.activeEditor.getContent();
         let avisar_a = $("#txt_avisar_carga_comentario_auditoria").val();
 
         if (id == "") {
@@ -226,6 +245,7 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
                         correcto(response.mensaje);
                         tabla_registros_auditoria_socio(1, null);
                         $("#txt_id_registrar_comentario_auditoria").val('');
+                        tinymce.activeEditor.setContent('');
                         $("#txt_mensaje_registrar_comentario_auditoria").val('');
                         $("#file_archivos_auditoria_socio").val('');
                         $("#modal_registrarComentarioAuditoria").modal("hide");
@@ -242,13 +262,18 @@ function registrar_comentario_auditoria_socio(openModal = false, id) {
 
 function editar_comentario_auditoria(openModal = false, id, comentario) {
     if (openModal === true) {
+        var editor = tinymce.EditorManager.get('txt_mensaje_editar_comentario_auditoria');
+        editor !== null ?
+            editor.setContent(comentario) :
+            $("#txt_mensaje_editar_comentario_auditoria").val(comentario);
+
         $("#txt_id_editar_comentario_auditoria_socio").val(id);
-        $("#txt_descripcion_editar_comentario_auditoria_socio").val(comentario);
         $("#modal_editarComentarioAuditoria").modal("show");
+
     } else {
 
         let id = $("#txt_id_editar_comentario_auditoria_socio").val();
-        let comentario = $("#txt_descripcion_editar_comentario_auditoria_socio").val();
+        let comentario = tinymce.activeEditor.getContent();
 
         $.ajax({
             type: "POST",
@@ -265,6 +290,7 @@ function editar_comentario_auditoria(openModal = false, id, comentario) {
                     tabla_registros_auditoria_socio(1, null);
                     tabla_comentarios_auditoria(datos.id);
                     $("#txt_id_editar_comentario_auditoria_socio").val('');
+                    tinymce.activeEditor.setContent('');
                     $("#txt_descripcion_editar_comentario_auditoria_socio").val('');
                     $("#modal_editarComentarioAuditoria").modal("hide");
                 } else {

@@ -46,6 +46,8 @@ function registrar_comentario($id_auditoria_socio, $comentario, $id_area, $id_su
     $conexion = connection(DB);
     $tabla = TABLA_COMENTARIO_AUDITORIAS_SOCIO;
 
+    $comentario = str_replace("'", '"', $comentario);
+
     $sql = "INSERT INTO {$tabla} (id_auditoria_socio, comentario, area_registro, usuario_registro, fecha_registro) VALUES ('$id_auditoria_socio', '$comentario', '$id_area', '$id_sub_usuario', NOW())";
     $consulta = mysqli_query($conexion, $sql);
     $id_insert = $consulta != false ? mysqli_insert_id($conexion) : false;

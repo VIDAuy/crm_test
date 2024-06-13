@@ -28,6 +28,8 @@ function editar_auditoria($id, $descripcion, $fecha_auditoria, $id_area, $id_sub
     $conexion = connection(DB);
     $tabla = TABLA_AUDITORIAS_SOCIO;
 
+    $descripcion = str_replace("'", '"', $descripcion);
+
     try {
         $sql = "UPDATE {$tabla} SET descripcion = '$descripcion', fecha = '$fecha_auditoria', area_edito = '$id_area', usuario_edito = '$id_sub_usuario', fecha_edicion = NOW() WHERE id = '$id'";
         $consulta = mysqli_query($conexion, $sql);

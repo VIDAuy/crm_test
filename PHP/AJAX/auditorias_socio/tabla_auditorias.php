@@ -32,14 +32,17 @@ while ($row = mysqli_fetch_assoc($auditorias)) {
         $acciones .= "<button class='btn btn-sm btn-primary' onclick='editar_auditoria_socio(true, `" . $id . "`, `" . $descripcion . "`, `" . $fecha_auditoria . "`)'>✏</button>";
     }
 
-    if (strlen($descripcion) > 20) {
-        $br  = array("<br />", "<br>", "<br/>");
-        $descripcion = str_ireplace($br, "\r\n", $descripcion);
 
-        $descripcion_sin_editar = $descripcion;
-        $descripcion = substr($descripcion, 0, 20) . " ...<button class='btn btn-link' onclick='verMasTabla(`" . $descripcion_sin_editar . "`);'>Ver Más</button>";
-        $descripcion = mb_convert_encoding($descripcion, 'UTF-8', 'UTF-8');
-    }
+    $texto_tiene_formato = str_contains($descripcion, "<") == true ? 1 : 0;
+
+    $texto_con_formato = $descripcion;
+    $texto_sin_formato = strip_tags($descripcion);
+    $texto_recortado = substr($texto_sin_formato, 0, 35);
+    $descripcion = strlen($texto_sin_formato) > 35 ?
+        "$texto_recortado ...<button class='btn btn-link' onclick='modalVerMasHtml(`" . $texto_con_formato . "`, $texto_tiene_formato);'>Ver Más</button>" :
+        $texto_sin_formato;
+
+
 
     $tabla["data"][] = [
         "id" => $id,

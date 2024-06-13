@@ -34,16 +34,34 @@ function datos_cobranza() {
 
 
 function tabla_cobranzas(cedula) {
-	$("#tabla_registros_cobranza").DataTable({
-		ajax: `${url_ajax}masDatos/datosCobranza.php?cedula=${cedula}&opcion=2`,
-		columns: [
-			{ data: "mes" },
-			{ data: "anho" },
-			{ data: "importe" },
-			{ data: "cobrado" },
-		],
-		order: [[1, "desc"], [0, "desc"]],
-		bDestroy: true,
-		language: { url: url_lenguage },
-	});
+	let sector = localStorage.getItem('sector');
+	if (sector == "Calidad" || sector == "Bajas") {
+		$('#tabla_registros_cobranza').find('th').eq(3).after('<th>Tipo Recibo</th>');
+		$("#tabla_registros_cobranza").DataTable({
+			ajax: `${url_ajax}masDatos/datosCobranza.php?cedula=${cedula}&opcion=2`,
+			columns: [
+				{ data: "mes" },
+				{ data: "anho" },
+				{ data: "importe" },
+				{ data: "cobrado" },
+				{ data: "tipo_recibo" },
+			],
+			order: [[1, "desc"], [0, "desc"]],
+			bDestroy: true,
+			language: { url: url_lenguage },
+		});
+	} else {
+		$("#tabla_registros_cobranza").DataTable({
+			ajax: `${url_ajax}masDatos/datosCobranza.php?cedula=${cedula}&opcion=2`,
+			columns: [
+				{ data: "mes" },
+				{ data: "anho" },
+				{ data: "importe" },
+				{ data: "cobrado" },
+			],
+			order: [[1, "desc"], [0, "desc"]],
+			bDestroy: true,
+			language: { url: url_lenguage },
+		});
+	}
 }

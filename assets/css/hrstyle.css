@@ -1,20 +1,33 @@
 @charset "utf-8";
+
 hr.style5 {
   background-color: #ffffff;
   border-top: 2px dashed #8c8b8b;
   max-width: 95% !important;
-} /* CSS Document */
+}
+
+/* CSS Document */
 
 hr.style6 {
   background-color: #ffffff;
   border-top: 3px dashed #6200ff;
   max-width: 95% !important;
-} /* CSS Document */
+}
+
+/* CSS Document */
 
 .container {
   min-width: 95%;
 }
 
 .swal2-container {
+  z-index: 20000 !important;
+}
+
+.tox-tinymce-aux {
+  z-index: 15000 !important;
+}
+
+#btnTema {
   z-index: 20000 !important;
 }
